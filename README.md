@@ -49,6 +49,7 @@ Discussões do projeto - 18 de dezembro
 * Hugo Curado (1)
 * Patricia Jesus
 * Pedro Neto (1)
+
 (1) Informatics Department, Faculty of Science, University of Lisbon, Lisbon, Portugal
 
 ## License
