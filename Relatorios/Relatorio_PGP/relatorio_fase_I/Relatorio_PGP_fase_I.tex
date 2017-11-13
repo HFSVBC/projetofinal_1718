@@ -1,0 +1,52 @@
+\documentclass[a4paper]{report}
+
+\usepackage[a4paper, total={6in, 9.5in}]{geometry}
+\usepackage{etoolbox}% http://ctan.org/pkg/etoolbox
+\makeatletter
+\patchcmd{\@makechapterhead}{\vspace*{50\p@}}{}{}{}% Removes space above \chapter head
+\makeatother
+
+\usepackage[portuges]{babel}
+\usepackage[latin1,utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{titlesec}
+
+\titleformat{\chapter}{\normalfont\huge}{\thechapter.}{20pt}{\huge\bf}
+
+\begin{document}
+\title{\textbf{Planeamento e Gestão de Projetos}\linebreak \linebreak 2017-2018\linebreak \linebreak {\huge \textbf{Relatório FASE I}}}
+\date{}
+\author{
+%	\begin{flushleft}
+	\textbf{Grupo 001}\\
+	\textbf{Autores:}\\
+	André Nunes, fcxxxxx\\
+	Ana Catarina Sousa, fc48301\\ 
+	Hugo Filipe Curado, fc48761\\ 
+	Patrícia Jesus, fcxxxxx\\
+	Pedro Duarte Neto, fc48758
+%	\end{flushleft}
+}
+\maketitle
+\tableofcontents
+\chapter{Introdução}
+\chapter{Âmbito do projeto}
+\section{Requisitos funcionais}
+\section{Requisitos não-funcionais}
+\section{Informação de entrada e saída}
+\chapter{Planeamento}
+\section{Estimativas}
+\subsection{Esforço disponível}
+\subsection{Dados históricos}
+\subsection{Estimativa de linhas de código}
+\subsection{Estimativa COCOMO}
+\subsection{Análise crítica}
+\section{Recursos}
+\section{Processo de desenvolvimento de software}
+\section{Organização da equipa}
+\section{Planeamento do Projeto}
+\section{Gestão de Riscos}
+\chapter{Conclusão}
+\chapter{Bibliografia }
+\end{document}
