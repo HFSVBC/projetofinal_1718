@@ -22,11 +22,22 @@ O sistema deve ser disponibilizado num ambiente “cloud” (por exemplo, na AWS
 ## 1ª FASE - Descrição detalhada do projeto
 Descrição do contexto e dos objetivos do projeto, especificando o tipo de informação que se pretende obter e armazenar, assim como o local e as fontes de recolha dessa informação. Descrição dos requisitos funcionais e não funcionais que o projeto irá oferecer. Estimação do esforço necessário para a concretização do projeto. Identificação dos riscos e medidas de gestão destes.
 
+* Contexto e objetivos 
+* Tipo de informação 
+* Fontes de informação
+* Lista de requisitos funcionais e não funcionais
+* Estimação de esforço
+* Gestão de riscos
+
 ### Deliverable:
 * Ficheiro pdf com o máximo de 15 páginas A4, de acordo com o relatório modelo
 
 ## 2ª FASE - Planeamento do projeto
 Planeamento do projeto incluindo divisão de tarefas, calendário, definição da equipa e mapa de Gantt.
+
+* Definição da equipa
+* Divisão de tarefas
+* Calendarização
 
 ### Deliverables:
 
@@ -43,11 +54,21 @@ As entregas são realizadas na página da disciplina através de um único fiche
 
 Discussões do projeto - 18 de dezembro
 
+### Planeamento TPs
+
+| Até à 1ª Entrega |  Até à 2ª Entrega |
+| ---------- | ----------- |
+| 16 de outubro - Modelos | 20 de novembro - Testes de software |
+| 23 de outubro - Métricas | 27 de novembro - Avaliação da 1a entrega |
+| 30 de outubro - Estimação e calendarização | 4 de dezembro - Apoio ao projeto |
+| 6 de novembro - Riscos | 11 de dezembro - Apoio ao projeto |
+| 13 de novembro - Apoio ao projeto | |
+
 ## Authors
 * Ana Catarina Sousa (1)
 * André Nunes (1)
 * Hugo Curado (1)
-* Patricia Jesus
+* Patricia Jesus (1)
 * Pedro Neto (1)
 
 (1) Informatics Department, Faculty of Science, University of Lisbon, Lisbon, Portugal
