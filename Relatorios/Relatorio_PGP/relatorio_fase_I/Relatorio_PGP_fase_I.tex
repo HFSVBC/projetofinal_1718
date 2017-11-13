@@ -11,6 +11,7 @@
 \usepackage{graphicx}
 \usepackage{hyperref}
 \usepackage{titlesec}
+\usepackage{tabularx}
 
 \titleformat{\chapter}{\normalfont\huge}{\thechapter.}{20pt}{\huge\bf}
 
@@ -31,6 +32,25 @@
 \maketitle
 \tableofcontents
 \chapter{Introdução}
+Este projeto tem como a conceção de uma plataforma de armazenamento, consulta e gestão de informação relativa aos acessos aos edifícios e salas da Faculdade de Ciências da Universidade de Lisboa, tendo em conta o hardware existente no espaço em causa e as necessidades do mesmo.
+Esta plataforma será disponibilizada num ((ambiente cloud(AWS??) integrando recursos locais com recursos disponibilizados pela “cloud”)).
+
+A necessidade de um levantamento rigoroso das atuais soluções foi feito na disciplina de Conceção do Produto no ano letivo 2016/2017. Com este levantamento das necessidades dos futuros utilizadores e das respetivas soluções podemos então aprimorar este aspecto em vez de o criar de base.
+
+Em relação ao projeto em causa, no minimo, terão que ser sustentadas 3 funcionalidades, 1 para cada grupo de utilizadores.
+\begin{enumerate}
+\item Aos administradores da plataforma, consulta de quem esteve presente num edifício ou numa sala em determinados períodos temporais
+\item Aos professores da FCUL, consulta dos alunos presentes nas suas aulas
+\item Aos alunos da FCUL, consulta do seu histórico de acessos
+\end{enumerate}
+
+Passivamente o sistema sustentará, no minimo, os seguintes requisitos:
+\begin{enumerate}
+\item Tolerar a falha de um qualquer componente de hardware com uma redução mínima de desempenho e sem perda de dados;
+\item Tolerar uma falha catastrófica com um período de indisponibilidade não superior a 24h, sendo admissível apenas a perda de dados que tenham sido introduzidos no sistema nas últimas 24h;
+\item Ser escalável e modular, por forma a suportar facilmente a adição e remoção de hardware para fazer face a picos de utilização que se prevê que ocorram em determinados momentos.
+\item confidencialidade de dados, tendo em conta a sensibilidade dos dados a manipular.
+\end{enumerate}
 \chapter{Âmbito do projeto}
 \section{Requisitos funcionais}
 \section{Requisitos não-funcionais}
@@ -38,6 +58,16 @@
 \chapter{Planeamento}
 \section{Estimativas}
 \subsection{Esforço disponível}
+Elementos da equipa e respectivas disponibilidades:\\
+
+\begin{tabularx}{\textwidth}{XX}
+	André = 35\%    & Patricia = 40\% \\
+	Catarina = 35\% & Pedro = 35\%    \\
+	Hugo = 35\%     &
+\end{tabularx}
+\linebreak\linebreak
+Tendo em conta a disponibilidade de cada elemento a equipa terá $0.35*4 + 0.4 =1.8$ pessoas\linebreak
+Com uma duração prevista de 5 meses teremos um \textbf{esforço disponivel} de $1.8*5=9$ Pessoas/Mês
 \subsection{Dados históricos}
 \subsection{Estimativa de linhas de código}
 \subsection{Estimativa COCOMO}
