@@ -40,7 +40,7 @@ Este projeto tem como a objetivo criar uma plataforma de armazenamento, consulta
 
 Esta plataforma será disponibilizada numa solução hibrida, integrando recurssos em cloud (AWS) e recursos locais.
 
-A necessidade de um levantamento rigoroso das atuais soluções foi realizado na cadeira de Conceção do Produto no ano letivo 2016/2017. Com este levantamento das necessidades dos futuros utilizadores e das respetivas soluções já realizado ganhamos algum tempo sendo só necessário melhorar alguns aspetos.
+A necessidade de efetuar um levantamento rigoroso das atuais soluções apresentadas aos utilizadores foi um dos trabalhos realizados no âmbito da cadeira de Conceção do Produto no ano letivo 2016/2017. Com este objetivo alcançado conseguimos ganhar algum tempo sendo que agora só será necessário melhorar alguns aspetos.
 
 Em relação ao projeto em causa, no minimo, terão que ser sustentadas três funcionalidades, uma para cada grupo de utilizadores:
 \begin{enumerate}
@@ -58,8 +58,98 @@ Passivamente o sistema sustentará, no minimo, os seguintes requisitos:
 \end{enumerate}
 \chapter{Âmbito do projeto}
 \section{Requisitos funcionais}
+\begin{enumerate}
+\item Funcionário de Limpeza / Manutenção
+	\begin{enumerate}
+    \item Consulta de histórico de acessos.
+    \item Consulta de salas disponiveis.
+	\end{enumerate}
+\item Aluno
+	\begin{enumerate}
+	\item Consulta de histórico de acessos.
+    \item Horário do curso frequentado.
+    \item Horário dos espaços, de acordo com o curriculo.
+    \item Espaços livres a determinadas horas e a que grupo pertence.
+	\end{enumerate}
+\item Funcionário de Departamento
+	\begin{enumerate}
+    \item Consulta de histórico de acessos.
+    \item Consulta de salas disponiveis.
+    \item Marcação de salas.
+	\end{enumerate}
+\item Secretaria
+	\begin{enumerate}
+    \item Consultar e alterar preseças nas aulas.
+    \item Alterar premissão de acesso ao parque de estacionamento.
+	\end{enumerate}
+\item Professor
+	\begin{enumerate}
+	\item Consulta dos alunos presentes nas suas aulas.
+    \item Horário de aulas e "compromissos".
+    \item Consulta de histórico de acessos.
+    \item Consulta de salas disponiveis.
+    \item Marcação de salas.
+    \item Reserva de sala para exame.
+	\end{enumerate}
+\item Seguranças
+	\begin{enumerate}
+	\item Consulta de quem esteve presente num edifício ou numa sala num determinado espaço de tempo, em caso de um incidente.
+    \item Consulta de histórico de acessos.
+    \item Consulta de salas disponiveis.
+    \item Criar acesso para visitantes.
+    \item Criar eventos de incidentes / desastres / perdidos e achados.
+    \item Criar acessos temporários no caso de perda de cartão.
+    \item Consulta de quem esteve presente num edifício ou numa sala num determinado espaço de tempo, em caso de desastre, validado por mais que uma pessoa com um nivel de Adimistrador de Sistema / Administrador-Chefe.
+    \item Bloqueio de acessos em caso de necessidade, Lock Down.
+    \item Desbloqueio do estado Lock Down, validado por mais que uma pessoa com um nivel de Adimistrador de Sistema.
+	\end{enumerate}
+\item Administrador
+	\begin{enumerate}
+    \item Consulta de quantas pessoas estiveram presentes num edifício ou numa sala num determinado espaço de tempo.
+    \item Registo das salas disponiveis em tempo real.
+    \item Registo de novos utilizadores.
+    \item Alteração de estatutos, inferior ao seu nivel de acesso.
+    \item Associar cartao de aluno no sistema informatico da dsi.
+    \item Criar acesso para visitantes.
+    \item Alterar acesso a salas e laboratórios.
+    \end{enumerate}
+\item Administrador-Chefe (Ex. Ze Fernandes)
+	\begin{enumerate}
+	\item .Consulta de quem esteve presente num edifício ou numa sala num determinado espaço de tempo, em caso de um incidente.
+    \item Consulta de histórico de acessos.
+    \item Consulta de salas disponiveis.
+    \item Criar acesso para visitantes.
+    \item Consulta de quem esteve presente num edifício ou numa sala num determinado espaço de tempo, em caso de desastre, validado por mais que uma pessoa com um nivel de Adimistrador de Sistema.
+    \item Consultar acessos ao parque de estacionamento.
+	\end{enumerate}
+\item Administrador de Sistemas
+	\begin{enumerate}
+    \item Acesso à API.
+    \item Alteração de todos os estatutos.
+    \item Todas as funcionalidades do Administrador.
+    \end{enumerate}
+\end{enumerate}
 \section{Requisitos não-funcionais}
+\begin{enumerate}
+\item Acessivel através de interface web na cloud, compatível com qualquer browser e dispositivo.
+\item Facilidade de integração com o hardware existente.
+\item Necessidade de ligação constante à internet.
+\item Confidencialidade dos dados.
+\item Usar protocolos que sustentem os requisitos funcionais e não funcionais.
+\item Cada utilizador so tem acesso a uma vista da base de dados coerente com o seu nivel de acesso.
+\item Nenhum utilizador terá acesso a uma visão global da base de dados.
+\item Tolerar a falha de um qualquer componente de hardware com uma redução mínima de desempenho e sem perda de dados
+\item Tolerar uma falha catastrófica com um período de indisponibilidade não superior a 24h, sendo admissível apenas a perda de dados que tenham sido introduzidos no sistema nas últimas 24h
+\item Ser escalável e modular, por forma a suportar facilmente a adição e remoção de hardware para fazer face a picos de utilização que se prevê que ocorram em determinados momentos.
+\item Execução de um sistema de simulação de dados de entrada sobre os utilizadores do sistema, salas, edificios e parque de estacionamento.
+\item Integração no sistema de autenticação atualmente presente na faculdade.
+\end{enumerate}
 \section{Informação de entrada e saída}
+\subsubsection*{Entrada inicial de informação}
+    Os dados sobre os utilizadores são gerados automaticamente por um serviço de simulação da interação de um grupo de pessoas com um edificio, sendo depois acedidos por JSON.
+    Dados sobre marcação de salas, exames, incidentes.
+\subsubsection*{Saidas de informação}
+    Toda a informaçao necessária para responder as necessidades dos requisitos funcionais.
 \chapter{Planeamento}
 \section{Estimativas}
 \subsection{Esforço disponível}
@@ -140,8 +230,11 @@ Com uma duração prevista de 5 meses teremos um \textbf{esforço disponivel} de
 \subsection{Análise crítica}
 \section{Recursos}
 \section{Processo de desenvolvimento de software}
+2ª entrega
 \section{Organização da equipa}
+2ª entrega
 \section{Planeamento do Projeto}
+2ª entrega
 \section{Gestão de Riscos}
 \chapter{Conclusão}
 \chapter{Bibliografia }
