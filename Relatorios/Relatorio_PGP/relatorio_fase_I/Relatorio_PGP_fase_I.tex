@@ -12,6 +12,10 @@
 \usepackage{hyperref}
 \usepackage{titlesec}
 \usepackage{tabularx}
+\usepackage{colortbl}
+\usepackage{cite}
+\usepackage[nottoc,numbib]{tocbibind}
+
 
 \titleformat{\chapter}{\normalfont\huge}{\thechapter.}{20pt}{\huge\bf}
 \begin{document}
@@ -38,18 +42,18 @@
 \chapter{Introdução}
 Este projeto tem como a objetivo criar uma plataforma de armazenamento, consulta e gestão de informação relativa aos acessos aos edifícios e salas da Faculdade de Ciências da Universidade de Lisboa, tendo em conta o hardware existente no espaço em causa e as necessidades do mesmo.
 
-Esta plataforma será disponibilizada numa solução hibrida, integrando recurssos em cloud (AWS) e recursos locais.
+Esta plataforma será disponibilizada numa solução hibrida, integrando recursos em cloud (AWS) e recursos locais.
 
 A necessidade de efetuar um levantamento rigoroso das atuais soluções apresentadas aos utilizadores foi um dos trabalhos realizados no âmbito da cadeira de Conceção do Produto no ano letivo 2016/2017. Com este objetivo alcançado conseguimos ganhar algum tempo sendo que agora só será necessário melhorar alguns aspetos.
 
-Em relação ao projeto em causa, no minimo, terão que ser sustentadas três funcionalidades, uma para cada grupo de utilizadores:
+Em relação ao projeto em causa, no mínimo, terão que ser sustentadas três funcionalidades, uma para cada grupo de utilizadores:
 \begin{enumerate}
 \item Aos administradores da plataforma, consulta de quem esteve presente num edifício ou numa sala em determinados períodos temporais %fica a faltar secretaria e seguranças
 \item Aos professores da FCUL, consulta dos alunos presentes nas suas aulas
 \item Aos alunos da FCUL, consulta do seu histórico de acessos
 \end{enumerate}
 
-Passivamente o sistema sustentará, no minimo, os seguintes requisitos:
+Passivamente o sistema sustentará, no mínimo, os seguintes requisitos:
 \begin{enumerate}
 \item Tolerar a falha de um qualquer componente de hardware com uma redução mínima de desempenho e sem perda de dados;
 \item Tolerar uma falha catastrófica com um período de indisponibilidade não superior a 24h, sendo admissível apenas a perda de dados que tenham sido introduzidos no sistema nas últimas 24h;
@@ -62,32 +66,32 @@ Passivamente o sistema sustentará, no minimo, os seguintes requisitos:
 \item Funcionário de Limpeza / Manutenção
 	\begin{enumerate}
     \item Consulta de histórico de acessos.
-    \item Consulta de salas disponiveis.
+    \item Consulta de salas disponíveis.
 	\end{enumerate}
 \item Aluno
 	\begin{enumerate}
 	\item Consulta de histórico de acessos.
     \item Horário do curso frequentado.
-    \item Horário dos espaços, de acordo com o curriculo.
+    \item Horário dos espaços, de acordo com o currículo.
     \item Espaços livres a determinadas horas e a que grupo pertence.
 	\end{enumerate}
 \item Funcionário de Departamento
 	\begin{enumerate}
     \item Consulta de histórico de acessos.
-    \item Consulta de salas disponiveis.
+    \item Consulta de salas disponíveis.
     \item Marcação de salas.
 	\end{enumerate}
 \item Secretaria
 	\begin{enumerate}
-    \item Consultar e alterar preseças nas aulas.
-    \item Alterar premissão de acesso ao parque de estacionamento.
+    \item Consultar e alterar presenças nas aulas.
+    \item Alterar permissão de acesso ao parque de estacionamento.
 	\end{enumerate}
 \item Professor
 	\begin{enumerate}
 	\item Consulta dos alunos presentes nas suas aulas.
     \item Horário de aulas e "compromissos".
     \item Consulta de histórico de acessos.
-    \item Consulta de salas disponiveis.
+    \item Consulta de salas disponíveis.
     \item Marcação de salas.
     \item Reserva de sala para exame.
 	\end{enumerate}
@@ -95,31 +99,31 @@ Passivamente o sistema sustentará, no minimo, os seguintes requisitos:
 	\begin{enumerate}
 	\item Consulta de quem esteve presente num edifício ou numa sala num determinado espaço de tempo, em caso de um incidente.
     \item Consulta de histórico de acessos.
-    \item Consulta de salas disponiveis.
+    \item Consulta de salas disponíveis.
     \item Criar acesso para visitantes.
     \item Criar eventos de incidentes / desastres / perdidos e achados.
     \item Criar acessos temporários no caso de perda de cartão.
-    \item Consulta de quem esteve presente num edifício ou numa sala num determinado espaço de tempo, em caso de desastre, validado por mais que uma pessoa com um nivel de Adimistrador de Sistema / Administrador-Chefe.
+    \item Consulta de quem esteve presente num edifício ou numa sala num determinado espaço de tempo, em caso de desastre, validado por mais que uma pessoa com um nível de Administrador de Sistema / Administrador-Chefe.
     \item Bloqueio de acessos em caso de necessidade, Lock Down.
-    \item Desbloqueio do estado Lock Down, validado por mais que uma pessoa com um nivel de Adimistrador de Sistema.
+    \item Desbloqueio do estado Lock Down, validado por mais que uma pessoa com um nível de Administrador de Sistema.
 	\end{enumerate}
 \item Administrador
 	\begin{enumerate}
     \item Consulta de quantas pessoas estiveram presentes num edifício ou numa sala num determinado espaço de tempo.
-    \item Registo das salas disponiveis em tempo real.
+    \item Registo das salas disponíveis em tempo real.
     \item Registo de novos utilizadores.
-    \item Alteração de estatutos, inferior ao seu nivel de acesso.
-    \item Associar cartao de aluno no sistema informatico da dsi.
+    \item Alteração de estatutos, inferior ao seu nível de acesso.
+    \item Associar cartão de aluno no sistema informático da dsi.
     \item Criar acesso para visitantes.
     \item Alterar acesso a salas e laboratórios.
     \end{enumerate}
-\item Administrador-Chefe (Ex. Ze Fernandes)
+\item Administrador-Chefe (Ex. Zé Fernandes)
 	\begin{enumerate}
 	\item .Consulta de quem esteve presente num edifício ou numa sala num determinado espaço de tempo, em caso de um incidente.
     \item Consulta de histórico de acessos.
-    \item Consulta de salas disponiveis.
+    \item Consulta de salas disponíveis.
     \item Criar acesso para visitantes.
-    \item Consulta de quem esteve presente num edifício ou numa sala num determinado espaço de tempo, em caso de desastre, validado por mais que uma pessoa com um nivel de Adimistrador de Sistema.
+    \item Consulta de quem esteve presente num edifício ou numa sala num determinado espaço de tempo, em caso de desastre, validado por mais que uma pessoa com um nível de Administrador de Sistema.
     \item Consultar acessos ao parque de estacionamento.
 	\end{enumerate}
 \item Administrador de Sistemas
@@ -131,44 +135,44 @@ Passivamente o sistema sustentará, no minimo, os seguintes requisitos:
 \end{enumerate}
 \section{Requisitos não-funcionais}
 \begin{enumerate}
-\item Acessivel através de interface web na cloud, compatível com qualquer browser e dispositivo.
+\item Acessível através de interface web na cloud, compatível com qualquer browser e dispositivo.
 \item Facilidade de integração com o hardware existente.
 \item Necessidade de ligação constante à internet.
 \item Confidencialidade dos dados.
 \item Usar protocolos que sustentem os requisitos funcionais e não funcionais.
-\item Cada utilizador so tem acesso a uma vista da base de dados coerente com o seu nivel de acesso.
+\item Cada utilizador só tem acesso a uma vista da base de dados coerente com o seu nível de acesso.
 \item Nenhum utilizador terá acesso a uma visão global da base de dados.
 \item Tolerar a falha de um qualquer componente de hardware com uma redução mínima de desempenho e sem perda de dados
 \item Tolerar uma falha catastrófica com um período de indisponibilidade não superior a 24h, sendo admissível apenas a perda de dados que tenham sido introduzidos no sistema nas últimas 24h
 \item Ser escalável e modular, por forma a suportar facilmente a adição e remoção de hardware para fazer face a picos de utilização que se prevê que ocorram em determinados momentos.
-\item Execução de um sistema de simulação de dados de entrada sobre os utilizadores do sistema, salas, edificios e parque de estacionamento.
+\item Execução de um sistema de simulação de dados de entrada sobre os utilizadores do sistema, salas, edifícios e parque de estacionamento.
 \item Integração no sistema de autenticação atualmente presente na faculdade.
 \end{enumerate}
 \section{Informação de entrada e saída}
 \subsubsection*{Entrada inicial de informação}
-    Os dados sobre os utilizadores são gerados automaticamente por um serviço de simulação da interação de um grupo de pessoas com um edificio, sendo depois acedidos por JSON.
+    Os dados sobre os utilizadores são gerados automaticamente por um serviço de simulação da interação de um grupo de pessoas com um edifício, sendo depois acedidos por JSON.
     Dados sobre marcação de salas, exames, incidentes.
-\subsubsection*{Saidas de informação}
-    Toda a informaçao necessária para responder as necessidades dos requisitos funcionais.
+\subsubsection*{Saídas de informação}
+    Toda a informação necessária para responder as necessidades dos requisitos funcionais.
 \chapter{Planeamento}
 \section{Estimativas}
 \subsection{Esforço disponível}
-Elementos da equipa e respectivas disponibilidades:\\
+Elementos da equipa e respetivas disponibilidades:\\
 
 \begin{tabularx}{\textwidth}{XX}
-	André = 35\%    & Patricia = 40\% \\
+	André = 35\%    & Patrícia = 40\% \\
 	Catarina = 35\% & Pedro = 35\%    \\
 	Hugo = 35\%     &
 \end{tabularx}
 \linebreak\linebreak
 Tendo em conta a disponibilidade de cada elemento a equipa terá 0.35*4 + 0.4 =1.8 pessoas\linebreak
-Com uma duração prevista de 5 meses teremos um \textbf{esforço disponivel} de 1.8*5=9 Pessoas/Mês
+Com uma duração prevista de 6 meses teremos um \textbf{esforço disponível} de 1.8*6=10.8 Pessoas/Mês
 \subsection{Dados históricos}
 \subsubsection*{André, Catarina, Hugo e Pedro} 
 \begin{description}
-\item[Projecto de Programação I] em que dados 2 ficheiros texto era produzido um ficehiro com a informação pretendida, para tal os dois ficheiros eram lidos e manipulados em memoria. O projecto teve uma \textbf{duração aproximada de um mês} e cada grupo desenvolveu, aproximadamente \textbf{100 linhas de codigo} em \textbf{python}.\\\textbf{Esforço} = 2*0.2(1 cadeira em 5)pessoas* 1 mês=0.4 PM\\ \textbf{Produtividade} =100 LOC/ 0.4 PM =250 LOC/PM
+\item[Projeto de Programação I] em que dados 2 ficheiros texto era produzido um ficheiro com a informação pretendida, para tal os dois ficheiros eram lidos e manipulados em memoria. O projeto teve uma \textbf{duração aproximada de um mês} e cada grupo desenvolveu, aproximadamente \textbf{100 linhas de código} em \textbf{python}.\\\textbf{Esforço} = 2*0.2(1 cadeira em 5)pessoas* 1 mês=0.4 PM\\ \textbf{Produtividade} =100 LOC/ 0.4 PM =250 LOC/PM
 
-\item[Projecto de Programação II] em que dado um ficheiro csv, eram produzidos gráficos com a informação mais relevanto do ficheiro em causa. O projecto teve uma \textbf{duração aproximada de um mês} e cada grupo desenvolveu, aproximadamente \textbf{100 linhas de código} em \textbf{python}, destaque para o uso do modulo pylab.\\\textbf{Esforço} = 2*0.2(1 cadeira em 5)pessoas* 1 mês=0.4 PM\\ \textbf{Produtividade} =100 LOC/ 0.4 PM =250 LOC/PM
+\item[Projeto de Programação II] em que dado um ficheiro csv, eram produzidos gráficos com a informação mais relevante do ficheiro em causa. O projeto teve uma \textbf{duração aproximada de um mês} e cada grupo desenvolveu, aproximadamente \textbf{100 linhas de código} em \textbf{python}, destaque para o uso do modulo pylab.\\\textbf{Esforço} = 2*0.2(1 cadeira em 5)pessoas* 1 mês=0.4 PM\\ \textbf{Produtividade} =100 LOC/ 0.4 PM =250 LOC/PM
 
 \item [Projeto de Introdução às Tecnologias Web] consistia em desenvolver um website a correr localmente só em browser. O tema era o jogo da forca. O projeto teve a \textbf{duração aproximada de dois meses e meio} e cada grupo desenvolveu aproximadamente \textbf{300 linhas de código} usando \textbf{HTML}, \textbf{CSS} e \textbf{Javascript}.\\\textbf{Esforço} = 3*0.2 pessoas*2.5 meses=1.5 P M\\ \textbf{Produtividade} = 300 LOC/1.5 PM= 200 LOC/PM
 
@@ -179,24 +183,24 @@ Com uma duração prevista de 5 meses teremos um \textbf{esforço disponivel} de
 		
 		\item[O terceiro mini-projeto] foi um aprimoramento do segundo em que se acrescentava a escrita em binário num ficheiro (log), se contabilizava o tempo de execução e se detetavam sinais (Ex.: SIGINT). Teve uma \textbf{duração de três semanas} e teve \textbf{aproximadamente 80 linhas de código}. Desenvolvido em \textbf{python}.
 	\end{description}\mbox{}\textbf{Esforço} = 3*0.2 pessoas*2meses=1,2PM\\ \textbf{Produtividade} = 380 LOC/1.2 PM = 317 LOC/PM
-	\item[Projecto de Sistemas Inteligentes] foi desenvolvido o jogo dos peões e respectivas funções de avaliação, teve \textbf{aproximadamente duração de 1 mês} e contou com \textbf{200 linhas de codigo} em \textbf{python}.\\\textbf{Esforço} = 3*0.2pessoas*1mes =0.6 PM\\ \textbf{Produtividade} = 200 LOC/0.6 PM = 333 LOC/PM
+	\item[Projeto de Sistemas Inteligentes] foi desenvolvido o jogo dos peões e respetivas funções de avaliação, teve \textbf{aproximadamente duração de 1 mês} e contou com \textbf{200 linhas de código} em \textbf{python}.\\\textbf{Esforço} = 3*0.2pessoas*1mes =0.6 PM\\ \textbf{Produtividade} = 200 LOC/0.6 PM = 333 LOC/PM
 \end{description}
 
 \subsubsection*{André, Catarina, Hugo, Patrícia e Pedro} 
 \begin{description}
-    \item[Projeto de Programação Centrada em Objectos] desenvolvido em duas fases, teve como objetivo o desenvolvimento uma plataforma de apoio a um restaurante, desenvolvido em \textbf{Java}. \textbf{200 linhas de código} e uma \textbf{duração de dois meses}.\\\textbf{Esforço} = 2*0.2*2meses = 0.8PM\\ \textbf{Produtividade} = 200 LOC/0.8 PM = 250 LOC/PM
+    \item[Projeto de Programação Centrada em Objetos] desenvolvido em duas fases, teve como objetivo o desenvolvimento uma plataforma de apoio a um restaurante, desenvolvido em \textbf{Java}. \textbf{200 linhas de código} e uma \textbf{duração de dois meses}.\\\textbf{Esforço} = 2*0.2*2meses = 0.8PM\\ \textbf{Produtividade} = 200 LOC/0.8 PM = 250 LOC/PM
     
     \item[Projeto de Bases de Dados] desenvolvido em duas fases, em que a primeira foi o desenho conceptual do enunciado e a segunda foi o mapeamento do desenho em SQL(DDL E DML). Teve uma \textbf{duração de 2 meses} e um \textbf{código de 250 linhas}.\\\textbf{Esforço} = 3*0.2*2meses =1.2PM\\ \textbf{Produtividade} = 250 LOC/1.2 PM = 208 LOC/PM
-    \item[4 mini-projetos de Aplicações Distribuidas] desenvolvidos ao longo do semestre.
+    \item[4 mini-projetos de Aplicações Distribuídas] desenvolvidos ao longo do semestre.
     \begin{description}
-    	\item[O primeiro projeto] foi o desenvolvimento de um servidor com recursos a serem disponibilizados, incluindo os respectivos locks, teve  \textbf{duração de 3 semanas} e \textbf{aproximadamente 200 linhas de codigo}.
-    	\item[O segundo projeto] foi um incremento do primeiro quanto às funcionalidades, tendo em conta a forma de comunicação e apresentação de conteudos, teve a \textbf{duração de 2 semanas} e \textbf{aproximadamente 200 linhas de codigo}.
-    	\item[O terceiro projeto] baseado num serviço WEB para um sistema simplificado, usou-se \textbf{sqlite3} e \textbf{flask}, teve duração de \textbf{3 semanas} e \textbf{aproximadamente 200 linhas de codigo}.
-    	\item[O quarto projeto] foi um aprimoramento do terceiro e consistiu em fazer a comunicação segura do serviço WEB, HTTPS, chave publicas e privadas, teve \textbf{duração de 2 semanas} e \textbf{aproximandamente 100 linhas de codigo}.
+    	\item[O primeiro projeto] foi o desenvolvimento de um servidor com recursos a serem disponibilizados, incluindo os respetivos locks, teve  \textbf{duração de 3 semanas} e \textbf{aproximadamente 200 linhas de código}.
+    	\item[O segundo projeto] foi um incremento do primeiro quanto às funcionalidades, tendo em conta a forma de comunicação e apresentação de conteúdos, teve a \textbf{duração de 2 semanas} e \textbf{aproximadamente 200 linhas de código}.
+    	\item[O terceiro projeto] baseado num serviço WEB para um sistema simplificado, usou-se \textbf{sqlite3} e \textbf{flask}, teve duração de \textbf{3 semanas} e \textbf{aproximadamente 200 linhas de código}.
+    	\item[O quarto projeto] foi um aprimoramento do terceiro e consistiu em fazer a comunicação segura do serviço WEB, HTTPS, chave publicas e privadas, teve \textbf{duração de 2 semanas} e \textbf{aproximadamente 100 linhas de código}.
     \end{description}\mbox{}\textbf{Esforço} = 3*0.2*2,5meses=1.5PM\\ \textbf{Produtividade} = 700 LOC/1.5 PM = 467 LOC/PM
-    \item[Projeto de Analise e Desenho de Software] foi dividido em 2 fases, teve por objetivo o desenvolvimento de um sistema para uma cadeia de supermercados. Para tal foi utilizado o unified process. Na 1ª fase foi feita a analise e desenho. Na 2ª fase foi realizada a  implementação e testes, teve \textbf{duração de 2 meses} e \textbf{200 linhas de codigo}, aproximadamente.\\\textbf{Esforço} = 3*0.2*2meses=1.2PM\\ \textbf{Produtividade} = 200 LOC/1.2 PM = 167 LOC/PM
+    \item[Projeto de Analise e Desenho de Software] foi dividido em 2 fases, teve por objetivo o desenvolvimento de um sistema para uma cadeia de supermercados. Para tal foi utilizado o unified process. Na 1ª fase foi feita a analise e desenho. Na 2ª fase foi realizada a  implementação e testes, teve \textbf{duração de 2 meses} e \textbf{200 linhas de código}, aproximadamente.\\\textbf{Esforço} = 3*0.2*2meses=1.2PM\\ \textbf{Produtividade} = 200 LOC/1.2 PM = 167 LOC/PM
     
-    \item[Projeto de Conceção do Produto] em que o tema é o mesmo que o da cadeira de Planeamento e Gestão de Projecto (PGP). , Neste projeto foi realizada a analise do problema a abordar em PGP e posteriormente no projeto final.
+    \item[Projeto de Conceção do Produto] em que o tema é o mesmo que o da cadeira de Planeamento e Gestão de Projeto (PGP). , Neste projeto foi realizada a analise do problema a abordar em PGP e posteriormente no projeto final.
 \end{description}
 
 \subsubsection*{Catarina, Hugo e Pedro} 
@@ -204,30 +208,120 @@ Com uma duração prevista de 5 meses teremos um \textbf{esforço disponivel} de
     \item[Projeto de Interação de Computadores] sobre uma aplicação tablet de encomenda de comida, ao longo do projeto foram desenvolvidos protótipos, questionários e por fim foi desenvolvido um protótipo funcional. Este projeto teve \textbf{duração aproximada de 2,5 meses} e um \textbf{código de 200 linhas}. Foi desenvolvido em \textbf{HTML}, \textbf{CSS} e \textbf{Javascript}.\\\textbf{Esforço} = 3*0.2*2.5meses=1.5PM\\ \textbf{Produtividade} = 200 LOC/1.5 PM = 133 LOC/PM
 \end{description}
 
-\subsubsection*{Patricia} 
+\subsubsection*{Patrícia} 
 \begin{description}
     \item[Projeto de Interação de Computadores] sobre uma aplicação tablet de gestão de uma cozinha, ao longo do projeto foram desenvolvidos protótipos, questionários e por fim foi desenvolvido um protótipo funcional. Este projeto teve \textbf{duração aproximada de 2,5 meses} e um \textbf{código de 500 linhas}. Foi desenvolvido em \textbf{HTML}, \textbf{CSS} e \textbf{Javascript}.\\\textbf{Esforço} = 3*0.2*2.5meses=1.5PM\\ \textbf{Produtividade} = 500 LOC/1.5 PM = 333 LOC/PM
 \end{description}
 
 \subsubsection*{Catarina, Hugo e Pedro}
 \begin{description}
-    \item[Projeto de Aplicações e Serviços Web] consistiu em desenvolver uma aplicação Full Stack para jogos de poker online, teve uma \textbf{duração de dois meses e meio}, cada projecto teve aproximadamente \textbf{500 linhas de codigo}. Para o desenvolvimeto foram usadas as linguagens \textbf{php}, \textbf{javascript}, \textbf{html} e \textbf{css} e como framework \textbf{CodeIgniter}.\\\textbf{Esforço} = 3*0.2*2.5meses=1.5PM\\ \textbf{Produtividade} = 500 LOC/1.5 PM = 333 LOC/PM
+    \item[Projeto de Aplicações e Serviços Web] consistiu em desenvolver uma aplicação Full Stack para jogos de poker online, teve uma \textbf{duração de dois meses e meio}, cada projeto teve aproximadamente \textbf{500 linhas de código}. Para o desenvolvimento foram usadas as linguagens \textbf{php}, \textbf{javascript}, \textbf{html} e \textbf{css} e como framework \textbf{CodeIgniter}.\\\textbf{Esforço} = 3*0.2*2.5meses=1.5PM\\ \textbf{Produtividade} = 500 LOC/1.5 PM = 333 LOC/PM
 \end{description}
 
 \subsubsection*{André}
 \begin{description}
-    \item[Projeto de Aplicações e Serviços Web] consistiu em desenvolver uma aplicação Full Stack para jogos de poker online, teve uma \textbf{duração de dois meses e meio}, teve aproximadamente \textbf{500 linhas de codigo}. Para o desenvolvimeto foram usadas as linguagens \textbf{javascript}, \textbf{html} e \textbf{css} com recurso ao MEAN Stack.\\\textbf{Esforço} = 3*0.2*2.5meses=1.5PM\\ \textbf{Produtividade} = 500 LOC/1.5 PM = 333 LOC/PM
+    \item[Projeto de Aplicações e Serviços Web] consistiu em desenvolver uma aplicação Full Stack para jogos de poker online, teve uma \textbf{duração de dois meses e meio}, teve aproximadamente \textbf{500 linhas de código}. Para o desenvolvimento foram usadas as linguagens \textbf{javascript}, \textbf{html} e \textbf{css} com recurso ao MEAN Stack.\\\textbf{Esforço} = 3*0.2*2.5meses=1.5PM\\ \textbf{Produtividade} = 500 LOC/1.5 PM = 333 LOC/PM
 \end{description}
 
-\subsubsection*{Patricia}
+\subsubsection*{Patrícia}
 \begin{description}
-    \item[Projeto de Aplicações e Serviços Web] consistiu em desenvolver uma aplicação Full Stack para leilões, teve uma \textbf{duração de dois meses e meio}, cada projecto teve aproximadamente \textbf{6500 linhas de codigo}. Para o desenvolvimeto foram usadas as linguagens \textbf{php}, \textbf{javascript}, \textbf{sql}, \textbf{html} e \textbf{css} .\\\textbf{Esforço} = 3*0.2*2.5meses=1.5PM\\ \textbf{Produtividade} = 6500 LOC/1.5 PM = 4333 LOC/PM
+    \item[Projeto de Aplicações e Serviços Web] consistiu em desenvolver uma aplicação Full Stack para leilões, teve uma \textbf{duração de dois meses e meio}, cada projeto teve aproximadamente \textbf{6500 linhas de código}. Para o desenvolvimento foram usadas as linguagens \textbf{php}, \textbf{javascript}, \textbf{sql}, \textbf{html} e \textbf{css} .\\\textbf{Esforço} = 3*0.2*2.5meses=1.5PM\\ \textbf{Produtividade} = 6500 LOC/1.5 PM = 4333 LOC/PM
 \end{description}
 
 \subsection{Estimativa de linhas de código}
+\begin{itemize}
+\item Front-End
+    \begin{itemize}
+    \item Single Page Design (HTML + CSS) [Otimista 150; Pessimista 400; Provavel 250]
+    \item Single Page Design (JS) [Otimista 75; Pessimista 200; Provavel 125]
+    \item Configuração Servidor (Mean com SQL) [Otimista 300; Pessimista 600; Provavel 425]
+    \item Base de dados [Otimista 50; Pessimista 100; Provavel 60]
+    \end{itemize}
+\item Back-End
+    \begin{itemize}
+    \item Base de dados [Otimista 150; Pessimista 400; Provavel 250]
+    \item Cache [Otimista 30; Pessimista 90; Provavel 50]
+    \item Configuração Servidor (LAMP) [Otimista 500; Pessimista 800; Provavel 625]
+    \item REST API [Otimista 150; Pessimista 325; Provavel 200]
+    \item Socket de comunicação entre servidores [Otimista 50; Pessimista 125; Provavel 80]
+    \end{itemize}
+\item Segurança
+    \begin{itemize}
+    \item OAuth (cache) [Otimista 15; Pessimista 70; Provavel 35]
+    \item Kerberos [Otimista 15; Pessimista 70; Provavel 35]
+    \item SSL / TLS (Lets Encrypt \cite{letsencrypt}) [Otimista 15; Pessimista 70; Provavel 35]
+    \item Token based authentication (Full Encription) [Otimista 15; Pessimista 70; Provavel 35]
+    \item Hijack Session [Otimista 15; Pessimista 70; Provavel 35]
+    \item IP Tables [Otimista 15; Pessimista 70; Provavel 35]
+    \item Two Factor Authentication (Authy \cite{authy}) [Otimista 15; Pessimista 70; Provavel 35]
+    \end{itemize}
+\item Redes
+    \begin{itemize}
+    \item Load Balancer (DNS) [Otimista 100; Pessimista 300; Provavel 150]
+    \end{itemize}
+\item Simulador de dados
+    \begin{itemize}
+    \item Base de dados [Otimista 200; Pessimista 425; Provavel 300]
+    \item REST API [Otimista 150; Pessimista 325; Provavel 200]
+    \item Web Service (PHP ou Python) [Otimista 150; Pessimista 325; Provavel 200]
+    \end{itemize}
+\end{itemize}
 \subsection{Estimativa COCOMO}
+Com base no COCOMO intermédio usando o modelo semi-independente e tendo em conta os multiplicadores de esforço retirados da tabela dos Slides da TP06 \cite{slideTP6} obtivemos os seguintes valores:\\\\ KLOC = $3$ \\
+Esforço[E] = $a * KLOC^{b} * EAF <=> 3 * 3^{1.12} * 1.167 = 11.98 PM$\\
+Duração[D] = $c * E^{d} * EAF <=> 2.5 * 11.98^{0.35} * 1.167 = 6.96 Meses$\\
+Numero de Pessoas [N] = $E / D <=> N = 11.98 / 6.96 = 1.72 Pessoas$
 \subsection{Análise crítica}
+\label{AC}
+Com base nos valores obtidos em 4.3 e 4.4 podemos concluir que os valores estimados a partir do Modelo intermédio COCOMO condizem com o projeto proposto.
+A duração disponível varia entre os 6 e os 7 meses, o COCOMO previu 6.96 meses.
+O numero de pessoas é de 1.8, o COCOMO previu 1.72 pessoas.
+O esforço disponível calculado foi de 10.8 PM, o COCOMO previu 11.98 PM.
+\pagebreak
 \section{Recursos}
+\begin{table}[h]
+\centering
+\begin{tabularx}{\textwidth}{X|c|X|X|X|c}
+\textbf{Descrição} & \textbf{Disp.} & \textbf{Quando Necessário} & \textbf{Tempo Necessário} & \textbf{Skills} & \textbf{Núm.} \\ \hline
+André Nunes & 35\% &  &  & Teste de Design / MEAN (front end), Segurança e Redes &  \\ \hline
+Ana Catarina Sousa & 35\% &  &  & Modelos / Testes Design / Design / MEAN (front end) &  \\ \hline
+Hugo Filipe Curado & 35\% &  &  & Design / LAMP (back end), Segurança e Redes &  \\ \hline
+Patrícia Jesus & 40\% &  &  & LAMP (back end), Construi Teste e Testar &  \\ \hline
+Pedro Duarte Neto & 35\% &  &  & Testes Modelos / MEAN (front end), Segurança e Redes / Construir Testes e Testar &  \\
+\end{tabularx}
+\caption{Tabela de Recursos Humanos}
+\label{TabRH}
+\end{table}
+\begin{table}[h]
+\centering
+\begin{tabularx}{\textwidth}{X|c|X|X|c}
+\textbf{Descrição} & \textbf{Disp.} & \textbf{Quando Necessário} & \textbf{Tempo Necessário} & \textbf{Categoria} \\ \hline
+Bootstrap & \multicolumn{1}{c|}{100\%} & Durante o desenvolvimento do front end &  & off-the-shelf \\ \hline
+CodeIgniter / Laravel & 100\% & Para o back end &  & off-the-shelf \\ \hline
+Microsoft SQL Server & \multicolumn{1}{c|}{100\%} & Para o back end &  & off-the-shelf \\ \hline
+MySql & 100\% & Para o front end &  & off-the-shelf \\ \hline
+jQuery & 100\% & Para o front end &  & off-the-shelf \\ \hline
+Angular & 100\% & Para o back end &  & off-the-shelf \\ \hline
+Express & 100\% & Para o back end &  & off-the-shelf \\ \hline
+Docker / Kubernets & \multicolumn{1}{c|}{100\%} & Durante o deployment do projeto &  & off-the-shelf \\
+\end{tabularx}
+\caption{Tabela de Recursos Software}
+\label{TabRS}
+\end{table}
+\begin{table}[h]
+\centering
+\begin{tabularx}{\textwidth}{l|c|X|c}
+\textbf{Descrição} & \textbf{Disp.} & \textbf{Quando Necessário} & \textbf{Tempo Necessário} \\ \hline
+Servidor Local & 500\% & Durante o desenvolvimento do projeto em ambiente local &  \\ \hline
+IDE de Desenvolvimento & 500\% & Durante todo o tempo de desenvolvimento &  \\ \hline
+Browser & 500\% & Durante todo o tempo de desenvolvimento &  \\ \hline
+Debugger do browser & 500\% & Durante todo o tempo de desenvolvimento &  \\ \hline
+Postman ou similar & 500\% & Durante todo o tempo de desenvolvimento &  \\
+\end{tabularx}
+\caption{Tabela de Recursos Ferramentas}
+\label{TabF}
+\end{table}
+\pagebreak
 \section{Processo de desenvolvimento de software}
 2ª entrega
 \section{Organização da equipa}
@@ -235,6 +329,39 @@ Com uma duração prevista de 5 meses teremos um \textbf{esforço disponivel} de
 \section{Planeamento do Projeto}
 2ª entrega
 \section{Gestão de Riscos}
+\label{GR}
+\begin{table}[h]
+\centering
+\begin{tabularx}{\textwidth}{c|X|c|c|c}
+\# & Risco & Prob. & Impacto & Categoria \\ \hline
+1  & Equipa não familiarizada com tecnologias & 4           & Projeto: 2, Produto: 4  & Projeto   \\ \hline
+2  & Má estimação da complexidade             & 4           & Projeto: 4, Produto: 3  & Projeto   \\ \hline
+3  & Atraso no projeto                        & 4           & Projeto: 3, Produto: 3 & Projeto   \\ \arrayrulecolor{red}\hline\arrayrulecolor{black}
+4  & Necessidade refazer funcionalidades      & 3           & Projeto: 4, Produto: 4  & Projeto   \\ \hline
+5  & Software não apresenta maturidade (bugs) & 3           & Projeto: 3, Produto: 4  & Técnico   \\ \hline
+6  & Falha no Sistema                         & 2           & Projeto: 5, Produto: 5  & Técnico   \\ \hline
+7  & Sistema apresentar falta de estabilidade & 2           & Projeto: 4, Produto: 5  & Técnico   \\ \hline
+8  & Professores não gostarem do produto      & 2           & Projeto: 4, Produto: 4  & Negócio   \\ \hline
+9  & Elemento da Equipa adoecer               & 2           & Projeto: 3, Produto: 3  & Projeto    
+\end{tabularx}
+\caption{Tabela de Gestão de Risco}
+\label{TabGR}
+\end{table}
+\begin{table}[h]
+\centering
+\begin{tabularx}{\textwidth}{c|X|X|X}
+\# & Mitigação  & Monitorização & Gestão \\ \hline
+1  & Dividir equipa em cada competência (Tabelas de Recursos); Documentação                                     & Acompanhar projetos e desenvolvimento de cada componente                                                     & Rodar pessoas, reunir e explicar caso haja alguém fluente \\ \hline
+7  & Tendo em conta a estimação pessimista faz se uma maior divisão de componentes; Alargar prazo da componente & Acompanhar desenvolvimento de cada componente; Verificar atrasos; Acompanhar dificuldades no desenvolvimento & Colocar mais pessoas a trabalhar na componente         
+\end{tabularx}
+\caption{Tabela RIMM}
+\label{TabRIMM}
+\end{table}
 \chapter{Conclusão}
-\chapter{Bibliografia }
+Face às estimativas o projeto é viável, como visto na secção Analise Critica \ref{AC}. 
+No plano RIMM temos as soluções para eventuais problemas encontradas durante a analise de riscos, ordenados por probabilidade de acontecimento, como visto na secção Gestão de Risco \ref{GR}.
+\clearpage
+\bibliography{BiliografiaPGP1718R1}{}
+\bibliographystyle{IEEEtran}
 \end{document}
+
