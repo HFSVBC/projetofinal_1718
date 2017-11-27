@@ -1,3 +1,0 @@
-Start Docker
-
-docker run -p 3000:3000 -ti -v /Users/hugocurado/Library/Mobile\ Documents/com~apple~CloudDocs/Developer/FCUL/projetofinal_1718/Docker/frontEnd/project:/usr/src/app cafcul_frontend:dev /bin/bash
