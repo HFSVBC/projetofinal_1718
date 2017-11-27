@@ -1,22 +1,23 @@
-FROM teracy/angular-cli
+# Create image based on the official Node 6 image from dockerhub
+FROM node:6
 
 # Create a directory where our app will be placed
-ENV HOME=/usr/src/cafcul-frontend
-RUN mkdir $HOME
-WORKDIR $HOME
+RUN mkdir -p /usr/src/app
 
-# Creates Project
-# RUN ng new cafcul-frontend
+# Change directory so that our commands run inside this new directory
+WORKDIR /usr/src/app
 
 # Copy dependency definitions
-COPY ./cafcul-frontend/package.json $HOME
+COPY ./project/package.json /usr/src/app
 
 # Install dependecies
 RUN npm install
 
 # Get all the code needed to run the app
-COPY ./cafcul-frontend/ $HOME
+COPY ./project/ /usr/src/app
 
-# Expose the ports the app runs in
-EXPOSE 4200
-EXPOSE 49153
+# Expose the port the app runs in
+EXPOSE 3000
+
+# Serve the app
+CMD ["npm", "start"]
