@@ -42,24 +42,11 @@
 \chapter{Introdução}
 Este projeto tem como a objetivo criar uma plataforma de armazenamento, consulta e gestão de informação relativa aos acessos aos edifícios e salas da Faculdade de Ciências da Universidade de Lisboa, tendo em conta o hardware existente no espaço em causa e as necessidades do mesmo.
 
-Esta plataforma será disponibilizada numa solução hibrida, integrando recursos em cloud (AWS) e recursos locais.
+Esta plataforma será disponibilizada numa solução hibrida, integrando recursos em cloud (AWS / Google Cloud) e recursos locais.
 
 A necessidade de efetuar um levantamento rigoroso das atuais soluções apresentadas aos utilizadores foi um dos trabalhos realizados no âmbito da cadeira de Conceção do Produto no ano letivo 2016/2017. Com este objetivo alcançado conseguimos ganhar algum tempo sendo que agora só será necessário melhorar alguns aspetos.
 
-Em relação ao projeto em causa, no mínimo, terão que ser sustentadas três funcionalidades, uma para cada grupo de utilizadores:
-\begin{enumerate}
-\item Aos administradores da plataforma, consulta de quem esteve presente num edifício ou numa sala em determinados períodos temporais %fica a faltar secretaria e seguranças
-\item Aos professores da FCUL, consulta dos alunos presentes nas suas aulas
-\item Aos alunos da FCUL, consulta do seu histórico de acessos
-\end{enumerate}
 
-Passivamente o sistema sustentará, no mínimo, os seguintes requisitos:
-\begin{enumerate}
-\item Tolerar a falha de um qualquer componente de hardware com uma redução mínima de desempenho e sem perda de dados;
-\item Tolerar uma falha catastrófica com um período de indisponibilidade não superior a 24h, sendo admissível apenas a perda de dados que tenham sido introduzidos no sistema nas últimas 24h;
-\item Ser escalável e modular, por forma a suportar facilmente a adição e remoção de hardware para fazer face a picos de utilização que se prevê que ocorram em determinados momentos.
-\item confidencialidade de dados, tendo em conta a sensibilidade dos dados a manipular.
-\end{enumerate}
 \chapter{Âmbito do projeto}
 \section{Requisitos funcionais}
 \begin{enumerate}
@@ -146,6 +133,7 @@ Passivamente o sistema sustentará, no mínimo, os seguintes requisitos:
 \chapter{Planeamento}
 \section{Estimativas}
 \subsection{Esforço disponível}
+Início do Projeto a 5 de Fevereiro com conclusão prevista a 7 de Julho, o que resulta num total de 5 meses.\\
 Elementos da equipa e respetivas disponibilidades:\\
 
 \begin{tabularx}{\textwidth}{XX}
@@ -154,8 +142,8 @@ Elementos da equipa e respetivas disponibilidades:\\
 	Hugo = 35\%     &
 \end{tabularx}
 \linebreak\linebreak
-Tendo em conta a disponibilidade de cada elemento a equipa terá 0.35*4 + 0.4 =1.8 pessoas\linebreak
-Com uma duração prevista de 6 meses teremos um \textbf{esforço disponível} de 1.8*6=10.8 Pessoas Mês
+Tendo em conta a disponibilidade de cada elemento a equipa terá $0.35*4 + 0.4 =1.8 pessoas$\linebreak
+Com uma duração prevista de 5 meses teremos um \textbf{esforço disponível} de $1.8*5=9 Pessoas Mes$
 \subsection{Dados históricos}
 \subsubsection*{André, Catarina, Hugo e Pedro} 
 \begin{description}
@@ -256,6 +244,17 @@ Com uma duração prevista de 6 meses teremos um \textbf{esforço disponível} d
     \end{itemize}
 \end{itemize}
 \subsection{Estimativa COCOMO}
+Para este projeto optámos pelo modelo de COCOMO orgânico visto que:
+\begin{itemize}
+\item a compreenção do produto é alargada com base no conhecimento já obtido no projeto da cadeira de CP, 
+\item a experiência em projetos semelhantes foi obtida ao longo da carreira académica de cada um dos elementos do grupo de trabalho, 
+\item a nessecidade de conformidade com pré requisistos é básica, visto que os requesitos funcionais do projeto não são muito extensos, focando-se em duas funcionalidades principais, registo de presenças e controlo de acessos,
+\item a necessidade de conformidade com interfaces externas é básica, visto que não nos foi dado acesso aos recursos já existentes, sendo estes dados simulados por um único recurso,
+\item a necessidade de desenvolvimento comcorrente de hardware e software não existe dado que não é o foco do projeto o desenvolvimento de hardware compativel com o sistema a desenvolver e o projeto não irá ser integrado com o sistema já existente na faculdade,
+\item a necessidade de estruturas de dados ou algoritmos inovadores pode ser considerada mínima visto que, apesar de ser nessário uma base de dados extensa para o backend não irá existir a necessidade algoritmos inovadores,
+\item o interesse em terminar o produto cedo é média visto que o projeto tem um prazo de entrega fixo com duração máxima de 5 meses,
+\item a dimensão do produto enquadra-se dentro do modo orgâninco sendo previstas 2,5 KLOC
+\end{itemize}
 Com base no COCOMO intermédio usando o modelo semi-independente e tendo em conta os multiplicadores de esforço retirados da tabela dos Slides da TP06 \cite{slideTP6} obtivemos os seguintes valores:\\\\ KLOC = $3$ \\
 Esforço[E] = $a * KLOC^{b} * EAF <=> 3 * 3^{1.12} * 1.167 = 11.98 PM$\\
 Duração[D] = $c * E^{d} * EAF <=> 2.5 * 11.98^{0.35} * 1.167 = 6.96 Meses$\\
