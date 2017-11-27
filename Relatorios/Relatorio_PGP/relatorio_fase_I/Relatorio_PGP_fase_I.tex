@@ -63,74 +63,66 @@ Passivamente o sistema sustentará, no mínimo, os seguintes requisitos:
 \chapter{Âmbito do projeto}
 \section{Requisitos funcionais}
 \begin{enumerate}
-\item Funcionário de Limpeza / Manutenção
-	\begin{enumerate}
-    \item Consulta de histórico de acessos.
-    \item Consulta de salas disponíveis.
-	\end{enumerate}
 \item Aluno
 	\begin{enumerate}
-	\item Consulta de histórico de acessos.
-    \item Horário do curso frequentado.
-    \item Horário dos espaços, de acordo com o currículo.
-    \item Espaços livres a determinadas horas e a que grupo pertence.
+	\item Consulta de histórico de acessos
+    \item Horário do curso frequentado
+    \item Horário dos espaços livres e a que grupo pertence (Ex.: grupo = Departamento de Informática)
 	\end{enumerate}
 \item Funcionário de Departamento
 	\begin{enumerate}
-    \item Consulta de histórico de acessos.
-    \item Consulta de salas disponíveis.
-    \item Marcação de salas.
+    \item Consulta de histórico de acessos
+    \item Consulta de salas disponíveis
+    \item Marcação de salas
 	\end{enumerate}
 \item Secretaria
 	\begin{enumerate}
-    \item Consultar e alterar presenças nas aulas.
-    \item Alterar permissão de acesso ao parque de estacionamento.
+    \item Consultar e alterar presenças nas aulas, mediante justificação válida
 	\end{enumerate}
 \item Professor
 	\begin{enumerate}
-	\item Consulta dos alunos presentes nas suas aulas.
-    \item Horário de aulas e "compromissos".
-    \item Consulta de histórico de acessos.
-    \item Consulta de salas disponíveis.
-    \item Marcação de salas.
-    \item Reserva de sala para exame.
+	\item Consulta dos alunos presentes nas suas aulas
+    \item Horário de aulas e "compromissos"
+    \item Consulta de histórico de acessos
+    \item Consulta de salas disponíveis
+    \item Marcação de salas para avaliações contínua e aulas extra
 	\end{enumerate}
 \item Seguranças
 	\begin{enumerate}
-	\item Consulta de quem esteve presente num edifício ou numa sala num determinado espaço de tempo, em caso de um incidente.
-    \item Consulta de histórico de acessos.
-    \item Consulta de salas disponíveis.
-    \item Criar acesso para visitantes.
-    \item Criar eventos de incidentes / desastres / perdidos e achados.
-    \item Criar acessos temporários no caso de perda de cartão.
-    \item Consulta de quem esteve presente num edifício ou numa sala num determinado espaço de tempo, em caso de desastre, validado por mais que uma pessoa com um nível de Administrador de Sistema / Administrador-Chefe.
-    \item Bloqueio de acessos em caso de necessidade, Lock Down.
-    \item Desbloqueio do estado Lock Down, validado por mais que uma pessoa com um nível de Administrador de Sistema.
+    \item Consulta de histórico de acessos
+    \item Consulta de salas disponíveis
+    \item Criar acesso para visitantes
+    \item Criar eventos de incidentes / desastres / perdidos e achados
+    \item Criar acessos temporários no caso de perda de cartão
+	\item Consulta de quantas pessoas estiveram presentes num edifício ou numa sala num determinado espaço de tempo
+    \item Consulta de quem esteve presente num edifício ou numa sala num determinado espaço de tempo, em caso de desastre, validado por mais que uma pessoa com um nível de Administrador de Sistema / Administrador-Chefe
+    \item Bloqueio de acessos em caso de necessidade, Lock Down
+    \item Desbloqueio do estado Lock Down, validado por mais que uma pessoa com um nível de Administrador de Sistema
 	\end{enumerate}
 \item Administrador
 	\begin{enumerate}
-    \item Consulta de quantas pessoas estiveram presentes num edifício ou numa sala num determinado espaço de tempo.
-    \item Registo das salas disponíveis em tempo real.
-    \item Registo de novos utilizadores.
-    \item Alteração de estatutos, inferior ao seu nível de acesso.
-    \item Associar cartão de aluno no sistema informático da dsi.
-    \item Criar acesso para visitantes.
-    \item Alterar acesso a salas e laboratórios.
+    \item Consulta de quantas pessoas estiveram presentes num edifício ou numa sala num determinado espaço de tempo
+    \item Registo das salas disponíveis em tempo real
+    \item Registo de novos utilizadores
+    \item Alteração de estatutos, inferior ao seu nível de acesso
+    \item Associar cartão de aluno no sistema informático da dsi
+    \item Criar acesso para visitantes
+    \item Alterar acesso a salas e laboratórios
     \end{enumerate}
 \item Administrador-Chefe (Ex. Zé Fernandes)
 	\begin{enumerate}
-	\item .Consulta de quem esteve presente num edifício ou numa sala num determinado espaço de tempo, em caso de um incidente.
-    \item Consulta de histórico de acessos.
-    \item Consulta de salas disponíveis.
-    \item Criar acesso para visitantes.
-    \item Consulta de quem esteve presente num edifício ou numa sala num determinado espaço de tempo, em caso de desastre, validado por mais que uma pessoa com um nível de Administrador de Sistema.
-    \item Consultar acessos ao parque de estacionamento.
+	\item Consulta de quem esteve presente num edifício ou numa sala num determinado espaço de tempo, em caso de um incidente
+    \item Consulta de histórico de acessos
+    \item Consulta de salas disponíveis
+    \item Criar acesso para visitantes
+    \item Consulta de quem esteve presente num edifício ou numa sala num determinado espaço de tempo, em caso de desastre, validado por mais que uma pessoa com um nível de Administrador de Sistema
+    \item Consultar acessos ao parque de estacionamento
 	\end{enumerate}
 \item Administrador de Sistemas
 	\begin{enumerate}
-    \item Acesso à API.
-    \item Alteração de todos os estatutos.
-    \item Todas as funcionalidades do Administrador.
+    \item Acesso à API
+    \item Alteração de todos os estatutos
+    \item Todas as funcionalidades do Administrador
     \end{enumerate}
 \end{enumerate}
 \section{Requisitos não-funcionais}
@@ -139,13 +131,10 @@ Passivamente o sistema sustentará, no mínimo, os seguintes requisitos:
 \item Facilidade de integração com o hardware existente.
 \item Necessidade de ligação constante à internet.
 \item Confidencialidade dos dados.
-\item Usar protocolos que sustentem os requisitos funcionais e não funcionais.
-\item Cada utilizador só tem acesso a uma vista da base de dados coerente com o seu nível de acesso.
-\item Nenhum utilizador terá acesso a uma visão global da base de dados.
+\item Um tipo de utilizador terá acesso a uma visão global da base de dados em caso de necessidade (Ex.: Desastre natural ou roubo numa determinda sala)
 \item Tolerar a falha de um qualquer componente de hardware com uma redução mínima de desempenho e sem perda de dados
 \item Tolerar uma falha catastrófica com um período de indisponibilidade não superior a 24h, sendo admissível apenas a perda de dados que tenham sido introduzidos no sistema nas últimas 24h
 \item Ser escalável e modular, por forma a suportar facilmente a adição e remoção de hardware para fazer face a picos de utilização que se prevê que ocorram em determinados momentos.
-\item Execução de um sistema de simulação de dados de entrada sobre os utilizadores do sistema, salas, edifícios e parque de estacionamento.
 \item Integração no sistema de autenticação atualmente presente na faculdade.
 \end{enumerate}
 \section{Informação de entrada e saída}
@@ -166,7 +155,7 @@ Elementos da equipa e respetivas disponibilidades:\\
 \end{tabularx}
 \linebreak\linebreak
 Tendo em conta a disponibilidade de cada elemento a equipa terá 0.35*4 + 0.4 =1.8 pessoas\linebreak
-Com uma duração prevista de 6 meses teremos um \textbf{esforço disponível} de 1.8*6=10.8 Pessoas/Mês
+Com uma duração prevista de 6 meses teremos um \textbf{esforço disponível} de 1.8*6=10.8 Pessoas Mês
 \subsection{Dados históricos}
 \subsubsection*{André, Catarina, Hugo e Pedro} 
 \begin{description}
@@ -354,12 +343,13 @@ Postman ou similar & 500\% & Durante todo o tempo de desenvolvimento &  \\
 1  & Dividir equipa em cada competência (Tabelas de Recursos); Documentação                                     & Acompanhar projetos e desenvolvimento de cada componente                                                     & Rodar pessoas, reunir e explicar caso haja alguém fluente \\ \hline
 7  & Tendo em conta a estimação pessimista faz se uma maior divisão de componentes; Alargar prazo da componente & Acompanhar desenvolvimento de cada componente; Verificar atrasos; Acompanhar dificuldades no desenvolvimento & Colocar mais pessoas a trabalhar na componente         
 \end{tabularx}
-\caption{Tabela RIMM}
+\caption{Tabela RMMM}
 \label{TabRIMM}
 \end{table}
 \chapter{Conclusão}
 Face às estimativas o projeto é viável, como visto na secção Analise Critica \ref{AC}. 
-No plano RIMM temos as soluções para eventuais problemas encontradas durante a analise de riscos, ordenados por probabilidade de acontecimento, como visto na secção Gestão de Risco \ref{GR}.
+No plano RMMM temos as soluções para eventuais problemas encontradas durante a analise de riscos, ordenados por probabilidade de acontecimento, como visto na secção Gestão de Risco \ref{GR}.
+%\item Execução de um sistema de simulação de dados de entrada sobre os utilizadores do sistema, salas, edifícios e parque de estacionamento.
 \clearpage
 \bibliography{BiliografiaPGP1718R1}{}
 \bibliographystyle{IEEEtran}
