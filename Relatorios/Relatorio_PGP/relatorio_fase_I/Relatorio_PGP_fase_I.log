@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.4.21)  27 NOV 2017 11:44
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.4.21)  28 NOV 2017 16:17
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -987,15 +987,11 @@ Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 355.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 355.
 Package rerunfilecheck Info: File `Relatorio_PGP_fase_I.out' has not changed.
 (rerunfilecheck)             Checksum: 8EE0D30C48D6A65855A267DEE11B25CA;1262.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
  ) 
 Here is how much of TeX's memory you used:
  7362 strings out of 493013
  104600 string characters out of 6133343
- 220006 words of memory out of 5000000
+ 220007 words of memory out of 5000000
  10713 multiletter control sequences out of 15000+600000
  9154 words of font info for 32 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1011,7 +1007,7 @@ al/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/
 texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/t
 exlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/tex
 live/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on Relatorio_PGP_fase_I.pdf (15 pages, 243076 bytes).
+Output written on Relatorio_PGP_fase_I.pdf (15 pages, 243127 bytes).
 PDF statistics:
  309 PDF objects out of 1000 (max. 8388607)
  276 compressed objects within 3 object streams
