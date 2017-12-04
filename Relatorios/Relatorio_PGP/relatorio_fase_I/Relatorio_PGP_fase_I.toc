@@ -16,5 +16,5 @@
 \contentsline {section}{\numberline {3.4}Organiza\IeC {\c c}\IeC {\~a}o da equipa}{12}{section.3.4}
 \contentsline {section}{\numberline {3.5}Planeamento do Projeto}{12}{section.3.5}
 \contentsline {section}{\numberline {3.6}Gest\IeC {\~a}o de Riscos}{12}{section.3.6}
-\contentsline {chapter}{\numberline {4}Conclus\IeC {\~a}o}{13}{chapter.4}
-\contentsline {chapter}{\numberline {5}Bibliografia}{14}{chapter.5}
+\contentsline {chapter}{\numberline {4}Conclus\IeC {\~a}o}{14}{chapter.4}
+\contentsline {chapter}{\numberline {5}Bibliografia}{15}{chapter.5}
