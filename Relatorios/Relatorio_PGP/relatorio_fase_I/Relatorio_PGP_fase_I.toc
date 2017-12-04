@@ -11,10 +11,10 @@
 \contentsline {subsection}{\numberline {3.1.3}Estimativa de linhas de c\IeC {\'o}digo}{8}{subsection.3.1.3}
 \contentsline {subsection}{\numberline {3.1.4}Estimativa COCOMO}{9}{subsection.3.1.4}
 \contentsline {subsection}{\numberline {3.1.5}An\IeC {\'a}lise cr\IeC {\'\i }tica}{10}{subsection.3.1.5}
-\contentsline {section}{\numberline {3.2}Recursos}{11}{section.3.2}
-\contentsline {section}{\numberline {3.3}Processo de desenvolvimento de software}{12}{section.3.3}
-\contentsline {section}{\numberline {3.4}Organiza\IeC {\c c}\IeC {\~a}o da equipa}{12}{section.3.4}
-\contentsline {section}{\numberline {3.5}Planeamento do Projeto}{12}{section.3.5}
-\contentsline {section}{\numberline {3.6}Gest\IeC {\~a}o de Riscos}{12}{section.3.6}
-\contentsline {chapter}{\numberline {4}Conclus\IeC {\~a}o}{14}{chapter.4}
-\contentsline {chapter}{\numberline {5}Bibliografia}{15}{chapter.5}
+\contentsline {section}{\numberline {3.2}Recursos}{10}{section.3.2}
+\contentsline {section}{\numberline {3.3}Processo de desenvolvimento de software}{11}{section.3.3}
+\contentsline {section}{\numberline {3.4}Organiza\IeC {\c c}\IeC {\~a}o da equipa}{11}{section.3.4}
+\contentsline {section}{\numberline {3.5}Planeamento do Projeto}{11}{section.3.5}
+\contentsline {section}{\numberline {3.6}Gest\IeC {\~a}o de Riscos}{11}{section.3.6}
+\contentsline {chapter}{\numberline {4}Conclus\IeC {\~a}o}{13}{chapter.4}
+\contentsline {chapter}{\numberline {5}Bibliografia}{14}{chapter.5}

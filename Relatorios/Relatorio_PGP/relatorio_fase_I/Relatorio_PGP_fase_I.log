@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.4.21)  4 DEC 2017 17:35
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.4.21)  4 DEC 2017 17:38
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -830,24 +830,19 @@ Underfull \hbox (badness 10000) in paragraph at lines 258--262
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 262.
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 269.
+(babel)             in language  on input line 268.
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 269.
+(babel)             in language  on input line 268.
 [9]
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 269.
-Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 269.
- [10]
-Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 269.
+(babel)             in language  on input line 268.
 
-Underfull \hbox (badness 10000) in paragraph at lines 279--279
+Underfull \hbox (badness 10000) in paragraph at lines 278--278
 []|\OT1/cmr/bx/n/10 Quando Ne-
  []
 
 
-Overfull \hbox (189.76971pt too wide) in alignment at lines 292--292
+Overfull \hbox (189.76971pt too wide) in alignment at lines 291--291
 [][][][][][][][][][][]
  []
 
@@ -855,40 +850,40 @@ Overfull \hbox (189.76971pt too wide) in alignment at lines 292--292
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 326.
+(babel)             in language  on input line 325.
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 326.
-[11]
+(babel)             in language  on input line 325.
+[10]
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 326.
+(babel)             in language  on input line 325.
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 329.
+(babel)             in language  on input line 328.
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 332.
+(babel)             in language  on input line 331.
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 334.
+(babel)             in language  on input line 333.
 
-Underfull \hbox (badness 10000) in paragraph at lines 359--359
+Underfull \hbox (badness 10000) in paragraph at lines 358--358
 \OT1/cmr/m/n/10 di-vis~ao de com-po-nen-tes;
  []
 
 
-Underfull \hbox (badness 3168) in paragraph at lines 359--359
+Underfull \hbox (badness 3168) in paragraph at lines 358--358
 \OT1/cmr/m/n/10 Alar-gar prazo da com-po-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 359--359
+Underfull \hbox (badness 10000) in paragraph at lines 358--358
 []|\OT1/cmr/m/n/10 Acompanhar de-sen-vol-vi-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 359--359
+Underfull \hbox (badness 10000) in paragraph at lines 358--358
 \OT1/cmr/m/n/10 Ve-ri-fi-car atra-sos; Acom-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 359--359
+Underfull \hbox (badness 10000) in paragraph at lines 358--358
 \OT1/cmr/m/n/10 pa-nhar di-fi-cul-da-des no
  []
 
@@ -896,23 +891,23 @@ Underfull \hbox (badness 10000) in paragraph at lines 359--359
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 363.
+(babel)             in language  on input line 362.
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 363.
-[12]
+(babel)             in language  on input line 362.
+[11]
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 363.
+(babel)             in language  on input line 362.
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 363.
- [13]
+(babel)             in language  on input line 362.
+ [12]
 Cap\'{\i }tulo 4.
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 363.
+(babel)             in language  on input line 362.
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 367.
+(babel)             in language  on input line 366.
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 367.
-[14
+(babel)             in language  on input line 366.
+[13
 
 ] (./Relatorio_PGP_fase_I.bbl
 Cap\'{\i }tulo 5.
@@ -934,19 +929,19 @@ Underfull \hbox (badness 4467) in paragraph at lines 35--38
  []
 
 )
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 370.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 369.
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 370.
+(babel)             in language  on input line 369.
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 370.
- [15
+(babel)             in language  on input line 369.
+ [14
 
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 370.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 369.
  (./Relatorio_PGP_fase_I.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 370.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 370.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 369.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 369.
 Package rerunfilecheck Info: File `Relatorio_PGP_fase_I.out' has not changed.
 (rerunfilecheck)             Checksum: 8EE0D30C48D6A65855A267DEE11B25CA;1262.
 
@@ -955,9 +950,9 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 7364 strings out of 493013
- 104616 string characters out of 6133343
- 220064 words of memory out of 5000000
+ 7363 strings out of 493013
+ 104609 string characters out of 6133343
+ 221064 words of memory out of 5000000
  10713 multiletter control sequences out of 15000+600000
  9154 words of font info for 32 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -973,10 +968,10 @@ al/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/
 texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/t
 exlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/tex
 live/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on Relatorio_PGP_fase_I.pdf (16 pages, 244559 bytes).
+Output written on Relatorio_PGP_fase_I.pdf (15 pages, 244325 bytes).
 PDF statistics:
- 314 PDF objects out of 1000 (max. 8388607)
- 280 compressed objects within 3 object streams
- 99 named destinations out of 1000 (max. 500000)
+ 310 PDF objects out of 1000 (max. 8388607)
+ 277 compressed objects within 3 object streams
+ 98 named destinations out of 1000 (max. 500000)
  158 words of extra memory for PDF output out of 10000 (max. 10000000)
 
