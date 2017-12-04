@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.4.21)  4 DEC 2017 12:04
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.4.21)  4 DEC 2017 17:35
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -864,31 +864,31 @@ Package babel Info: Redefining portuges shorthand "|
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language  on input line 329.
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 331.
+(babel)             in language  on input line 332.
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 333.
+(babel)             in language  on input line 334.
 
-Underfull \hbox (badness 10000) in paragraph at lines 358--358
+Underfull \hbox (badness 10000) in paragraph at lines 359--359
 \OT1/cmr/m/n/10 di-vis~ao de com-po-nen-tes;
  []
 
 
-Underfull \hbox (badness 3168) in paragraph at lines 358--358
+Underfull \hbox (badness 3168) in paragraph at lines 359--359
 \OT1/cmr/m/n/10 Alar-gar prazo da com-po-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 358--358
+Underfull \hbox (badness 10000) in paragraph at lines 359--359
 []|\OT1/cmr/m/n/10 Acompanhar de-sen-vol-vi-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 358--358
+Underfull \hbox (badness 10000) in paragraph at lines 359--359
 \OT1/cmr/m/n/10 Ve-ri-fi-car atra-sos; Acom-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 358--358
+Underfull \hbox (badness 10000) in paragraph at lines 359--359
 \OT1/cmr/m/n/10 pa-nhar di-fi-cul-da-des no
  []
 
@@ -896,22 +896,22 @@ Underfull \hbox (badness 10000) in paragraph at lines 358--358
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 362.
+(babel)             in language  on input line 363.
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 362.
+(babel)             in language  on input line 363.
 [12]
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 362.
+(babel)             in language  on input line 363.
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 362.
+(babel)             in language  on input line 363.
  [13]
 Cap\'{\i }tulo 4.
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 362.
+(babel)             in language  on input line 363.
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 366.
+(babel)             in language  on input line 367.
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 366.
+(babel)             in language  on input line 367.
 [14
 
 ] (./Relatorio_PGP_fase_I.bbl
@@ -934,19 +934,19 @@ Underfull \hbox (badness 4467) in paragraph at lines 35--38
  []
 
 )
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 369.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 370.
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 369.
+(babel)             in language  on input line 370.
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 369.
+(babel)             in language  on input line 370.
  [15
 
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 369.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 370.
  (./Relatorio_PGP_fase_I.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 369.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 369.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 370.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 370.
 Package rerunfilecheck Info: File `Relatorio_PGP_fase_I.out' has not changed.
 (rerunfilecheck)             Checksum: 8EE0D30C48D6A65855A267DEE11B25CA;1262.
 
@@ -973,7 +973,7 @@ al/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/
 texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/t
 exlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/tex
 live/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on Relatorio_PGP_fase_I.pdf (16 pages, 244260 bytes).
+Output written on Relatorio_PGP_fase_I.pdf (16 pages, 244559 bytes).
 PDF statistics:
  314 PDF objects out of 1000 (max. 8388607)
  280 compressed objects within 3 object streams
