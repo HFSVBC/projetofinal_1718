@@ -347,22 +347,6 @@ Pedro Duarte Neto & 35\% & 80\% & 8:00 horas \\
 \label{TabRH}
 \end{table}
 
-
-%\begin{landscape}
-%	\begin{table}[h]
-%	\centering
-%	\begin{tabularx}{\textwidth}{X|X|X|X|X|X|X|X|X|X}
-%	& Modelos & T.,Modelos & Design & T.,Design & Construir e Executar T. & MEAN & LAMP & Segurança & Redes \\ \hline
-%	André Nunes & M & M & M & M & E & E & B & M & E \\ \hline
-%	Ana Catarina Sousa & E & E & E & E & E & B & M & M & M \\ \hline
-%	Hugo Filipe Curado & M & M & M & M & E & M & E & E & E \\ \hline
-%	Patrícia Jesus & M & M & M & M & M & M & M & M & M \\ \hline
-%	Pedro Duarte Neto & E & E & B & B & E & M & M & E & E
-%	\end{tabularx}
-%	\caption{Tabela de Conhecimentos dos Recursos Humanos}
-%	\label{TabRH}
-%	\end{table}
-%\end{landscape}
 \begin{table}[h]
 \centering
 \begin{tabular}{llllllll}
@@ -397,41 +381,60 @@ Pedro Duarte Neto & 35\% & 80\% & 8:00 horas \\
 \caption{Disponibilidade por pessoa por semana}
 \label{dppps}
 \end{table}
-\begin{table}[h]
+
+\begin{table}[]
+\centering
+\begin{adjustbox}{width=1.1\textwidth, center=\textwidth}
+\label{my-label}
+\begin{tabular}{l|c|c|c|c|c|c|c|c|c}
+ & \multicolumn{1}{l|}{Modelos} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}Testes\\ Modelos\end{tabular}} & \multicolumn{1}{l|}{Design} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}Testes\\ Design\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}Construir e\\ Executar testes\end{tabular}} & \multicolumn{1}{l|}{MEAN} & \multicolumn{1}{l|}{LAMP} & \multicolumn{1}{l|}{Segurança} & \multicolumn{1}{l}{Redes} \\ \hline
+Ana Sousa & E & E & E & E & E & B & M & M & M \\ \hline
+André Nunes & M & M & M & M & E & E & B & M & E \\ \hline
+Hugo Curado & M & M & M & M & E & M & E & E & E \\ \hline
+Patricia Jesus & B & M & M & M & M & E & E & M & B \\ \hline
+Pedro Neto & E & E & B & B & E & M & M & E & E
+\end{tabular}
+\end{adjustbox}
+\caption{Tabela de competências da equipa}
+\end{table}
+
+
+\begin{table}[]
 \centering
 \begin{tabularx}{\textwidth}{X|c|X|X|c}
 \textbf{Descrição} & \textbf{Disp.} & \textbf{Quando Necessário} & \textbf{Tempo Necessário} & \textbf{Categoria} \\ \hline
-Bootstrap & \multicolumn{1}{c|}{100\%} & Durante o desenvolvimento do front end &  & off-the-shelf \\ \hline
-CodeIgniter / Laravel & 100\% & Para o back end &  & off-the-shelf \\ \hline
-Microsoft SQL Server & \multicolumn{1}{c|}{100\%} & Para o back end &  & off-the-shelf \\ \hline
-MySql & 100\% & Para o front end &  & off-the-shelf \\ \hline
-jQuery & 100\% & Para o front end &  & off-the-shelf \\ \hline
-Angular & 100\% & Para o back end &  & off-the-shelf \\ \hline
-Express & 100\% & Para o back end &  & off-the-shelf \\ \hline
+Bootstrap & \multicolumn{1}{c|}{100\%} & Durante o desenvolvimento do front end & Duração do projeto & off-the-shelf \\ \hline
+CodeIgniter / Laravel & 100\% & Para o back end & Duração do projeto & off-the-shelf \\ \hline
+Microsoft SQL Server & \multicolumn{1}{c|}{100\%} & Para o back end & Duração do projeto & off-the-shelf \\ \hline
+MySql & 100\% & Para o front end & Duração do projeto & off-the-shelf \\ \hline
+jQuery & 100\% & Para o front end & Duração do projeto & off-the-shelf \\ \hline
+Angular & 100\% & Para o back end & Duração do projeto & off-the-shelf \\ \hline
+Express & 100\% & Para o back end & Duração do projeto & off-the-shelf \\ \hline
 Docker / Kubernets & \multicolumn{1}{c|}{100\%} & Durante o deployment do projeto &  & off-the-shelf \\
 \end{tabularx}
 \caption{Tabela de Recursos Software}
 \label{TabRS}
 \end{table}
-\begin{table}[h]
+\begin{table}[]
 \centering
 \begin{tabularx}{\textwidth}{l|c|X|c}
 \textbf{Descrição} & \textbf{Disp.} & \textbf{Quando Necessário} & \textbf{Tempo Necessário} \\ \hline
-Servidor Local & 500\% & Durante o desenvolvimento do projeto em ambiente local &  \\ \hline
-IDE de Desenvolvimento & 500\% & Durante todo o tempo de desenvolvimento &  \\ \hline
-Browser & 500\% & Durante todo o tempo de desenvolvimento &  \\ \hline
-Debugger do browser & 500\% & Durante todo o tempo de desenvolvimento &  \\ \hline
-Postman ou similar & 500\% & Durante todo o tempo de desenvolvimento &  \\
+Servidor Local & 500\% & Durante o desenvolvimento do projeto em ambiente local &  Duração do projeto\\ \hline
+IDE de Desenvolvimento & 500\% & Durante todo o tempo de desenvolvimento &  Duração do projeto \\ \hline
+Browser & 500\% & Durante todo o tempo de desenvolvimento &  Duração do projeto\\ \hline
+Debugger do browser & 500\% & Durante todo o tempo de desenvolvimento & Duração do projeto  \\ \hline
+Postman ou similar & 500\% & Durante todo o tempo de desenvolvimento & Duração do projeto \\
 \end{tabularx}
 \caption{Tabela de Recursos Ferramentas}
 \label{TabF}
 \end{table}
 
 \pagebreak
+
 \section{Processo de desenvolvimento de software}
 A nossa escolha sobre o modelo de processo a utilizar recai sobre o modelo incremental porque é aquele que melhor se adapta à equipa e ao produto a desenvolver.\\
 Visto ser um modelo constituido por mini cascatas conseguimos ter uma funcionalidade a 100\% mais rapidamente do que com qualquer outro modelo de processo. Isto será especialmente relevante nas reuniões com os clientes (professores), pois, assim conseguimos apresentar funcionalidades com maturidade de software e assim o retorno será mais preciso,ao contrário do que acontece com outros modelos de processo em que as funcionalidades nem sempre apresentam maturidade de software o que pode levar a um retorno mais vago.
-\pagebreak
+
 
 \section{Organização da equipa}
 O modelo de organização da equipa a usar é o modelo matricial. Esta escolha justifica-se principalmente pela modularidade do projecto em causa, o que elimina a organização horizontal, o facto de ser descentralizado é um factor a favor e elimina o modelo hierárquico que é centralizado.\\
@@ -485,9 +488,12 @@ Gestor de Projecto     &           & X            &             &               
 \caption{Tabela de competências}
 \end{table}
 
+\pagebreak
+
 \section{Planeamento do Projeto}
 Por favor consultar o ficheiro planeamentoPGP001.mpp.
-\pagebreak
+
+
 \section{Gestão de Riscos}
 \label{GR}
 \begin{table}[h]

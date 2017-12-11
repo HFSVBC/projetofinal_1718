@@ -12,9 +12,9 @@
 \contentsline {subsection}{\numberline {3.1.4}Estimativa COCOMO}{10}{subsection.3.1.4}
 \contentsline {subsection}{\numberline {3.1.5}An\IeC {\'a}lise cr\IeC {\'\i }tica}{11}{subsection.3.1.5}
 \contentsline {section}{\numberline {3.2}Recursos}{12}{section.3.2}
-\contentsline {section}{\numberline {3.3}Processo de desenvolvimento de software}{13}{section.3.3}
+\contentsline {section}{\numberline {3.3}Processo de desenvolvimento de software}{14}{section.3.3}
 \contentsline {section}{\numberline {3.4}Organiza\IeC {\c c}\IeC {\~a}o da equipa}{14}{section.3.4}
-\contentsline {section}{\numberline {3.5}Planeamento do Projeto}{14}{section.3.5}
+\contentsline {section}{\numberline {3.5}Planeamento do Projeto}{15}{section.3.5}
 \contentsline {section}{\numberline {3.6}Gest\IeC {\~a}o de Riscos}{15}{section.3.6}
 \contentsline {chapter}{\numberline {4}Conclus\IeC {\~a}o}{16}{chapter.4}
 \contentsline {chapter}{\numberline {5}Bibliografia}{17}{chapter.5}
