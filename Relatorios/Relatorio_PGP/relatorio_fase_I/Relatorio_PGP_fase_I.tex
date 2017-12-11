@@ -20,6 +20,9 @@
  \usepackage{lscape}
 \usepackage{longtable}
 \usepackage{tabu}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage[export]{adjustbox}[2011/08/13]
+
 
 \titleformat{\chapter}{\normalfont\huge}{\thechapter.}{20pt}{\huge\bf}
 \begin{document}
@@ -138,9 +141,9 @@ Posto isto é necessário primeiro planificar quais os requisitos do sistema, as
 \section{Informação de entrada e saída}
 \subsubsection*{Entrada inicial de informação}
     Os dados sobre os utilizadores são gerados automaticamente por um serviço de simulação da interação de um grupo de pessoas com um edifício, sendo depois acedidos por JSON.
-	Os dados simulados são dados referentes à implementação de um novo sistema de controlo de acessos. Este sistema é composto por aquesição do id do sítio por onde o utilizador passou, um timestamp que representa a hora a que passou e o id do utilizador. Estes pontos de controlo estaram inseridos antes e depois da porta ou entrada de qualquer espaço da faculdade. Sendo depois processados pela nossa aplicação. 
+	Os dados simulados são dados referentes à implementação de um novo sistema de controlo de acessos. Este sistema é composto por aquesição do id do sítio por onde o utilizador passou, um timestamp que representa a hora a que passou e o id do utilizador. Estes pontos de controlo estaram inseridos antes e depois da porta ou entrada de qualquer espaço da faculdade. Sendo depois processados pela nossa aplicação. Para os dados relativos aos utilizadores, tais como nome, número da faculdade, curso, entre outros, é necessário haver uma ligação à base de dados académica da faculdade de modo a termos acesso a essa informação. Para a informação sobre horários, salas e espaços é necessário uma ligação ao sistema Fenix da Faculdade de Ciências. Para a informação sobre o estacionamento na faculdade é necessário uma ligação ao sistema Verex da faculdade.
 \subsubsection*{Saídas de informação}
-	Os dados de saída seram os dados relativos ao histórico de acesso de um utilizador 
+	Os dados de saída seram os dados relativos ao histórico de acesso de utilizadores, informação sobre a disponibilidade e ocupação dos espaços, incidentes e perdidos e achados, permissões de cada utilizador.  
 \chapter{Planeamento}
 \section{Estimativas}
 \subsection{Esforço disponível}
@@ -153,8 +156,8 @@ Elementos da equipa e respetivas disponibilidades:\\
 	Hugo = 35\%     &
 \end{tabularx}
 \linebreak\linebreak
-Tendo em conta a disponibilidade de cada elemento a equipa terá $0.35*4 + 0.4 =1.8 pessoas$\linebreak
-Com uma duração prevista de 5 meses teremos um \textbf{esforço disponível} de $1.8*5=9 Pessoas Mes$
+Tendo em conta a disponibilidade de cada elemento a equipa terá $0.35*4 + 0.4 =1.8$ pessoas\linebreak
+Com uma duração prevista de \textbf{5 meses} teremos um \textbf{esforço disponível} de $1.8*5=9$ Pessoa Mes
 \subsection{Dados históricos}
 \subsubsection*{André, Catarina, Hugo e Pedro} 
 \begin{description}
@@ -208,52 +211,39 @@ Com uma duração prevista de 5 meses teremos um \textbf{esforço disponível} d
 
 \subsubsection*{André}
 \begin{description}
-    \item[Projeto de Aplicações e Serviços Web] consistiu em desenvolver uma aplicação Full Stack para jogos de poker online, teve uma \textbf{duração de dois meses e meio}, teve aproximadamente \textbf{500 linhas de código}. Para o desenvolvimento foram usadas as linguagens \textbf{javascript}, \textbf{html} e \textbf{css} com recurso ao MEAN Stack.\\\textbf{Esforço} = 3*0.2*2.5meses=1.5PM\\ \textbf{Produtividade} = 500 LOC/1.5 PM = 333 LOC/PM
+    \item[Projeto de Aplicações e Serviços Web] consistiu em desenvolver uma aplicação Full Stack para jogos de poker online, teve uma \textbf{duração de dois meses e meio}, teve aproximadamente \textbf{1500 linhas de código}. Para o desenvolvimento foram usadas as linguagens \textbf{javascript}, \textbf{html} e \textbf{css} com recurso ao MEAN Stack.\\\textbf{Esforço} = 3*0.2*2.5meses=1.5PM\\ \textbf{Produtividade} = 1500 LOC/1.5 PM = 1000 LOC/PM
 \end{description}
 
 \subsubsection*{Patrícia}
 \begin{description}
     \item[Projeto de Aplicações e Serviços Web] consistiu em desenvolver uma aplicação Full Stack para leilões, teve uma \textbf{duração de dois meses e meio}, cada projeto teve aproximadamente \textbf{6500 linhas de código}. Para o desenvolvimento foram usadas as linguagens \textbf{php}, \textbf{javascript}, \textbf{sql}, \textbf{html} e \textbf{css} .\\\textbf{Esforço} = 3*0.2*2.5meses=1.5PM\\ \textbf{Produtividade} = 6500 LOC/1.5 PM = 4333 LOC/PM
 \end{description}
-
+\pagebreak
 \subsection{Estimativa de linhas de código}
-\begin{itemize}
-\item Front-End
-    \begin{itemize}
-    \item Single Page Design (HTML + CSS) [Otimista 150; Pessimista 400; Provavel 250]
-    \item Single Page Design (JS) [Otimista 75; Pessimista 200; Provavel 125]
-    \item Configuração Servidor (Mean com SQL) [Otimista 300; Pessimista 600; Provavel 425]
-    \item Base de dados [Otimista 50; Pessimista 100; Provavel 60]
-    \end{itemize}
-\item Back-End
-    \begin{itemize}
-    \item Base de dados [Otimista 150; Pessimista 400; Provavel 250]
-    \item Cache [Otimista 30; Pessimista 90; Provavel 50]
-    \item Configuração Servidor (LAMP) [Otimista 500; Pessimista 800; Provavel 625]
-    \item REST API [Otimista 150; Pessimista 325; Provavel 200]
-    \item Socket de comunicação entre servidores [Otimista 50; Pessimista 125; Provavel 80]
-    \end{itemize}
-\item Segurança
-    \begin{itemize}
-    \item OAuth (cache) [Otimista 15; Pessimista 70; Provavel 35]
-    \item Kerberos [Otimista 15; Pessimista 70; Provavel 35]
-    \item SSL / TLS (Lets Encrypt \cite{letsencrypt}) [Otimista 15; Pessimista 70; Provavel 35]
-    \item Token based authentication (Full Encription) [Otimista 15; Pessimista 70; Provavel 35]
-    \item Hijack Session [Otimista 15; Pessimista 70; Provavel 35]
-    \item IP Tables [Otimista 15; Pessimista 70; Provavel 35]
-    \item Two Factor Authentication (Authy \cite{authy}) [Otimista 15; Pessimista 70; Provavel 35]
-    \end{itemize}
-\item Redes
-    \begin{itemize}
-    \item Load Balancer (DNS) [Otimista 100; Pessimista 300; Provavel 150]
-    \end{itemize}
-\item Simulador de dados
-    \begin{itemize}
-    \item Base de dados [Otimista 200; Pessimista 425; Provavel 300]
-    \item REST API [Otimista 150; Pessimista 325; Provavel 200]
-    \item Web Service (PHP ou Python) [Otimista 150; Pessimista 325; Provavel 200]
-    \end{itemize}
-\end{itemize}
+Com base nos dados históricos de cada membro da equipa, foi feita a estimação das linhas de
+código nas diferentes perspectivas (otimista, provável e pessimista). De modo a ter uma melhor noção mais realista, dividimos o projecto nas várias componentes e estimamos a sua dimensão. As linhas de código para o simuldor de dados não foram tidas em conta no calculo final da ELC, isto porque os dados seriam obtidos usando hardware disponível na faculdade caso seja para produção.
+
+\begin{table}[h]
+\centering
+\label{my-label}
+\begin{tabular}{l|l|l|l|l}
+ & Otimista & Provável & Pessimista & Final \\ \hline
+Servidor MEAN & 400 & 600 & 1000 & 633 \\ \hline
+Controlador & 800 & 1000 & 1500 & 1050 \\ \hline
+Views & 850 & 1200 & 1600 & 1208 \\ \hline
+Servidor LAMP & 450 & 800 & 1200 & 808 \\ \hline
+Controlador & 750 & 1000 & 1300 & 1008 \\ \hline
+Modelos & 250 & 500 & 800 & 508 \\ \hline
+Base de dados & 150 & 350 & 500 & 342 \\ \hline
+Segurança & 150 & 500 & 800 & 492 \\ \hline
+Simulador de dados & 350 & 500 & 800 & 525 \\ \hline
+Total & 3800 & 5950 & 8700 & \textbf{6048}
+\end{tabular}
+\caption{Estimativa de Linhas de Código}
+\end{table}
+
+EAL Final = $\frac{Otimista + 4 * Provavel + Pessimista}{6}$ = 6048
+\pagebreak
 \subsection{Estimativa COCOMO}
 Para este projeto optámos pelo modelo de COCOMO orgânico visto que:
 \begin{itemize}
@@ -264,32 +254,100 @@ Para este projeto optámos pelo modelo de COCOMO orgânico visto que:
 \item a necessidade de desenvolvimento comcorrente de hardware e software não existe dado que não é o foco do projeto o desenvolvimento de hardware compativel com o sistema a desenvolver e o projeto não irá ser integrado com o sistema já existente na faculdade,
 \item a necessidade de estruturas de dados ou algoritmos inovadores pode ser considerada mínima visto que, apesar de ser nessário uma base de dados extensa para o backend não irá existir a necessidade algoritmos inovadores,
 \item o interesse em terminar o produto cedo é média visto que o projeto tem um prazo de entrega fixo com duração máxima de 5 meses,
-\item a dimensão do produto enquadra-se dentro do modo orgâninco sendo previstas 2,5 KLOC
+\item a dimensão do produto enquadra-se dentro do modo orgâninco sendo previstas 2,75 KLOC
 \end{itemize}
-Com base no COCOMO intermédio usando o modelo semi-independente e tendo em conta os multiplicadores de esforço retirados da tabela dos Slides da TP06 \cite{slideTP6} obtivemos os seguintes valores:\\\\ KLOC = $3$ \\
-Esforço[E] = $a * KLOC^{b} * EAF <=> 3 * 3^{1.12} * 1.167 = 11.98 PM$\\
-Duração[D] = $c * E^{d} * EAF <=> 2.5 * 11.98^{0.35} * 1.167 = 6.96 Meses$\\
-Numero de Pessoas [N] = $E / D <=> N = 11.98 / 6.96 = 1.72 Pessoas$
+
+\begin{table}[h]
+\centering
+\begin{adjustbox}{width=1\textwidth}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+ & \multicolumn{5}{c|}{\textbf{Classificação}} \\ \hline
+ & \textbf{Muito reduzido} & \textbf{Reduzido} & \textbf{Nominal} & \textbf{Elevado} & \textbf{Muito elevado} \\ \hline
+\textbf{Atributos do produto} &  &  &  &  &  \\ \hline
+\textbf{Fiabilidade do software necessária} & .75 & .88 & \cellcolor[HTML]{FFFE65}1.0 & 1.15 & 1.4 \\ \hline
+\textbf{Dimensão da base de dados} &  & \cellcolor[HTML]{FFFE65}.94 & 1.0 & 1.08 & 1.16 \\ \hline
+\textbf{Complexidade do produto} & .70 & .85 & 1.0 & \cellcolor[HTML]{FFFE65}1.15 & 1.3 \\ \hline
+ &  &  &  &  &  \\ \hline
+\textbf{Atributos do computador} &  &  &  &  &  \\ \hline
+\textbf{Restrições ao tempo de execução} &  &  & \cellcolor[HTML]{FFFE65}1.0 & 1.11 & 1.3 \\ \hline
+\textbf{Restrições ao armazenamento de dados} &  &  & \cellcolor[HTML]{FFFE65}1.0 & 1.06 & 1.21 \\ \hline
+\textbf{Volatilidade da máquina virtual} &  & \cellcolor[HTML]{FFFE65}.87 & 1.0 & 1.15 & 1.3 \\ \hline
+\textbf{Tempo disponível do computador} &  & .87 & \cellcolor[HTML]{FFFE65}1.0 & 1.07 & 1.15 \\ \hline
+ &  &  &  &  &  \\ \hline
+\textbf{Atributos dos indivíduos} &  &  &  &  &  \\ \hline
+\textbf{Capacidade dos analistas} & 1.46 & 1.19 & 1.0 & \cellcolor[HTML]{FFFE65}.86 & .71 \\ \hline
+\textbf{Experiência no desenv. De aplicações} & 1.29 & 1.13 & \cellcolor[HTML]{FFFE65}1.0 & .91 & .82 \\ \hline
+\textbf{Capacidade de programação} & 1.42 & 1.17 & \cellcolor[HTML]{FFFE65}1.0 & .86 & .70 \\ \hline
+\textbf{Experiência com a máquina virtual} & 1.21 & 1.1 & \cellcolor[HTML]{FFFE65}1.0 & .90 &  \\ \hline
+\textbf{Experiência com a liguagem de prog.} & 1.14 & 1.07 & \cellcolor[HTML]{FFFE65}1.0 & .95 &  \\ \hline
+ &  &  &  &  &  \\ \hline
+\textbf{Atributos do projecto} &  &  &  &  &  \\ \hline
+\textbf{Uso de práticas modernas de programação} & 1.24 & 1.1 & \cellcolor[HTML]{FFFE65}1.0 & .91 & .82 \\ \hline
+\textbf{Uso de ferramentas de software} & 1.24 & 1.1 & \cellcolor[HTML]{FFFE65}1.0 & .91 & .83 \\ \hline
+\textbf{Prazos de desenvolvimento} & 1.23 & \cellcolor[HTML]{FFFE65}1.08 & 1.0 & 1.04 & 1.1 \\ \hline
+\end{tabular}
+\end{adjustbox}
+\caption{Tabela de valores de multiplicadores de esforço}
+\label{my-label}
+\end{table}
+
+Com base no COCOMO intermédio usando o modelo orgânico e tendo em conta os multiplicadores de esforço retirados da tabela dos Slides da TP06 \cite{slideTP6} obtivemos os seguintes valores:\\\\ 
+KLOC = $6048 / 1000 = 6.05$ \\
+Esforço [E] = $a * KLOC^{b} * EAF <=> 3.2 * 6.05^{1.05} * 0.87 = 18.43 PM$\\
+Duração [D] = $c * E^{d} * EAF <=> 2.5 * 10.80^{0.38} = 7.56 Meses$\\
+Numero de Pessoas [N] = $E / D <=> N = 18.43 / 7.56 = 2.43 Pessoas$
+
+\pagebreak
 \subsection{Análise crítica}
 \label{AC}
-Com base nos valores obtidos em 4.3 e 4.4 podemos concluir que os valores estimados a partir do Modelo intermédio COCOMO condizem com o projeto proposto.
-A duração disponível varia entre os 6 e os 7 meses, o COCOMO previu 6.96 meses.
-O numero de pessoas é de 1.8, o COCOMO previu 1.72 pessoas.
-O esforço disponível calculado foi de 10.8 PM, o COCOMO previu 11.98 PM.
+
+Depois de uma análise aos dados históricos e a disponibilidade de cada elemento do grupo concluimos que o projecto terá uma duração prevista de \textbf{5 meses} e um esforço de \textbf{9 PM}. Com os valores finais estimados das linhas de código obtivemos um KLOC de \textbf{6048}, sem contar com a implementação do simulador de dados. De acordo com os cáculos do COCOMO intermédio obtivemos um esforço de \textbf{18.43 PM} e uma duração de \textbf{7.56 meses}.\\
+Perante estes valores podemos observar que a duração é muito superior ao tempo disponível que temos para a elaboração do projecto. Uma das possíveis causas para esta descrepância pode ser devido ao facto de que a estimação das linhas de código ter-se baseado em projectos de pequena dimensão e em tecnologias e arquiteturas diferentes. Visto que o esforço necessário para o projecto é de \textbf{18.43 PM}, mais de metade do esforço disponível do grupo e a duração ter ultrapassado mais de 20\% da duração disponível, decidimos aplicar o modelo intermédio do COCOMO a uma nova tabela de Estimativa de Linahs de Código. Esta nova tabela contempla todas as funcionalidades fundamentais pedidas no enunciado, garantindo assim que no final temos uma aplicação para apresentar.
+
+\begin{table}[h]
+\centering
+\label{my-label}
+\begin{tabular}{l|l|l|l|l}
+ & Otimista & Provável & Pessimista & Final \\ \hline
+Servidor MEAN & 150 & 250 & 500 & 275 \\ \hline
+Controlador & 300 & 450 & 700 & 467 \\ \hline
+Views & 300 & 500 & 800 & 517 \\ \hline
+Servidor LAMP & 150 & 350 & 650 & 367 \\ \hline
+Controlador & 350 & 450 & 800 & 492 \\ \hline
+Modelos & 200 & 400 & 700 & 417 \\ \hline
+Base de dados & 100 & 150 & 300 & 167 \\ \hline
+Segurança & 100 & 200 & 500 & 233 \\ \hline
+Simulador de dados & 350 & 500 & 800 & 525 \\ \hline
+Total & 1650 & 2750 & 4950 & \textbf{2935}
+\end{tabular}
+\caption{Estimativa de Linhas de Código}
+\end{table}
+EAL Final = $\frac{Otimista + 4 * Provavel + Pessimista}{6}$ = 2935
+KLOC = $2935 / 1000 = 2.935$ \\
+Esforço [E] = $a * KLOC^{b} * EAF <=> 3.2 * 2.935^{1.05} * 0.87 = 8.62 PM$\\
+Duração [D] = $c * E^{d} * EAF <=> 2.5 * 10.80^{0.38} = 5.66 Meses$\\
+Numero de Pessoas [N] = $E / D <=> N = 8.62 / 5.66 = 1.52 Pessoas$\\\\
+
+Com base nestes resultados obtivemos então um esforço de \textbf{8.62 PM} e uma duração de \textbf{5.66 meses}. Estes valores já são aceitáveis para a elaboração do projecto pois correspondem às previsões efectuadas da equipa. Na tabela acima estão descritas as linhas de código para realizar as funcionalidades necessárias para obter aprovação às disciplinas de PTI e PTR, incluíndo o mínimo de segurança e fiabilidade do sistema.
+
+\pagebreak
 \section{Recursos}
 \begin{table}[h]
 \centering
-\begin{tabularx}{\textwidth}{X|c|X|X|c}
+\begin{tabularx}{\textwidth}{X|c|c|c}
 \textbf{Descrição} & \textbf{Disp. Média} & \textbf{Quando Necessário} & \textbf{Tempo Necessário} \\ \hline
-André Nunes & 35\% &   &  \\ \hline
-Ana Catarina Sousa & 35\% &  &  \\ \hline
-Hugo Filipe Curado & 35\% & 80\% & \\ \hline
-Patrícia Jesus & 40\% & 90\% &  \\ \hline
-Pedro Duarte Neto & 35\% &  &  \\
+André Nunes & 35\% & 80\%  & 8:00 horas \\ \hline
+Ana Catarina Sousa & 35\% & 80\% & 8:00 horas \\ \hline
+Hugo Filipe Curado & 35\% & 80\% & 8:00 horas \\ \hline
+Patrícia Jesus & 40\% & 90\% & 8:00 horas \\ \hline
+Pedro Duarte Neto & 35\% & 80\% & 8:00 horas \\
 \end{tabularx}
 \caption{Tabela de Recursos Humanos}
 \label{TabRH}
 \end{table}
+
+
 %\begin{landscape}
 %	\begin{table}[h]
 %	\centering
@@ -368,13 +426,65 @@ Postman ou similar & 500\% & Durante todo o tempo de desenvolvimento &  \\
 \caption{Tabela de Recursos Ferramentas}
 \label{TabF}
 \end{table}
+
 \pagebreak
 \section{Processo de desenvolvimento de software}
 A nossa escolha sobre o modelo de processo a utilizar recai sobre o modelo incremental porque é aquele que melhor se adapta à equipa e ao produto a desenvolver.\\
 Visto ser um modelo constituido por mini cascatas conseguimos ter uma funcionalidade a 100\% mais rapidamente do que com qualquer outro modelo de processo. Isto será especialmente relevante nas reuniões com os clientes (professores), pois, assim conseguimos apresentar funcionalidades com maturidade de software e assim o retorno será mais preciso,ao contrário do que acontece com outros modelos de processo em que as funcionalidades nem sempre apresentam maturidade de software o que pode levar a um retorno mais vago.
+\pagebreak
+
 \section{Organização da equipa}
 O modelo de organização da equipa a usar é o modelo matricial. Esta escolha justifica-se principalmente pela modularidade do projecto em causa, o que elimina a organização horizontal, o facto de ser descentralizado é um factor a favor e elimina o modelo hierárquico que é centralizado.\\
-Este modelo de organização da equipa funciona bem com o modelo de processo do projecto porque ambos se focam na modularidade.
+Este modelo de organização da equipa funciona bem com o modelo de processo do projecto porque ambos se focam na modularidade.\\
+
+\begin{table}[h]
+\centering
+\begin{adjustbox}{width=1.3\textwidth, center=\textwidth}
+\label{my-label}
+\begin{tabular}{l|l|l|l|l|l|l|l|l|l}
+                                    & Especialista de Front-End & Architecture Designer & Especialista em Redes & Especialista em Segurança & Especialista de Back-End & Especialista em Testing & Analista & Gestor de Projeto & Cliente \\
+Análise de Front-End                & C                         &                       &                       &                           &                          &                         & RA       & I                 &C         \\
+Design de Front-End                 & R                       & RA                    &                       &                           &                          &                         &          & I                 &         \\
+Implementação de Front-End          & RA                        &                       &                       &                           &                          &                         &          & I                 &         \\
+Testing de Front-End                & R                     &                       &                       &                           &                          & RA                      &          & I                 &C I       \\
+Análise de Back-End                 &                           &                       &                       &                           & C                        &                         & RA       & I                 & C        \\
+Design de Back-End                  &                           & RA                    &                       &                           & R                      &                         &          & I                 &         \\
+Implementação de Back-End           &                           &                       &                       &                           & RA                       &                         &          & I                 &         \\
+Testing de Back-End                 &                           &                       &                       &                           & R                       & RA                      &          & I                 & CI       \\
+Análise de Segurança                &                           &                       &                       & C                         &                          &                         & RA       & I                 & C        \\
+Design de Segurança                 &                           & RA                    &                       & R                        &                          &                         &          & I                 &         \\
+Implementação de Segurança          &                           &                       &                       & RA                        &                          &                         &          & I                 &         \\
+Testing de Segurança                &                           &                       &                       & R                       &                          & RA                      &          & I                 & CI       \\
+Análise de Simulador de Dados       &                           &                       &                       &                           &                          &                         & RA       & I                 & C        \\
+Design de Simulador de Dados        &                           & RA                    &                       &                           &                          &                         &          & I                 &         \\
+Implementação de Simulador de Dados &                           &                       &                       &                           &                          &                         &          & I                 &         \\
+Testing de Simulador de Dados       &                           &                       &                       &                           &                          & RA                      &          & I                 &CI       \\
+Análise de Redes                    &                           &                       & C                     &                           &                          &                         & RA       & I                 &   C      \\
+Design de Redes                     &                           & RA                    & R                    &                           &                          &                         &          & I                 &         \\
+Implementação de Redes              &                           &                       & RA                    &                           &                          &                         &          & I                 &         \\
+Testing de Redes                    &                           &                       & R                    &                           &                          & RA                      &          & I                 & CI      
+\end{tabular}
+\end{adjustbox}
+\caption{Tabela RACI}
+\end{table}
+
+\begin{table}[h]
+\centering
+\label{my-label}
+\begin{tabular}{l|c|c|c|c|c}
+                       & Ana Sousa & André Nunes & Hugo Curado & Patricia Jesus & Pedro Neto \\ \hline
+Especialista Front-End & X         & X           & X           &                &            \\ \hline
+Especialista Back-End  &           & X           & X           & X              &            \\ \hline
+Architecture Designer  & X         &             &             &                & X          \\ \hline
+Especialista Testing   & X         &             &             & X              & X          \\ \hline
+Especialista Segurança &           & X           & X           &                & X          \\ \hline
+Especialista Redes     & X         & X           &             &                & X          \\ \hline
+Analista               & X         &             &             & X              &            \\ \hline
+Gestor de Projecto     &           & X            &             &                &            \\
+\end{tabular}
+\caption{Tabela de competências}
+\end{table}
+
 \section{Planeamento do Projeto}
 Por favor consultar o ficheiro planeamentoPGP001.mpp.
 \pagebreak
@@ -386,12 +496,12 @@ Por favor consultar o ficheiro planeamentoPGP001.mpp.
 \# & Risco & Prob. & Impacto & Categoria \\ \hline
 1                        & Equipa não familiarizada com tecnologias                            & 4                          & Projeto: 2, Produto: 4       & Projeto                        \\ \hline
 2                        & Má estimação da complexidade                                        & 4                          & Projeto: 4, Produto: 3       & Projeto                        \\ \arrayrulecolor{red}\hline\arrayrulecolor{black}
-3                        & Necessidade refazer funcionalidades                                 & 3                          & Projeto: 4, Produto: 4       & Projeto                        \\ \hline
+3                        & Incompatibilidade entre as tecnologias                                 & 3                          & Projeto: 4, Produto: 4       & Projeto                        \\ \hline
 4                        & Requisito mal entendido                                             & 3                          & Projeto: 4, Produto: 4       & Projeto                        \\ \hline
 5                        & Software não apresenta maturidade (bugs)                            & 3                          & Projeto: 3, Produto: 4       & Técnico                        \\ \hline
 6                        & Sobrecarga trabalhos (outras disciplinas)                           & 3                          & Projeto: 3, Produto: 3       & Projeto                        \\ \hline
-7                        & Falha no hardware que sustenta o produto(Ex: Falha de eletricidade) & 2                          & Projeto: 5, Produto: 5       & Técnico                        \\ \hline
-8                        & Professores não gostarem do produto                                 & 2                          & Projeto: 4, Produto: 4       & Negócio                        \\ \hline
+7                        & Má configuração dos servidores & 2                          & Projeto: 5, Produto: 5       & Técnico                        \\ \hline
+8                        & Prometer demasiado aos clientes(professores)                                 & 2                          & Projeto: 4, Produto: 4       & Negócio                        \\ \hline
 9                        & Elemento da Equipa adoecer                                          & 2                          & Projeto: 3, Produto: 3       & Projeto   
 \end{tabularx}
 \caption{Tabela de Gestão de Risco}
@@ -408,9 +518,10 @@ Por favor consultar o ficheiro planeamentoPGP001.mpp.
 \label{TabRIMM}
 \end{table}
 \chapter{Conclusão}
-Face às estimativas o projeto é viável, como visto na secção Analise Critica \ref{AC}. 
-No plano RMMM temos as soluções para eventuais problemas encontradas durante a analise de riscos, ordenados por probabilidade de acontecimento, como visto na secção Gestão de Risco \ref{GR}.
-%\item Execução de um sistema de simulação de dados de entrada sobre os utilizadores do sistema, salas, edifícios e parque de estacionamento.
+
+Tendo como base a análise feita na cadeira de Conceção de Produto e tendo analisado um pouco mais a arquitetura estrutural das necessidades para a elaboração do projecto elaboramos este planeamento. A nossa solução foi pensada de modo a simplificar as interações dos utilizadores com os espaços da faculdade e ao mesmo tempo mantendo todo o controlo e segurança necessários. 
+Com os primeiros valores do COCOMO podemos concluir que o projecto planeado é demasiado ambicioso para o tempo disponível. Perante o nosso modelo de desenvolvimento incremental, decidimos refazer os cálculos de modo a elaborarmos primeiamente os requisitos fundamentais para obter aprovação nas cadeiras de PTI e PTR. Assim sendo concluimos que o projecto é viável se ser executado no tempo pretendido. \\
+Contudo, o grupo compromete-se a apresentar uma solução baseada nas funcionalidades descritas nos requisitos funcionais do projecto, dando prioridade às funcionalidades core. Com o trabalho realizado ao longo desta cadeira, reconhecemos um dos príncipais obstáculos à elaboração de um projecto, ou seja, um dos factores mais importantes é ter um bom planeamento que corresponda com as necessidades tecnicas, estruturais e tecnológicas do mesmo. Muitas das vezes a parte do planeamento pouco elaborada e por causa disso a execução do projecto pode ser a esperada.
 \clearpage
 \bibliography{BiliografiaPGP1718R1}{}
 \bibliographystyle{IEEEtran}
