@@ -44,11 +44,17 @@
 \maketitle
 \tableofcontents
 \chapter{Introdução}
-Este projeto tem como a objetivo criar uma plataforma de armazenamento, consulta e gestão de informação relativa aos acessos aos edifícios e salas da Faculdade de Ciências da Universidade de Lisboa, tendo em conta o hardware existente no espaço em causa e as necessidades do mesmo.
-
-Esta plataforma será disponibilizada numa solução hibrida, integrando recursos em cloud (AWS / Google Cloud) e recursos locais.
-
-A necessidade de efetuar um levantamento rigoroso das atuais soluções apresentadas aos utilizadores foi um dos trabalhos realizados no âmbito da cadeira de Conceção do Produto no ano letivo 2016/2017. Com este objetivo alcançado conseguimos ganhar algum tempo sendo que agora só será necessário melhorar alguns aspetos.
+O objectivo para este trabalho é planear e conceber uma plataforma de controlo de acessos da Faculdade de Ciências. 
+Atualmente o acesso aos diversos espaços da faculdade (salas de aula, laboratórios, gabinetes, garagem, etc.) não é adequado às necessidades da comunidade escolar da faculdade (alunos, professores, funcionários, etc.) portanto foi-nos pedida uma solução que pudesse minimizar este problema, tornando o acesso mais prático, de fácil gestão e manutenção, mantendo todas as suas funcionalidades e segurança.\\
+No sistema actual por vezes não é possível fazer um controlo rigoroso sobre a entrada de pessoas não autorizadas em espaços reservados, o que leva a uma visão irrealista e pouco segura.\\
+Outro problema encontrado foi o controlo de pessoas num determinado espaço, como por exemplo o número de alunos numa determinada sala ou auditorio.\\
+Num caso mais extremo de uma catástrofe, não existe uma visão de quantas pessoas estão num espaço que é necessário evacuar.\\
+De modo a minimizar o problema do controlo de acessos, foi-nos proposto desenvolver uma solução tecnologica.
+Esta solução tem como base desenvolver um sistema acessível através de uma interface Web, disponivel num ambiente "cloud" e de facil integração com o hardware existente na faculdade.\\
+É necessário também que este sistema seja seguro e disponivel. Devido à sensibilidade dos dados da aplicação, tais como nome dos alunos e professores, horários, o sistema deve usar mecanismos de segurança adequados de modo a manter a confidencialidade dos dados e a estar protegido contra vulnerabilidades e ataques\\
+Em relação à disponibilidade, o sistema deverá tolerar a falha de de um qualquer componente de hardware com uma redução mínima de desempenho e sem perda de dados, e tolerar uma falha catastrófica com um período de indisponibilidade não superior a 24h, sendo admissível apenas a perda de dados que tenham sido introduzidos no sistema nas últimas 24h.\\
+A análise de requisitos, fontes de informação e tratamento da informação foram efectuadas na disciplina de Conceção de Produto no semestre passado, e é com base nessa informação recolhida que desenvolvemos esta solução.\\
+Posto isto é necessário primeiro planificar quais os requisitos do sistema, as necessidades tecnológicas, riscos e organização da equipa. É também necessário escolher um modelo de desenvolvimento para o projecto e planear a execução do mesmo.\\
 
 
 \chapter{Âmbito do projeto}
@@ -56,13 +62,13 @@ A necessidade de efetuar um levantamento rigoroso das atuais soluções apresent
 \begin{enumerate}
 \item Aluno
 	\begin{enumerate}
-	\item Consulta de histórico de acessos
+	\item Consulta de histórico de acessos pessoal
     \item Horário do curso frequentado
     \item Horário dos espaços livres e a que grupo pertence (Ex.: grupo = Departamento de Informática)
 	\end{enumerate}
 \item Funcionário de Departamento
 	\begin{enumerate}
-    \item Consulta de histórico de acessos
+	\item Consulta de histórico de acessos pessoal
     \item Consulta de salas disponíveis
     \item Marcação de salas
 	\end{enumerate}
@@ -74,7 +80,7 @@ A necessidade de efetuar um levantamento rigoroso das atuais soluções apresent
 	\begin{enumerate}
 	\item Consulta dos alunos presentes nas suas aulas
     \item Horário de aulas e "compromissos"
-    \item Consulta de histórico de acessos
+	\item Consulta de histórico de acessos pessoal
     \item Consulta de salas disponíveis
     \item Marcação de salas para avaliações contínua e aulas extra
 	\end{enumerate}
@@ -89,25 +95,26 @@ A necessidade de efetuar um levantamento rigoroso das atuais soluções apresent
     \item Consulta de quem esteve presente num edifício ou numa sala num determinado espaço de tempo, em caso de desastre, validado por mais que uma pessoa com um nível de Administrador de Sistema / Administrador-Chefe
     \item Bloqueio de acessos em caso de necessidade, Lock Down
     \item Desbloqueio do estado Lock Down, validado por mais que uma pessoa com um nível de Administrador de Sistema
+    \item Consultar acessos ao parque de estacionamento
 	\end{enumerate}
 \item Administrador
 	\begin{enumerate}
     \item Consulta de quantas pessoas estiveram presentes num edifício ou numa sala num determinado espaço de tempo
-    \item Registo das salas disponíveis em tempo real
+    \item Registo das salas disponíveis num determinado espaço temporal
     \item Registo de novos utilizadores
+	\item Consulta de histórico de acessos pessoal
     \item Alteração de estatutos, inferior ao seu nível de acesso
     \item Associar cartão de aluno no sistema informático da dsi
     \item Criar acesso para visitantes
     \item Alterar acesso a salas e laboratórios
+    \item Consulta de salas disponíveis
+    \item Consultar acessos ao parque de estacionamento
     \end{enumerate}
 \item Administrador-Chefe (Ex. Zé Fernandes)
 	\begin{enumerate}
 	\item Consulta de quem esteve presente num edifício ou numa sala num determinado espaço de tempo, em caso de um incidente
-    \item Consulta de histórico de acessos
-    \item Consulta de salas disponíveis
-    \item Criar acesso para visitantes
     \item Consulta de quem esteve presente num edifício ou numa sala num determinado espaço de tempo, em caso de desastre, validado por mais que uma pessoa com um nível de Administrador de Sistema
-    \item Consultar acessos ao parque de estacionamento
+    \item Todas as funcionalidades do Administrador
 	\end{enumerate}
 \item Administrador de Sistemas
 	\begin{enumerate}
@@ -131,9 +138,9 @@ A necessidade de efetuar um levantamento rigoroso das atuais soluções apresent
 \section{Informação de entrada e saída}
 \subsubsection*{Entrada inicial de informação}
     Os dados sobre os utilizadores são gerados automaticamente por um serviço de simulação da interação de um grupo de pessoas com um edifício, sendo depois acedidos por JSON.
-    Dados sobre marcação de salas, exames, incidentes.
+	Os dados simulados são dados referentes à implementação de um novo sistema de controlo de acessos. Este sistema é composto por aquesição do id do sítio por onde o utilizador passou, um timestamp que representa a hora a que passou e o id do utilizador. Estes pontos de controlo estaram inseridos antes e depois da porta ou entrada de qualquer espaço da faculdade. Sendo depois processados pela nossa aplicação. 
 \subsubsection*{Saídas de informação}
-    Toda a informação necessária para responder as necessidades dos requisitos funcionais.
+	Os dados de saída seram os dados relativos ao histórico de acesso de um utilizador 
 \chapter{Planeamento}
 \section{Estimativas}
 \subsection{Esforço disponível}
@@ -273,12 +280,12 @@ O esforço disponível calculado foi de 10.8 PM, o COCOMO previu 11.98 PM.
 \begin{table}[h]
 \centering
 \begin{tabularx}{\textwidth}{X|c|X|X|c}
-\textbf{Descrição} & \textbf{Disp. Média} & \textbf{Quando Necessário} & \textbf{Tempo Necessário} & \textbf{Núm.} \\ \hline
-André Nunes & 35\% &  &  &  \\ \hline
-Ana Catarina Sousa & 35\% &  &  &  \\ \hline
-Hugo Filipe Curado & 35\% &  &  & \\ \hline
-Patrícia Jesus & 40\% &  &  & \\ \hline
-Pedro Duarte Neto & 35\% &  &  & \\
+\textbf{Descrição} & \textbf{Disp. Média} & \textbf{Quando Necessário} & \textbf{Tempo Necessário} \\ \hline
+André Nunes & 35\% &   &  \\ \hline
+Ana Catarina Sousa & 35\% &  &  \\ \hline
+Hugo Filipe Curado & 35\% & 80\% & \\ \hline
+Patrícia Jesus & 40\% & 90\% &  \\ \hline
+Pedro Duarte Neto & 35\% &  &  \\
 \end{tabularx}
 \caption{Tabela de Recursos Humanos}
 \label{TabRH}
