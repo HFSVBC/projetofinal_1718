@@ -15,7 +15,11 @@
 \usepackage{colortbl}
 \usepackage{cite}
 \usepackage[nottoc,numbib]{tocbibind}
-
+\usepackage[normalem]{ulem}
+ \useunder{\uline}{\ul}{}
+ \usepackage{lscape}
+\usepackage{longtable}
+\usepackage{tabu}
 
 \titleformat{\chapter}{\normalfont\huge}{\thechapter.}{20pt}{\huge\bf}
 \begin{document}
@@ -279,18 +283,54 @@ Pedro Duarte Neto & 35\% &  &  & \\
 \caption{Tabela de Recursos Humanos}
 \label{TabRH}
 \end{table}
+%\begin{landscape}
+%	\begin{table}[h]
+%	\centering
+%	\begin{tabularx}{\textwidth}{X|X|X|X|X|X|X|X|X|X}
+%	& Modelos & T.,Modelos & Design & T.,Design & Construir e Executar T. & MEAN & LAMP & Segurança & Redes \\ \hline
+%	André Nunes & M & M & M & M & E & E & B & M & E \\ \hline
+%	Ana Catarina Sousa & E & E & E & E & E & B & M & M & M \\ \hline
+%	Hugo Filipe Curado & M & M & M & M & E & M & E & E & E \\ \hline
+%	Patrícia Jesus & M & M & M & M & M & M & M & M & M \\ \hline
+%	Pedro Duarte Neto & E & E & B & B & E & M & M & E & E
+%	\end{tabularx}
+%	\caption{Tabela de Conhecimentos dos Recursos Humanos}
+%	\label{TabRH}
+%	\end{table}
+%\end{landscape}
 \begin{table}[h]
 \centering
-\begin{tabularx}{\textwidth}{c|c|c|c|c|c|c|c|c|c|c}
-\textbf{Nome / Skill} & Modelos & T. Modelos & Design & T. Design & Construir e Executar Testes & MEAN & LAMP & Segurança & Redes\\ \hline
-André Nunes & \\ \hline
-Ana Catarina Sousa & \\ \hline
-Hugo Filipe Curado & \\ \hline
-Patrícia Jesus & \\ \hline
-Pedro Duarte Neto & 
-\end{tabularx}
-\caption{Tabela de Conhecimentos dos Recursos Humanos}
-\label{TabRH}
+\begin{tabular}{llllllll}
+\multicolumn{1}{l|}{\textbf{Pessoa / Semana}} & \multicolumn{1}{l|}{\textbf{05-Feb}} & \multicolumn{1}{l|}{\textbf{12-Feb}} & \multicolumn{1}{l|}{\textbf{19-Feb}} & \multicolumn{1}{l|}{\textbf{26-Feb}} & \multicolumn{1}{l|}{\textbf{05-Mar}} & \multicolumn{1}{l|}{\textbf{12-Mar}} & \textbf{19-Mar} \\ \hline
+\multicolumn{1}{l|}{\textbf{André Nunes}} & \multicolumn{1}{l|}{90,00\%} & \multicolumn{1}{l|}{90,00\%} & \multicolumn{1}{l|}{50,00\%} & \multicolumn{1}{l|}{50,00\%} & \multicolumn{1}{l|}{40,00\%} & \multicolumn{1}{l|}{20,00\%} & 25,00\% \\ \hline
+\multicolumn{1}{l|}{\textbf{Ana Catarina Sousa}} & \multicolumn{1}{l|}{70,00\%} & \multicolumn{1}{l|}{70,00\%} & \multicolumn{1}{l|}{50,00\%} & \multicolumn{1}{l|}{50,00\%} & \multicolumn{1}{l|}{40,00\%} & \multicolumn{1}{l|}{20,00\%} & 20,00\% \\ \hline
+\multicolumn{1}{l|}{\textbf{Hugo Filipe Curado}} & \multicolumn{1}{l|}{90,00\%} & \multicolumn{1}{l|}{90,00\%} & \multicolumn{1}{l|}{50,00\%} & \multicolumn{1}{l|}{50,00\%} & \multicolumn{1}{l|}{40,00\%} & \multicolumn{1}{l|}{20,00\%} & 20,00\% \\ \hline
+\multicolumn{1}{l|}{\textbf{Patricia Jesus}} & \multicolumn{1}{l|}{90,00\%} & \multicolumn{1}{l|}{90,00\%} & \multicolumn{1}{l|}{40,00\%} & \multicolumn{1}{l|}{30,00\%} & \multicolumn{1}{l|}{40,00\%} & \multicolumn{1}{l|}{55,00\%} & 40,00\% \\ \hline
+\multicolumn{1}{l|}{\textbf{Pedro Neto}} & \multicolumn{1}{l|}{70,00\%} & \multicolumn{1}{l|}{70,00\%} & \multicolumn{1}{l|}{50,00\%} & \multicolumn{1}{l|}{50,00\%} & \multicolumn{1}{l|}{35,00\%} & \multicolumn{1}{l|}{20,00\%} & 20,00\% \\
+\textbf{} &  &  &  &  &  &  &  \\
+\multicolumn{1}{l|}{\textbf{Pessoa / Semana}} & \multicolumn{1}{l|}{\textbf{26-Mar}} & \multicolumn{1}{l|}{\textbf{02-Apr}} & \multicolumn{1}{l|}{\textbf{09-Apr}} & \multicolumn{1}{l|}{\textbf{16-Apr}} & \multicolumn{1}{l|}{\textbf{23-Apr}} & \multicolumn{1}{l|}{\textbf{30-Apr}} & \textbf{07-May} \\ \hline
+\multicolumn{1}{l|}{\textbf{André Nunes}} & \multicolumn{1}{l|}{25,00\%} & \multicolumn{1}{l|}{20,00\%} & \multicolumn{1}{l|}{30,00\%} & \multicolumn{1}{l|}{30,00\%} & \multicolumn{1}{l|}{20,00\%} & \multicolumn{1}{l|}{30,00\%} & 30,00\% \\ \hline
+\multicolumn{1}{l|}{\textbf{Ana Catarina Sousa}} & \multicolumn{1}{l|}{25,00\%} & \multicolumn{1}{l|}{20,00\%} & \multicolumn{1}{l|}{40,00\%} & \multicolumn{1}{l|}{40,00\%} & \multicolumn{1}{l|}{20,00\%} & \multicolumn{1}{l|}{20,00\%} & 50,00\% \\ \hline
+\multicolumn{1}{l|}{\textbf{Hugo Filipe Curado}} & \multicolumn{1}{l|}{25,00\%} & \multicolumn{1}{l|}{20,00\%} & \multicolumn{1}{l|}{30,00\%} & \multicolumn{1}{l|}{30,00\%} & \multicolumn{1}{l|}{20,00\%} & \multicolumn{1}{l|}{30,00\%} & 30,00\% \\ \hline
+\multicolumn{1}{l|}{\textbf{Patricia Jesus}} & \multicolumn{1}{l|}{25,00\%} & \multicolumn{1}{l|}{50,00\%} & \multicolumn{1}{l|}{50,00\%} & \multicolumn{1}{l|}{45,00\%} & \multicolumn{1}{l|}{30,00\%} & \multicolumn{1}{l|}{50,00\%} & 50,00\% \\ \hline
+\multicolumn{1}{l|}{\textbf{Pedro Neto}} & \multicolumn{1}{l|}{30,00\%} & \multicolumn{1}{l|}{20,00\%} & \multicolumn{1}{l|}{40,00\%} & \multicolumn{1}{l|}{40,00\%} & \multicolumn{1}{l|}{20,00\%} & \multicolumn{1}{l|}{20,00\%} & 50,00\% \\
+\textbf{} &  &  &  &  &  &  &  \\
+\multicolumn{1}{l|}{\textbf{Pessoa / Semana}} & \multicolumn{1}{l|}{\textbf{14-May}} & \multicolumn{1}{l|}{\textbf{21-May}} & \multicolumn{1}{l|}{\textbf{28-May}} & \multicolumn{1}{l|}{\textbf{04-Jun}} & \multicolumn{1}{l|}{\textbf{11-Jun}} & \multicolumn{1}{l|}{\textbf{18-Jun}} & \textbf{25-Jun} \\ \hline
+\multicolumn{1}{l|}{\textbf{André Nunes}} & \multicolumn{1}{l|}{35,00\%} & \multicolumn{1}{l|}{30,00\%} & \multicolumn{1}{l|}{40,00\%} & \multicolumn{1}{l|}{40,00\%} & \multicolumn{1}{l|}{40,00\%} & \multicolumn{1}{l|}{50,00\%} & 50,00\% \\ \hline
+\multicolumn{1}{l|}{\textbf{Ana Catarina Sousa}} & \multicolumn{1}{l|}{20,00\%} & \multicolumn{1}{l|}{20,00\%} & \multicolumn{1}{l|}{40,00\%} & \multicolumn{1}{l|}{30,00\%} & \multicolumn{1}{l|}{30,00\%} & \multicolumn{1}{l|}{30,00\%} & 30,00\% \\ \hline
+\multicolumn{1}{l|}{\textbf{Hugo Filipe Curado}} & \multicolumn{1}{l|}{20,00\%} & \multicolumn{1}{l|}{30,00\%} & \multicolumn{1}{l|}{40,00\%} & \multicolumn{1}{l|}{40,00\%} & \multicolumn{1}{l|}{40,00\%} & \multicolumn{1}{l|}{50,00\%} & 50,00\% \\ \hline
+\multicolumn{1}{l|}{\textbf{Patricia Jesus}} & \multicolumn{1}{l|}{45,00\%} & \multicolumn{1}{l|}{30,00\%} & \multicolumn{1}{l|}{45,00\%} & \multicolumn{1}{l|}{30,00\%} & \multicolumn{1}{l|}{50,00\%} & \multicolumn{1}{l|}{30,00\%} & 70,00\% \\ \hline
+\multicolumn{1}{l|}{\textbf{Pedro Neto}} & \multicolumn{1}{l|}{20,00\%} & \multicolumn{1}{l|}{20,00\%} & \multicolumn{1}{l|}{40,00\%} & \multicolumn{1}{l|}{30,00\%} & \multicolumn{1}{l|}{30,00\%} & \multicolumn{1}{l|}{30,00\%} & 30,00\% \\
+\textbf{} &  &  &  &  &  &  &  \\
+\multicolumn{1}{l|}{\textbf{Pessoa / Semana}} & \textbf{02-Jul} &  &  &  &  &  &  \\ \cline{1-2}
+\multicolumn{1}{l|}{\textbf{André Nunes}} & 100,00\% &  &  &  &  &  &  \\ \cline{1-2}
+\multicolumn{1}{l|}{\textbf{Ana Catarina Sousa}} & 80,00\% &  &  &  &  &  &  \\ \cline{1-2}
+\multicolumn{1}{l|}{\textbf{Hugo Filipe Curado}} & 100,00\% &  &  &  &  &  &  \\ \cline{1-2}
+\multicolumn{1}{l|}{\textbf{Patricia Jesus}} & 90,00\% &  &  &  &  &  &  \\ \cline{1-2}
+\multicolumn{1}{l|}{\textbf{Pedro Neto}} & 80,00\% &  &  &  &  &  & 
+\end{tabular}
+\caption{Disponibilidade por pessoa por semana}
+\label{dppps}
 \end{table}
 \begin{table}[h]
 \centering
@@ -329,7 +369,8 @@ Visto ser um modelo constituido por mini cascatas conseguimos ter uma funcionali
 O modelo de organização da equipa a usar é o modelo matricial. Esta escolha justifica-se principalmente pela modularidade do projecto em causa, o que elimina a organização horizontal, o facto de ser descentralizado é um factor a favor e elimina o modelo hierárquico que é centralizado.\\
 Este modelo de organização da equipa funciona bem com o modelo de processo do projecto porque ambos se focam na modularidade.
 \section{Planeamento do Projeto}
-2ª entrega
+Por favor consultar o ficheiro planeamentoPGP001.mpp.
+\pagebreak
 \section{Gestão de Riscos}
 \label{GR}
 \begin{table}[h]
