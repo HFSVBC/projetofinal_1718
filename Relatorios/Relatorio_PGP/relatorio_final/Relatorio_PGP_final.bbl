@@ -21,16 +21,6 @@
 \providecommand{\BIBdecl}{\relax}
 \BIBdecl
 
-\bibitem{letsencrypt}
-\BIBentryALTinterwordspacing
- [Online]. Available: \url{https://letsencrypt.org}
-\BIBentrySTDinterwordspacing
-
-\bibitem{authy}
-\BIBentryALTinterwordspacing
- [Online]. Available: \url{https://authy.com}
-\BIBentrySTDinterwordspacing
-
 \bibitem{slideTP6}
 C.~Duarte, \emph{pgp 1718 - aula 6 - estima{\c c}{\~a}o.pdf},
   \url{https://moodle.ciencias.ulisboa.pt/pluginfile.php/15607/mod_resource/content/3/pgp%201718%20-%20aula%206%20-%20estima{\c
