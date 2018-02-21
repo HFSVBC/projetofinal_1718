@@ -22,6 +22,7 @@ export class AuthService {
       this.token = result.credential.accessToken;
       this.userDetails = result.user;
       console.log('User '+this.userDetails.displayName+" logged in!");
+      this.router.navigateByUrl('');
     })
     .catch(function(error) {
       // Handle Errors here.
