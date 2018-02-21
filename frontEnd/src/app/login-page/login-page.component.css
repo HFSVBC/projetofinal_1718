@@ -1,0 +1,36 @@
+.container-logIn, #backgroudBlackFilter{
+    position: fixed;
+    width: 100%;
+    top: 0;
+    bottom: 0;
+    margin: 0;
+}
+.container-logIn{
+    /* background: url(https://firebasestorage.googleapis.com/v0/b/fcul-projetofinal-1718.appspot.com/o/people-woman-coffee-meeting.jpg?alt=media&token=a2c5228c-3a9b-4f89-9d22-50147cec4881) no-repeat center center fixed;  */
+    background: url("../../assets/backgroudLogin.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding-top: 8%;
+}
+#backgroudBlackFilter{
+    background: rgba(0, 0, 0, 0.3);
+
+}
+.container-logIn .card{
+    border-radius: 0;
+    opacity: 0.9;
+}
+.container-logIn #image-cont{
+    margin: 20px auto;
+}
+.container-logIn #logIn-btn-contaier button{
+    width: 100%;
+    border-radius: 0;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+.container-logIn .card-footer{
+    font-size: 0.8rem;
+}
