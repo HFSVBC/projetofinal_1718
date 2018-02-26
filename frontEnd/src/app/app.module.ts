@@ -19,14 +19,15 @@ import { AuthService } from './providers/auth.service';
 import { LoggedInUsersService } from './service/logged-in-users.service';
 
 const appRoutes: Routes = [
-  { 
-    path: '', 
-    component: DashboardComponent, 
-    canActivate: [LoggedInUsersService] 
+  {
+    path: '',
+    component: DashboardComponent,
+    canActivate: [LoggedInUsersService]
   },
-  { 
-    path: 'login', 
-    component: LoginPageComponent 
+  {
+    path: 'login',
+    component: LoginPageComponent
+    // component: DashboardComponent
   }
 ];
 
@@ -49,10 +50,10 @@ const appRoutes: Routes = [
     AngularFireAuthModule
   ],
   providers: [
-    AuthService, 
+    AuthService,
     LoggedInUsersService
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { 
+export class AppModule {
 }

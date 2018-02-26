@@ -1,22 +1,28 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import {Observable} from 'rxjs';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/take';
+import 'rxjs/add/observable/from';
 
-import { AuthService } from '../providers/auth.service'
+import { AuthService } from '../providers/auth.service';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 @Injectable()
 export class LoggedInUsersService implements CanActivate {
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private angularAuth: AngularFireAuth, private router: Router) {}
 
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ): Observable<boolean>|Promise<boolean>|boolean {
-    if ( this.authService.isLoggedIn() ) {
-        return true;
-    }
-    this.router.navigate(['/login']);
-    return false;
+  canActivate(): Observable<boolean> {
+    return Observable.from(this.angularAuth.authState)
+      .take(1)
+      .map(state => !!state)
+      .do(authenticated => {
+        if (!authenticated) {
+          this.router.navigate([ '/login' ]);
+        }
+      });
   }
+
 }

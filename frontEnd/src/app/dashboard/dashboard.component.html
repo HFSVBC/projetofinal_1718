@@ -1,3 +1,25 @@
 <app-menu></app-menu>
-<h1 style="margin-top:70px;">{{authService.userDetails.displayName}}</h1>
+
+<div class="container-fluid">
+    <div class="row">
+      <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+        <div id="sidenav-sticky">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Dashboard</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="#">Consultar Histórico</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="#">Perfil</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <div class="row">
+          <p>{{authService.userDetails.displayName}}</p>
+        </div>
+    </div>
+  </div>
 <app-footer></app-footer>
