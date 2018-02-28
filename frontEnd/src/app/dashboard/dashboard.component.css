@@ -1,9 +1,7 @@
-/*
- * Sidebar
- */
 .row {
   height: 100%;
 }
+
  .sidebar {
   position: relative;
   height: 100%;
@@ -12,13 +10,13 @@
   bottom: 0;
   left: 0;
   margin-right: 50px;
-  z-index: 100; /* Behind the navbar */
+  z-index: 100;
   padding: 0;
   box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
 }
 
 .container-fluid {
-  padding-top: 5%;
+  padding-top: 64px;
   height: 100%;
 }
 
@@ -26,11 +24,10 @@
   height: 100%;
   position: -webkit-sticky;
   position: sticky;
-  top: 48px; /* Height of navbar */
+  top: 48px;
   height: calc(100vh - 48px);
   padding-top: .5rem;
   overflow-x: hidden;
-  overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
 }
 
 .sidebar .nav-link {
@@ -55,4 +52,8 @@
 .sidebar-heading {
   font-size: .75rem;
   text-transform: uppercase;
+}
+
+.current {
+  background-color: goldenrod;
 }

@@ -4,15 +4,37 @@
     <div class="row">
       <nav class="col-md-2 d-none d-md-block bg-light sidebar">
         <div id="sidenav-sticky">
-          <ul class="nav flex-column">
+          <ul class="nav nav-tabs nav-justified flex-column">
             <li class="nav-item">
-              <a class="nav-link active" href="#">Dashboard</a>
+              <a class="nav-link current" href="#">Dashboard</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link active" href="#">Consultar Histórico</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link active" href="#">Perfil</a>
+            </li>
+            <li class="nav-item">
+                <a class="collapsed card-link nav-link active" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                  Grupo 1</a>
+                <div id="collapseOne" class="collapse show">
+                    <ul class="nav nav-tabs nav-justified flex-column">
+                        <li class="nav-item">
+                          <a class="nav-link" href="#">Opção 1</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Opção 2</a>
+                        </li>
+                      </ul>
+                </div>
+            </li>
+            <li class="nav-item">
+              <a class="collapsed card-link nav-link active" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                Grupo 2
+              </a>
+              <div id="collapseTwo" class="collapse">
+                  <a class="nav-link" href="#">Opção 1</a>
+              </div>
             </li>
           </ul>
         </div>
