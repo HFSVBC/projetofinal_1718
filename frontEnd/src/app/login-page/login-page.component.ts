@@ -13,13 +13,13 @@ export class LoginPageComponent implements OnInit {
   constructor(public authService: AuthService, private router: Router) { }
 
   ngOnInit() {
-    if(this.authService.isLoggedIn()){
+    if (this.authService.isLoggedIn()) {
       this.router.navigate(['/']);
     }
   }
 
   login() {
-    this.authService.signInWithGoogle()
+    this.authService.signInWithGoogle();
   }
 
 }

@@ -33,7 +33,6 @@ export class AuthService {
     );
   }
 
-
   signInWithGoogle() {
     const provider = new firebase.auth.GoogleAuthProvider();
     firebase.auth().useDeviceLanguage();
@@ -61,8 +60,9 @@ export class AuthService {
   }
 
   logout() {
-    this.userDetails = null;
     this._firebaseAuth.auth.signOut()
       .then((res) => this.router.navigate(['/']));
+    this.userDetails = null;
+    this.router.navigateByUrl('/login');
   }
 }

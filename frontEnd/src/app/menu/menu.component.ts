@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { Router } from '@angular/router';
+
+import { AuthService } from '../providers/auth.service';
 
 @Component({
   selector: 'app-menu',
@@ -7,9 +11,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
 
-  constructor() { }
+  constructor(public authService: AuthService, public angularAuth: AngularFireAuth, private router: Router) { }
 
   ngOnInit() {
+    if (this.authService.isLoggedIn()) {
+      this.router.navigate(['/']);
+    }
+  }
+
+  logout() {
+    // this.authService.logout();
+    // dunno why doesnt work...
+    this.angularAuth.auth.signOut();
+    this.router.navigateByUrl('/login');
   }
 
 }
