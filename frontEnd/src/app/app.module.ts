@@ -17,6 +17,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 
 import { AuthService } from './providers/auth.service';
 import { LoggedInUsersService } from './service/logged-in-users.service';
+import { HistoricoComponent } from './historico/historico.component';
 
 const appRoutes: Routes = [
   {
@@ -37,7 +38,8 @@ const appRoutes: Routes = [
     MenuComponent,
     FooterComponent,
     LoginPageComponent,
-    DashboardComponent
+    DashboardComponent,
+    HistoricoComponent
   ],
   imports: [
     BrowserModule,
