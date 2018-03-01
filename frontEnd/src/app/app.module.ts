@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
+//import {MatTableModule} from '@angular/material/table';
 
 import { AngularFireModule } from 'angularfire2';
 // for AngularFireAuth
@@ -35,6 +36,7 @@ import { RoutingModule } from './/routing.module';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     RoutingModule
+    //MatTableModule
   ],
   providers: [
     AuthService,
