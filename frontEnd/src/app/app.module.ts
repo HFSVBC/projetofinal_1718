@@ -18,19 +18,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthService } from './providers/auth.service';
 import { LoggedInUsersService } from './service/logged-in-users.service';
 import { HistoricoComponent } from './historico/historico.component';
+import { RoutingModule } from './/routing.module';
 
-const appRoutes: Routes = [
-  {
-    path: '',
-    component: DashboardComponent,
-    canActivate: [LoggedInUsersService]
-  },
-  {
-    path: 'login',
-    component: LoginPageComponent
-    // component: DashboardComponent
-  }
-];
 
 @NgModule({
   declarations: [
@@ -44,12 +33,9 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule,
     HttpModule,
-    RouterModule.forRoot(
-      appRoutes,
-      // { enableTracing: true } // <-- debugging purposes only
-    ),
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    RoutingModule
   ],
   providers: [
     AuthService,
