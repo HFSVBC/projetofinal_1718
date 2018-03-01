@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './historico.component.html',
   styleUrls: ['./historico.component.css']
 })
+
 export class HistoricoComponent implements OnInit {
 
   constructor() { }
