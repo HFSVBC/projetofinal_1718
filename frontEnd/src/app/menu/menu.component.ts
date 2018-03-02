@@ -11,12 +11,15 @@ import { AuthService } from '../providers/auth.service';
 })
 export class MenuComponent implements OnInit {
 
+  name;
+
   constructor(public authService: AuthService, public angularAuth: AngularFireAuth, private router: Router) { }
 
   ngOnInit() {
     if (this.authService.isLoggedIn()) {
       this.router.navigate(['/']);
     }
+    this.name = this.angularAuth.auth.currentUser.displayName;
   }
 
   logout() {

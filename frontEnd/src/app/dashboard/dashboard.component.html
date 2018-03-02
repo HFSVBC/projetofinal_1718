@@ -2,44 +2,44 @@
 
 <div class="container-fluid">
     <div class="row">
-      <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+      <nav class="col-sm-2 d-none d-md-block bg-dark sidebar">
         <div id="sidenav-sticky">
           <ul class="nav nav-tabs nav-justified flex-column">
             <li class="nav-item">
-              <a class="nav-link current" href="/">Dashboard</a>
+              <a class="nav-link" routerLink="/" routerLinkActive="active">Dashboard</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active"  routerLink="/historico" routerLinkActive="active">Consultar Histórico</a>
+                <a class="nav-link" routerLink="/historico" routerLinkActive="active">Consultar Histórico</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" href="#">Perfil</a>
+                <a class="nav-link" routerLink="/">Perfil</a>
             </li>
             <li class="nav-item">
-                <a class="collapsed card-link nav-link active" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                <a class="collapsed card-link nav-link" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
                   Grupo 1</a>
-                <div id="collapseOne" class="collapse show">
+                <div id="collapseOne" class="collapse">
                     <ul class="nav nav-tabs nav-justified flex-column">
                         <li class="nav-item">
-                          <a class="nav-link" href="#">Opção 1</a>
+                          <a class="nav-link" routerLink="/">Opção 1</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Opção 2</a>
+                            <a class="nav-link" routerLink="/">Opção 2</a>
                         </li>
                       </ul>
                 </div>
             </li>
             <li class="nav-item">
-              <a class="collapsed card-link nav-link active" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+              <a class="collapsed card-link nav-link" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
                 Grupo 2
               </a>
               <div id="collapseTwo" class="collapse">
-                  <a class="nav-link" href="#">Opção 1</a>
+                  <a class="nav-link" routerLink="/">Opção 1</a>
               </div>
             </li>
           </ul>
         </div>
       </nav>
-      <div class="row">
+      <div class="col-sm-10">
         <!--<app-historico></app-historico> -->
         <!-- Aqui vai entrar o router-outlet para os varios componentes
         adicionar aqui o primeiro componente para testar -->

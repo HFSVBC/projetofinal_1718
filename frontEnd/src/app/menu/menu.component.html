@@ -1,13 +1,33 @@
-
-<nav class="navbar fixed-top navbar-toggleable-md navbar-expand-md" style="display: flex;">
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+  <div class="col-2 col-xs-2 col-sm-2" style="text-align: center">
     <a class="navbar-brand" href="#">CA FCUL</a>
+  </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+
+      <div class="col-5 col-xs-5 col-sm-5" style="display: flex; margin-left: auto">
+          <span style="color: white; margin-right: 30px">Bem vindo
+            <a class="" href="#" style="color: white">{{this.name}}</a>
+          </span>
+          <button type="button" class="btn btn-sm btn-outline-light" (click)="logout()"> Sair </button>
+      </div>
+    </div>
+  </nav>
+
+
+<!--
+<nav class="navbar fixed-top navbar-toggleable-md navbar-expand-md" style="display: flex;">
+    <a class="navbar-brand col-sm-2" href="#">CA FCUL</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
 
-    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-<!--
+    <div class="collapse navbar-collapse col-sm-10" id="navbarTogglerDemo02">
+
       <ul class="navbar-nav mr-auto mt-0 mt-md-2">
         <li class="nav-item active">
           <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
@@ -19,10 +39,9 @@
           <a class="nav-link disabled" href="#">Disabled</a>
         </li>
       </ul>
--->
-      <div>
+
         <i class="material-icons">person_outline</i>
         <button type="button" class="btn btn-sm btn-outline-light my-2 my-sm-0" (click)="logout()">Log out</button>
-      </div>
     </div>
   </nav>
+-->
