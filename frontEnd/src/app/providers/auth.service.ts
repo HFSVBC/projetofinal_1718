@@ -55,6 +55,7 @@ export class AuthService {
       new firebase.auth.GoogleAuthProvider()).then(res => {
         console.log('User just logged in by google ', res);
         this.router.navigateByUrl('/');
+        this.userDetails = res.user;
         })
       .catch((err) => {
         const error = err.message;
@@ -74,7 +75,7 @@ export class AuthService {
     this.router.navigateByUrl('/login');
   }
 
-  getName(){
-    return firebase.auth().currentUser.displayName;
+  getUser() {
+    return firebase.auth().currentUser;
   }
 }

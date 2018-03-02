@@ -9,7 +9,9 @@ import { AuthService } from '../providers/auth.service';
 })
 export class InitialComponent implements OnInit {
   constructor(public authService: AuthService, private router: Router) {
-    console.log('aqui ' + authService.getName());
+    // console.log('aqui ' + authService.getName());
+    const user = authService.getUser();
+    console.log('aqui ' + user.displayName);
     // PROBLEMA!!!! nao conseguimos ir buscar o user ao authService
   }
 
