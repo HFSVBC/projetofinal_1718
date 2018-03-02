@@ -8,9 +8,8 @@ import { AuthService } from '../providers/auth.service';
   styleUrls: ['./initial.component.css']
 })
 export class InitialComponent implements OnInit {
-
   constructor(public authService: AuthService, private router: Router) {
-    // console.log('aqui ' + authService);
+    console.log('aqui ' + authService.getName());
     // PROBLEMA!!!! nao conseguimos ir buscar o user ao authService
   }
 

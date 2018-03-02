@@ -73,4 +73,8 @@ export class AuthService {
     this.userDetails = null;
     this.router.navigateByUrl('/login');
   }
+
+  getName(){
+    return firebase.auth().currentUser.displayName;
+  }
 }
