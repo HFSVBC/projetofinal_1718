@@ -11,12 +11,6 @@ export class AuthService {
   public userDetails;
   private token: String;
 
-  /*
-  constructor(private _firebaseAuth: AngularFireAuth, private router: Router) {
-    this.userDetails = null;
-    this.user = _firebaseAuth.authState;
-  }
-  */
   constructor(private _firebaseAuth: AngularFireAuth, private router: Router) {
 
     this.user = _firebaseAuth.authState;
@@ -55,14 +49,32 @@ export class AuthService {
     });
   }
 
+  loginWithGoogle() {
+    firebase.auth().useDeviceLanguage();
+    this._firebaseAuth.auth.signInWithPopup(
+      new firebase.auth.GoogleAuthProvider()).then(res => {
+        console.log('User just logged in by google ', res);
+        this.router.navigateByUrl('/');
+        })
+      .catch((err) => {
+        const error = err.message;
+        console.log('Something went wrong: ' + error);
+      });
+  }
+
   isLoggedIn() {
     return this.userDetails !== null;
   }
 
   logout() {
-    this._firebaseAuth.auth.signOut()
-      .then((res) => this.router.navigate(['/']));
+    /*this._firebaseAuth.auth.signOut()
+      .then((res) => this.router.navigate(['/']));*/
+    this._firebaseAuth.auth.signOut();
     this.userDetails = null;
     this.router.navigateByUrl('/login');
+  }
+
+  getName(){
+    return firebase.auth().currentUser.displayName;
   }
 }

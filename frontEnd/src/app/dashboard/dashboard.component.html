@@ -6,10 +6,10 @@
         <div id="sidenav-sticky">
           <ul class="nav nav-tabs nav-justified flex-column">
             <li class="nav-item">
-              <a class="nav-link current" href="#">Dashboard</a>
+              <a class="nav-link current" href="/">Dashboard</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" href="#">Consultar Histórico</a>
+                <a class="nav-link active"  routerLink="/historico" routerLinkActive="active">Consultar Histórico</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link active" href="#">Perfil</a>
@@ -40,10 +40,10 @@
         </div>
       </nav>
       <div class="row">
-        <app-historico></app-historico>
+        <!--<app-historico></app-historico> -->
         <!-- Aqui vai entrar o router-outlet para os varios componentes
         adicionar aqui o primeiro componente para testar -->
-          <p>{{authService.userDetails.displayName}}</p>
+          <router-outlet></router-outlet>
         </div>
     </div>
   </div>
