@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../providers/auth.service';
-import * as $ from 'jquery';
 
 @Component({
   selector: 'app-historico',

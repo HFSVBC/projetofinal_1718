@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
-// import {MatTableModule} from '@angular/material/table';
+import {MatTableModule} from '@angular/material/table';
 
 // OAuth
 import { AngularFireModule } from 'angularfire2';
@@ -9,8 +9,10 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AuthService } from './providers/auth.service';
 import { LoggedInUsersService } from './service/logged-in-users.service';
+
 // Routes
 import { routes } from './app.routes';
+
 // Components
 import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
@@ -36,8 +38,8 @@ import { InitialComponent } from './initial/initial.component';
     HttpModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
-    routes
-    // MatTableModule
+    routes,
+    MatTableModule
   ],
   providers: [
     AuthService,
