@@ -50,7 +50,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 // CONSULTA DE HISTORICO DE ACESSOS
-
+$route['history_search/student'] = 'History/searchStudent'; #POST FIELDS: userTokenId
 // CONSULTA DE PRESENÇAS NAS AULAS
 
 // CONSULTA DE QUEM ESTA NUM ESPAÇO
