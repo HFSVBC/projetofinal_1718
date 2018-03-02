@@ -18,4 +18,4 @@ with open('populate.sql', 'w') as infile:
 
     #Criar acessos
     for i in range(1, 6):
-        infile.write("INSERT INTO Semana" + str(i) + "(" + str(i) + "," + str(i) + "," + str(i) + ");\n")
+        infile.write("INSERT INTO Semana" + str(i) + "(" + str(i) + "," + str(i) + "," + str(i) + "," + str(i) + ");\n")
