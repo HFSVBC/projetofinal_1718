@@ -18,10 +18,21 @@ class History extends CI_Controller {
 			),
 		);
 		$this->form_validation->set_rules($config);
+		$this->form_validation->set_error_delimiters('', '&');
 		if($this->form_validation->run() === true){
 			echo json_encode(displayError('ok', 200));
 		}else{
-			echo json_encode(array_merge(displayError('Method Not Allowed', 405), array('message'=>'POST has not passed the validation check.')));
+			$code = 405;
+			$this->output->set_status_header($code);
+			echo json_encode(
+				array_merge(
+					displayError('Method Not Allowed', $code), 
+					array(
+						'message'=>'POST has not passed the validation check.',
+						'errors' => validation_errors(),
+					)
+				)
+			);
 		}
 	}
 }
