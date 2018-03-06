@@ -4,6 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 function displayError($errorMessage, $errorCode)
 {
     $CI =& get_instance();
+    $CI->output->set_status_header($errorCode);
     $out_array = array(
         "state" => $errorMessage,
         "code" => $errorCode,
