@@ -1,8 +1,14 @@
 nav {
-  display: flex;
- /* height: 35px; */
+    display: flex;
+    /* height: 35px; */
+    position: -webkit-sticky;
+    position: sticky;
 }
 
 .bg-primary {
-  background-color: #303F9F !important;
+    background-color: #303F9F !important;
+}
+
+.navbar-brand {
+    padding: 0 .5em;
 }
