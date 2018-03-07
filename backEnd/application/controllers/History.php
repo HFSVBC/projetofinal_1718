@@ -12,12 +12,12 @@ class History extends CI_Controller {
 		$config = array(
 			array(
 					'field' => 'userTokenId',
-					'label' => "User's Token ID",
+					'label' => "User's Token",
 					'rules' => 'trim|required'
 			),
 		);
 		$this->form_validation->set_rules($config);
-		$this->form_validation->set_error_delimiters('', '&');
+		$this->form_validation->set_error_delimiters('', '');
 		if($this->form_validation->run() === true){
 			echo json_encode(
 				array_merge(
