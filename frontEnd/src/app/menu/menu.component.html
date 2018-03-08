@@ -1,19 +1,20 @@
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
-    <div class="" style="text-align: center">
+    <div class="brand">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
         <a class="navbar-brand" href="#">CA FCUL</a>
     </div>
 
-
-    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-
-        <div class="" style="display: flex; margin-left: auto">
-            <span style="color: white; margin-right: 30px">Bem vindo
-            <a class="" href="#" style="color: white">{{this.name}}</a>
-          </span>
-            <button type="button" class="btn btn-sm btn-outline-light" (click)="logout()"> Sair </button>
+    <div class="user">
+        <button id='togglerUser' class="navbar-toggler" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img src={{this.photo}} id='photoUser'>
+        </button>
+        <div class='dropdown-menu' aria-labelledby="togglerUser">
+            <span class="dropdown-item">Bem vindo
+                <a href="#">{{this.name}}</a>
+            </span>
+            <button type="button" class=" dropdown-item btn btn-sm btn-outline-light" (click)="logout()"> Sair </button>
         </div>
     </div>
 </nav>

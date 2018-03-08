@@ -16,7 +16,7 @@ export const router: Routes = [
     canActivate: [LoggedInUsersService],
     children: [
       {
-        path: '',
+        path: 'initial',
         component: InitialComponent
       },
       {

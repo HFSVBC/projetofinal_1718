@@ -12,6 +12,7 @@ import { AuthService } from '../providers/auth.service';
 export class MenuComponent implements OnInit {
 
   name;
+  photo;
 
   constructor(public authService: AuthService, public angularAuth: AngularFireAuth, private router: Router) { }
 
@@ -20,6 +21,7 @@ export class MenuComponent implements OnInit {
       this.router.navigate(['/']);
     }
     this.name = this.angularAuth.auth.currentUser.displayName;
+    this.photo = this.angularAuth.auth.currentUser.photoURL;
   }
 
   logout() {
