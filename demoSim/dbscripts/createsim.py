@@ -1,0 +1,11 @@
+with open('create.sql', 'w') as infile:
+    infile.write("PRAGMA foreign_keys = ON;\n")
+    infile.write("CREATE TABLE Visitante (ID INTEGER PRIMARY KEY AUTOINCREMENT, NumVisitante INTEGER NOT NULL, CONSTRAINT NumVisitRest (NumVisitante));\n")
+    infile.write("CREATE TABLE Aluno (ID INTEGER PRIMARY KEY AUTOINCREMENT, NumAluno INTEGER NOT NULL, CONSTRAINT NumAlunoRest UNIQUE (NumAluno));\n")
+    infile.write("CREATE TABLE Sala (ID INTEGER PRIMARY KEY AUTOINCREMENT, Bloco INTEGER NOT NULL, Piso INTEGER NOT NULL, Numero INTEGER NOT NULL, LotacaoMax INTEGER);\n")
+    infile.write("CREATE TABLE Professor (ID INTEGER PRIMARY KEY AUTOINCREMENT, NumProfessor INTEGER UNIQUE NOT NULL, CONSTRAINT NumRestProf UNIQUE (NumProfessor));\n")
+    infile.write("CREATE TABLE Disciplina (ID INTEGER PRIMARY KEY AUTOINCREMENT, Codigo INTEGER UNIQUE, Designacao TEXT, Creditos INTEGER NOT NULL, Regente INTEGER, FOREIGN KEY (Regente) REFERENCES Professor(NumProfessor));\n")
+    infile.write("CREATE TABLE Turma (ID INTEGER PRIMARY KEY AUTOINCREMENT, NInscritos INTEGER, MaxInscritos INTEGER, Tipo TEXT, IDDisciplina INTEGER, NumProf INTEGER, FOREIGN KEY (IDDisciplina) REFERENCES Disciplina(ID), FOREIGN KEY (NumProf) REFERENCES Professor(NumProfessor));\n")
+    infile.write("CREATE TABLE Aula (ID INTEGER PRIMARY KEY AUTOINCREMENT, HoraInicio TEXT, HoraFrom TEXT, IDSala INTEGER, IDTurma INTEGER, FOREIGN KEY (IDSala) REFERENCES Sala(ID), FOREIGN KEY (IDTurma) REFERENCES Turma(ID));\n")
+    infile.write("CREATE TABLE TurmaAluno (ID INTEGER PRIMARY KEY AUTOINCREMENT, NumAluno INTEGER, IDTurma INTEGER, FOREIGN KEY (NumAluno) REFERENCES Aluno(NumAluno), FOREIGN KEY (IDTurma) REFERENCES Turma(ID));\n")
+    infile.write("CREATE TABLE Acessos (ID INTEGER PRIMARY KEY AUTOINCREMENT, IDSala INTEGER, HoraEntrada TEXT, HoraSaida TEXT, NumAluno INTEGER, NumVisitante INTEGER, FOREIGN KEY (NumVisitante) REFERENCES Visitante(NumVisitante) FOREIGN KEY (NumAluno) REFERENCES Aluno(NumAluno), FOREIGN KEY (IDSala) REFERENCES Sala(ID));")
