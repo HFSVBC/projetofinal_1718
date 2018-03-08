@@ -2,44 +2,41 @@
 
 <div class="container-fluid">
     <div class="row">
-        <nav class="col-sm-2 d-none d-md-block bg-dark sidebar" id="navbarTogglerDemo02">
-            <div id="sidenav-sticky">
-                <ul class="nav nav-tabs flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link" routerLink="/initial" routerLinkActive="active">Dashboard</a>
+        <nav class="col-sm-2 d-md-block bg-dark sidebar collapse" id='dashboard' aria-labelledby="dashToggle ">
+            <li class="nav-item" id="mobileLogo">
+                <a class="navbar-brand" href="#">CA FCUL</a>
+                <button class="navbar-toggler close" type="button" data-toggle="collapse" data-target="#dashboard" aria-controls="dashboard" aria-expanded="false" id="dashToggle">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </li>
+            <div id="sidenav-sticky ">
+                <ul class="nav nav-tabs flex-column " id="accordion ">
+                    <li class="nav-item ">
+                        <a class="nav-link " routerLink="/initial" routerLinkActive="active ">Dashboard</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" routerLink="/historico" routerLinkActive="active">Consultar Histórico</a>
+                    <li class="nav-item ">
+                        <a class="nav-link " routerLink="/historico" routerLinkActive="active ">Consultar Histórico</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" routerLink="/">Perfil</a>
+                    <li class="nav-item ">
+                        <a class="nav-link " routerLink="/">Perfil</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="collapsed card-link nav-link" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                  Grupo 1</a>
-                        <div id="collapseOne" class="collapse">
-                            <ul class="nav nav-tabs flex-column">
-                                <li class="nav-item">
-                                    <a class="nav-link" routerLink="/">Opção 1</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" routerLink="/">Opção 2</a>
-                                </li>
-                            </ul>
+                    <li class="nav-item panel ">
+                        <a class="nav-link " data-toggle="collapse " data-parent="#accordion " href="#collapse1 ">Group 1</a>
+                        <div id="collapse1 " class=" collapse ">
+                            <a class="nav-link " routerLink="/">Opção 1</a>
+                            <a class="nav-link " routerLink="/">Opção 2</a>
                         </div>
                     </li>
-                    <li class="nav-item">
-                        <a class="collapsed card-link nav-link" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                Grupo 2
-              </a>
-                        <div id="collapseTwo" class="collapse">
-                            <a class="nav-link" routerLink="/">Opção 1</a>
+                    <li class="nav-item panel ">
+                        <a class="nav-link " data-toggle="collapse " data-parent="#accordion " href="#collapse2 ">Group 2</a>
+                        <div id="collapse2 " class="collapse ">
+                            <a class="nav-link " routerLink="/">Opção 1</a>
                         </div>
                     </li>
                 </ul>
             </div>
         </nav>
-        <div class="col-sm-10 outlet">
+        <div class="col-sm-10 outlet ">
             <!--<app-historico></app-historico> -->
             <!-- Aqui vai entrar o router-outlet para os varios componentes
         adicionar aqui o primeiro componente para testar -->

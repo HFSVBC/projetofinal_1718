@@ -7,8 +7,14 @@ nav {
     background-color: #303F9F !important;
 }
 
+.navbar {
+    padding: .5rem 0;
+}
+
 .navbar-brand {
     padding: 0 .5em;
+    font-size: 1.55rem;
+    float: left;
 }
 
 #togglerUser {
@@ -18,24 +24,51 @@ nav {
     padding: 0;
     outline: none;
     cursor: pointer;
+    background: transparent;
+}
+
+#togglerUser::after {
+    vertical-align: middle;
+    border-top: .4em solid white;
+    border-right: .35em solid transparent;
+    border-left: .35em solid transparent;
 }
 
 #photoUser {
     border-radius: 50%;
-    height: 2.1em;
+    height: 2.5em;
 }
 
 .user {
     float: right;
+    margin-right: 1rem;
 }
 
 .brand {
-    font-size: 1.5rem;
     float: left;
+}
+
+#dashToggle {
+    display: none;
+    margin-left: 1rem;
 }
 
 .user .dropdown-menu {
     right: 0;
     left: auto;
     text-align: right;
+}
+
+@media only screen and (max-width: 767px) {
+    .navbar-brand {
+        position: absolute;
+        width: 50%;
+        left: 25%;
+        float: none;
+        text-align: center;
+        top: .5rem;
+    }
+    #dashToggle {
+        display: block;
+    }
 }
