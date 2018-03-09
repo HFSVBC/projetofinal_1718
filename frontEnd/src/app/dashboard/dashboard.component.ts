@@ -13,7 +13,7 @@ export class DashboardComponent implements OnInit {
   constructor(public authService: AuthService, public angularAuth: AngularFireAuth, private router: Router) { }
 
   ngOnInit() {
-    console.log('DETAILS:', this.angularAuth.auth.currentUser.providerData[0]);
+    // console.log('DETAILS:', this.angularAuth.auth.currentUser.providerData[0]);
   }
 
 }
