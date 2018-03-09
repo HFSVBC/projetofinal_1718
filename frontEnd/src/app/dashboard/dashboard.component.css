@@ -29,38 +29,34 @@
     border-bottom: 0;
 }
 
+.collapsing {
+    -webkit-transition: none;
+    transition: none;
+}
+
 .sidebar {
     position: relative;
     height: 100%;
     top: 0;
     bottom: 0;
     left: 0;
-    z-index: 100;
-    padding: 0;
+    padding: 2em 0 0;
     -webkit-box-shadow: 0 0 2.5em 0.1em grey;
     -moz-box-shadow: 0 0 2.5em 0.1em grey;
     box-shadow: 0 0 2.5em 0.1em grey;
     /* transform: translateZ(10px) */
-    padding-top: 2em;
-    background-color: #1a2358 !important;
+    background: #1a2358 !important;
     text-align: left!important;
-    animation: fadein 2s;
-    transition: background 0.35s linear, height 0.35s ease-in 200ms;
+}
+
+#sidenav-sticky,
+#sidenav-sticky ul {
+    height: 100%;
 }
 
 .container-fluid {
     padding-top: 2.8em;
     height: 100%;
-}
-
-.sidebar-sticky {
-    height: 10 0%;
-    position: -webkit-sticky;
-    position: sticky;
-    top: 48px;
-    height: calc(100vh - 48px);
-    padding-top: .5rem;
-    overflow-x: hidden;
 }
 
 @keyframes fadein {
@@ -81,6 +77,13 @@
         position: fixed;
         z-index: 1031;
         padding: 0;
+    }
+    .nav-item {
+        transition: opacity 0.35s ease-out, transform 0.35s ease-out;
+    }
+    .sidebar {
+        animation: fadein 2s;
+        transition: background 0.35s linear, height 0.35s ease-in 200ms;
     }
     #mobileLogo {
         display: block;
