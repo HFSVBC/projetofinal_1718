@@ -7,6 +7,8 @@ class UserLoader extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
+
+		$this->load->model('user_model');
 	}
 	// add the necessary fields for user login
 	//login user by adding a line to the LoggedIn_Users table
@@ -17,21 +19,12 @@ class UserLoader extends CI_Controller {
 					'field' => 'uid',
 					'label' => "User's UID",
 					'rules' => 'trim|required'
-			),
-			array(
-					'field' => 'externalIP',
-					'label' => "User's External IP",
-					'rules' => 'trim|required'
-			),
-			array(
-					'field' => 'macaddress',
-					'label' => "User's MAC adress",
-					'rules' => 'trim|required'
-			),
+			)
 		);
 		$this->form_validation->set_rules($config);
 		$this->form_validation->set_error_delimiters('', '');
 		if($this->form_validation->run() === true){
+			
 			echo json_encode(
 				array_merge(
 					displayError('ok', 200), 
@@ -59,17 +52,7 @@ class UserLoader extends CI_Controller {
 					'field' => 'userTokenId',
 					'label' => "User's Token",
 					'rules' => 'trim|required'
-			),
-			array(
-					'field' => 'externalIP',
-					'label' => "User's External IP",
-					'rules' => 'trim|required'
-			),
-			array(
-					'field' => 'macaddress',
-					'label' => "User's MAC adress",
-					'rules' => 'trim|required'
-			),
+			)
 		);
 		$this->form_validation->set_rules($config);
 		$this->form_validation->set_error_delimiters('', '');
@@ -102,17 +85,7 @@ class UserLoader extends CI_Controller {
 					'field' => 'userTokenId',
 					'label' => "User's Token",
 					'rules' => 'trim|required'
-			),
-			array(
-					'field' => 'externalIP',
-					'label' => "User's External IP",
-					'rules' => 'trim|required'
-			),
-			array(
-					'field' => 'macaddress',
-					'label' => "User's MAC adress",
-					'rules' => 'trim|required'
-			),
+			)
 		);
 		$this->form_validation->set_rules($config);
 		$this->form_validation->set_error_delimiters('', '');
@@ -144,17 +117,7 @@ class UserLoader extends CI_Controller {
 					'field' => 'uid',
 					'label' => "User's UID",
 					'rules' => 'trim|required'
-			),
-			array(
-					'field' => 'externalIP',
-					'label' => "User's External IP",
-					'rules' => 'trim|required'
-			),
-			array(
-					'field' => 'macaddress',
-					'label' => "User's MAC adress",
-					'rules' => 'trim|required'
-			),
+			)
 		);
 		$this->form_validation->set_rules($config);
 		$this->form_validation->set_error_delimiters('', '');
@@ -180,13 +143,14 @@ class UserLoader extends CI_Controller {
 	}
 	// add the necessary fields for user registration
 	// registers user in the database 
+	// chcek how to protect the route (one way could be for it to be verified by an admin)
 	public function register() 
 	{
 		$config = array(
 			array(
 					'field' => 'uid',
 					'label' => "User's UID",
-					'rules' => 'trim|required'
+					'rules' => 'trim|integer|required'
 			),
 			array(
 					'field' => 'name',
@@ -202,17 +166,31 @@ class UserLoader extends CI_Controller {
 					'field' => 'avatar',
 					'label' => "User's Avatar",
 					'rules' => 'trim|required'
+			),
+			array(
+					'field' => 'type',
+					'label' => "User's Account Type",
+					'rules' => 'trim|integer|required'
 			)
 		);
 		$this->form_validation->set_rules($config);
 		$this->form_validation->set_error_delimiters('', '');
 		if($this->form_validation->run() === true){
-			echo json_encode(
-				array_merge(
-					displayError('ok', 200), 
-					array("data" => array())
-				)
-			);
+			if($this->user_model->register() === true){
+				echo json_encode(
+					array_merge(
+						displayError('ok', 200), 
+						array("data" => array('message'=>'user successfully added to the system'))
+					)
+				);
+			}else{
+				echo json_encode(
+					array_merge(
+						displayError('Server Error', 500), 
+						array("data" => array('message'=>'error adding user the system'))
+					)
+				);
+			}
 		}else{
 			echo json_encode(
 				array_merge(
@@ -234,27 +212,37 @@ class UserLoader extends CI_Controller {
 					'field' => 'userTokenId',
 					'label' => "User's Token",
 					'rules' => 'trim|required'
-			),
-			array(
-					'field' => 'externalIP',
-					'label' => "User's External IP",
-					'rules' => 'trim|required'
-			),
-			array(
-					'field' => 'macaddress',
-					'label' => "User's MAC adress",
-					'rules' => 'trim|required'
-			),
+			)
 		);
 		$this->form_validation->set_rules($config);
 		$this->form_validation->set_error_delimiters('', '');
 		if($this->form_validation->run() === true){
-			echo json_encode(
-				array_merge(
-					displayError('ok', 200), 
-					array("data" => array())
-				)
-			);
+			$userId = $this->user_model->getLoggedInUserId();
+			if($userId[0]===true){
+				$result = $this->user_model->getUserProfile($userId[1]);
+				if($result[0]===true){
+					echo json_encode(
+						array_merge(
+							displayError('ok', 200), 
+							array("data" => $result[1])							
+						)
+					);
+				}else{
+					echo json_encode(
+						array_merge(
+							displayError('Server Error', 500), 
+							array("data" => array('message'=>'error adding user the system'))
+						)
+					);
+				}
+			}else{
+				echo json_encode(
+					array_merge(
+						displayError('Server Error', 500), 
+						array("data" => array('message'=>'error adding user the system'))
+					)
+				);
+			}
 		}else{
 			echo json_encode(
 				array_merge(
