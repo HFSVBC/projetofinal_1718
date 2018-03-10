@@ -79,7 +79,7 @@
         padding: 0;
     }
     .nav-item {
-        transition: opacity 0.35s ease-out, transform 0.35s ease-out;
+        transition: opacity 0.35s ease-in, transform 0.35s ease-in;
     }
     .sidebar {
         animation: fadein 2s;

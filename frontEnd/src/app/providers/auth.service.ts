@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { Observable } from 'rxjs/Observable';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 @Injectable()
 export class AuthService {
@@ -11,7 +12,7 @@ export class AuthService {
   public userDetails;
   private token: String;
 
-  constructor(private _firebaseAuth: AngularFireAuth, private router: Router) {
+  constructor(private _firebaseAuth: AngularFireAuth, private router: Router, private http: HttpClient) {
 
     this.user = _firebaseAuth.authState;
     this.user.subscribe(
@@ -50,12 +51,50 @@ export class AuthService {
   }
 
   loginWithGoogle() {
+
     firebase.auth().useDeviceLanguage();
+
+    /*
+    const provider = new firebase.auth.GoogleAuthProvider();
+    firebase.auth().signInWithRedirect(provider).then(result => {
+      const token = result.credential.accessToken;
+      // The signed-in user info.
+      const user = result.user;
+      console.log('cenas', token, user);
+      this.router.navigateByUrl('/');
+     });*/
+
     this._firebaseAuth.auth.signInWithPopup(
       new firebase.auth.GoogleAuthProvider()).then(res => {
-        console.log('User just logged in by google ', res);
-        this.router.navigateByUrl('/');
+        const user_info =  res.user.providerData[0];
+        console.log('User just logged in by google ', res.user.providerData[0].displayName);
+
+        // POST INFO
+        const data = {
+          displayName: user_info.displayName,
+          photoURL: user_info.photoURL,
+          email: user_info.email,
+          uid: user_info.uid,
+          withCredentials: true
+        };
+        const baseURL = 'http://localhost:8000';
+        this.http.post(baseURL, data).subscribe(
+          result => {
+            console.log(result);
+            console.log('fiz o pedido');
+          },
+          (err: HttpErrorResponse) => {
+            if (err.error instanceof Error) {
+              console.log('Client-side error occured.');
+            } else {
+              console.log('Server-side error occured.');
+            }
+          }
+        );
+        // END POST
+
         this.userDetails = res.user;
+        this.router.navigateByUrl('/');
         })
       .catch((err) => {
         const error = err.message;
@@ -64,7 +103,7 @@ export class AuthService {
   }
 
   isLoggedIn() {
-    return this.userDetails !== null;
+    return firebase.auth().currentUser !== null;
   }
 
   logout() {

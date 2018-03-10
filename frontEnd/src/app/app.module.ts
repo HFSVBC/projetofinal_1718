@@ -22,6 +22,7 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HistoricoComponent } from './historico/historico.component';
 import { InitialComponent } from './initial/initial.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { InitialComponent } from './initial/initial.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     routes,
-    MatTableModule
+    MatTableModule,
+    HttpClientModule
   ],
   providers: [
     AuthService,
