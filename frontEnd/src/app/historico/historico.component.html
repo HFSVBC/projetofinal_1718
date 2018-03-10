@@ -1,19 +1,24 @@
-<mat-table [dataSource]="myDataArray">
-
-  <ng-container matColumnDef="data">
-    <mat-header-cell *matHeaderCellDef> Data </mat-header-cell>
-    <mat-cell *matCellDef="let dados"> {{dados.data}} </mat-cell>
-  </ng-container>
-  <ng-container matColumnDef="hora">
-    <mat-header-cell *matHeaderCellDef> Hora </mat-header-cell>
-    <mat-cell *matCellDef="let dados"> {{dados.hora}} </mat-cell>
-  </ng-container>
-  <ng-container matColumnDef="sala">
-    <mat-header-cell *matHeaderCellDef> Sala </mat-header-cell>
-    <mat-cell *matCellDef="let dados"> {{dados.sala}} </mat-cell>
-  </ng-container>
-
-  <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
-  <mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></mat-row>
-</mat-table>
 <!--<h1>Esta é a página do histótico de acessos</h1>-->
+
+
+<table datatable [dtOptions]="dtOptions" class="table table-striped table-bordered dataTable no-footer">
+  <thead>
+    <tr role="row">
+        <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Data: activate to sort column descending" aria-sort="ascending" style="width: 113px;">
+        Data
+      </th>
+      <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Data: activate to sort column descending" aria-sort="ascending" style="width: 113px;">
+        Hora
+      </th>
+      <th>Sala</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let pos of myDataArray" role="row" class="odd">
+      <td class="sorting_1">{{ pos.data }}</td>
+      <td class="sorting_1">{{ pos.hora }}</td>
+      <td class="sorting_1">{{ pos.sala }}</td>
+    </tr>
+  </tbody>
+  </table>
+

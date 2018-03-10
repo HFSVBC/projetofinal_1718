@@ -1,7 +1,11 @@
-import { BrowserModule } from '@angular/platform-browser';
+// Core
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+
+// Modules
 import { HttpModule } from '@angular/http';
-import {MatTableModule} from '@angular/material/table';
+import { HttpClientModule } from '@angular/common/http';
+import { DataTablesModule } from 'angular-datatables';
 
 // OAuth
 import { AngularFireModule } from 'angularfire2';
@@ -22,7 +26,7 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HistoricoComponent } from './historico/historico.component';
 import { InitialComponent } from './initial/initial.component';
-import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -40,8 +44,8 @@ import { HttpClientModule } from '@angular/common/http';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     routes,
-    MatTableModule,
-    HttpClientModule
+    HttpClientModule,
+    DataTablesModule
   ],
   providers: [
     AuthService,
