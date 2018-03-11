@@ -17,9 +17,12 @@ def connect_db(basedados):
 
     if not db_is_created:
         with open("../dbscripts/create.sql", "r") as infile:
-            print infile.read()
             g.cursor.executescript(infile.read())
             g.conn.commit()
+        with open("../dbscripts/populate.sql", "r") as infile:
+            g.cursor.executescript(infile.read())
+            g.conn.commit()
+
 
 @app.before_request
 def before_request():
