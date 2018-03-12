@@ -26,6 +26,7 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HistoricoComponent } from './historico/historico.component';
 import { InitialComponent } from './initial/initial.component';
+import { PresencasComponent } from './presencas/presencas.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { InitialComponent } from './initial/initial.component';
     LoginPageComponent,
     DashboardComponent,
     HistoricoComponent,
-    InitialComponent
+    InitialComponent,
+    PresencasComponent
   ],
   imports: [
     BrowserModule,
