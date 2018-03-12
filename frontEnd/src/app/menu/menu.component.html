@@ -1,4 +1,4 @@
-<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+<nav class="col-sm-12 navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
     <div class="brand">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#dashboard" aria-controls="dashboard" aria-expanded="false" id="dashToggle">
         <span class="navbar-toggler-icon"></span>
@@ -18,6 +18,26 @@
         </div>
     </div>
 </nav>
+
+        <nav class="d-md-block bg-dark sidebar collapse" id='dashboard' aria-labelledby="dashToggle ">
+            <!--<li class="nav-item" id="mobileLogo">
+                <a class="navbar-brand" href="#">CA FCUL</a>
+                <span aria-hidden="true">&times;</span>
+                <button class="navbar-toggler close" type="button" data-toggle="collapse" data-target="#dashboard" aria-controls="dashboard" aria-expanded="false" id="dashToggle">
+                </button>
+            </li>-->
+            <div id="sidenav-sticky ">
+                <ul class="nav nav-tabs flex-column " id="accordion ">
+                    <li class="nav-item ">
+                        <a class="nav-link " routerLink="/dashboard" routerLinkActive="active ">Dashboard</a>
+                    </li>
+                      <a class="nav-link " routerLink="/historico" routerLinkActive="active ">Consultar Histórico</a>
+                    <li class="nav-item ">
+                        <a class="nav-link " routerLink="/presencas" routerLinkActive="active ">Consultar Presenças</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
 
 
 <!--
