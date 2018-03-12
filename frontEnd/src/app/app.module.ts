@@ -12,7 +12,10 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AuthService } from './providers/auth.service';
+
+// Services
 import { LoggedInUsersService } from './service/logged-in-users.service';
+import { ApiconnectorService } from './service/apiconnector.service';
 
 // Routes
 import { routes } from './app.routes';
@@ -25,7 +28,6 @@ import { environment } from './../environments/environment';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HistoricoComponent } from './historico/historico.component';
-import { InitialComponent } from './initial/initial.component';
 import { PresencasComponent } from './presencas/presencas.component';
 
 
@@ -37,7 +39,6 @@ import { PresencasComponent } from './presencas/presencas.component';
     LoginPageComponent,
     DashboardComponent,
     HistoricoComponent,
-    InitialComponent,
     PresencasComponent
   ],
   imports: [
@@ -51,7 +52,8 @@ import { PresencasComponent } from './presencas/presencas.component';
   ],
   providers: [
     AuthService,
-    LoggedInUsersService
+    LoggedInUsersService,
+    ApiconnectorService
   ],
   bootstrap: [AppComponent]
 })

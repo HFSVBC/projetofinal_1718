@@ -5,7 +5,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HistoricoComponent } from './historico/historico.component';
-import { InitialComponent } from './initial/initial.component';
 import { PresencasComponent } from './presencas/presencas.component';
 
 import { LoggedInUsersService } from './service/logged-in-users.service';
@@ -19,7 +18,7 @@ export const router: Routes = [
   },
   {
     path: 'dashboard',
-    component: InitialComponent,
+    component: DashboardComponent,
     canActivate: [LoggedInUsersService]
   },
   {

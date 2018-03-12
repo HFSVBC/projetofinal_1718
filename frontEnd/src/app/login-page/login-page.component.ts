@@ -4,6 +4,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { AuthService } from '../providers/auth.service';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { ApiconnectorService } from '../service/apiconnector.service';
 
 @Component({
   selector: 'app-login-page',
@@ -13,11 +14,12 @@ import { AngularFireAuth } from 'angularfire2/auth';
 export class LoginPageComponent implements OnInit {
 
   constructor(private authService: AuthService, private _firebaseAuth: AngularFireAuth,
-     private router: Router, private http: HttpClient) { }
+     private router: Router, private http: HttpClient, private conn: ApiconnectorService) { }
 
   ngOnInit() {
 
     if (this.authService.isLoggedIn()) {
+      console.log('URL', this.conn.clientURL);
       console.log('cenas', this.authService.getUser().providerData);
       const data = {};
       const baseurl = '';
