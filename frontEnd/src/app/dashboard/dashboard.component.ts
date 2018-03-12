@@ -21,7 +21,6 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     // console.log('DETAILS:', this.angularAuth.auth.currentUser.providerData[0]);
-    console.log('URL', this.conn.clientURL);
   }
 
 }

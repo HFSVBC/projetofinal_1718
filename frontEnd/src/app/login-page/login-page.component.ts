@@ -19,8 +19,10 @@ export class LoginPageComponent implements OnInit {
   ngOnInit() {
 
     if (this.authService.isLoggedIn()) {
-      console.log('URL', this.conn.clientURL);
       console.log('cenas', this.authService.getUser().providerData);
+
+      // this.conn.postData(this.conn.loginPOST, data);
+
       const data = {};
       const baseurl = '';
       this.http.post(baseurl, data).subscribe(
