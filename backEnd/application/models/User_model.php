@@ -8,12 +8,22 @@
 		public function login()
 		{
 			$googleUID 		= $this->db->escape($this->input->post('uid'));
-			$userExternalIp = get_client_ip();
-			$token 			= '';
-			$timeOut		= time()+21600;
+			$token 			= $this->db->escape(bin2hex(openssl_random_pseudo_bytes(16)));
+			$timeOut 		= new DateTime();
+			$timeOut->add(new DateInterval('PT21600S'));
+			$timeOut 		= $this->db->escape($timeOut->format('Y-m-d H:i:s'));
+			$userExternalIp = $this->db->escape(get_client_ip());
 
 			$sql = "INSERT INTO users_loggedIn (`user`, `token`, `timeOut`, `externalIP`)
-					VALUES ((SELECT user FROM users WHERE googleUID = $googleUID), $token, $timeOut, $userExternalIp)";
+					SELECT users.id, $token, $timeOut, $userExternalIp
+					FROM users 
+					WHERE users.googleUID = $googleUID";
+
+			if($this->db->query($sql)){
+				return array(true, $token);
+			}else{
+				return array(false, '');
+			}
 		}
 		public function register()
 		{
@@ -23,13 +33,29 @@
 			$confCode  = $this->db->escape(md5($email.time()));
 			$email     = $this->db->escape($email);
 			$avatar	   = $this->db->escape($this->input->post('avatar'));
-			$type	   = $this->db->escape($this->input->post('type'));
 
 
-			$sql = "INSERT INTO users (`googleUID`, `name`, `email`, `confId`, `avatar`, `account_type`)
-					VALUES ($googleUID, $name, $email, $confCode, $avatar, $type)";
+			$sql = "INSERT INTO users (`googleUID`, `name`, `email`, `confId`, `avatar`)
+					VALUES ($googleUID, $name, $email, $confCode, $avatar)";
 
 			if($this->db->query($sql)){
+				return true;
+			}else{
+				return false;
+			}
+		}
+		public function isRegistered($uid)
+		{
+			$uid = $this->db->escape($uid);
+
+			$sql = "SELECT COUNT(id) AS count
+					FROM users
+					WHERE googleUID = $uid";
+			
+			$query = $this->db->query($sql);
+			$row   = $query->row();
+
+			if($row->count == 1){
 				return true;
 			}else{
 				return false;

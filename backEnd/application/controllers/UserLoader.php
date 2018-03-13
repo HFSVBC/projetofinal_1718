@@ -14,39 +14,73 @@ class UserLoader extends CI_Controller {
 	//login user by adding a line to the LoggedIn_Users table
 	public function logIn()
 	{ 
+		$jsonConf = array("code"=>null,"description"=>"","data"=>array());
 		$config = array(
 			array(
 					'field' => 'uid',
 					'label' => "User's UID",
+					'rules' => 'trim|required'
+			),
+			array(
+					'field' => 'name',
+					'label' => "User's Name",
+					'rules' => 'trim|required'
+			),
+			array(
+					'field' => 'email',
+					'label' => "User's e-mail",
+					'rules' => 'trim|required'
+			),
+			array(
+					'field' => 'avatar',
+					'label' => "User's Avatar",
 					'rules' => 'trim|required'
 			)
 		);
 		$this->form_validation->set_rules($config);
 		$this->form_validation->set_error_delimiters('', '');
 		if($this->form_validation->run() === true){
-			
-			echo json_encode(
-				array_merge(
-					displayError('ok', 200), 
-					array("data" => array())
-				)
-			);
+			if($this->user_model->isRegistered($this->input->post("uid"))){
+				$jsonConf = $this->loginHelper();
+			}else{
+				if($this->user_model->register()===true){
+					$jsonConf = $this->loginHelper();
+				}else{
+					$jsonConf["code"]        = 500;
+					$jsonConf["description"] = "Server Error";
+					$jsonConf["data"] 		 = array('message'=>'error adding user the system');
+				}
+			}	
 		}else{
-			echo json_encode(
-				array_merge(
-					displayError('Method Not Allowed', 405), 
-					array(
-						'message'=>'POST has not passed the validation check.',
-						'errors' => validation_errors(),
-					)
-				)
-			);
+			$jsonConf["code"]        = 405;
+			$jsonConf["description"] = "Method Not Allowed";
+			$jsonConf["data"] 		 = array(
+											'message'=>'POST has not passed the validation check.',
+											'errors' => validation_errors(),
+										);
 		}
+		jsonExporter($jsonConf);
+	}
+	private function loginHelper()
+	{
+		$jsonConf = array("code"=>null,"description"=>"","data"=>array());
+		$result = $this->user_model->login();
+		if($result[0]===true){
+			$jsonConf["code"]        = 200;
+			$jsonConf["description"] = "ok";
+			$jsonConf["data"] 		 = array('token' => $result[1]);
+		}else{
+			$jsonConf["code"]        = 500;
+			$jsonConf["description"] = "Server Error";
+			$jsonConf["data"] 		 = array('message'=>'error adding user the system');
+		}
+		return $jsonConf;
 	}
 	//logout user by adding a line to the LoggedOut_Users Table 
 	// and removing user from LoggedIn_Users table
 	public function logOut()
-	{ 
+	{
+		$jsonConf = array("code"=>null,"description"=>"","data"=>array()); 
 		$config = array(
 			array(
 					'field' => 'userTokenId',
@@ -57,12 +91,69 @@ class UserLoader extends CI_Controller {
 		$this->form_validation->set_rules($config);
 		$this->form_validation->set_error_delimiters('', '');
 		if($this->form_validation->run() === true){
-			echo json_encode(
-				array_merge(
-					displayError('ok', 200), 
-					array("data" => array())
-				)
-			);
+			$jsonConf["code"]        = 200;
+			$jsonConf["description"] = "ok";
+			$jsonConf["data"] 		 = array('token' => $result[1]);
+		}else{
+			$jsonConf["code"]        = 405;
+			$jsonConf["description"] = "Method Not Allowed";
+			$jsonConf["data"] 		 = array(
+											'message'=>'POST has not passed the validation check.',
+											'errors' => validation_errors(),
+										);
+		}
+		jsonExporter($jsonConf);
+	}
+	// add the necessary fields for user registration
+	// registers user in the database 
+	// chcek how to protect the route (one way could be for it to be verified by an admin)
+	public function register() 
+	{
+		$config = array(
+			array(
+					'field' => 'uid',
+					'label' => "User's UID",
+					'rules' => 'trim|integer|required'
+			),
+			array(
+					'field' => 'name',
+					'label' => "User's Name",
+					'rules' => 'trim|required'
+			),
+			array(
+					'field' => 'email',
+					'label' => "User's e-mail",
+					'rules' => 'trim|required'
+			),
+			array(
+					'field' => 'avatar',
+					'label' => "User's Avatar",
+					'rules' => 'trim|required'
+			),
+			array(
+					'field' => 'type',
+					'label' => "User's Account Type",
+					'rules' => 'trim|integer|required'
+			)
+		);
+		$this->form_validation->set_rules($config);
+		$this->form_validation->set_error_delimiters('', '');
+		if($this->form_validation->run() === true){
+			if($this->user_model->register() === true){
+				echo json_encode(
+					array_merge(
+						displayError('ok', 200), 
+						array("data" => array('message'=>'user successfully added to the system'))
+					)
+				);
+			}else{
+				echo json_encode(
+					array_merge(
+						displayError('Server Error', 500), 
+						array("data" => array('message'=>'error adding user the system'))
+					)
+				);
+			}
 		}else{
 			echo json_encode(
 				array_merge(
@@ -128,69 +219,6 @@ class UserLoader extends CI_Controller {
 					array("data" => array())
 				)
 			);
-		}else{
-			echo json_encode(
-				array_merge(
-					displayError('Method Not Allowed', 405), 
-					array(
-						'message'=>'POST has not passed the validation check.',
-						'errors' => validation_errors(),
-					)
-				)
-			);
-		}
-
-	}
-	// add the necessary fields for user registration
-	// registers user in the database 
-	// chcek how to protect the route (one way could be for it to be verified by an admin)
-	public function register() 
-	{
-		$config = array(
-			array(
-					'field' => 'uid',
-					'label' => "User's UID",
-					'rules' => 'trim|integer|required'
-			),
-			array(
-					'field' => 'name',
-					'label' => "User's Name",
-					'rules' => 'trim|required'
-			),
-			array(
-					'field' => 'email',
-					'label' => "User's e-mail",
-					'rules' => 'trim|required'
-			),
-			array(
-					'field' => 'avatar',
-					'label' => "User's Avatar",
-					'rules' => 'trim|required'
-			),
-			array(
-					'field' => 'type',
-					'label' => "User's Account Type",
-					'rules' => 'trim|integer|required'
-			)
-		);
-		$this->form_validation->set_rules($config);
-		$this->form_validation->set_error_delimiters('', '');
-		if($this->form_validation->run() === true){
-			if($this->user_model->register() === true){
-				echo json_encode(
-					array_merge(
-						displayError('ok', 200), 
-						array("data" => array('message'=>'user successfully added to the system'))
-					)
-				);
-			}else{
-				echo json_encode(
-					array_merge(
-						displayError('Server Error', 500), 
-						array("data" => array('message'=>'error adding user the system'))
-					)
-				);
-			}
 		}else{
 			echo json_encode(
 				array_merge(
