@@ -14,7 +14,9 @@ export class MenuComponent implements OnInit {
   name;
   photo;
 
-  constructor(public authService: AuthService, public angularAuth: AngularFireAuth, private router: Router) { }
+  constructor(public authService: AuthService, public angularAuth: AngularFireAuth, private router: Router) { 
+    this.ngOnInit();
+  }
 
   ngOnInit() {
     if (this.authService.isLoggedIn()) {
