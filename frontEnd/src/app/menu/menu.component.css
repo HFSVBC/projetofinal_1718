@@ -1,9 +1,6 @@
-nav {
-    box-shadow: 0 0 2em black;
-}
-
 #menu {
     display: block;
+    box-shadow: 0 0 2em black;
 }
 
 .bg-primary {
@@ -117,12 +114,11 @@ nav {
     bottom: 0;
     left: 0;
     z-index: 100;
-    padding: 0;
+    padding: 2em 0 0;
     -webkit-box-shadow: 0 0 2.5em 0.1em grey;
     -moz-box-shadow: 0 0 2.5em 0.1em grey;
     box-shadow: 0 0 2.5em 0.1em grey;
     /* transform: translateZ(10px) */
-    padding-top: 2em;
     background-color: #1a2358 !important;
     text-align: left!important;
 }
@@ -130,25 +126,6 @@ nav {
 .container-fluid {
     padding-top: 2.8em;
     height: 100%;
-}
-
-.sidebar-sticky {
-    height: 10 0%;
-    position: -webkit-sticky;
-    position: sticky;
-    top: 48px;
-    height: calc(100vh - 48px);
-    padding-top: .5rem;
-    overflow-x: hidden;
-}
-
-@keyframes fadein {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
 }
 
 #mobileLogo {
@@ -163,6 +140,14 @@ nav {
         width: 100%;
         animation: fadein 2s;
         transition: background 0.35s linear, height 0.35s ease-in 200ms;
+    }
+    @keyframes fadein {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
     }
     #mobileLogo {
         display: block;
@@ -184,5 +169,31 @@ nav {
     }
     .sidebar ul {
         padding: 3.5em 0 0;
+    }
+    #accordion li {
+        opacity: 0;
+    }
+    @keyframes slide {
+        0% {
+            opacity: 0;
+            transform: scale(1.1) translateY(-24px);
+        }
+        100% {
+            opacity: 1;
+            transform: none;
+        }
+    }
+    .slide {
+        animation: slide 2s;
+        animation-fill-mode: forwards;
+    }
+    #accordion li:nth-child(1) {
+        animation-delay: .5s;
+    }
+    #accordion li:nth-child(2) {
+        animation-delay: 1.5s;
+    }
+    #accordion li:nth-child(3) {
+        animation-delay: 2.5s;
     }
 }

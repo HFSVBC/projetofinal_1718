@@ -107,66 +107,66 @@ class UserLoader extends CI_Controller {
 	// add the necessary fields for user registration
 	// registers user in the database 
 	// chcek how to protect the route (one way could be for it to be verified by an admin)
-	public function register() 
-	{
-		$config = array(
-			array(
-					'field' => 'uid',
-					'label' => "User's UID",
-					'rules' => 'trim|integer|required'
-			),
-			array(
-					'field' => 'name',
-					'label' => "User's Name",
-					'rules' => 'trim|required'
-			),
-			array(
-					'field' => 'email',
-					'label' => "User's e-mail",
-					'rules' => 'trim|required'
-			),
-			array(
-					'field' => 'avatar',
-					'label' => "User's Avatar",
-					'rules' => 'trim|required'
-			),
-			array(
-					'field' => 'type',
-					'label' => "User's Account Type",
-					'rules' => 'trim|integer|required'
-			)
-		);
-		$this->form_validation->set_rules($config);
-		$this->form_validation->set_error_delimiters('', '');
-		if($this->form_validation->run() === true){
-			if($this->user_model->register() === true){
-				echo json_encode(
-					array_merge(
-						displayError('ok', 200), 
-						array("data" => array('message'=>'user successfully added to the system'))
-					)
-				);
-			}else{
-				echo json_encode(
-					array_merge(
-						displayError('Server Error', 500), 
-						array("data" => array('message'=>'error adding user the system'))
-					)
-				);
-			}
-		}else{
-			echo json_encode(
-				array_merge(
-					displayError('Method Not Allowed', 405), 
-					array(
-						'message'=>'POST has not passed the validation check.',
-						'errors' => validation_errors(),
-					)
-				)
-			);
-		}
+	// public function register() 
+	// {
+	// 	$config = array(
+	// 		array(
+	// 				'field' => 'uid',
+	// 				'label' => "User's UID",
+	// 				'rules' => 'trim|integer|required'
+	// 		),
+	// 		array(
+	// 				'field' => 'name',
+	// 				'label' => "User's Name",
+	// 				'rules' => 'trim|required'
+	// 		),
+	// 		array(
+	// 				'field' => 'email',
+	// 				'label' => "User's e-mail",
+	// 				'rules' => 'trim|required'
+	// 		),
+	// 		array(
+	// 				'field' => 'avatar',
+	// 				'label' => "User's Avatar",
+	// 				'rules' => 'trim|required'
+	// 		),
+	// 		array(
+	// 				'field' => 'type',
+	// 				'label' => "User's Account Type",
+	// 				'rules' => 'trim|integer|required'
+	// 		)
+	// 	);
+	// 	$this->form_validation->set_rules($config);
+	// 	$this->form_validation->set_error_delimiters('', '');
+	// 	if($this->form_validation->run() === true){
+	// 		if($this->user_model->register() === true){
+	// 			echo json_encode(
+	// 				array_merge(
+	// 					displayError('ok', 200), 
+	// 					array("data" => array('message'=>'user successfully added to the system'))
+	// 				)
+	// 			);
+	// 		}else{
+	// 			echo json_encode(
+	// 				array_merge(
+	// 					displayError('Server Error', 500), 
+	// 					array("data" => array('message'=>'error adding user the system'))
+	// 				)
+	// 			);
+	// 		}
+	// 	}else{
+	// 		echo json_encode(
+	// 			array_merge(
+	// 				displayError('Method Not Allowed', 405), 
+	// 				array(
+	// 					'message'=>'POST has not passed the validation check.',
+	// 					'errors' => validation_errors(),
+	// 				)
+	// 			)
+	// 		);
+	// 	}
 
-	}
+	// }
 	// checks if session is still valid. if not user is logged out. 
 	// returns true for still active session & false for non active session
 	public function isLoggedIn() 
