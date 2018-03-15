@@ -17,16 +17,18 @@ def connect_db(basedados):
 
     if not db_is_created:
         with open("../dbscripts/create.sql", "r") as infile:
-            g.cursor.executescript(infile.read())
+            textr = infile.read()
+            g.cursor.executescript(textr)
             g.conn.commit()
         with open("../dbscripts/populate.sql", "r") as infile:
-            g.cursor.executescript(infile.read())
+            textw = infile.read()
+            g.cursor.executescript(textw)
             g.conn.commit()
 
 
 @app.before_request
 def before_request():
-    g.db = connect_db("simulador.db")
+    g.db = connect_db("./simulador.db")
 
 @app.teardown_request
 def teardown_request(exception):
@@ -42,16 +44,18 @@ def resposta (res, msg):
 		r = make_response(msg)
 		r.status_code = 501
 	return r
+
 @app.route('/')
 def hello_world():
     return 'Hello, World!'
 
-@app.route('/alunos/<string:ida>', methods = ["GET"])
-def getAluno(ida):
-    sql = "SELECT * FROM Aluno WHERE NumAluno={}".format(ida)
+@app.route('/visitante/<string:idv>', methods = ["GET"])
+def getVisitante(idv):
+    sql = "SELECT * FROM visitante WHERE NumVisitante={}".format(idv)
     g.cursor.execute(sql)
     response = g.cursor.fetchone()
-    resposta(True, response[0])
+    return jsonify(id=response[0], numero=response[1])
+
 
 if __name__ == '__main__':
     app.run()
