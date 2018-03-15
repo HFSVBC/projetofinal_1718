@@ -30,7 +30,6 @@ with open('populate.sql', 'w') as infile:
     for i in range(1, len(codigo)+1):
         infile.write("INSERT INTO disciplina(Codigo, Designacao, Creditos, Regente) VALUES(" + str(codigo[i-1]) + "," + "'" + designacao[i-1] + "'" + "," + str(creditos[r.randint(0, len(creditos)-1)]) + "," + str(r.randint(0, 100)) + ");\n")
 
-    """
     #Criar Turmas
     NInscritos = [22,17,70,43,24,66,34,21,56,35]
     MaxInscritos = [30,70,200,100,70,80,40,50,90,300]
@@ -44,15 +43,15 @@ with open('populate.sql', 'w') as infile:
             n_inscritos_turma = NInscritos[r.randint(0, len(NInscritos)-1)]
             max_inscritos_turma = MaxInscritos[r.randint(0, len(MaxInscritos)-1)]
 
-        infile.write("INSERT INTO turma(NInscritos, MaxInscritos, Tipo, IDDisciplina, NumProf) VALUES(" + str(n_inscritos_turma) + "," + str(max_inscritos_turma) + "," + Tipo[r.randint(0, len(Tipo)-1)] + "," + str(Disciplinas[r.randint(0, len(Disciplinas)-1)]) + "," + str(r.randint(0,100)) + ");\n" )
+        infile.write("INSERT INTO turma(NInscritos, MaxInscritos, Tipo, IDDisciplina, NumProf) VALUES(" + str(n_inscritos_turma) + "," + str(max_inscritos_turma) + "," + "'" + Tipo[r.randint(0, len(Tipo)-1)] + "'" + "," + str(Disciplinas[r.randint(0, len(Disciplinas)-1)]) + "," + str(r.randint(0,100)) + ");\n" )
 
     #Criar Aulas
-    HoraInicio = ["9:00", "10:00", "14:00", "15:30", "16:00"]
-    HoraFim = ["10:30", "11:30", "15:30", "17:00", "17:30"]
+    HoraInicio = ["9h00", "10h00", "14h00", "15h30", "16h00"]
+    HoraFim = ["10h30", "11h30", "15h30", "17h00", "17h30"]
     sala_turma = range(1,20)
 
     for i in range(1,40):
-        infile.write("INSERT INTO aula(HoraInicio, HoraFim, IDSala, IDTurma) VALUES(" + HoraInicio[(i%len(HoraInicio))-1] + "," + HoraFim[(i%len(HoraFim))-1] + "," + str(sala_turma[r.randint(0, len(sala_turma)-1)]) + "," + str(sala_turma[r.randint(0, len(sala_turma)-1)]) + ");\n")
+        infile.write("INSERT INTO aula(HoraInicio, HoraFinal, IDSala, IDTurma) VALUES(" + "'" + HoraInicio[(i%len(HoraInicio))-1] + "'" + "," + "'" + HoraFim[(i%len(HoraFim))-1] + "'" + "," + str(sala_turma[r.randint(0, len(sala_turma)-1)]) + "," + str(sala_turma[r.randint(0, len(sala_turma)-1)]) + ");\n")
 
     #Criar Turma alunos
     for i in range(1,80):
@@ -60,5 +59,4 @@ with open('populate.sql', 'w') as infile:
 
     #Criar acessos
     for i in range(1,200):
-        infile.write("INSERT INTO acessos(IDSala, HoraEntrada, HoraSaida, NumAluno, NumVisitante) VALUES (" + str(r.randint(1,20)) + "," + HoraInicio[(i%len(HoraInicio))-1] + "," + HoraFim[(i%len(HoraFim))-1] + "," + str(r.randint(45000, 47000)) + "," + str(r.randint(10000,10200)) +  ");\n")
-    """
+        infile.write("INSERT INTO acessos(IDSala, HoraEntrada, HoraSaida, NumAluno, NumVisitante) VALUES (" + str(r.randint(1,20)) + "," + "'" + HoraInicio[(i%len(HoraInicio))-1] + "'" + "," + "'" + HoraFim[(i%len(HoraFim))-1] + "'" + "," + str(r.randint(45000, 47000)) + "," + str(r.randint(10000,10200)) +  ");\n")
