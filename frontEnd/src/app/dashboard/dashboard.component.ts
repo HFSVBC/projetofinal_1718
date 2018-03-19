@@ -10,13 +10,10 @@ import { ApiconnectorService } from '../service/apiconnector.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  private user;
 
-  constructor(public authService: AuthService, public angularAuth: AngularFireAuth, private router: Router,
-    private conn: ApiconnectorService) {
-        // console.log('aqui ' + authService.getName());
-        const user = authService.getUser();
-        console.log('aqui ' + user.displayName);
-        // PROBLEMA!!!! nao conseguimos ir buscar o user ao authService
+  constructor(public authService: AuthService, private router: Router) {
+    this.user = authService.getUser();
   }
 
   ngOnInit() {

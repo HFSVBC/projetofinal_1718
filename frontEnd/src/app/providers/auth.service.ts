@@ -1,68 +1,98 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, CanActivate } from '@angular/router';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/take';
+import 'rxjs/add/observable/from';
+
 
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
-import { Observable } from 'rxjs/Observable';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Session } from 'protractor';
 
 @Injectable()
 export class AuthService {
   private user: Observable<firebase.User>;
-  public userDetails;
+  private current;
   private token: String;
 
   constructor(private _firebaseAuth: AngularFireAuth, private router: Router, private http: HttpClient) {
 
     this.user = _firebaseAuth.authState;
-    this.user.subscribe(
-      (user) => {
+
+    this.user.subscribe(user => {
         if (user) {
-          this.userDetails = user;
-          console.log('User already logged in', this.userDetails);
-          this.router.navigateByUrl('/');
+          this.current = user;
+          console.log('User already logged in', this.current);
+          console.log('current user', _firebaseAuth.auth.currentUser);
+          this.router.navigateByUrl('/dashboard');
         } else {
-          this.userDetails = null;
+          this.current = false;
         }
       }
     );
   }
 
+  canActivate(): Observable<boolean> {
+    return Observable.from(this._firebaseAuth.authState)
+      .take(1)
+      .map(state => !!state)
+      .do(authenticated => {
+        if (!authenticated) {
+          this.router.navigate([ '/login' ]);
+        }
+      });
+  }
+
   signInWithGoogle() {
-    const provider = new firebase.auth.GoogleAuthProvider();
+
+    firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
+    .then(function() {
+
+      const provider = new firebase.auth.GoogleAuthProvider();
     firebase.auth().useDeviceLanguage();
-    this._firebaseAuth.auth.signInWithPopup(provider)
+
+    firebase.auth().signInWithPopup(provider)
     .then(result => {
       this.token = result.credential.accessToken;
-      this.userDetails = result.user;
-      console.log('User ' + this.userDetails.displayName + 'logged in!');
-      this.router.navigateByUrl('');
+      this.current = result.user;
+      console.log('User ' + this.current.displayName + 'logged in! boa', this.token);
+      this.router.navigateByUrl('/dashboard');
     })
-    .catch(function(error) {
+    .catch(error => {
       // Handle Errors here.
-      // var errorCode = error.code;
+      const errorCode = error.code;
       const errorMessage = error.message;
-      // The email of the user's account used.
-      // var email = error.email;
-      // The firebase.auth.AuthCredential type that was used.
-      // var credential = error.credential;
-      console.log('Something went wrong: ' + errorMessage);
+      console.log('Something went wrong: ' + errorMessage + 'code' + errorCode);
     });
+
+    });
+
+/*
+    firebase.auth().signInWithRedirect(provider)
+    .then(result => {
+      if (result.credential) {
+        const token = result.credential.accessToken;
+        console.log('OKAY');
+      }
+      this.userDetails = result.user;
+      console.log('User ' + this.userDetails.displayName + 'logged in! boa', this.token);
+      this.router.navigateByUrl('/');
+    })
+    .catch(error => {
+      // Handle Errors here.
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log('Something went wrong: ' + errorMessage + 'code' + errorCode);
+    });
+*/
   }
 
   loginWithGoogle() {
 
     firebase.auth().useDeviceLanguage();
-
-    /*
-    const provider = new firebase.auth.GoogleAuthProvider();
-    firebase.auth().signInWithRedirect(provider).then(result => {
-      const token = result.credential.accessToken;
-      // The signed-in user info.
-      const user = result.user;
-      console.log('cenas', token, user);
-      this.router.navigateByUrl('/');
-     });*/
 
     this._firebaseAuth.auth.signInWithPopup(
       new firebase.auth.GoogleAuthProvider()).then(res => {
@@ -92,8 +122,7 @@ export class AuthService {
           }
         );
         // END POST
-
-        this.userDetails = res.user;
+        this.current = res.user;
         this.router.navigateByUrl('/');
         })
       .catch((err) => {
@@ -107,14 +136,16 @@ export class AuthService {
   }
 
   logout() {
-    /*this._firebaseAuth.auth.signOut()
-      .then((res) => this.router.navigate(['/']));*/
+    this.current = null;
     this._firebaseAuth.auth.signOut();
-    this.userDetails = null;
     this.router.navigateByUrl('/login');
   }
 
   getUser() {
-    return firebase.auth().currentUser;
+    return this.current;
+  }
+
+  getToken() {
+    return this.token;
   }
 }

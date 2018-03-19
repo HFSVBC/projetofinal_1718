@@ -14,7 +14,6 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AuthService } from './providers/auth.service';
 
 // Services
-import { LoggedInUsersService } from './service/logged-in-users.service';
 import { ApiconnectorService } from './service/apiconnector.service';
 
 // Routes
@@ -52,7 +51,6 @@ import { PresencasComponent } from './presencas/presencas.component';
   ],
   providers: [
     AuthService,
-    LoggedInUsersService,
     ApiconnectorService
   ],
   bootstrap: [AppComponent]

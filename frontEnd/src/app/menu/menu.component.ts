@@ -13,24 +13,19 @@ export class MenuComponent implements OnInit {
 
   name;
   photo;
+  private user;
 
-  constructor(public authService: AuthService, public angularAuth: AngularFireAuth, private router: Router) { 
-    this.ngOnInit();
+  constructor(public authService: AuthService, public angularAuth: AngularFireAuth, private router: Router) {
+    this.user = authService.getUser();
   }
 
   ngOnInit() {
-    if (this.authService.isLoggedIn()) {
-      this.router.navigate(['/']);
-    }
-    this.name = this.angularAuth.auth.currentUser.displayName;
-    this.photo = this.angularAuth.auth.currentUser.photoURL;
+    this.name = this.user.displayName;
+    this.photo = this.user.photoURL;
   }
 
   logout() {
-    // this.authService.logout();
-    // dunno why doesnt work...
-    this.angularAuth.auth.signOut();
-    this.router.navigateByUrl('/login');
+    this.authService.logout();
   }
 
 }

@@ -1,14 +1,1 @@
-<!-- The content below is only a placeholder and can be replaced.
-
-<app-footer></app-footer> -->
-<ng-container *ngIf="router.url!=='/login'">
-    <div class="row">
-        <app-menu class="col-sm-2"></app-menu>
-        <div class="router col-sm-10">
-            <router-outlet></router-outlet>
-        </div>
-    </div>
-</ng-container>
-<ng-container *ngIf="router.url==='/login'">
-    <router-outlet></router-outlet>
-</ng-container>
+<router-outlet></router-outlet>

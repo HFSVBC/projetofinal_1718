@@ -7,33 +7,33 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { HistoricoComponent } from './historico/historico.component';
 import { PresencasComponent } from './presencas/presencas.component';
 
-import { LoggedInUsersService } from './service/logged-in-users.service';
+import { AuthService } from './providers/auth.service';
 
 export const router: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'login',
     pathMatch: 'full',
-    canActivate: [LoggedInUsersService]
-  },
-  {
-    path: 'dashboard',
-    component: DashboardComponent,
-    canActivate: [LoggedInUsersService]
-  },
-  {
-    path: 'historico',
-    component: HistoricoComponent,
-    canActivate: [LoggedInUsersService]
-  },
-  {
-    path: 'presencas',
-    component: PresencasComponent,
-    canActivate: [LoggedInUsersService]
+    canActivate: [AuthService]
   },
   {
     path: 'login',
     component: LoginPageComponent
+  },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    canActivate: [AuthService]
+  },
+  {
+    path: 'historico',
+    component: HistoricoComponent,
+    canActivate: [AuthService]
+  },
+  {
+    path: 'presencas',
+    component: PresencasComponent,
+    canActivate: [AuthService]
   }
 ];
 export const routes: ModuleWithProviders = RouterModule.forRoot(router);
