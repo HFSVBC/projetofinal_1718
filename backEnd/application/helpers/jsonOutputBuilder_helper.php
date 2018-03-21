@@ -13,7 +13,6 @@ function jsonExporter($conf)
 function displayError($errorMessage, $errorCode)
 {
     $CI =& get_instance();
-    $CI->output->set_status_header($errorCode);
     $out_array = array(
         "state" => $errorMessage,
         "code" => $errorCode,
@@ -29,7 +28,10 @@ function builder($arrayToAdd)
         "url" => base_url(uri_string()),
         "request_date" => date(DATE_W3C, time())
     );
-    $CI->output->set_content_type('application/json');
+    header('Access-Control-Allow-Origin: *');
+	header("Access-Control-Allow-Methods: GET, POST");
+	header("Access-Control-Allow-Headers: Content-Type");
+    $CI->output->set_content_type('application/x-www-form-urlencoded');
     return array_merge($out_array, $arrayToAdd);
 }
 ?>

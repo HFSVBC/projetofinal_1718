@@ -35,22 +35,15 @@ export class AuthService {
           const url = apiconnector.loginPOST;
           const user_info = this.current.providerData[0];
           const data = {
-            'name': user_info.displayName,
-            'avatar': user_info.photoURL,
-            'email': user_info.email,
-            'uid': user_info.uid,
-            // withCredentials: true
+            name: user_info.displayName,
+            avatar: user_info.photoURL,
+            email: user_info.email,
+            uid: user_info.uid,
           };
 
           console.log('data', data);
 
-          this.http.post(url,
-            {
-            'name': user_info.displayName,
-            'avatar': user_info.photoURL,
-            'email': user_info.email,
-            'uid': user_info.uid,
-            }, httpOptions)
+          this.http.post(url,data)
           .subscribe(result => {
             console.log(result);
             console.log('fiz o pedido');

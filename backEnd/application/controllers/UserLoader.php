@@ -37,6 +37,7 @@ class UserLoader extends CI_Controller {
 					'rules' => 'trim|required'
 			)
 		);
+		//verify if user is already loggedin
 		$this->form_validation->set_rules($config);
 		$this->form_validation->set_error_delimiters('', '');
 		if($this->form_validation->run() === true){
@@ -57,6 +58,7 @@ class UserLoader extends CI_Controller {
 			$jsonConf["data"] 		 = array(
 											'message'=>'POST has not passed the validation check.',
 											'errors' => validation_errors(),
+											'received' => json_encode($_POST)
 										);
 		}
 		jsonExporter($jsonConf);

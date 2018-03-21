@@ -10,9 +10,9 @@ export class APIConnectorService {
   private baseURL = 'https://cafcul.hugocurado.info/';
 
   httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type':  'application/x-www-form-urlencoded'
-    })
+    headers: new HttpHeaders().set(
+      'Content-Type', 'application/x-www-form-urlencoded'
+    )
   };
 
   // USER Routes
