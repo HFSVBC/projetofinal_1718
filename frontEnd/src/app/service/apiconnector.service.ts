@@ -1,12 +1,19 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 
 @Injectable()
-export class ApiconnectorService {
+export class APIConnectorService {
 
   constructor(private http: HttpClient) { }
 
-  private baseURL = 'http://localhost:8888/';
+  // private baseURL = 'http://localhost:8888/';
+  private baseURL = 'https://cafcul.hugocurado.info/';
+
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/x-www-form-urlencoded'
+    })
+  };
 
   // USER Routes
   loginPOST = this.baseURL + 'user/login';

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../providers/auth.service';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { ApiconnectorService } from '../service/apiconnector.service';
+import { APIConnectorService } from '../service/apiconnector.service';
 
 @Component({
   selector: 'app-dashboard',
