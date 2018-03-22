@@ -1,8 +1,8 @@
 <nav class="col-sm-12 navbar fixed-top navbar-expand-lg navbar-dark bg-primary" id="menu">
     <div class="brand">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#dashboard" aria-controls="dashboard" aria-expanded="false" id="dashToggle">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+        <button ng-click="dashboard='fadein'" class="navbar-toggler" type="button" data-target="#dashboard" aria-controls="dashboard" aria-expanded="false" id="dashToggle">
+            <span class="navbar-toggler-icon"></span>
+        </button>
         <a class="navbar-brand" href="#">CA FCUL</a>
     </div>
 
@@ -19,10 +19,10 @@
     </div>
 </nav>
 
-<nav class="d-md-block bg-dark sidebar collapse" id='dashboard' aria-labelledby="dashToggle">
+<nav ng-class="dashboard" class="d-md-block bg-dark sidebar" id='dashboard' aria-labelledby="dashToggle">
     <li class="nav-item" id="mobileLogo">
         <a class="navbar-brand" href="#">CA FCUL</a>
-        <button class="navbar-toggler close" type="button" data-toggle="collapse" data-target="#dashboard" aria-controls="dashboard" aria-expanded="false" id="dashToggle">
+        <button ng-click="dashboard='fadeout'" class="close" type="button" data-target="#dashboard" aria-controls="dashboard" aria-expanded="false" id="dashToggle">
             <span aria-hidden="true">&times;</span>
         </button>
     </li>
@@ -40,32 +40,3 @@
         </ul>
     </div>
 </nav>
-
-
-<!--
-<nav class="navbar fixed-top navbar-toggleable-md navbar-expand-md" style="display: flex;">
-    <a class="navbar-brand col-sm-2" href="#">CA FCUL</a>
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-
-    <div class="collapse navbar-collapse col-sm-10" id="navbarTogglerDemo02">
-
-      <ul class="navbar-nav mr-auto mt-0 mt-md-2">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#">Disabled</a>
-        </li>
-      </ul>
-
-        <i class="material-icons">person_outline</i>
-        <button type="button" class="btn btn-sm btn-outline-light my-2 my-sm-0" (click)="logout()">Log out</button>
-    </div>
-  </nav>
--->

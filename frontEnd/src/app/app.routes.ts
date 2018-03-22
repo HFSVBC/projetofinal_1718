@@ -8,6 +8,7 @@ import { HistoricoComponent } from './historico/historico.component';
 import { PresencasComponent } from './presencas/presencas.component';
 
 import { AuthService } from './providers/auth.service';
+import './menu/menu.component.js'
 
 export const router: Routes = [
   {

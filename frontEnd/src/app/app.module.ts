@@ -1,6 +1,7 @@
 // Core
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // Modules
 import { HttpModule } from '@angular/http';
@@ -42,6 +43,7 @@ import { PresencasComponent } from './presencas/presencas.component';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,

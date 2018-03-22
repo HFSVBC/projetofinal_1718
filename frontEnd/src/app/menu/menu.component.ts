@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 
 import { AuthService } from '../providers/auth.service';
 
+import '@angular/animations';
+
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
