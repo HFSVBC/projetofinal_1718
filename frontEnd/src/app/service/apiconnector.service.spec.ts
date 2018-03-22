@@ -1,15 +1,15 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { ApiconnectorService } from './apiconnector.service';
+import { APIConnectorService } from './apiconnector.service';
 
 describe('ApiconnectorService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [ApiconnectorService]
+      providers: [APIConnectorService]
     });
   });
 
-  it('should be created', inject([ApiconnectorService], (service: ApiconnectorService) => {
+  it('should be created', inject([APIConnectorService], (service: APIConnectorService) => {
     expect(service).toBeTruthy();
   }));
 });

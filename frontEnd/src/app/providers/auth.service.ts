@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate } from '@angular/router';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/take';
 import 'rxjs/add/observable/from';
 
-
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { Session } from 'protractor';
+import { APIConnectorService } from '../service/apiconnector.service';
+import { userInfo } from 'os';
 
 @Injectable()
 export class AuthService {
@@ -18,7 +19,8 @@ export class AuthService {
   private current;
   private token: String;
 
-  constructor(private _firebaseAuth: AngularFireAuth, private router: Router, private http: HttpClient) {
+  constructor(private _firebaseAuth: AngularFireAuth, private router: Router, private http: HttpClient,
+    private apiconnector: APIConnectorService) {
 
     this.user = _firebaseAuth.authState;
 
@@ -27,12 +29,41 @@ export class AuthService {
           this.current = user;
           console.log('User already logged in', this.current);
           console.log('current user', _firebaseAuth.auth.currentUser);
+
+          // Send info to backend that user just login
+          const httpOptions = apiconnector.httpOptions;
+          const url = apiconnector.loginPOST;
+          const user_info = this.current.providerData[0];
+          const data = {
+            name: user_info.displayName,
+            avatar: user_info.photoURL,
+            email: user_info.email,
+            uid: user_info.uid,
+          };
+
+          console.log('data', data);
+
+          this.http.post(url,data)
+          .subscribe(result => {
+            console.log(result);
+            console.log('fiz o pedido');
+          },
+          (err: HttpErrorResponse) => {
+            if (err.error instanceof Error) {
+                console.log('Client-side error occured.');
+            } else {
+                console.log('Server-side error occured.');
+            }
+          }
+          );
+
           this.router.navigateByUrl('/dashboard');
         } else {
           this.current = false;
         }
       }
     );
+
   }
 
   canActivate(): Observable<boolean> {
@@ -65,7 +96,7 @@ export class AuthService {
       // Handle Errors here.
       const errorCode = error.code;
       const errorMessage = error.message;
-      console.log('Something went wrong: ' + errorMessage + 'code' + errorCode);
+      console.log('Something went wrong: ' + errorMessage + ' code ' + errorCode);
     });
 
     });

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { AuthService } from '../providers/auth.service';
+import { APIConnectorService } from '../service/apiconnector.service';
 
 @Component({
   selector: 'app-login-page',
