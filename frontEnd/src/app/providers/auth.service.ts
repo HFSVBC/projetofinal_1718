@@ -34,12 +34,17 @@ export class AuthService {
           const httpOptions = apiconnector.httpOptions;
           const url = apiconnector.loginPOST;
           const user_info = this.current.providerData[0];
-          const data = {
-            name: user_info.displayName,
-            avatar: user_info.photoURL,
-            email: user_info.email,
-            uid: user_info.uid,
-          };
+          let data = new FormData();
+          data.append('name', user_info.displayName);
+          data.append('avatar', user_info.photoURL);
+          data.append('email', user_info.email);
+          data.append('uid', user_info.uid);
+          // const data = {
+          //   name: user_info.displayName,
+          //   avatar: user_info.photoURL,
+          //   email: user_info.email,
+          //   uid: user_info.uid,
+          // };
 
           console.log('data', data);
 

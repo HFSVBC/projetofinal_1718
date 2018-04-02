@@ -8,10 +8,11 @@ export class APIConnectorService {
 
   // private baseURL = 'http://localhost:8888/';
   private baseURL = 'https://cafcul.hugocurado.info/';
+  // private baseURL = 'https://d61f73da.ngrok.io/';
 
   httpOptions = {
     headers: new HttpHeaders().set(
-      'Content-Type', 'application/x-www-form-urlencoded'
+      'Content-Type', 'multipart/form-data'
     )
   };
 
