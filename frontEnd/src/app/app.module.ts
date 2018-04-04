@@ -16,6 +16,7 @@ import { AuthService } from './providers/auth.service';
 
 // Services
 import { APIConnectorService } from './service/apiconnector.service';
+import { CookieService } from 'angular2-cookie/services/cookies.service';
 
 // Routes
 import { routes } from './app.routes';
@@ -28,6 +29,8 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HistoricoComponent } from './historico/historico.component';
 import { PresencasComponent } from './presencas/presencas.component';
+import { AdminComponent } from './admin/admin.component';
+import { AdminService } from './providers/admin.service';
 
 
 @NgModule({
@@ -38,7 +41,8 @@ import { PresencasComponent } from './presencas/presencas.component';
     LoginPageComponent,
     DashboardComponent,
     HistoricoComponent,
-    PresencasComponent
+    PresencasComponent,
+    AdminComponent
   ],
   imports: [
     routes,
@@ -51,7 +55,9 @@ import { PresencasComponent } from './presencas/presencas.component';
   ],
   providers: [
     AuthService,
-    APIConnectorService
+    APIConnectorService,
+    CookieService,
+    AdminService
   ],
   bootstrap: [AppComponent]
 })

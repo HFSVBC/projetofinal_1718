@@ -37,6 +37,9 @@
             <li class="nav-item slide">
                 <a class="nav-link" routerLink="/presencas" routerLinkActive="active">Consultar Presenças</a>
             </li>
+            <li *ngIf="tipo=='0'" class="nav-item slide">
+              <a class="nav-link" routerLink="/admin" routerLinkActive="active">Admin</a>
+          </li>
         </ul>
     </div>
 </nav>

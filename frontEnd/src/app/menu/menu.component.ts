@@ -3,6 +3,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { Router } from '@angular/router';
 
 import { AuthService } from '../providers/auth.service';
+import { CookieService } from 'angular2-cookie/core';
 
 @Component({
   selector: 'app-menu',
@@ -14,9 +15,12 @@ export class MenuComponent implements OnInit {
   name;
   photo;
   private user;
+  tipo;
 
-  constructor(public authService: AuthService, public angularAuth: AngularFireAuth, private router: Router) {
+  constructor(public authService: AuthService, public angularAuth: AngularFireAuth, private router: Router,
+  private _cookieService: CookieService) {
     this.user = authService.getUser();
+    this.tipo = _cookieService.get('tipo');
   }
 
   ngOnInit() {

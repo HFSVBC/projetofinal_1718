@@ -12,6 +12,7 @@ import * as firebase from 'firebase/app';
 import { Session } from 'protractor';
 import { APIConnectorService } from '../service/apiconnector.service';
 import { userInfo } from 'os';
+import { CookieService } from 'angular2-cookie/core';
 
 @Injectable()
 export class AuthService {
@@ -20,7 +21,7 @@ export class AuthService {
   private token: String;
 
   constructor(private _firebaseAuth: AngularFireAuth, private router: Router, private http: HttpClient,
-    private apiconnector: APIConnectorService) {
+    private apiconnector: APIConnectorService, private _cookieService: CookieService) {
 
     this.user = _firebaseAuth.authState;
 
@@ -34,7 +35,7 @@ export class AuthService {
           const httpOptions = apiconnector.httpOptions;
           const url = apiconnector.loginPOST;
           const user_info = this.current.providerData[0];
-          let data = new FormData();
+          const data = new FormData();
           data.append('name', user_info.displayName);
           data.append('avatar', user_info.photoURL);
           data.append('email', user_info.email);
@@ -48,7 +49,7 @@ export class AuthService {
 
           console.log('data', data);
 
-          this.http.post(url,data)
+          this.http.post(url, data)
           .subscribe(result => {
             console.log(result);
             console.log('fiz o pedido');
@@ -61,7 +62,7 @@ export class AuthService {
             }
           }
           );
-
+          this._cookieService.put('tipo', '1');
           this.router.navigateByUrl('/dashboard');
         } else {
           this.current = false;
@@ -79,6 +80,8 @@ export class AuthService {
         if (!authenticated) {
           this.router.navigate([ '/login' ]);
         }
+        const tipo = this._cookieService.get('tipo');
+        console.log('tipo de user', tipo);
       });
   }
 
