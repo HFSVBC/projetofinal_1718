@@ -44,7 +44,7 @@ class UserLoader extends CI_Controller {
 		$this->form_validation->set_rules($config);
 		$this->form_validation->set_error_delimiters('', '');
 		if($this->form_validation->run() === true){
-			if($this->user_model->isRegistered($this->input->post("uid"))){
+			if($this->user_model->isRegistered($this->input->post("email"))===true){
 				$jsonConf = $this->loginHelper();
 			}else{
 				if($this->user_model->register()===true){
@@ -60,24 +60,37 @@ class UserLoader extends CI_Controller {
 			$jsonConf["description"] = "Method Not Allowed";
 			$jsonConf["data"] 		 = array(
 											'message'=>'POST has not passed the validation check.',
-											'errors' => validation_errors(),
-											'received' => json_encode($_POST)
+											'errors' => validation_errors()
 										);
 		}
 		jsonExporter($jsonConf);
 	}
 	private function loginHelper()
 	{
+		// verificar se ja se encontra logado
 		$jsonConf = array("code"=>null,"description"=>"","data"=>array());
-		$result = $this->user_model->login();
+		$result = $this->user_model->isLoggedIn($this->input->post("email"));
 		if($result[0]===true){
 			$jsonConf["code"]        = 200;
 			$jsonConf["description"] = "ok";
-			$jsonConf["data"] 		 = array('token' => $result[1]);
+			$jsonConf["data"] 		 = array(
+				'token' => $result[1][0],
+				'user_type' => $result[1][1]
+			);
 		}else{
-			$jsonConf["code"]        = 500;
-			$jsonConf["description"] = "Server Error";
-			$jsonConf["data"] 		 = array('message'=>'error adding user the system');
+			$result = $this->user_model->login();
+			if($result[0]===true){
+				$jsonConf["code"]        = 200;
+				$jsonConf["description"] = "ok";
+				$jsonConf["data"] 		 = array(
+					'token' => $result[1][0],
+					'user_type' => $this->user_model->getUserType($this->input->post("email"))
+				);
+			}else{
+				$jsonConf["code"]        = 500;
+				$jsonConf["description"] = "Server Error";
+				$jsonConf["data"] 		 = array('message'=>'error adding user the system');
+			}
 		}
 		return $jsonConf;
 	}

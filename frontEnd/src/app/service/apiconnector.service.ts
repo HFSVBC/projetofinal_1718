@@ -15,17 +15,11 @@ export class APIConnectorService {
   private baseURL = 'https://cafcul.hugocurado.info/';
   // private baseURL = 'https://d61f73da.ngrok.io/';
 
-  httpOptions = {
-    headers: new HttpHeaders().set(
-      'Content-Type', 'multipart/form-data'
-    )
-  };
-
   // USER Routes
   loginPOST = this.baseURL + 'user/login';
   logoutPOST = this.baseURL + 'user/logout';
   isloggedinPOST = this.baseURL + 'user/isloggedin';
-  registerPOST = this.baseURL + 'user/register';
+  // registerPOST = this.baseURL + 'user/register';
   existsPOST = this.baseURL + 'user/exists';
   retriveprofilePOST = this.baseURL + 'user/retriveprofile';
 
@@ -35,7 +29,6 @@ export class APIConnectorService {
   getDATA(URL: string) { }
 
   loginPost(user_info): Observable<any> {
-    const httpOptions = this.httpOptions;
     const url = this.loginPOST;
     const data = new FormData();
     data.append('name', user_info.displayName);

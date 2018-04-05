@@ -7,7 +7,7 @@
 	class User_model extends CI_Model{
 		public function login()
 		{
-			$googleUID 		= $this->db->escape($this->input->post('uid'));
+			$email 		= $this->db->escape($this->input->post('email'));
 			$token 			= $this->db->escape(bin2hex(openssl_random_pseudo_bytes(16)));
 			$timeOut 		= new DateTime();
 			$timeOut->add(new DateInterval('PT21600S'));
@@ -17,7 +17,7 @@
 			$sql = "INSERT INTO users_loggedIn (`user`, `token`, `timeOut`, `externalIP`)
 					SELECT users.id, $token, $timeOut, $userExternalIp
 					FROM users 
-					WHERE users.googleUID = $googleUID";
+					WHERE users.email = $email";
 
 			if($this->db->query($sql)){
 				return array(true, $token);
@@ -44,22 +44,54 @@
 				return false;
 			}
 		}
-		public function isRegistered($uid)
+		public function isRegistered($email)
 		{
-			$uid = $this->db->escape($uid);
+			$email = $this->db->escape($email);
 
-			$sql = "SELECT COUNT(id) AS count
+			$sql = "SELECT email
 					FROM users
-					WHERE googleUID = $uid";
+					WHERE email = $email";
 			
 			$query = $this->db->query($sql);
 			$row   = $query->row();
 
-			if($row->count == 1){
+			if(!empty($row)){
 				return true;
 			}else{
 				return false;
 			}
+		}
+		public function isLoggedIn($email)
+		{
+			$email = $this->db->escape($email);
+
+			$sql = "SELECT ul.token, uat.description
+					FROM users_loggedIn ul, users u, users_accountType uat
+					WHERE ul.user = u.id AND uat.id = u.account_type AND u.email = $email";
+
+			$query = $this->db->query($sql);
+			$row   = $query->row();
+			
+			if(!empty($row)){
+				return array(true, array($row->token, $row->description));
+			}else{
+				return array(false, '');
+			}
+		}
+		public function getUserType($email)
+		{
+			$email = $this->db->escape($email);
+
+			$sql = "SELECT description
+					FROM users_accountType
+					WHERE id = (SELECT account_type
+								FROM users
+								WHERE email=$email)";
+
+			$query = $this->db->query($sql);
+			$row   = $query->row();
+
+			return $row->description;
 		}
 		private function getLoggedInUserId()
 		{
