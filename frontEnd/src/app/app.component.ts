@@ -15,10 +15,9 @@ export class AppComponent implements OnInit {
 
   constructor(public router: Router,  private authService: AuthService) {
     this.user = authService.getUser();
-    console.log('user cenas', this.user);
   }
 
   ngOnInit() {
-
+    this.user = this.authService.getUser();
   }
 }

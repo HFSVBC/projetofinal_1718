@@ -31,6 +31,10 @@ import { HistoricoComponent } from './historico/historico.component';
 import { PresencasComponent } from './presencas/presencas.component';
 import { AdminComponent } from './admin/admin.component';
 import { AdminService } from './providers/admin.service';
+import { SecurityService } from './providers/security.service';
+import { ProfessorService } from './providers/professor.service';
+import { AllService } from './providers/all.service';
+import { EspacosComponent } from './espacos/espacos.component';
 
 
 @NgModule({
@@ -42,7 +46,8 @@ import { AdminService } from './providers/admin.service';
     DashboardComponent,
     HistoricoComponent,
     PresencasComponent,
-    AdminComponent
+    AdminComponent,
+    EspacosComponent
   ],
   imports: [
     routes,
@@ -57,7 +62,10 @@ import { AdminService } from './providers/admin.service';
     AuthService,
     APIConnectorService,
     CookieService,
-    AdminService
+    AdminService,
+    SecurityService,
+    ProfessorService,
+    AllService
   ],
   bootstrap: [AppComponent]
 })

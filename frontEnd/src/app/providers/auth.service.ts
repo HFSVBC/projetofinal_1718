@@ -24,65 +24,36 @@ export class AuthService {
     private apiconnector: APIConnectorService, private _cookieService: CookieService) {
 
     this.user = _firebaseAuth.authState;
+    console.log(this.user);
 
     this.user.subscribe(user => {
         if (user) {
           this.current = user;
-          console.log('User already logged in', this.current);
-          console.log('current user', _firebaseAuth.auth.currentUser);
-
-          // Send info to backend that user just login
-          const httpOptions = apiconnector.httpOptions;
-          const url = apiconnector.loginPOST;
+          console.log('User was already registed', this.current);
+          // Send info to backend that a user just login
           const user_info = this.current.providerData[0];
-          const data = new FormData();
-          data.append('name', user_info.displayName);
-          data.append('avatar', user_info.photoURL);
-          data.append('email', user_info.email);
-          data.append('uid', user_info.uid);
-          // const data = {
-          //   name: user_info.displayName,
-          //   avatar: user_info.photoURL,
-          //   email: user_info.email,
-          //   uid: user_info.uid,
-          // };
 
-          console.log('data', data);
+          this.apiconnector.loginPost(user_info)
+          .subscribe(res => {
+            console.log('cenas', res);
+            const t = res['token'];
+            console.log('t', t);
+          // Get user type from database
+          // this._cookieService.put('tipo', '10');
+          // this.router.navigateByUrl('/dashboard');
+          });
 
-          this.http.post(url, data)
-          .subscribe(result => {
-            console.log(result);
-            console.log('fiz o pedido');
-          },
-          (err: HttpErrorResponse) => {
-            if (err.error instanceof Error) {
-                console.log('Client-side error occured.');
-            } else {
-                console.log('Server-side error occured.');
-            }
-          }
-          );
-          this._cookieService.put('tipo', '1');
+          // Get user type from database
+          this._cookieService.put('tipo', '10');
+
           this.router.navigateByUrl('/dashboard');
         } else {
+          console.log('User has to register');
           this.current = false;
         }
       }
     );
 
-  }
-
-  canActivate(): Observable<boolean> {
-    return Observable.from(this._firebaseAuth.authState)
-      .take(1)
-      .map(state => !!state)
-      .do(authenticated => {
-        if (!authenticated) {
-          this.router.navigate([ '/login' ]);
-        }
-        const tipo = this._cookieService.get('tipo');
-        console.log('tipo de user', tipo);
-      });
   }
 
   signInWithGoogle() {
@@ -91,14 +62,21 @@ export class AuthService {
     .then(function() {
 
       const provider = new firebase.auth.GoogleAuthProvider();
-    firebase.auth().useDeviceLanguage();
+      firebase.auth().useDeviceLanguage();
 
-    firebase.auth().signInWithPopup(provider)
-    .then(result => {
-      this.token = result.credential.accessToken;
-      this.current = result.user;
-      console.log('User ' + this.current.displayName + 'logged in! boa', this.token);
-      this.router.navigateByUrl('/dashboard');
+      firebase.auth().signInWithPopup(provider)
+      .then(result => {
+        this.token = result.credential.accessToken;
+        this.current = result.user;
+        console.log('New user just signin');
+
+        // Send info to backend that user just login
+        const user_info = this.current.providerData[0];
+        this.apiconnector.loginPost(user_info);
+        // Get user type from database
+        // return da funcao loginPost TODO
+        this._cookieService.put('tipo', '10');
+        this.router.navigateByUrl('/dashboard');
     })
     .catch(error => {
       // Handle Errors here.
@@ -109,65 +87,6 @@ export class AuthService {
 
     });
 
-/*
-    firebase.auth().signInWithRedirect(provider)
-    .then(result => {
-      if (result.credential) {
-        const token = result.credential.accessToken;
-        console.log('OKAY');
-      }
-      this.userDetails = result.user;
-      console.log('User ' + this.userDetails.displayName + 'logged in! boa', this.token);
-      this.router.navigateByUrl('/');
-    })
-    .catch(error => {
-      // Handle Errors here.
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log('Something went wrong: ' + errorMessage + 'code' + errorCode);
-    });
-*/
-  }
-
-  loginWithGoogle() {
-
-    firebase.auth().useDeviceLanguage();
-
-    this._firebaseAuth.auth.signInWithPopup(
-      new firebase.auth.GoogleAuthProvider()).then(res => {
-        const user_info =  res.user.providerData[0];
-        console.log('User just logged in by google ', res.user.providerData[0].displayName);
-
-        // POST INFO
-        const data = {
-          displayName: user_info.displayName,
-          photoURL: user_info.photoURL,
-          email: user_info.email,
-          uid: user_info.uid,
-          withCredentials: true
-        };
-        const baseURL = 'http://localhost:8000';
-        this.http.post(baseURL, data).subscribe(
-          result => {
-            console.log(result);
-            console.log('fiz o pedido');
-          },
-          (err: HttpErrorResponse) => {
-            if (err.error instanceof Error) {
-              console.log('Client-side error occured.');
-            } else {
-              console.log('Server-side error occured.');
-            }
-          }
-        );
-        // END POST
-        this.current = res.user;
-        this.router.navigateByUrl('/');
-        })
-      .catch((err) => {
-        const error = err.message;
-        console.log('Something went wrong: ' + error);
-      });
   }
 
   isLoggedIn() {
@@ -177,6 +96,7 @@ export class AuthService {
   logout() {
     this.current = null;
     this._firebaseAuth.auth.signOut();
+    this._cookieService.removeAll();
     this.router.navigateByUrl('/login');
   }
 
