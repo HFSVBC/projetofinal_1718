@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CookieService } from 'angular2-cookie/core';
 
 @Component({
   selector: 'app-espacos',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EspacosComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _cookieService: CookieService) {
+    _cookieService.put('page', '/espacos');
+  }
 
   ngOnInit() {
   }

@@ -7,6 +7,7 @@ import { environment } from './../environments/environment';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { DataTablesModule } from 'angular-datatables';
+import { FormsModule } from '@angular/forms';
 
 // OAuth
 import { AngularFireModule } from 'angularfire2';
@@ -56,7 +57,8 @@ import { EspacosComponent } from './espacos/espacos.component';
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
-    DataTablesModule
+    DataTablesModule,
+    FormsModule
   ],
   providers: [
     AuthService,

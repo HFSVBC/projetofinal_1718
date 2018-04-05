@@ -1,4 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { CookieService } from 'angular2-cookie/core';
+
+class SearchOptions {
+  aula: string;
+  sala: string;
+  aluno: string;
+  data_inicio: Date;
+  data_fim: Date;
+}
 
 @Component({
   selector: 'app-presencas',
@@ -7,9 +16,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PresencasComponent implements OnInit {
 
-  constructor() { }
+  model;
+  aulas = [];
+  salas = [];
+
+  constructor(private _cookieService: CookieService) {
+    _cookieService.put('page', '/presencas');
+    this.model = new SearchOptions();
+  }
 
   ngOnInit() {
+  }
+
+  onSubmit() {
+    console.log('Form Data', this.model);
   }
 
 }

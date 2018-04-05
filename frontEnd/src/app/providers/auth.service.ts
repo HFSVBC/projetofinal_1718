@@ -46,7 +46,12 @@ export class AuthService {
           // Get user type from database
           this._cookieService.put('tipo', '10');
 
-          this.router.navigateByUrl('/dashboard');
+          const page = _cookieService.get('page');
+          if (page) {
+            this.router.navigateByUrl(page);
+          } else {
+            this.router.navigateByUrl('/dashboard');
+          }
         } else {
           console.log('User has to register');
           this.current = false;

@@ -24,7 +24,6 @@ export class ProfessorService implements CanActivate {
         }
 
         const tipo = this._cookieService.get('tipo');
-        console.log('tipo de user', tipo);
 
         if (tipo === '2' || tipo === '10') {
           return true;
