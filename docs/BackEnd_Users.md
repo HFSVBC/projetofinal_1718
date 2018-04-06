@@ -11,6 +11,7 @@ avatar => User's avatar provided by Google => String
 It returns a JSON with the following configuration:
 ```
 {
+    
     "user_agent": (String) Client user agent,
     "client_ip": (String) Client external ip,
     "url": (String) Client accessed route,
