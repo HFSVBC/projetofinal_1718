@@ -37,11 +37,11 @@ export class AuthService {
 
   }
 
-  signInWithGoogle() {
+  signInWithGoogle(): any {
 
     // firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
     // .then(function() {
-
+      let cenas;
       const provider = new firebase.auth.GoogleAuthProvider();
       firebase.auth().useDeviceLanguage();
 
@@ -56,19 +56,22 @@ export class AuthService {
         this.apiconnector.loginPost(user_info)
         .subscribe(res => {
           // Process code
-          console.log('cenas', res);
           const code = res['code'];
 
           if (code !== 200) {
+            cenas = false;
             this.router.navigateByUrl('/login');
-            // return false;
           } else {
+            cenas = true;
             const tipo = this.getTipo(res['data']['user_type']);
             this._cookieService.put('tipo', tipo);
             this._cookieService.put('token', res['data']['token']);
             this.router.navigateByUrl('/dashboard');
           }
         });
+        // .then(e => {
+        //   return cenas;
+        // });
     })
     .catch(error => {
       // Handle Errors here.
@@ -100,10 +103,17 @@ export class AuthService {
   }
 
   logout() {
-    this.current = null;
-    this._firebaseAuth.auth.signOut();
-    this._cookieService.removeAll();
-    this.router.navigateByUrl('/login');
+    const user_info = {
+      userTokenId : this._cookieService.get('token')
+    };
+    this.apiconnector.loginPost(user_info)
+        .subscribe(res => {
+          console.log('User logout', res);
+          this.current = null;
+          this._firebaseAuth.auth.signOut();
+          this._cookieService.removeAll();
+          this.router.navigateByUrl('/login');
+        });
   }
 
   getUser() {

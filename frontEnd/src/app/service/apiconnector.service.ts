@@ -36,7 +36,21 @@ export class APIConnectorService {
     data.append('email', user_info.email);
     data.append('uid', user_info.uid);
 
-    // Verificar a resposta do servidor
+    return this.http.post(url, data)
+    .map(res => res,
+    (err: HttpErrorResponse) => {
+      if (err.error instanceof Error) {
+        console.log('Client-side error occured.');
+      } else {
+        console.log('Server-side error occured.');
+      }
+    });
+  }
+
+  logoutPost(user_info): Observable<any> {
+    const url = this.logoutPOST;
+    const data = new FormData();
+    data.append('userTokenId', user_info.userTokenId);
 
     return this.http.post(url, data)
     .map(res => res,
@@ -46,9 +60,6 @@ export class APIConnectorService {
       } else {
         console.log('Server-side error occured.');
       }
-    }
-    );
-
+    });
   }
-
 }
