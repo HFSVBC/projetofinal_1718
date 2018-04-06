@@ -21,7 +21,6 @@ export class PresencasComponent implements OnInit {
   salas = [];
 
   constructor(private _cookieService: CookieService) {
-    _cookieService.put('page', '/presencas');
     this.model = new SearchOptions();
   }
 

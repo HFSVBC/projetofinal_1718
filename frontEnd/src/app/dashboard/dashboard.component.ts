@@ -15,7 +15,6 @@ export class DashboardComponent implements OnInit {
 
   constructor(public authService: AuthService, private router: Router, private _cookieService: CookieService) {
     this.user = authService.getUser();
-    _cookieService.put('page', '/dashboard');
   }
 
   ngOnInit() {

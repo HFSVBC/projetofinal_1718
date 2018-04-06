@@ -11,8 +11,11 @@ import { APIConnectorService } from '../service/apiconnector.service';
   styleUrls: ['./login-page.component.css']
 })
 export class LoginPageComponent implements OnInit {
+  errorLogin;
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router) {
+    this.errorLogin = false;
+  }
 
   ngOnInit() {
 
@@ -20,7 +23,6 @@ export class LoginPageComponent implements OnInit {
 
   login() {
     this.authService.signInWithGoogle();
-    // this.authService.loginWithGoogle();
   }
 
 }

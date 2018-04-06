@@ -9,7 +9,6 @@ import { CookieService } from 'angular2-cookie/core';
 export class EspacosComponent implements OnInit {
 
   constructor(private _cookieService: CookieService) {
-    _cookieService.put('page', '/espacos');
   }
 
   ngOnInit() {

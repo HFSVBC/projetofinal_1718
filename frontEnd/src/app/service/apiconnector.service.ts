@@ -12,8 +12,8 @@ export class APIConnectorService {
   constructor(private http: HttpClient) { }
 
   // private baseURL = 'http://localhost:8888/';
-  private baseURL = 'https://cafcul.hugocurado.info/';
-  // private baseURL = 'https://d61f73da.ngrok.io/';
+   private baseURL = 'https://cafcul.hugocurado.info/';
+  // private baseURL = 'https://0a024cd4.ngrok.io/';
 
   // USER Routes
   loginPOST = this.baseURL + 'user/login';
@@ -36,8 +36,10 @@ export class APIConnectorService {
     data.append('email', user_info.email);
     data.append('uid', user_info.uid);
 
+    // Verificar a resposta do servidor
+
     return this.http.post(url, data)
-    .map(res => res['data'],
+    .map(res => res,
     (err: HttpErrorResponse) => {
       if (err.error instanceof Error) {
         console.log('Client-side error occured.');

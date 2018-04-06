@@ -24,64 +24,51 @@ export class AuthService {
     private apiconnector: APIConnectorService, private _cookieService: CookieService) {
 
     this.user = _firebaseAuth.authState;
-    console.log(this.user);
+    console.log('Auth state', _firebaseAuth.authState);
 
     this.user.subscribe(user => {
-        if (user) {
-          this.current = user;
-          console.log('User was already registed', this.current);
-          // Send info to backend that a user just login
-          const user_info = this.current.providerData[0];
-
-          this.apiconnector.loginPost(user_info)
-          .subscribe(res => {
-            console.log('cenas', res);
-            const t = res['token'];
-            console.log('t', t);
-          // Get user type from database
-          // this._cookieService.put('tipo', '10');
-          // this.router.navigateByUrl('/dashboard');
-          });
-
-          // Get user type from database
-          this._cookieService.put('tipo', '10');
-
-          const page = _cookieService.get('page');
-          if (page) {
-            this.router.navigateByUrl(page);
-          } else {
-            this.router.navigateByUrl('/dashboard');
-          }
-        } else {
-          console.log('User has to register');
-          this.current = false;
-        }
+      if (user) {
+        this.current = user;
+      } else {
+        console.log('User has to register');
+        this.current = false;
       }
-    );
+    });
 
   }
 
   signInWithGoogle() {
 
-    firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
-    .then(function() {
+    // firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
+    // .then(function() {
 
       const provider = new firebase.auth.GoogleAuthProvider();
       firebase.auth().useDeviceLanguage();
 
       firebase.auth().signInWithPopup(provider)
       .then(result => {
-        this.token = result.credential.accessToken;
         this.current = result.user;
-        console.log('New user just signin');
+        console.log('New user just signin', this.current);
 
         // Send info to backend that user just login
         const user_info = this.current.providerData[0];
-        this.apiconnector.loginPost(user_info);
-        // Get user type from database
-        // return da funcao loginPost TODO
-        this._cookieService.put('tipo', '10');
-        this.router.navigateByUrl('/dashboard');
+
+        this.apiconnector.loginPost(user_info)
+        .subscribe(res => {
+          // Process code
+          console.log('cenas', res);
+          const code = res['code'];
+
+          if (code !== 200) {
+            this.router.navigateByUrl('/login');
+            // return false;
+          } else {
+            const tipo = this.getTipo(res['data']['user_type']);
+            this._cookieService.put('tipo', tipo);
+            this._cookieService.put('token', res['data']['token']);
+            this.router.navigateByUrl('/dashboard');
+          }
+        });
     })
     .catch(error => {
       // Handle Errors here.
@@ -90,8 +77,22 @@ export class AuthService {
       console.log('Something went wrong: ' + errorMessage + ' code ' + errorCode);
     });
 
-    });
+  // });
 
+  }
+
+  getTipo(t) {
+    if (t === 'student') {
+      return '0';
+    } else if (t === 'teacher') {
+      return '1';
+    } else if (t === 'staff member') {
+      return '2';
+    } else if (t === 'security guard') {
+      return '3';
+    } else if (t === 'admin') {
+      return '10';
+    }
   }
 
   isLoggedIn() {

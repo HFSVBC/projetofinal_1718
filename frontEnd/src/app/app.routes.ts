@@ -26,7 +26,7 @@ import { AllService } from './providers/all.service';
 export const router: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'dashboard',
     pathMatch: 'full',
     canActivate: [AuthService]
   },

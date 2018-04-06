@@ -20,7 +20,6 @@ export class MenuComponent implements OnInit {
   constructor(public authService: AuthService, public angularAuth: AngularFireAuth, private router: Router,
   private _cookieService: CookieService) {
     this.user = authService.getUser();
-    this.tipo = _cookieService.get('tipo');
   }
 
   ngOnInit() {

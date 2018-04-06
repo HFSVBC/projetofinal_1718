@@ -48,6 +48,7 @@ export class HistoricoComponent implements OnInit {
     'C7' : ['1', '2'],
     'C8' : ['1', '2', '3', '4', '5'],
     };
+
   edificios_pisos_salas = {
     'C1.1' : ['1', '2', '3', '4', '5'],
     'C1.2' : ['1', '2', '3', '4', '5'],
@@ -87,7 +88,6 @@ export class HistoricoComponent implements OnInit {
 
   constructor(public authService: AuthService, private router: Router, private _cookieService: CookieService) {
     // this.model = new SearchOptions();
-    _cookieService.put('page', '/historico');
   }
 
     // Rebuild the product list every time the product type changes.
