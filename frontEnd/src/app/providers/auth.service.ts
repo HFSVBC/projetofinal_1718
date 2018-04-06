@@ -106,7 +106,7 @@ export class AuthService {
     const user_info = {
       userTokenId : this._cookieService.get('token')
     };
-    this.apiconnector.loginPost(user_info)
+    this.apiconnector.logoutPost(user_info)
         .subscribe(res => {
           console.log('User logout', res);
           this.current = null;
