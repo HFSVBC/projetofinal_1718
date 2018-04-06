@@ -117,6 +117,7 @@ class UserLoader extends CI_Controller {
 			if($this->user_model->logOut()===true){
 				$jsonConf["code"]        = 200;
 				$jsonConf["description"] = "ok";
+				$jsonConf["data"] 		 = array();
 			}else{
 				$jsonConf["code"]        = 500;
 				$jsonConf["description"] = "Server Error";

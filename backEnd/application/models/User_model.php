@@ -35,7 +35,7 @@
 		// adds user to the users_loggedOut table
 		public function logOut()
 		{
-			$token = $this->db->escape($this->input->post('userTokenId'));
+			$token = $this->input->post('userTokenId');
 
 			$this->db->trans_start();
 			$sql = "INSERT INTO users_loggedOut (user, login_timestamp, externalIP)
