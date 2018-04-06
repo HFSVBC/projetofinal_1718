@@ -8,10 +8,9 @@ name => User's name => String
 email => User's email => String
 avatar => User's avatar provided by Google => String
 ```
-It returns a JSON with the following configuration:
+It returns a JSON with the following configuration for a succesfull response:
 ```
 {
-    
     "user_agent": (String) Client user agent,
     "client_ip": (String) Client external ip,
     "url": (String) Client accessed route,
@@ -26,3 +25,5 @@ It returns a JSON with the following configuration:
 ```
 ## LogOut
 Accessed by the route ```https://cafcul.hugocurado.info/user/logout```.
+
+## UserTypeChange

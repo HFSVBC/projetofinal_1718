@@ -56,12 +56,12 @@ $route['history_search/student'] = 'History/searchStudent'; #POST FIELDS: userTo
 // CONSULTA DE QUEM ESTA NUM ESPAÇO
 
 // UTILIZADOR
-$route['user/login']          = 'UserLoader/logIn'; // registers user if not already registered | {token => String, user_type => String}
-$route['user/logout']         = 'UserLoader/logOut'; // logs user out
+$route['user/login']          = 'UserLoader/logIn'; // [20] registers user if not already registered | {token => String, user_type => String}
+$route['user/logout']         = 'UserLoader/logOut'; // [20] logs user out
 // $route['user/isloggedin']     = 'UserLoader/isLoggedIn';
 // $route['user/register']       = 'UserLoader/register';
 // $route['user/exists']         = 'UserLoader/exists';
-// $route['user/retriveprofile'] = 'UserLoader/profile';
+$route['user/retriveprofile'] = 'UserLoader/getUserProfile'; // [20, 30, 10]
 // ROTAS GERAIS
 $route['default_controller'] = 'NotAuthorized';
 $route['404_override'] = '';

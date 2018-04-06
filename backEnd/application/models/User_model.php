@@ -13,7 +13,7 @@
 		// user login method -> adds user to the users_loggedIn table
 		public function login()
 		{
-			$email 		= $this->db->escape($this->input->post('email'));
+			$email 			= $this->db->escape($this->input->post('email'));
 			$token 			= $this->db->escape(bin2hex(openssl_random_pseudo_bytes(16)));
 			$timeOut 		= new DateTime();
 			$timeOut->add(new DateInterval('PT21600S'));
@@ -75,6 +75,24 @@
 				return false;
 			}
 		}
+		public function getProfileData()
+		{
+			$email = $this->db->escape($this->input->post('userEmail'));
+
+			$sql = "SELECT u.googleUID, u.name, u.email, u.avatar, uat.description
+					FROM users u, users_accountType uat
+					WHERE u.account_type = uat.id AND u.email = $email";
+
+			$query = $this->db->query($sql);
+			$row   = $query->row();
+			
+			if(!empty($row)){
+				return array(true, $row);
+			}else{
+				return array(false, '');
+			}
+		}
+		// -------------EXTRA Aux functions
 		public function isLoggedIn($uid)
 		{
 			$uid = $this->db->escape($uid);
@@ -123,6 +141,54 @@
 			$row   = $query->row();
 
 			return $row->description;
+		}
+		// ------------ SUPPORT for user_helper
+		// checks if a user is still loggedin requires the user token
+		public function userLoggedin($token)
+		{
+			$token = $this->db->escape($token);
+
+			$sql = "SELECT token 
+					FROM users_loggedIn 
+					WHERE `timeOut` > CURRENT_TIMESTAMP AND token=$token";
+
+			$query = $this->db->query($sql);
+			$row   = $query->row();
+
+			if(!empty($row)){
+				return true;
+			}else{
+				return false;
+			}
+		}
+		// generates a new token for the user and postpones login time out for 6 hours
+		public function generateNewToken($token)
+		{
+			$newToken = $this->db->escape(bin2hex(openssl_random_pseudo_bytes(16)));
+			$timeOut  = new DateTime();
+			$timeOut->add(new DateInterval('PT21600S'));
+			$timeOut  = $this->db->escape($timeOut->format('Y-m-d H:i:s'));
+
+			$sql = "UPDATE users_loggedIn
+					SET token=$newToken, `timeOut`=$timeOut
+					WHERE token=$token";
+
+			if($this->db->query($sql)){
+				return array(true, $newToken);
+			}else{
+				return array(false, '');
+			}
+		}
+		public function checksRouteAccess($sql)
+		{
+			$query = $this->db->query($sql);
+			$row   = $query->row();
+
+			if(!empty($row)){
+				return true;
+			}else{
+				return false;
+			}
 		}
 	}
 ?>
