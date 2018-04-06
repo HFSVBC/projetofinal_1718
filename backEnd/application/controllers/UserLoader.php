@@ -154,7 +154,7 @@ class UserLoader extends CI_Controller {
 		$this->form_validation->set_error_delimiters('', '');
 		if($this->form_validation->run() === true){
 			if(isUserLoggedIn($this->input->post('token'))===true){
-				$token = $this->input->post('userTokenId');
+				$token = $this->db->escape($this->input->post('userTokenId'));
 				$email = $this->db->escape($this->input->post('userEmail'));
 				$sql = "SELECT *
 						FROM conf_routesAccess
