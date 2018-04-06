@@ -28,10 +28,6 @@ function builder($arrayToAdd)
         "url" => base_url(uri_string()),
         "request_date" => date(DATE_W3C, time())
     );
-    // header('Access-Control-Allow-Origin: *');
-	// header("Access-Control-Allow-Methods: GET, POST");
-	// header("Access-Control-Allow-Headers: Content-Type");
-    // $CI->output->set_content_type('application/x-www-form-urlencoded');
     return array_merge($out_array, $arrayToAdd);
 }
 ?>
