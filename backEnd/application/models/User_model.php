@@ -2,9 +2,15 @@
 	/**
 	* User Model
 	* includes: 
-	*	- user registration
+	*	- login -> array(Boolean, token(String))
+	*	- logOut -> Boolean
+	*	- register -> Boolean
+	*	- isLoggedIn -> array(Boolean, array(token(String), description(String)))
+	*	- isRegistered -> Boolean
+	*	_ getUserType -> String
 	*/
 	class User_model extends CI_Model{
+		// user login method -> adds user to the users_loggedIn table
 		public function login()
 		{
 			$email 		= $this->db->escape($this->input->post('email'));
@@ -25,6 +31,31 @@
 				return array(false, '');
 			}
 		}
+		// user logout method -> removes user from the users_loggedIn table and 
+		// adds user to the users_loggedOut table
+		public function logOut()
+		{
+			$token = $this->db->escape($this->input->post('userTokenId'));
+
+			$this->db->trans_start();
+			$sql = "INSERT INTO users_loggedOut (user, login_timestamp, externalIP)
+					VALUES (
+						(SELECT user FROM users_loggedIn WHERE token=$token),
+						(SELECT `timestamp` FROM users_loggedIn WHERE token=$token),
+						(SELECT externalIP FROM users_loggedIn WHERE token=$token))";
+			$this->db->query($sql);
+			$sql = "DELETE FROM users_loggedIn
+					WHERE token=$token";
+			$this->db->query($sql);
+			$this->db->trans_complete();
+
+			if ($this->db->trans_status() === FALSE)
+			{
+				return false;
+			}else{
+				return true;
+			}
+		}	
 		public function register()
 		{
 			$googleUID = $this->db->escape($this->input->post('uid'));
@@ -44,30 +75,13 @@
 				return false;
 			}
 		}
-		public function isRegistered($email)
+		public function isLoggedIn($uid)
 		{
-			$email = $this->db->escape($email);
-
-			$sql = "SELECT email
-					FROM users
-					WHERE email = $email";
-			
-			$query = $this->db->query($sql);
-			$row   = $query->row();
-
-			if(!empty($row)){
-				return true;
-			}else{
-				return false;
-			}
-		}
-		public function isLoggedIn($email)
-		{
-			$email = $this->db->escape($email);
+			$uid = $this->db->escape($uid);
 
 			$sql = "SELECT ul.token, uat.description
 					FROM users_loggedIn ul, users u, users_accountType uat
-					WHERE ul.user = u.id AND uat.id = u.account_type AND u.email = $email";
+					WHERE ul.user = u.id AND uat.id = u.account_type AND u.googleUID = $uid";
 
 			$query = $this->db->query($sql);
 			$row   = $query->row();
@@ -78,52 +92,37 @@
 				return array(false, '');
 			}
 		}
-		public function getUserType($email)
+		public function isRegistered($uid)
 		{
-			$email = $this->db->escape($email);
+			$uid = $this->db->escape($uid);
+
+			$sql = "SELECT email
+					FROM users
+					WHERE googleUID = $uid";
+			
+			$query = $this->db->query($sql);
+			$row   = $query->row();
+
+			if(!empty($row)){
+				return true;
+			}else{
+				return false;
+			}
+		}
+		public function getUserType($uid)
+		{
+			$uid = $this->db->escape($uid);
 
 			$sql = "SELECT description
 					FROM users_accountType
 					WHERE id = (SELECT account_type
 								FROM users
-								WHERE email=$email)";
+								WHERE googleUID=$uid)";
 
 			$query = $this->db->query($sql);
 			$row   = $query->row();
 
 			return $row->description;
-		}
-		private function getLoggedInUserId()
-		{
-			$userTokenId = $this->db->escape($this->input->post('userTokenId'));
-
-			$sql = "SELECT `user`
-					FROM users_loggedIn
-					WHERE token = $userTokenId";
-
-			$query = $this->db->query($sql);
-			$row   = $query->row();
-			if($query & isset($row)){
-				return array(true, $row->user);
-			}else{
-				return array(false, "");
-			}
-		}
-		private function getUserProfile($userId)
-		{
-			$userId = $this->db->escape($userId);
-
-			$sql = "SELECT `name`, `email`, `avatar`, `account_type`
-					FROM users
-					WHERE id = $userId";
-			
-			$query = $this->db->query($sql);
-			$row   = $query->row();
-			if (isset($row)){
-				return array(true, $row);
-			}else{
-				return array(false, '');
-			}
 		}
 	}
 ?>

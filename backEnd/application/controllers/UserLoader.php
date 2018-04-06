@@ -1,7 +1,11 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-//try to recycle code as much as possible
-// * 400 & 200 codes to much code repetition 
+/*
+ * User Loader controller
+ * Available methods:
+ * 	- logIn -> registers user if not already registered in db, RETURNS user first token and user type
+ * 	- logOut -> logs user out and adds user to logout table (for logging)
+ */
 class UserLoader extends CI_Controller {
 
 	public function __construct($config = 'rest')
@@ -44,7 +48,7 @@ class UserLoader extends CI_Controller {
 		$this->form_validation->set_rules($config);
 		$this->form_validation->set_error_delimiters('', '');
 		if($this->form_validation->run() === true){
-			if($this->user_model->isRegistered($this->input->post("email"))===true){
+			if($this->user_model->isRegistered($this->input->post("uid"))===true){
 				$jsonConf = $this->loginHelper();
 			}else{
 				if($this->user_model->register()===true){
@@ -65,11 +69,12 @@ class UserLoader extends CI_Controller {
 		}
 		jsonExporter($jsonConf);
 	}
+	// login's user in the database and generates ser first token
 	private function loginHelper()
 	{
 		// verificar se ja se encontra logado
 		$jsonConf = array("code"=>null,"description"=>"","data"=>array());
-		$result = $this->user_model->isLoggedIn($this->input->post("email"));
+		$result = $this->user_model->isLoggedIn($this->input->post("uid"));
 		if($result[0]===true){
 			$jsonConf["code"]        = 200;
 			$jsonConf["description"] = "ok";
@@ -83,8 +88,8 @@ class UserLoader extends CI_Controller {
 				$jsonConf["code"]        = 200;
 				$jsonConf["description"] = "ok";
 				$jsonConf["data"] 		 = array(
-					'token' => $result[1][0],
-					'user_type' => $this->user_model->getUserType($this->input->post("email"))
+					'token' => $result[1],
+					'user_type' => $this->user_model->getUserType($this->input->post("uid"))
 				);
 			}else{
 				$jsonConf["code"]        = 500;
@@ -109,9 +114,14 @@ class UserLoader extends CI_Controller {
 		$this->form_validation->set_rules($config);
 		$this->form_validation->set_error_delimiters('', '');
 		if($this->form_validation->run() === true){
-			$jsonConf["code"]        = 200;
-			$jsonConf["description"] = "ok";
-			$jsonConf["data"] 		 = array('token' => $result[1]);
+			if($this->user_model->logOut()===true){
+				$jsonConf["code"]        = 200;
+				$jsonConf["description"] = "ok";
+			}else{
+				$jsonConf["code"]        = 500;
+				$jsonConf["description"] = "Server Error";
+				$jsonConf["data"] 		 = array('message'=>'error completing logout process');
+			}
 		}else{
 			$jsonConf["code"]        = 405;
 			$jsonConf["description"] = "Method Not Allowed";
@@ -121,186 +131,6 @@ class UserLoader extends CI_Controller {
 										);
 		}
 		jsonExporter($jsonConf);
-	}
-	// add the necessary fields for user registration
-	// registers user in the database 
-	// chcek how to protect the route (one way could be for it to be verified by an admin)
-	// public function register() 
-	// {
-	// 	$config = array(
-	// 		array(
-	// 				'field' => 'uid',
-	// 				'label' => "User's UID",
-	// 				'rules' => 'trim|integer|required'
-	// 		),
-	// 		array(
-	// 				'field' => 'name',
-	// 				'label' => "User's Name",
-	// 				'rules' => 'trim|required'
-	// 		),
-	// 		array(
-	// 				'field' => 'email',
-	// 				'label' => "User's e-mail",
-	// 				'rules' => 'trim|required'
-	// 		),
-	// 		array(
-	// 				'field' => 'avatar',
-	// 				'label' => "User's Avatar",
-	// 				'rules' => 'trim|required'
-	// 		),
-	// 		array(
-	// 				'field' => 'type',
-	// 				'label' => "User's Account Type",
-	// 				'rules' => 'trim|integer|required'
-	// 		)
-	// 	);
-	// 	$this->form_validation->set_rules($config);
-	// 	$this->form_validation->set_error_delimiters('', '');
-	// 	if($this->form_validation->run() === true){
-	// 		if($this->user_model->register() === true){
-	// 			echo json_encode(
-	// 				array_merge(
-	// 					displayError('ok', 200), 
-	// 					array("data" => array('message'=>'user successfully added to the system'))
-	// 				)
-	// 			);
-	// 		}else{
-	// 			echo json_encode(
-	// 				array_merge(
-	// 					displayError('Server Error', 500), 
-	// 					array("data" => array('message'=>'error adding user the system'))
-	// 				)
-	// 			);
-	// 		}
-	// 	}else{
-	// 		echo json_encode(
-	// 			array_merge(
-	// 				displayError('Method Not Allowed', 405), 
-	// 				array(
-	// 					'message'=>'POST has not passed the validation check.',
-	// 					'errors' => validation_errors(),
-	// 				)
-	// 			)
-	// 		);
-	// 	}
-
-	// }
-	// checks if session is still valid. if not user is logged out. 
-	// returns true for still active session & false for non active session
-	public function isLoggedIn() 
-	{
-		$config = array(
-			array(
-					'field' => 'userTokenId',
-					'label' => "User's Token",
-					'rules' => 'trim|required'
-			)
-		);
-		$this->form_validation->set_rules($config);
-		$this->form_validation->set_error_delimiters('', '');
-		if($this->form_validation->run() === true){
-			echo json_encode(
-				array_merge(
-					displayError('ok', 200), 
-					array("data" => array())
-				)
-			);
-		}else{
-			echo json_encode(
-				array_merge(
-					displayError('Method Not Allowed', 405), 
-					array(
-						'message'=>'POST has not passed the validation check.',
-						'errors' => validation_errors(),
-					)
-				)
-			);
-		}
-
-	}
-	//checks if the user is already registered in the database
-	public function exists() 
-	{
-		$config = array(
-			array(
-					'field' => 'uid',
-					'label' => "User's UID",
-					'rules' => 'trim|required'
-			)
-		);
-		$this->form_validation->set_rules($config);
-		$this->form_validation->set_error_delimiters('', '');
-		if($this->form_validation->run() === true){
-			echo json_encode(
-				array_merge(
-					displayError('ok', 200), 
-					array("data" => array())
-				)
-			);
-		}else{
-			echo json_encode(
-				array_merge(
-					displayError('Method Not Allowed', 405), 
-					array(
-						'message'=>'POST has not passed the validation check.',
-						'errors' => validation_errors(),
-					)
-				)
-			);
-		}
-
-	}
-	// returns user profile 
-	public function profile()
-	{
-		$config = array(
-			array(
-					'field' => 'userTokenId',
-					'label' => "User's Token",
-					'rules' => 'trim|required'
-			)
-		);
-		$this->form_validation->set_rules($config);
-		$this->form_validation->set_error_delimiters('', '');
-		if($this->form_validation->run() === true){
-			$userId = $this->user_model->getLoggedInUserId();
-			if($userId[0]===true){
-				$result = $this->user_model->getUserProfile($userId[1]);
-				if($result[0]===true){
-					echo json_encode(
-						array_merge(
-							displayError('ok', 200), 
-							array("data" => $result[1])							
-						)
-					);
-				}else{
-					echo json_encode(
-						array_merge(
-							displayError('Server Error', 500), 
-							array("data" => array('message'=>'error adding user the system'))
-						)
-					);
-				}
-			}else{
-				echo json_encode(
-					array_merge(
-						displayError('Server Error', 500), 
-						array("data" => array('message'=>'error adding user the system'))
-					)
-				);
-			}
-		}else{
-			echo json_encode(
-				array_merge(
-					displayError('Method Not Allowed', 405), 
-					array(
-						'message'=>'POST has not passed the validation check.',
-						'errors' => validation_errors(),
-					)
-				)
-			);
-		}
-
 	}
 }
 ?>
