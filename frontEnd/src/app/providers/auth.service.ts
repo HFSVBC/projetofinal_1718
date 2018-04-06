@@ -11,14 +11,12 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { Session } from 'protractor';
 import { APIConnectorService } from '../service/apiconnector.service';
-import { userInfo } from 'os';
 import { CookieService } from 'angular2-cookie/core';
 
 @Injectable()
 export class AuthService {
   private user: Observable<firebase.User>;
   private current;
-  private token: String;
 
   constructor(private _firebaseAuth: AngularFireAuth, private router: Router, private http: HttpClient,
     private apiconnector: APIConnectorService, private _cookieService: CookieService) {
@@ -57,10 +55,11 @@ export class AuthService {
         .subscribe(res => {
           // Process code
           const code = res['code'];
+          console.log(res);
 
           if (code !== 200) {
-            cenas = false;
-            this.router.navigateByUrl('/login');
+            this._cookieService.put('error', 'true');
+            alert('Something went wrong! Try again later.');
           } else {
             cenas = true;
             const tipo = this.getTipo(res['data']['user_type']);
@@ -103,24 +102,30 @@ export class AuthService {
   }
 
   logout() {
-    const user_info = {
-      userTokenId : this._cookieService.get('token')
-    };
-    this.apiconnector.logoutPost(user_info)
+    const url = this.apiconnector.logoutPOST;
+    const data = new FormData();
+    data.append('userTokenId', this._cookieService.get('token'));
+
+    const a$ = this.apiconnector.postData(url, data);
+    console.log('cenas fixes', a$);
+
+    this.current = null;
+    this._firebaseAuth.auth.signOut();
+    this._cookieService.removeAll();
+    this.router.navigateByUrl('/login');
+
+    /*this.apiconnector.postData(url, data)
         .subscribe(res => {
           console.log('User logout', res);
           this.current = null;
           this._firebaseAuth.auth.signOut();
           this._cookieService.removeAll();
           this.router.navigateByUrl('/login');
-        });
+        });*/
   }
 
   getUser() {
     return this.current;
   }
 
-  getToken() {
-    return this.token;
-  }
 }

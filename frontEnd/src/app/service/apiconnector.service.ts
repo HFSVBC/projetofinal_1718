@@ -23,6 +23,10 @@ export class APIConnectorService {
   existsPOST = this.baseURL + 'user/exists';
   retriveprofilePOST = this.baseURL + 'user/retriveprofile';
 
+  // ADMIN Routes
+  updateType = this.baseURL + 'admin/user/updatetype';
+
+
   historicoGET = '/historicoGET';
   presencasGET = '/presencasGET';
 
@@ -47,11 +51,7 @@ export class APIConnectorService {
     });
   }
 
-  logoutPost(user_info): Observable<any> {
-    const url = this.logoutPOST;
-    const data = new FormData();
-    data.append('userTokenId', user_info.userTokenId);
-
+  postData(url, data) {
     return this.http.post(url, data)
     .map(res => res,
     (err: HttpErrorResponse) => {
@@ -59,7 +59,9 @@ export class APIConnectorService {
         console.log('Client-side error occured.');
       } else {
         console.log('Server-side error occured.');
-      }
-    });
+      }});
+    /*}).subscribe(res => {
+      console.log('resposta', res);
+    });*/
   }
 }

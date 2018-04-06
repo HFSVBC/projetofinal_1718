@@ -4,6 +4,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { AuthService } from '../providers/auth.service';
 import { APIConnectorService } from '../service/apiconnector.service';
+import { CookieService } from 'angular2-cookie/core';
 
 @Component({
   selector: 'app-login-page',
@@ -13,7 +14,7 @@ import { APIConnectorService } from '../service/apiconnector.service';
 export class LoginPageComponent implements OnInit {
   errorLogin;
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private authService: AuthService, private router: Router, private _cookieService: CookieService) {
     this.errorLogin = false;
   }
 
@@ -22,8 +23,7 @@ export class LoginPageComponent implements OnInit {
   }
 
   login() {
-    const a = this.authService.signInWithGoogle();
-    console.log('a', a);
+    this.authService.signInWithGoogle();
   }
 
 }

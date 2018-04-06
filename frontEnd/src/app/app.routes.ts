@@ -58,6 +58,12 @@ export const router: Routes = [
     path: 'admin',
     component: AdminComponent,
     canActivate: [AdminService]
+  },
+  {
+    path: '**',
+    redirectTo: 'dashboard',
+    pathMatch: 'full',
+    canActivate: [AuthService]
   }
 ];
 export const routes: ModuleWithProviders = RouterModule.forRoot(router);

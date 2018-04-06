@@ -2,5 +2,17 @@
   <app-menu class="col-sm-2"></app-menu>
   <div class="router col-sm-10">
       <h1>ADMIN</h1>
+      <form (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="name">Email</label>
+          <input type="email" class="form-control" id="email" [(ngModel)]="email" name="email" required>
+        </div>
+
+        <button type="submit" class="btn btn-success">Submit</button>
+
+      </form>
+      <div *ngIf='a'>
+        <h1>{{a}}</h1>
+      </div>
   </div>
 </div>
