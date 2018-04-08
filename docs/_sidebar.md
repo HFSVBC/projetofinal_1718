@@ -9,6 +9,7 @@
     * [Users](BackEnd_Users.md)
         - [Log In](BackEnd_Users.md#logIn)
         - [Log Out](BackEnd_Users.md#logOut)
-        - [User Type Change](BackEnd_Users.md#userTypeChange)
+        - [Get User Profile](BackEnd_Users.md#getUserProfile)
 
 * Data Simulator
+    * [Recursos](dataSim.md#recursos)

@@ -71,4 +71,4 @@ It returns a JSON with the following configuration for an unsuccesfull response:
 }
 ```
 
-## UserTypeChange
+## getUserProfile
