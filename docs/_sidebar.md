@@ -7,9 +7,6 @@
 
 * Back End
     * [Users](BackEnd_Users.md)
-        - [Log In](BackEnd_Users.md#logIn)
-        - [Log Out](BackEnd_Users.md#logOut)
-        - [Get User Profile](BackEnd_Users.md#getUserProfile)
 
 * Data Simulator
-    * [Recursos](dataSim.md#recursos)
+    * [Resources](dataSim.md)

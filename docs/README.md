@@ -1,6 +1,6 @@
 # CA FCUL Documentation
-## Description
-## Authors
+## Description {docsify-ignore}
+## Authors {docsify-ignore}
 * Ana Catarina Sousa (1)
 * André Nunes (1)
 * Hugo Curado (1)
@@ -9,5 +9,5 @@
 * Sofia Pacheco (1)
 
 (1) Informatics Department, Faculty of Science, University of Lisbon, Lisbon, Portugal
-## Licence
+## Licence {docsify-ignore}
 2017 - 2018 © Faculdade de Ciências da Universidade de Lisboa
