@@ -58,7 +58,7 @@ class UserLoader extends CI_Controller {
 				}else{
 					$jsonConf["code"]        = 500;
 					$jsonConf["description"] = "Server Error";
-					$jsonConf["data"] 		 = array('message'=>'error adding user the system');
+					$jsonConf["data"] 		 = array('message'=>'Error completing signup process');
 				}
 			}	
 		}else{
@@ -96,7 +96,7 @@ class UserLoader extends CI_Controller {
 			}else{
 				$jsonConf["code"]        = 500;
 				$jsonConf["description"] = "Server Error";
-				$jsonConf["data"] 		 = array('message'=>'error adding user the system');
+				$jsonConf["data"] 		 = array('message'=>'Error completing login process');
 			}
 		}
 		return $jsonConf;
@@ -123,7 +123,7 @@ class UserLoader extends CI_Controller {
 			}else{
 				$jsonConf["code"]        = 500;
 				$jsonConf["description"] = "Server Error";
-				$jsonConf["data"] 		 = array('message'=>'error completing logout process');
+				$jsonConf["data"] 		 = array('message'=>'Error completing logout process');
 			}
 		}else{
 			$jsonConf["code"]        = 405;
@@ -178,7 +178,7 @@ class UserLoader extends CI_Controller {
 					}else{
 						$jsonConf["code"]        = 500;
 						$jsonConf["description"] = "Server Error";
-						$jsonConf["data"] 		 = array('message'=>'error completing logout process');
+						$jsonConf["data"] 		 = array('message'=>'Error gueting user profile');
 					}
 				}else{
 					$jsonConf["code"]        = 403;
