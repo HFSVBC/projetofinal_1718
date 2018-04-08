@@ -1,7 +1,5 @@
-# Users
-Some text
 ## LogIn
-Accessed by the route ```https://cafcul.hugocurado.info/user/login```. It handles user registration and login in the back end. For that it requires the following POST elements:
+Accessed by the route ```/user/login```. It handles user registration and login in the back end. For that it requires the following POST elements:
 ```
 uid => Google's UID => String
 name => User's name => String
@@ -9,7 +7,7 @@ email => User's email => String
 avatar => User's avatar provided by Google => String
 ```
 It returns a JSON with the following configuration for a succesfull response:
-```
+```JSON
 {
     "user_agent": (String) Client user agent,
     "client_ip": (String) Client external ip,
@@ -24,7 +22,7 @@ It returns a JSON with the following configuration for a succesfull response:
 }
 ```
 It returns a JSON with the following configuration for an unsuccesfull response:
-```
+```JSON
 {
     "user_agent": (String) Client user agent,
     "client_ip": (String) Client external ip,
@@ -41,12 +39,12 @@ It returns a JSON with the following configuration for an unsuccesfull response:
 The HTTP error codes might be 405 (Method Not Allowed => POST has not passed the validation check.) and 500 (Server Error => Error completing signup process / Error completing login process)
 
 ## LogOut
-Accessed by the route ```https://cafcul.hugocurado.info/user/logout```. It handles user logout in the back end. For that it requires the following POST elements:
+Accessed by the route ```/user/logout```. It handles user logout in the back end. For that it requires the following POST elements:
 ```
 userTokenId => Client's last issued token => String
 ```
 It returns a JSON with the following configuration for a succesfull response:
-```
+```JSON
 {
     "user_agent": (String) Client user agent,
     "client_ip": (String) Client external ip,
@@ -58,7 +56,7 @@ It returns a JSON with the following configuration for a succesfull response:
 }
 ```
 It returns a JSON with the following configuration for an unsuccesfull response:
-```
+```JSON
 {
     "user_agent": (String) Client user agent,
     "client_ip": (String) Client external ip,
@@ -75,7 +73,7 @@ It returns a JSON with the following configuration for an unsuccesfull response:
 The HTTP error codes might be 405 (Method Not Allowed => POST has not passed the validation check.) and 500 (Server Error => Error completing logout process)
 
 ## getUserProfile
-Accessed by the route ```https://cafcul.hugocurado.info/user/retriveprofile```. It handles user logout in the back end. For that it requires the following POST elements:
+Accessed by the route ```/user/retriveprofile```. It handles user logout in the back end. For that it requires the following POST elements:
 ```
 userTokenId => Client's last issued token => String
 userEmail => The user's email to whom the profile to retrieve belongs to => String
@@ -83,7 +81,7 @@ userEmail => The user's email to whom the profile to retrieve belongs to => Stri
 The API ensures that the user is still valid and has access to the route.
 
 It returns a JSON with the following configuration for a succesfull response:
-```
+```JSON
 {
     "user_agent": (String) Client user agent,
     "client_ip": (String) Client external ip,
@@ -104,7 +102,7 @@ It returns a JSON with the following configuration for a succesfull response:
 }
 ```
 It returns a JSON with the following configuration for an unsuccesfull response:
-```
+```JSON
 {
     "user_agent": (String) Client user agent,
     "client_ip": (String) Client external ip,
