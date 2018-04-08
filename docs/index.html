@@ -12,12 +12,25 @@
   <div id="app"></div>
   <script>
     window.$docsify = {
+      auto2top: true,
       loadSidebar: true,
+      loadNavbar: true,
+      mergeNavbar: true,
       subMaxLevel: 2,
+      search: {
+        noData: {
+          '/': 'No results!'
+        },
+        paths: 'auto',
+        placeholder: {
+          '/': 'Search'
+        }
+      },
       repo: "HFSVBC/projetofinal_1718",
       name: 'CA FCUL'
     }
   </script>
   <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
+  <script src="//unpkg.com/docsify/lib/plugins/search.min.js"></script>
 </body>
 </html>
