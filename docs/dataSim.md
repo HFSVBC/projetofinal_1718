@@ -2,8 +2,76 @@
 It simulates the data that can be retrieved if a sensor network was implemented at the faculty.
 
 ## Users
-The route ```/users``` retrieves the info about all users. And the route ```/users/<id>``` retrieves the info on a specific user defined by the ```<id>```.
-## Spaces
-The route ```/espacos``` retrieves the info about all spaces. And the route ```/espacos/<id>``` retrieves the info on a specific space defined by the ```<id>```.
-## Accesses
-The route ```/acessos``` retrieves the info about all accesses to spaces. And the route ```/acessos/<id>``` retrieves the info on a specific access defined by the ```<id>```.
+The route ```/users``` retrieves the info about all users.
+
+It returns a JSON with the following configuration for a succesfull response:
+```JSON
+{
+    "id": Int with user id,
+    "numero": Internal user number
+}
+```
+ And the route ```/users/<id>``` retrieves the info on a specific user defined by the ```<id>```.
+ It returns a JSON with the following configuration for a succesfull response:
+ ```JSON
+ {
+     "id": Int with user id,
+     "numero": Internal user number
+ }
+ ```
+
+## Classrooms
+The route ```/espacos``` retrieves the info about all spaces.
+It returns a JSON with the following configuration for a succesfull response:
+```JSON
+{
+    "id": Int with user id,
+    "bloco": Building number,
+    "piso": Floor number,
+    "numero": Room number,
+    "lotacaoMax": Maximum number of people,
+    "lotacaoAtual": Number of people on the room
+}
+```
+
+And the route ```/espacos/<id>``` retrieves the info on a specific space defined by the ```<id>```.
+It returns a JSON with the following configuration for a succesfull response:
+```JSON
+{
+    "id": Int with user id,
+    "bloco": Building number,
+    "piso": Floor number,
+    "numero": Room number,
+    "lotacaoMax": Maximum number of people,
+    "lotacaoAtual": Number of people on the room
+}
+```
+
+## Entrances/Exits
+The route ```/acessos``` retrieves the info about all accesses to spaces.
+It returns a JSON with the following configuration for a succesfull response:
+```JSON
+{
+    "id": Int with user id,
+    "utilizador": User who acessed,
+    "bloco": Building number of the acess,
+    "piso": Floor number of the acess,
+    "sala": Room number of the acess,
+    "hora_entrada": time of the entrance,
+    "hora_saida": time of the exit
+}
+```
+
+And the route ```/acessos/<id>``` retrieves the info on a specific access defined by the ```<id>```.
+It returns a JSON with the following configuration for a succesfull response:
+```JSON
+{
+    "id": Int with user id,
+    "utilizador": User who acessed,
+    "bloco": Building number of the acess,
+    "piso": Floor number of the acess,
+    "sala": Room number of the acess,
+    "hora_entrada": time of the entrance,
+    "hora_saida": time of the exit
+}
+```
