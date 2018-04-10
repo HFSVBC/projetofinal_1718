@@ -27,7 +27,7 @@ class History extends CI_Controller {
 		if($this->form_validation->run() === true){
 			if(isUserLoggedIn($this->input->post('token'))===true){
 				$token = $this->db->escape($this->input->post('userTokenId'));
-				if($email===null){
+				if($email==="null"){
 					$email = $this->user_model->getEmailFromToken($token);
 				}
 				$email = $this->db->escape(urldecode($email));
@@ -42,9 +42,9 @@ class History extends CI_Controller {
 					$out = array("data"=>array());
 					for($i=0;$i<count($obj);$i++){
 						$histOut = array(
-							"C".$obj[$i]->bloco.".".$obj[$i]->piso.".".$obj[$i]->sala,
-							$obj[$i]->hora_entrada,
-							$obj[$i]->hora_saida
+							"sala"=>"C".$obj[$i]->bloco.".".$obj[$i]->piso.".".$obj[$i]->sala,
+							"inicio"=>str_replace("T", " ", $obj[$i]->hora_entrada),
+							"fim"=>str_replace("T", " ", $obj[$i]->hora_saida)
 						);
 						array_push($out["data"], $histOut);
 					}					

@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { AuthService } from '../providers/auth.service';
 import { Http, Response } from '@angular/http';
 import { Subject } from 'rxjs/Subject';
-/* import { DataTablesModule } from 'angular-datatables'; */
 import { CookieService } from 'angular2-cookie/core';
 import { APIConnectorService } from '../service/apiconnector.service';
 
@@ -134,9 +133,7 @@ export class HistoricoComponent implements OnInit {
   }
 
   private extractData(myDataArray) {
-    const body = myDataArray;
-
-    this.histAc = body.data || {};
+    this.histAc = myDataArray.data || {};
     this.dtTrigger.next();
   }
 
