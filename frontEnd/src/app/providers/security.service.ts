@@ -27,6 +27,7 @@ export class SecurityService implements CanActivate {
       if (tipo === '3' || tipo === '10') {
         return true;
       } else {
+        this.router.navigate([ '/dashboard' ]);
         return false;
       }
     });

@@ -24,11 +24,11 @@ export class AdminService implements CanActivate {
 
       const tipo = this._cookieService.get('tipo');
 
-      if (tipo === '10') {
-        return true;
-      } else {
+      if (tipo !== '10') {
+        this.router.navigate([ '/dashboard' ]);
         return false;
       }
+      return true;
     });
 
   }

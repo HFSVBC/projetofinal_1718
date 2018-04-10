@@ -32,6 +32,7 @@ export class AdminComponent implements OnInit {
 
     this.apiconnector.postData(url, data)
     .subscribe(res => {
+      console.log('user', res);
       this.user = res['data']['user'];
       this._cookieService.put('token', res['data']['token']);
       this.user_name = this.user['name'];
@@ -43,13 +44,12 @@ export class AdminComponent implements OnInit {
     });
   }
 
-  changeType(){
-	  const url = this.apiconnector.retriveprofilePOST;
-		const data = new FormData();
-		
-	  data.append('userEmail', this.email);
+  changeType() {
+    const url = this.apiconnector.retriveprofilePOST;
+    const data = new FormData();
+    data.append('userEmail', this.email);
 
-	  this.apiconnector.postData(url, data)
+    this.apiconnector.postData(url, data);
   }
 
 }
