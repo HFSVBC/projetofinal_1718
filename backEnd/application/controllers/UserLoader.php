@@ -16,8 +16,6 @@ class UserLoader extends CI_Controller {
 		parent::__construct();
 
 		$this->load->model('user_model');
-
-		$this->load->helper('user');
 	}
 	// add the necessary fields for user login
 	//login user by adding a line to the LoggedIn_Users table

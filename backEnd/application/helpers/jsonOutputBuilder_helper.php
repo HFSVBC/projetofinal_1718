@@ -22,6 +22,7 @@ function displayError($errorMessage, $errorCode)
 function builder($arrayToAdd)
 {
     $CI =& get_instance();
+    header('Content-Type: application/json');
     $out_array = array(
         "user_agent" => $CI->input->user_agent(),
         "client_ip" => $CI->input->ip_address(),

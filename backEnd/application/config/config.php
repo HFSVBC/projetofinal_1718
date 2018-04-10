@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost:8888/';
+$config['base_url'] = 'https://cafcul.hugocurado.info';
 
 /*
 |--------------------------------------------------------------------------
@@ -400,10 +400,10 @@ $config['sess_regenerate_destroy'] = TRUE;
 |       'cookie_httponly') will also affect sessions.
 |
 */
-$config['cookie_prefix']	= '';
-$config['cookie_domain']	= 'localhost';
+$config['cookie_prefix']	= 'cafcul_';
+$config['cookie_domain']	= 'cafcul.hugocurado.info';
 $config['cookie_path']		= '/';
-$config['cookie_secure']	= FALSE;
+$config['cookie_secure']	= TRUE;
 $config['cookie_httponly'] 	= TRUE;
 
 /*

@@ -142,6 +142,30 @@
 
 			return $row->description;
 		}
+		public function getUserIdFromEmail($email)
+		{
+			$sql = "SELECT id
+					FROM users
+					WHERE email=$email";
+			
+			$query = $this->db->query($sql);
+			$row   = $query->row();
+
+			return $row->id;
+		}
+		public function getEmailFromToken($token)
+		{
+			$sql = "SELECT email
+					FROM users
+					WHERE id = (SELECT user
+								FROM users_loggedIn
+								WHERE token = $token)";
+	
+			$query = $this->db->query($sql);
+			$row   = $query->row();
+
+			return $row->email;
+		}
 		// ------------ SUPPORT for user_helper
 		// checks if a user is still loggedin requires the user token
 		public function userLoggedin($token)
