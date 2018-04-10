@@ -3,8 +3,9 @@ import { Router } from '@angular/router';
 import { AuthService } from '../providers/auth.service';
 import { Http, Response } from '@angular/http';
 import { Subject } from 'rxjs/Subject';
-import { DataTablesModule } from 'angular-datatables';
+/* import { DataTablesModule } from 'angular-datatables'; */
 import { CookieService } from 'angular2-cookie/core';
+import { APIConnectorService } from '../service/apiconnector.service';
 
 import 'rxjs/add/operator/map';
 
@@ -16,6 +17,12 @@ class SearchOptions {
   data_fim: Date;
 }
 
+class histAc {
+  sala: string;
+  inicio: string;
+  fim: string;
+}
+
 @Component({
   selector: 'app-historico',
   templateUrl: './historico.component.html',
@@ -24,17 +31,13 @@ class SearchOptions {
 
 export class HistoricoComponent implements OnInit {
 
+  token;
+
   dtOptions: DataTables.Settings = {};
   // We use this trigger because fetching the list of persons can be quite long,
   // thus we ensure the data is fetched before rendering
+  histAc: histAc[] = [];
   dtTrigger: Subject<any> = new Subject();
-
-  myDataArray = [
-  {'data': '2016', 'hora': '12:24', 'sala': '1.2.15'},
-  {'data': '2017', 'hora': '15:56', 'sala': '1.2.24'},
-  {'data': '2017', 'hora': '10:11', 'sala': '1.2.22'},
-  {'data': '2016', 'hora': '09:48', 'sala': '1.2.21'}
-  ];
 
   model = new SearchOptions();
 
@@ -84,10 +87,9 @@ export class HistoricoComponent implements OnInit {
     pisos = [];
     salas = [];
 
-  columnsToDisplay = ['data', 'hora', 'sala'];
+  columnsToDisplay = ['Sala', 'Hora de Entrada', 'Hora de Saida'];
 
-  constructor(public authService: AuthService, private router: Router, private _cookieService: CookieService) {
-    // this.model = new SearchOptions();
+  constructor(public authService: AuthService, private router: Router, private _cookieService: CookieService, private apiconnector: APIConnectorService) {
   }
 
     // Rebuild the product list every time the product type changes.
@@ -117,6 +119,25 @@ export class HistoricoComponent implements OnInit {
       pagingType: 'full_numbers',
       pageLength: 10
     };
+
+    const url = this.apiconnector.historico;
+    const data = new FormData();
+    console.log(this._cookieService.get('token'))
+    this.token = data.append('userTokenId', this._cookieService.get('token'));
+
+    this.apiconnector.postData(url, data)
+      .subscribe(res => {
+        console.log('res', res);
+        this._cookieService.put('token', res['data']['token']);
+        this.extractData(res['data']['accessHist']);
+      });
+  }
+
+  private extractData(myDataArray) {
+    const body = myDataArray;
+
+    this.histAc = body.data || {};
+    this.dtTrigger.next();
   }
 
 }

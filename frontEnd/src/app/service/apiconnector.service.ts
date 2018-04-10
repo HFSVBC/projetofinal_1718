@@ -26,8 +26,7 @@ export class APIConnectorService {
   // ADMIN Routes
   updateType = this.baseURL + 'admin/user/updatetype';
 
-
-  historicoGET = '/historicoGET';
+  historico = this.baseURL + 'history/user';
   presencasGET = '/presencasGET';
 
   getDATA(URL: string) { }
