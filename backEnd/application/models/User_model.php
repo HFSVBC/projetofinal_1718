@@ -164,18 +164,19 @@
 		// generates a new token for the user and postpones login time out for 6 hours
 		public function generateNewToken($token)
 		{
-			$token    = $this->db->escape($token);
-			$newToken = $this->db->escape(bin2hex(openssl_random_pseudo_bytes(16)));
-			$timeOut  = new DateTime();
+			$token     = $this->db->escape($token);
+			$newTokenS = bin2hex(openssl_random_pseudo_bytes(16));
+			$newToken  = $this->db->escape($newTokenS);
+			$timeOut   = new DateTime();
 			$timeOut->add(new DateInterval('PT21600S'));
-			$timeOut  = $this->db->escape($timeOut->format('Y-m-d H:i:s'));
+			$timeOut   = $this->db->escape($timeOut->format('Y-m-d H:i:s'));
 
 			$sql = "UPDATE users_loggedIn
 					SET token=$newToken, `timeOut`=$timeOut
 					WHERE token=$token";
 
 			if($this->db->query($sql)){
-				return array(true, $newToken);
+				return array(true, $newTokenS);
 			}else{
 				return array(false, '');
 			}
