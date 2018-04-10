@@ -2,5 +2,30 @@
     <app-menu class="col-sm-2"></app-menu>
     <div class="router col-sm-10">
         <h1>PRESENÇAS</h1>
+        <form (ngSubmit)="onSubmit()" #searchForm="ngForm">
+
+            <div class="col-sm-2">
+              <label for="power">Aula</label>
+              <select class="form-control" id="aula"
+                      [(ngModel)]="model.aula" name="aula">
+                <option *ngFor="let a of aulas" [value]="a">{{a}}</option>
+              </select>
+            </div>
+
+            <div class="col-sm-2">
+                <label for="power">Sala</label>
+                <select class="form-control" id="piso"
+                        [(ngModel)]="model.sala" name="sala">
+                  <option *ngFor="let s of salas" [value]="s">{{s}}</option>
+                </select>
+            </div>
+
+            <div class="col-sm-2">
+                <input type="text" class="form-control" id="aluno"
+                [(ngModel)]="model.aluno" name="aluno">
+            </div>
+
+            <button type="submit" class="btn btn-success">Submit</button>
+          </form>
     </div>
 </div>

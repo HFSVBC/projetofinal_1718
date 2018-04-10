@@ -1,6 +1,35 @@
 <div class="row">
     <app-menu class="col-sm-2"></app-menu>
     <div class="datatable router col-sm-10">
+        <form (ngSubmit)="onSubmit()" #searchForm="ngForm">
+
+            <div class="col-sm-2">
+              <label for="power">Edifício</label>
+              <select class="form-control" id="edifico" (change)="edificioChanged()"
+                      [(ngModel)]="model.edificio" name="edificio">
+                <option *ngFor="let ed of edificios" [value]="ed">{{ed}}</option>
+              </select>
+            </div>
+
+            <div class="col-sm-2">
+                <label for="power">Piso</label>
+                <select class="form-control" id="piso" (change)="pisoChanged()"
+                        [(ngModel)]="model.piso" name="piso">
+                  <option *ngFor="let p of pisos" [value]="p">{{p}}</option>
+                </select>
+            </div>
+
+            <div class="col-sm-2">
+                <label for="power">Sala</label>
+                <select class="form-control" id="sala" (change)="salaChanged()"
+                        [(ngModel)]="model.sala" name="sala">
+                  <option *ngFor="let s of salas" [value]="s">{{s}}</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-success col-sm-2">Submit</button>
+          </form>
+
         <table datatable [dtOptions]="dtOptions" class="table table-striped table-bordered dataTable no-footer">
             <thead>
                 <tr role="row">

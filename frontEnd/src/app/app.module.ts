@@ -8,6 +8,7 @@ import { environment } from './../environments/environment';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { DataTablesModule } from 'angular-datatables';
+import { FormsModule } from '@angular/forms';
 
 // OAuth
 import { AngularFireModule } from 'angularfire2';
@@ -17,6 +18,7 @@ import { AuthService } from './providers/auth.service';
 
 // Services
 import { APIConnectorService } from './service/apiconnector.service';
+import { CookieService } from 'angular2-cookie/services/cookies.service';
 
 // Routes
 import { routes } from './app.routes';
@@ -29,6 +31,12 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HistoricoComponent } from './historico/historico.component';
 import { PresencasComponent } from './presencas/presencas.component';
+import { AdminComponent } from './admin/admin.component';
+import { AdminService } from './providers/admin.service';
+import { SecurityService } from './providers/security.service';
+import { ProfessorService } from './providers/professor.service';
+import { AllService } from './providers/all.service';
+import { EspacosComponent } from './espacos/espacos.component';
 
 
 @NgModule({
@@ -39,7 +47,9 @@ import { PresencasComponent } from './presencas/presencas.component';
     LoginPageComponent,
     DashboardComponent,
     HistoricoComponent,
-    PresencasComponent
+    PresencasComponent,
+    AdminComponent,
+    EspacosComponent
   ],
   imports: [
     routes,
@@ -49,11 +59,17 @@ import { PresencasComponent } from './presencas/presencas.component';
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
-    DataTablesModule
+    DataTablesModule,
+    FormsModule
   ],
   providers: [
     AuthService,
-    APIConnectorService
+    APIConnectorService,
+    CookieService,
+    AdminService,
+    SecurityService,
+    ProfessorService,
+    AllService
   ],
   bootstrap: [AppComponent]
 })

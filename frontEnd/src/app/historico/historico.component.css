@@ -2,6 +2,11 @@ div.datatable {
     padding: 5.5em 1em 0!important;
 }
 
+form {
+  display: flex;
+  padding: 20px;
+}
+
 @media only screen and (max-width: 767px) {
     div.datatable {
         padding: 1.5em 0 0!important;

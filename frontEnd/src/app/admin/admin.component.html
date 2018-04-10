@@ -1,0 +1,34 @@
+<div class="row">
+    <app-menu class="col-sm-2"></app-menu>
+    <div class="router col-sm-10">
+        <h1>ADMIN</h1>
+        <form (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="name">Email</label>
+                <input type="email" class="form-control" id="email" [(ngModel)]="email" name="email" required>
+            </div>
+
+            <button type="submit" class="btn btn-success">Submit</button>
+
+        </form>
+
+        <div *ngIf='a'>
+            <form (ngSubmit)="changeType()">
+                <img src={{this.a.avatar}}>
+                <h1>{{this.a.name}}</h1>
+                <h1>{{this.a.email}}</h1>
+                <h1 hidden>{{this.a.uid}}</h1>
+                <select class="custom-select mr-sm-2" id="user_type" ng-model="{{this.a.user_type}}">
+					<option value="0" ng-selected="student == this.a.user_type">student</option>
+					<option value="1" ng-selected="teacher == this.a.user_type">teacher</option>
+					<option value="2" ng-selected="staff member == this.a.user_type">staff member</option>
+					<option value="3" ng-selected="security guard == this.a.user_type">security guard</option>
+					<option value="10" ng-selected="admin == this.a.user_type">admin</option>
+					<option value="20" ng-selected="all == this.a.user_type">all</option>
+					<option value="30" ng-selected="mine == this.a.user_type">mine</option>
+				</select>
+                <button type="submit" class="btn btn-success">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
