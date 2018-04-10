@@ -75,7 +75,7 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost:8889',
+	'hostname' => 'localhost',
 	'username' => 'user_cafcul_kby1',
 	'password' => 's9kV4OO2tix0K^8$5usgJW39UIQ8Ag',
 	'database' => 'cafcul_qYNv0x',

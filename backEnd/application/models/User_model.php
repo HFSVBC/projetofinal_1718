@@ -142,6 +142,30 @@
 
 			return $row->description;
 		}
+		public function getUserIdFromEmail($email)
+		{
+			$sql = "SELECT id
+					FROM users
+					WHERE email=$email";
+			
+			$query = $this->db->query($sql);
+			$row   = $query->row();
+
+			return $row->id;
+		}
+		public function getEmailFromToken($token)
+		{
+			$sql = "SELECT email
+					FROM users
+					WHERE id = (SELECT user
+								FROM users_loggedIn
+								WHERE token = $token)";
+	
+			$query = $this->db->query($sql);
+			$row   = $query->row();
+
+			return $row->email;
+		}
 		// ------------ SUPPORT for user_helper
 		// checks if a user is still loggedin requires the user token
 		public function userLoggedin($token)
@@ -164,17 +188,19 @@
 		// generates a new token for the user and postpones login time out for 6 hours
 		public function generateNewToken($token)
 		{
-			$newToken = $this->db->escape(bin2hex(openssl_random_pseudo_bytes(16)));
-			$timeOut  = new DateTime();
+			$token     = $this->db->escape($token);
+			$newTokenS = bin2hex(openssl_random_pseudo_bytes(16));
+			$newToken  = $this->db->escape($newTokenS);
+			$timeOut   = new DateTime();
 			$timeOut->add(new DateInterval('PT21600S'));
-			$timeOut  = $this->db->escape($timeOut->format('Y-m-d H:i:s'));
+			$timeOut   = $this->db->escape($timeOut->format('Y-m-d H:i:s'));
 
 			$sql = "UPDATE users_loggedIn
 					SET token=$newToken, `timeOut`=$timeOut
 					WHERE token=$token";
 
 			if($this->db->query($sql)){
-				return array(true, $newToken);
+				return array(true, $newTokenS);
 			}else{
 				return array(false, '');
 			}

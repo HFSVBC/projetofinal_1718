@@ -16,8 +16,6 @@ class UserLoader extends CI_Controller {
 		parent::__construct();
 
 		$this->load->model('user_model');
-
-		$this->load->helper('user');
 	}
 	// add the necessary fields for user login
 	//login user by adding a line to the LoggedIn_Users table
@@ -58,7 +56,7 @@ class UserLoader extends CI_Controller {
 				}else{
 					$jsonConf["code"]        = 500;
 					$jsonConf["description"] = "Server Error";
-					$jsonConf["data"] 		 = array('message'=>'error adding user the system');
+					$jsonConf["data"] 		 = array('message'=>'Error completing signup process');
 				}
 			}	
 		}else{
@@ -96,7 +94,7 @@ class UserLoader extends CI_Controller {
 			}else{
 				$jsonConf["code"]        = 500;
 				$jsonConf["description"] = "Server Error";
-				$jsonConf["data"] 		 = array('message'=>'error adding user the system');
+				$jsonConf["data"] 		 = array('message'=>'Error completing login process');
 			}
 		}
 		return $jsonConf;
@@ -123,7 +121,7 @@ class UserLoader extends CI_Controller {
 			}else{
 				$jsonConf["code"]        = 500;
 				$jsonConf["description"] = "Server Error";
-				$jsonConf["data"] 		 = array('message'=>'error completing logout process');
+				$jsonConf["data"] 		 = array('message'=>'Error completing logout process');
 			}
 		}else{
 			$jsonConf["code"]        = 405;
@@ -154,7 +152,7 @@ class UserLoader extends CI_Controller {
 		$this->form_validation->set_error_delimiters('', '');
 		if($this->form_validation->run() === true){
 			if(isUserLoggedIn($this->input->post('token'))===true){
-				$token = $this->input->post('userTokenId');
+				$token = $this->db->escape($this->input->post('userTokenId'));
 				$email = $this->db->escape($this->input->post('userEmail'));
 				$sql = "SELECT *
 						FROM conf_routesAccess
@@ -178,7 +176,7 @@ class UserLoader extends CI_Controller {
 					}else{
 						$jsonConf["code"]        = 500;
 						$jsonConf["description"] = "Server Error";
-						$jsonConf["data"] 		 = array('message'=>'error completing logout process');
+						$jsonConf["data"] 		 = array('message'=>'Error gueting user profile');
 					}
 				}else{
 					$jsonConf["code"]        = 403;

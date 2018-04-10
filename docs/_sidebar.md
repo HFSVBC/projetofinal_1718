@@ -3,10 +3,10 @@
     * [Authors](README.md#authors)
     * [Licence](README.md#licence)
 
-* FrontEnd
+* Front End
 
-* BackEnd
+* Back End
     * [Users](BackEnd_Users.md)
-        - [Log In](BackEnd_Users.md#logIn)
-        - [Log Out](BackEnd_Users.md#logOut)
-        - [User Type Change](BackEnd_Users.md#userTypeChange)
+
+* Data Simulator
+    * [Resources](dataSim.md)

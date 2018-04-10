@@ -89,7 +89,7 @@ $autoload['drivers'] = array();
 |
 |	$autoload['helper'] = array('url', 'file');
 */
-$autoload['helper'] = array('url', 'date', 'jsonoutputbuilder', 'clientdata');
+$autoload['helper'] = array('url', 'date', 'jsonOutputBuilder', 'clientData', 'dataSim', 'user');
 
 /*
 | -------------------------------------------------------------------

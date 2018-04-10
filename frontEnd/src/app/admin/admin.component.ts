@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'angular2-cookie/core';
 import { APIConnectorService } from '../service/apiconnector.service';
+import { EmailValidator } from '@angular/forms';
 
 @Component({
   selector: 'app-admin',
@@ -9,7 +10,11 @@ import { APIConnectorService } from '../service/apiconnector.service';
 })
 export class AdminComponent implements OnInit {
   email;
-  a;
+  user;
+  user_name;
+  user_email;
+  user_uid;
+  user_type;
 
   constructor(private _cookieService: CookieService, private apiconnector: APIConnectorService) {
   }
@@ -27,7 +32,14 @@ export class AdminComponent implements OnInit {
 
     this.apiconnector.postData(url, data)
     .subscribe(res => {
-      this.a = res['data'].user;
+      this.user = res['data']['user'];
+      this._cookieService.put('token', res['data']['token']);
+      this.user_name = this.user['name'];
+      console.log('user', this.user);
+      this.user_email = this.user['email'];
+      this.user_uid = this.user['uid'];
+      this.user_type = this.user['user_type'];
+      console.log(res);
     });
   }
 
