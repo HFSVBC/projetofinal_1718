@@ -15,6 +15,7 @@ export class AdminComponent implements OnInit {
   user_email;
   user_uid;
   user_type;
+  user_avatar;
 
   constructor(private _cookieService: CookieService, private apiconnector: APIConnectorService) {
   }
@@ -39,6 +40,7 @@ export class AdminComponent implements OnInit {
       this.user_email = this.user['email'];
       this.user_uid = this.user['uid'];
       this.user_type = this.user['user_type'];
+      this.user_avatar = this.user['avatar'];
       console.log(res);
     });
   }

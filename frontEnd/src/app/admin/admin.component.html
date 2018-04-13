@@ -12,6 +12,7 @@
         </form>
 
         <div *ngIf='user'>
+            <img src={{ this.user_avatar }} id='photoUser'>
             <ul>
                 <li>{{ user_uid }}</li>
             </ul>
@@ -24,6 +25,15 @@
             <ul>
                 <li>{{ user_type }}</li>
             </ul>
+            <select>
+                <option value="0">student</option>
+                <option value="1">teacher</option>
+                <option value="2">staff member</option>
+                <option value="3">security</option>
+                <option value="10">admin</option>
+                <option value="20">all</option>
+                <option value="30">mine</option>
+            </select>
         </div>
     </div>
 </div>

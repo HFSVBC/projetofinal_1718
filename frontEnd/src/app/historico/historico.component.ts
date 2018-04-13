@@ -121,12 +121,11 @@ export class HistoricoComponent implements OnInit {
 
     const url = this.apiconnector.historico;
     const data = new FormData();
-    console.log(this._cookieService.get('token'))
     this.token = data.append('userTokenId', this._cookieService.get('token'));
 
     this.apiconnector.postData(url, data)
       .subscribe(res => {
-        console.log('res', res);
+        
         this._cookieService.put('token', res['data']['token']);
         this.extractData(res['data']['accessHist']);
       });
