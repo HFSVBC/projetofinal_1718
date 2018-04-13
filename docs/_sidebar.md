@@ -7,6 +7,7 @@
 
 * Back End
     * [Users](BackEnd_Users.md)
+    * [History](BackEnd_History.md)
 
 * Data Simulator
     * [Resources](dataSim.md)
