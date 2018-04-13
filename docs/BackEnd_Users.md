@@ -1,3 +1,5 @@
+# Users
+---
 ## LogIn
 Accessed by the route ```/user/login```. It handles user registration and login in the back end. For that it requires the following POST elements:
 ```
@@ -39,11 +41,11 @@ It returns a JSON with the following configuration for an unsuccesfull response:
 The HTTP error codes might be 405 (Method Not Allowed => POST has not passed the validation check.) and 500 (Server Error => Error completing signup process / Error completing login process)
 
 ## LogOut
-Accessed by the route ```/user/logout```. It handles user logout in the back end. For that it requires the following POST elements:
+Accessed by the route ```/user/logout```. It handles user to log out in the back end. For that it requires the following POST elements:
 ```
 userTokenId => Client's last issued token => String
 ```
-It returns a JSON with the following configuration for a succesfull response:
+It returns a JSON with the following configuration for a successful response:
 ```JSON
 {
     "user_agent": (String) Client user agent,
@@ -73,14 +75,14 @@ It returns a JSON with the following configuration for an unsuccesfull response:
 The HTTP error codes might be 405 (Method Not Allowed => POST has not passed the validation check.) and 500 (Server Error => Error completing logout process)
 
 ## getUserProfile
-Accessed by the route ```/user/retriveprofile```. It handles user logout in the back end. For that it requires the following POST elements:
+Accessed by the route ```/user/retriveprofile```. It handles user to log out in the back end. For that it requires the following POST elements:
 ```
 userTokenId => Client's last issued token => String
 userEmail => The user's email to whom the profile to retrieve belongs to => String
 ```
 The API ensures that the user is still valid and has access to the route.
 
-It returns a JSON with the following configuration for a succesfull response:
+It returns a JSON with the following configuration for a successful response:
 ```JSON
 {
     "user_agent": (String) Client user agent,

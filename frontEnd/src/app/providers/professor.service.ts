@@ -28,6 +28,7 @@ export class ProfessorService implements CanActivate {
         if (tipo === '2' || tipo === '10') {
           return true;
         } else {
+          this.router.navigate([ '/dashboard' ]);
           return false;
         }
       });

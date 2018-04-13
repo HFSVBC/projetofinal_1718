@@ -1,10 +1,11 @@
 # Data Simulator
+---
 It simulates the data that can be retrieved if a sensor network was implemented at the faculty.
 
 ## Users
 The route ```/users``` retrieves the info about all users.
 
-It returns a JSON list with the following configuration for a succesfull response:
+It returns a JSON list with the following configuration for a successful response:
 ```JSON
 [
 {
@@ -14,7 +15,7 @@ It returns a JSON list with the following configuration for a succesfull respons
 ...]
 ```
  And the route ```/users/<id>``` retrieves the info on a specific user defined by the ```<id>```.
- It returns a JSON with the following configuration for a succesfull response:
+ It returns a JSON with the following configuration for a successful response:
  ```JSON
  {
      "id": Int with user id,
@@ -24,7 +25,7 @@ It returns a JSON list with the following configuration for a succesfull respons
 
 ## Classrooms
 The route ```/espacos``` retrieves the info about all spaces.
-It returns a JSON lis with the following configuration for a succesfull response:
+It returns a JSON list with the following configuration for a successful response:
 ```JSON
 [
 {
@@ -39,7 +40,7 @@ It returns a JSON lis with the following configuration for a succesfull response
 ```
 
 And the route ```/espacos/<id>``` retrieves the info on a specific space defined by the ```<id>```.
-It returns a JSON with the following configuration for a succesfull response:
+It returns a JSON with the following configuration for a successful response:
 ```JSON
 {
     "id": Int with user id,
@@ -53,7 +54,7 @@ It returns a JSON with the following configuration for a succesfull response:
 
 ## Entrances/Exits
 The route ```/acessos``` retrieves the info about all accesses to spaces.
-It returns a JSON list with the following configuration for a succesfull response:
+It returns a JSON list with the following configuration for a successful response:
 ```JSON
 [
 {
@@ -68,8 +69,8 @@ It returns a JSON list with the following configuration for a succesfull respons
 ...]
 ```
 
-,The route ```/acessos/<id>``` retrieves the info on a specific access defined by the ```<id>```.
-It returns a JSON with the following configuration for a succesfull response:
+The route ```/acessos/<id>``` retrieves the info on a specific access defined by the ```<id>```.
+It returns a JSON with the following configuration for a successful response:
 ```JSON
 {
     "id": Int with user id,
@@ -82,8 +83,8 @@ It returns a JSON with the following configuration for a succesfull response:
 }
 ```
 
-And the route ```/acessosuser/<numero>``` retrieves the info on a specific acess defined by the ```<numero>```.
-It returns a JSON list with the following configuration for a successfull response:
+And the route ```/acessosuser/<numero>``` retrieves the info on a specific access defined by the ```<numero>```.
+It returns a JSON list with the following configuration for a successful response:
 ```JSON
 [
 {
