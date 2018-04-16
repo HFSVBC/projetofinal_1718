@@ -1,0 +1,23 @@
+.card {
+    margin-top: 2em;
+    border: none;
+}
+
+.card .col-md-6,
+.card .col-md-4 {
+    padding: 0;
+}
+
+.card-img-top img {
+    height: 15em;
+}
+
+.card .list-group-item {
+    padding: .5em;
+}
+
+.card .custom-select {
+    margin-right: 15px;
+    margin-left: 15px;
+    width: 61%;
+}
