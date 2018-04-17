@@ -5,11 +5,12 @@
 
 * Front End
     * [General](FrontEnd_General.md)
-    * [Admin](FrontEnd_Admin.md)
     * [Dashboard](FrontEnd_Dashboard.md)
-    * [Espacos](FrontEnd_Espacos.md)
-    * [Historico](FrontEnd_Historico.md)
-    * [Presencas](FrontEnd_Presencas.md)
+    * [Consultar Histórico](FrontEnd_Historico.md)
+    * [Consultar Presenças](FrontEnd_Presencas.md)
+    * [Consultar Espaços](FrontEnd_Espacos.md)
+    * [Admin](FrontEnd_Admin.md)
+
 
 * Back End
     * [Users](BackEnd_Users.md)

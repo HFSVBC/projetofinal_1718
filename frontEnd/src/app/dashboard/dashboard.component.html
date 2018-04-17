@@ -1,6 +1,53 @@
 <div class="row">
-    <app-menu class="col-sm-2"></app-menu>
-    <div class="router col-sm-10">
-        <h1>DASHBOARD</h1>
+  <app-menu class="col-sm-2"></app-menu>
+  <div class="router col-sm-10">
+
+    <div class="row">
+
+      <div class=" col-md-12" id="padBottom">
+        <div class="card">
+          <h5 class="card-header">Perfil</h5>
+          <div class="row">
+            <div class="col-md-3 " >
+              <div class="card-img-top">
+                <img src={{user_avatar}} id='photoUser' class="rounded-circle">
+              </div>
+            </div>
+
+            <div class="col-md-9" id="pad">
+              <h5 class="card-title">{{user_name}}</h5>
+              <p class="card-text">Email: {{user_email}}</p>
+              <p class="card-text">UID: {{user_uid}}</p>
+              <p class="card-text">Tipo: {{user_type}}</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class=" col-md-6" id="padBottom">
+        <div class="card">
+          <h5 class="card-header">Histórico de Acessos</h5>
+          <div class="" id="pad">
+            <h5 class="card-title">Special title treatment</h5>
+            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+      </div>
+
+      <div class=" col-md-6" id="padBottom">
+        <div class="card">
+          <h5 class="card-header">Presenças</h5>
+          <div class="" id="pad">
+            <h5 class="card-title">Special title treatment</h5>
+            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+      </div>
+
     </div>
+
+  </div>
 </div>

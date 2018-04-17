@@ -1,0 +1,13 @@
+#photoUser {
+  padding: 25px
+}
+
+#pad {
+  padding: 25px
+}
+
+@media only screen and (min-width: 600px) {
+#padBottom {
+  padding-bottom: 15px
+}
+}
