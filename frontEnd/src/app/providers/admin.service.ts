@@ -30,8 +30,6 @@ export class AdminService implements CanActivate {
       }
       return true;
     });
-
   }
-
 
 }

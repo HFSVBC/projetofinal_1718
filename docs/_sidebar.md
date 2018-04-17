@@ -4,6 +4,8 @@
     * [Licence](README.md#licence)
 
 * Front End
+    * [Routes](FrontEnd.md)
+    * [User Types](FrontEnd.md)
 
 * Back End
     * [Users](BackEnd_Users.md)

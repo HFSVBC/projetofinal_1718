@@ -40,7 +40,6 @@ export class AuthService {
 
     firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION);
 
-    let cenas;
     const provider = new firebase.auth.GoogleAuthProvider();
     firebase.auth().useDeviceLanguage();
 
@@ -60,22 +59,22 @@ export class AuthService {
 
         if (code !== 200) {
           this._cookieService.put('error', 'true');
+          this.logout();
           alert('Something went wrong! Try again later.');
         } else {
-          cenas = true;
           const tipo = this.getTipo(res['data']['user_type']);
           this._cookieService.put('tipo', tipo);
           this._cookieService.put('token', res['data']['token']);
           this.router.navigateByUrl('/dashboard');
         }
       });
-  })
-  .catch(error => {
-    // Handle Errors here.
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    console.log('Something went wrong: ' + errorMessage + ' code ' + errorCode);
-  });
+    })
+    .catch(error => {
+      // Handle Errors here.
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log('Something went wrong: ' + errorMessage + ' code ' + errorCode);
+    });
 
   }
 
