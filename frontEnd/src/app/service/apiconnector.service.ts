@@ -24,7 +24,7 @@ export class APIConnectorService {
   retriveprofilePOST = this.baseURL + 'user/retriveprofile';
 
   // ADMIN Routes
-  updateType = this.baseURL + 'admin/user/updatetype';
+  changeType = this.baseURL + 'user/changeType';
 
   historico = this.baseURL + 'history/user';
   presencasGET = '/presencasGET';

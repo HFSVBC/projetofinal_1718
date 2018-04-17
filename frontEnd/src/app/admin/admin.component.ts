@@ -46,36 +46,43 @@ export class AdminComponent implements OnInit {
     });
 
     this.users = [{
-      "id": 0,
-      "type": "student"
+      'id': 0,
+      'type': 'student'
     }, {
-      "id": 1,
-      "type": "teacher"
+      'id': 1,
+      'type': 'teacher'
     },
     {
-      "id": 2,
-      "type": "staff member"
+      'id': 2,
+      'type': 'staff member'
     },
     {
-      "id": 3,
-      "type": "security"
+      'id': 3,
+      'type': 'security'
     }, {
-      "id": 10,
-      "type": "admin"
+      'id': 10,
+      'type': 'admin'
     }
     ];
   }
 
   onChange(newValue) {
-    for (let user of this.users) {
-      if (user.type == newValue) {
-        const url = this.apiconnector.retriveprofilePOST;
+    console.log('trocou');
+    for (const user of this.users) {
+      if (user.type === newValue) {
+        const url = this.apiconnector.changeType;
         const data = new FormData();
         data.append('userTokenId', this._cookieService.get('token'));
-        data.append('userEmail', this.email);
-        data.append('user_type', this.user_type);
+        data.append('uid', this.user_uid);
+        data.append('type', user.id);
+        console.log(user.id);
 
         this.apiconnector.postData(url, data)
+        .subscribe(res => {
+          console.log('cenas', res);
+          this._cookieService.put('token', res['data']['token']);
+          alert('Trocou o id');
+        });
       }
     }
   }

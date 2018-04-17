@@ -28,7 +28,8 @@ export const router: Routes = [
     path: '',
     redirectTo: 'dashboard',
     pathMatch: 'full',
-    canActivate: [AuthService]
+    // canActivate: [AuthService]
+    canActivate: [AdminService]
   },
   {
     path: 'login',

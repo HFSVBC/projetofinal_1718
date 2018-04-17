@@ -37,7 +37,7 @@ class History extends CI_Controller {
 							(user_type = 30 AND (SELECT id FROM users WHERE email = $email) = (SELECT id FROM users WHERE id = (SELECT user FROM users_loggedIn WHERE token=$token)))";
 				if(routeAccess($sql)===true){
 					$userId = $this->user_model->getUserIdFromEmail($email);
-					$json = file_get_contents(getUrlDataSim("/acessosuser/".$userId));
+					$json = file_get_contents(getUrlDataSim("/acessosuser/".$userId)); // save on our DB
 					$obj = json_decode($json);
 					$out = array("data"=>array());
 					for($i=0;$i<count($obj);$i++){
