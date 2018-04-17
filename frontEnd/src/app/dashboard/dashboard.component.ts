@@ -64,6 +64,7 @@ export class DashboardComponent implements OnInit {
       pageLength: 5,
       // paging: false,
       searching: false,
+      lengthChange: false
     };
 
     const url = this.apiconnector.historico;
