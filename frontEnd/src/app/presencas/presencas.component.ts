@@ -16,15 +16,25 @@ class SearchOptions {
 })
 export class PresencasComponent implements OnInit {
 
-  model;
-  aulas = [];
-  salas = [];
+  model = new SearchOptions();
+  todasAulas = ['CSS', 'ITW', 'PGP'];
+  todasSalas = {
+    'CSS' : ['C1.1.23', 'C3.2.14'],
+    'ITW' : ['C1.1.20', 'C8.2.47'],
+    'PGP' : ['C1.2.10'],
+    };
+    salas = [];
 
   constructor(private _cookieService: CookieService) {
     this.model = new SearchOptions();
   }
 
   ngOnInit() {
+  }
+
+  aulaChange() {
+    console.log(this.model);
+    this.salas = this.todasSalas[this.model.aula];
   }
 
   onSubmit() {

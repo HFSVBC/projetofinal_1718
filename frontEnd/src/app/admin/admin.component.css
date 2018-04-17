@@ -21,3 +21,12 @@
     margin-left: 15px;
     width: 61%;
 }
+
+#btnAlterar {
+  float: right;
+  margin: 20px;
+}
+
+#photoUser {
+  padding: 20px;
+}

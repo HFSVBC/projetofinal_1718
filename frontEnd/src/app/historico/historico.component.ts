@@ -92,7 +92,6 @@ export class HistoricoComponent implements OnInit {
      private apiconnector: APIConnectorService) {
   }
 
-    // Rebuild the product list every time the product type changes.
     edificioChanged() {
       console.log(this.model);
       this.pisos = this.edificios_pisos[this.model.edificio];
