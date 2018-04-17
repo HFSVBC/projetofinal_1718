@@ -62,14 +62,6 @@ export class AdminComponent implements OnInit {
     }, {
       "id": 10,
       "type": "admin"
-    },
-    {
-      "id": 20,
-      "type": "all"
-    },
-    {
-      "id": 30,
-      "type": "mine"
     }
     ];
   }
