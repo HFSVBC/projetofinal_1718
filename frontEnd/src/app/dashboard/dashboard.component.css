@@ -6,7 +6,13 @@
   padding: 25px
 }
 
-@media only screen and (min-width: 600px) {
+.btn {
+  border-color: #303F9F !important;
+  background-color: #303F9F !important;
+  color: white;
+}
+
+@media (max-width: 600px) {
 #padBottom {
   padding-bottom: 15px
 }

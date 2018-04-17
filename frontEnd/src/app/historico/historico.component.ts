@@ -113,11 +113,15 @@ export class HistoricoComponent implements OnInit {
     }
 
   ngOnInit(): void {
+    this.createTable();
+  }
 
+  createTable() {
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 10,
       dom: 'Bfrtip',
+      searching: false,
       buttons: [
         'copy', 'csv', 'excel', 'pdf', 'print'
       ]
@@ -129,7 +133,7 @@ export class HistoricoComponent implements OnInit {
 
     this.apiconnector.postData(url, data)
       .subscribe(res => {
-
+        console.log('res', res);
         this._cookieService.put('token', res['data']['token']);
         this.extractData(res['data']['accessHist']);
       });
