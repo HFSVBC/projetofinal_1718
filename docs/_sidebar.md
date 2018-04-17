@@ -4,8 +4,12 @@
     * [Licence](README.md#licence)
 
 * Front End
-    * [Routes](FrontEnd.md)
-    * [User Types](FrontEnd.md)
+    * [General](FrontEnd_General.md)
+    * [Admin](FrontEnd_Admin.md)
+    * [Dashboard](FrontEnd_Dashboard.md)
+    * [Espacos](FrontEnd_Espacos.md)
+    * [Historico](FrontEnd_Historico.md)
+    * [Presencas](FrontEnd_Presencas.md)
 
 * Back End
     * [Users](BackEnd_Users.md)
