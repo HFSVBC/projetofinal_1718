@@ -60,11 +60,10 @@ export class DashboardComponent implements OnInit {
 
   createTable() {
     this.dtOptions = {
-      pagingType: 'full_numbers',
-      pageLength: 3,
-      dom: 'Bfrtip',
+      // pagingType: 'full_numbers',
+      pageLength: 5,
+      // paging: false,
       searching: false,
-      buttons: false,
     };
 
     const url = this.apiconnector.historico;
