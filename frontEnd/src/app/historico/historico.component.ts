@@ -25,14 +25,14 @@ class histAc {
 @Component({
   selector: 'app-historico',
   templateUrl: './historico.component.html',
-  styleUrls: ['./historico.component.css']
+  styleUrls: ['./historico.component.css'],
 })
 
 export class HistoricoComponent implements OnInit {
 
   token;
 
-  dtOptions: DataTables.Settings = {};
+  dtOptions: any = {};
   // We use this trigger because fetching the list of persons can be quite long,
   // thus we ensure the data is fetched before rendering
   histAc: histAc[] = [];
@@ -116,7 +116,11 @@ export class HistoricoComponent implements OnInit {
 
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 10
+      pageLength: 10,
+      dom: 'Bfrtip',
+      buttons: [
+        'copy', 'csv', 'excel', 'pdf', 'print'
+      ]
     };
 
     const url = this.apiconnector.historico;
