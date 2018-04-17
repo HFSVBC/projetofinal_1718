@@ -59,10 +59,8 @@ $route['history/user/(:any)'] = 'history/getUserAccessHistory/$1';
 // UTILIZADOR
 $route['user/login']          = 'UserLoader/logIn'; // [20] registers user if not already registered | {token => String, user_type => String}
 $route['user/logout']         = 'UserLoader/logOut'; // [20] logs user out
-// $route['user/isloggedin']     = 'UserLoader/isLoggedIn';
-// $route['user/register']       = 'UserLoader/register';
-// $route['user/exists']         = 'UserLoader/exists';
 $route['user/retriveprofile'] = 'UserLoader/getUserProfile'; // [20, 30, 10]
+$route['user/changeType']     = 'UserLoader/updateUserType'; //[10]
 // ROTAS GERAIS
 $route['default_controller'] = 'NotAuthorized';
 $route['404_override'] = '';

@@ -7,7 +7,7 @@
 	*	- register -> Boolean
 	*	- isLoggedIn -> array(Boolean, array(token(String), description(String)))
 	*	- isRegistered -> Boolean
-	*	_ getUserType -> String
+	*	- getUserType -> String
 	*/
 	class User_model extends CI_Model{
 		// user login method -> adds user to the users_loggedIn table
@@ -90,6 +90,21 @@
 				return array(true, $row);
 			}else{
 				return array(false, '');
+			}
+		}
+		public function changeUserType()
+		{
+			$uid        = $this->db->escape($this->input->post('uid'));
+			$acountType = $this->db->escape($this->input->post('type'));
+
+			$sql = "UPDATE users
+					SET account_type = $acountType
+					WHERE googleUID = $uid";
+			
+			if($this->db->query($sql)){
+				return true;
+			}else{
+				return false;
 			}
 		}
 		// -------------EXTRA Aux functions

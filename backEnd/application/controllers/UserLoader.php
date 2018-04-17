@@ -198,5 +198,66 @@ class UserLoader extends CI_Controller {
 		}
 		jsonExporter($jsonConf);
 	}
+	// user/changeType
+	public function updateUserType()
+	{
+		$jsonConf = array("code"=>null,"description"=>"","data"=>array()); 
+		$config = array(
+			array(
+					'field' => 'userTokenId',
+					'label' => "User's Token",
+					'rules' => 'trim|required'
+			),
+			array(
+					'field' => 'uid',
+					'label' => "User's UID",
+					'rules' => 'trim|required'
+			),
+			array(
+					'field' => 'type',
+					'label' => "User's user type",
+					'rules' => 'trim|required'
+			)
+		);
+		$this->form_validation->set_rules($config);
+		$this->form_validation->set_error_delimiters('', '');
+		if($this->form_validation->run() === true){
+			if(isUserLoggedIn($this->input->post('token'))===true){
+				$token = $this->db->escape($this->input->post('userTokenId'));
+				$sql = "SELECT *
+						FROM conf_routesAccess
+						WHERE user_type = (SELECT account_type FROM users WHERE id = (SELECT user FROM users_loggedIn WHERE token = $token))";
+				if(routeAccess($sql)===true){
+					if($this->user_model->changeUserType()===true){
+						$jsonConf["code"]        = 200;
+						$jsonConf["description"] = "ok";
+						$jsonConf["data"] 		 = array(
+							'token' => regenerateUserToken($this->input->post('userTokenId'))[1],
+						);
+					}else{
+						$jsonConf["code"]        = 500;
+						$jsonConf["description"] = "Server Error";
+						$jsonConf["data"] 		 = array('message'=>'Error gueting user profile');
+					}
+				}else{
+					$jsonConf["code"]        = 403;
+					$jsonConf["description"] = "Forbidden";
+					$jsonConf["data"] 		 = array('message'=>'Access not authorised for current user');
+				}
+			}else{
+				$jsonConf["code"]        = 401;
+				$jsonConf["description"] = "Unauthorizedd";
+				$jsonConf["data"] 		 = array('message'=>'User session expired');
+			}
+		}else{
+			$jsonConf["code"]        = 405;
+			$jsonConf["description"] = "Method Not Allowed";
+			$jsonConf["data"] 		 = array(
+											'message'=>'POST has not passed the validation check.',
+											'errors' => validation_errors(),
+										);
+		}
+		jsonExporter($jsonConf);
+	}
 }
 ?>
