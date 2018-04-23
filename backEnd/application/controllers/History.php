@@ -14,7 +14,6 @@ class History extends CI_Controller {
     }
 	public function getUserAccessHistory($email="null")
 	{
-		$jsonConf = array("code"=>null,"description"=>"","data"=>array());
 		$config = array(
 			array(
 					'field' => 'userTokenId',
@@ -47,32 +46,21 @@ class History extends CI_Controller {
 							"fim"=>str_replace("T", " ", $obj[$i]->hora_saida)
 						);
 						array_push($out["data"], $histOut);
-					}					
-					$jsonConf["code"]        = 200;
-					$jsonConf["description"] = "ok";
-					$jsonConf["data"] 		 = array(
-													"accessHist"=>$out,
-													"token"=>regenerateUserToken($this->input->post('userTokenId'))[1]
-												);
+					}
+					$data = array(
+                        "accessHist"=>$out,
+                        "token"=>regenerateUserToken($this->input->post('userTokenId'))[1]
+                    );
+                    jsonExporter(200, $data);
 				}else{
-					$jsonConf["code"]        = 403;
-					$jsonConf["description"] = "Forbidden";
-					$jsonConf["data"] 		 = array('message'=>'Access not authorised for current user');
-				}
-			}else{
-				$jsonConf["code"]        = 401;
-				$jsonConf["description"] = "Unauthorizedd";
-				$jsonConf["data"] 		 = array('message'=>'User session expired');
-			}
-		}else{
-			$jsonConf["code"]        = 405;
-			$jsonConf["description"] = "Method Not Allowed";
-			$jsonConf["data"] 		 = array(
-											'message'=>'POST has not passed the validation check.',
-											'errors' => validation_errors(),
-										);
+                    jsonExporter(403);
+                }
+            }else{
+                jsonExporter(401);
+            }
+        }else{
+            jsonExporter(405, validation_errors());
 		}
-		jsonExporter($jsonConf);
 		// if($email=="null"){
 			
 		// }else{

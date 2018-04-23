@@ -110,6 +110,7 @@
 		// -------------EXTRA Aux functions
 		public function isLoggedIn($uid)
 		{
+		    $this->loggedInUser_Cleaner();
 			$uid = $this->db->escape($uid);
 
 			$sql = "SELECT ul.token, uat.description
@@ -125,6 +126,24 @@
 				return array(false, '');
 			}
 		}
+		private function loggedInUser_Cleaner()
+        {
+            $sql = "SELECT *
+                    FROM users_loggedIn
+                    WHERE CURRENT_DATE() > timeOut";
+            $usersExpired = $this->db->query($sql);
+            $usersExpired = $usersExpired->result_array();
+            $this->db->trans_start();
+            foreach($usersExpired as $key => $value){
+                $sql = "INSERT INTO users_loggedOut (user, login_timestamp, externalIP)
+                        VALUES (".$value['user'].",'".$value['timestamp']."','".$value['externalIP']."')";
+                $this->db->query($sql);
+                $sql = "DELETE FROM users_loggedIn
+					    WHERE token='".$value['token']."'";
+            $this->db->query($sql);
+            }
+            $this->db->trans_complete();
+        }
 		public function isRegistered($uid)
 		{
 			$uid = $this->db->escape($uid);
