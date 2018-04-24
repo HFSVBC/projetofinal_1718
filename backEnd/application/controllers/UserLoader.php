@@ -20,8 +20,7 @@ class UserLoader extends CI_Controller {
 	// add the necessary fields for user login
 	//login user by adding a line to the LoggedIn_Users table
 	public function logIn()
-	{ 
-		$jsonConf = array("code"=>null,"description"=>"","data"=>array());
+	{
 		$config = array(
 			array(
 					'field' => 'uid',
@@ -49,61 +48,46 @@ class UserLoader extends CI_Controller {
 		$this->form_validation->set_error_delimiters('', '');
 		if($this->form_validation->run() === true){
 			if($this->user_model->isRegistered($this->input->post("uid"))===true){
-				$jsonConf = $this->loginHelper();
+				$this->loginHelper();
 			}else{
 				if($this->user_model->register()===true){
-					$jsonConf = $this->loginHelper();
+					$this->loginHelper();
 				}else{
-					$jsonConf["code"]        = 500;
-					$jsonConf["description"] = "Server Error";
-					$jsonConf["data"] 		 = array('message'=>'Error completing signup process');
+					jsonExporter(500, 'Error completing signup process');
 				}
 			}	
 		}else{
-			$jsonConf["code"]        = 405;
-			$jsonConf["description"] = "Method Not Allowed";
-			$jsonConf["data"] 		 = array(
-											'message'=>'POST has not passed the validation check.',
-											'errors' => validation_errors()
-										);
+			jsonExporter(405, validation_errors());
 		}
-		jsonExporter($jsonConf);
 	}
 	// login's user in the database and generates ser first token
 	private function loginHelper()
 	{
 		// verificar se ja se encontra logado
-		$jsonConf = array("code"=>null,"description"=>"","data"=>array());
 		$result = $this->user_model->isLoggedIn($this->input->post("uid"));
 		if($result[0]===true){
-			$jsonConf["code"]        = 200;
-			$jsonConf["description"] = "ok";
-			$jsonConf["data"] 		 = array(
+			$data = array(
 				'token' => $result[1][0],
 				'user_type' => $result[1][1]
 			);
+			jsonExporter(200, $data);
 		}else{
 			$result = $this->user_model->login();
 			if($result[0]===true){
-				$jsonConf["code"]        = 200;
-				$jsonConf["description"] = "ok";
-				$jsonConf["data"] 		 = array(
+				$data = array(
 					'token' => $result[1],
 					'user_type' => $this->user_model->getUserType($this->input->post("uid"))
 				);
+				jsonExporter(200, $data);
 			}else{
-				$jsonConf["code"]        = 500;
-				$jsonConf["description"] = "Server Error";
-				$jsonConf["data"] 		 = array('message'=>'Error completing login process');
+				jsonExporter(500, 'Error completing login process');
 			}
 		}
-		return $jsonConf;
 	}
 	//logout user by adding a line to the LoggedOut_Users Table 
 	// and removing user from LoggedIn_Users table
 	public function logOut()
 	{
-		$jsonConf = array("code"=>null,"description"=>"","data"=>array()); 
 		$config = array(
 			array(
 					'field' => 'userTokenId',
@@ -115,27 +99,16 @@ class UserLoader extends CI_Controller {
 		$this->form_validation->set_error_delimiters('', '');
 		if($this->form_validation->run() === true){
 			if($this->user_model->logOut()===true){
-				$jsonConf["code"]        = 200;
-				$jsonConf["description"] = "ok";
-				$jsonConf["data"] 		 = array();
+				jsonExporter(200, array());
 			}else{
-				$jsonConf["code"]        = 500;
-				$jsonConf["description"] = "Server Error";
-				$jsonConf["data"] 		 = array('message'=>'Error completing logout process');
+				jsonExporter(500, 'Error completing logout process');
 			}
 		}else{
-			$jsonConf["code"]        = 405;
-			$jsonConf["description"] = "Method Not Allowed";
-			$jsonConf["data"] 		 = array(
-											'message'=>'POST has not passed the validation check.',
-											'errors' => validation_errors(),
-										);
+			jsonExporter(405, validation_errors());
 		}
-		jsonExporter($jsonConf);
 	}
 	public function getUserProfile()
 	{
-		$jsonConf = array("code"=>null,"description"=>"","data"=>array()); 
 		$config = array(
 			array(
 					'field' => 'userTokenId',
@@ -161,9 +134,7 @@ class UserLoader extends CI_Controller {
 				if(routeAccess($sql)===true){
 					$result = $this->user_model->getProfileData();
 					if($result[0]===true){
-						$jsonConf["code"]        = 200;
-						$jsonConf["description"] = "ok";
-						$jsonConf["data"] 		 = array(
+						$data = array(
 							"token" => regenerateUserToken($this->input->post('userTokenId'))[1],
 							"user" => array(
 								"uid" => $result[1]->googleUID,
@@ -173,35 +144,23 @@ class UserLoader extends CI_Controller {
 								"user_type" => $result[1]->description
 							)
 						);
+						jsonExporter(200, $data);
 					}else{
-						$jsonConf["code"]        = 500;
-						$jsonConf["description"] = "Server Error";
-						$jsonConf["data"] 		 = array('message'=>'Error gueting user profile');
+						jsonExporter(500, 'Error gueting user profile');
 					}
 				}else{
-					$jsonConf["code"]        = 403;
-					$jsonConf["description"] = "Forbidden";
-					$jsonConf["data"] 		 = array('message'=>'Access not authorised for current user');
+					jsonExporter(403);
 				}
 			}else{
-				$jsonConf["code"]        = 401;
-				$jsonConf["description"] = "Unauthorizedd";
-				$jsonConf["data"] 		 = array('message'=>'User session expired');
+				jsonExporter(401);
 			}
 		}else{
-			$jsonConf["code"]        = 405;
-			$jsonConf["description"] = "Method Not Allowed";
-			$jsonConf["data"] 		 = array(
-											'message'=>'POST has not passed the validation check.',
-											'errors' => validation_errors(),
-										);
+			jsonExporter(405, validation_errors());
 		}
-		jsonExporter($jsonConf);
 	}
 	// user/changeType
 	public function updateUserType()
 	{
-		$jsonConf = array("code"=>null,"description"=>"","data"=>array()); 
 		$config = array(
 			array(
 					'field' => 'userTokenId',
@@ -229,35 +188,22 @@ class UserLoader extends CI_Controller {
 						WHERE user_type = (SELECT account_type FROM users WHERE id = (SELECT user FROM users_loggedIn WHERE token = $token))";
 				if(routeAccess($sql)===true){
 					if($this->user_model->changeUserType()===true){
-						$jsonConf["code"]        = 200;
-						$jsonConf["description"] = "ok";
-						$jsonConf["data"] 		 = array(
+						$data = array(
 							'token' => regenerateUserToken($this->input->post('userTokenId'))[1],
 						);
+						jsonExporter(200, $data);
 					}else{
-						$jsonConf["code"]        = 500;
-						$jsonConf["description"] = "Server Error";
-						$jsonConf["data"] 		 = array('message'=>'Error gueting user profile');
+						jsonExporter(500, 'Error changing user account type');
 					}
 				}else{
-					$jsonConf["code"]        = 403;
-					$jsonConf["description"] = "Forbidden";
-					$jsonConf["data"] 		 = array('message'=>'Access not authorised for current user');
+					jsonExporter(403);
 				}
 			}else{
-				$jsonConf["code"]        = 401;
-				$jsonConf["description"] = "Unauthorizedd";
-				$jsonConf["data"] 		 = array('message'=>'User session expired');
+				jsonExporter(401);
 			}
 		}else{
-			$jsonConf["code"]        = 405;
-			$jsonConf["description"] = "Method Not Allowed";
-			$jsonConf["data"] 		 = array(
-											'message'=>'POST has not passed the validation check.',
-											'errors' => validation_errors(),
-										);
+			jsonExporter(405, validation_errors());
 		}
-		jsonExporter($jsonConf);
 	}
 }
 ?>

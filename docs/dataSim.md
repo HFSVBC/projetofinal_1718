@@ -99,7 +99,7 @@ It returns a JSON list with the following configuration for a successful respons
 ...]
 ```
 
-#Classes
+## Classes
 The route ```/acessosprof/<profdiscaula>``` retrieves the info on a specific access defined by the ```<profdiscaula>``` which is idprof, iddisc and idaula separated by ```,```.
 It returns a JSON list with the following configuration for a successful response:
 ```JSON
@@ -135,7 +135,7 @@ It returns a JSON list with the following configuration for a successful respons
 ...]
 ```
 
-#Subjects
+## Subjects
 The route ```/disciplinaprof/<prof>``` retrieves the info on a specific access defined by the ```<prof>```.
 It returns a JSON list with the following configuration for a successful response:
 ```JSON
