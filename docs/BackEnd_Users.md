@@ -92,7 +92,7 @@ It returns a JSON with the following configuration for a successful response:
     "state": "ok",
     "code": 200,
     "data": {
-        "token": (String) Client's first token,
+        "token": (String) Client's updated token,
         "user": {
             "avatar": (String) Client's avatar link,
             "email": (String) Client's email address,
@@ -100,6 +100,46 @@ It returns a JSON with the following configuration for a successful response:
             "uid": (String) Client's Google UID,
             "user_type": (String) Client's account type
         }
+    }
+}
+```
+It returns a JSON with the following configuration for an unsuccesfull response:
+```JSON
+{
+    "user_agent": (String) Client user agent,
+    "client_ip": (String) Client external ip,
+    "url": (String) Client accessed route,
+    "request_date": (String) Client request time stamp,
+    "state": (String) Error message,
+    "code": (int) HTTP error code,
+    "data": {
+        "message": (String) Error description,
+        "errors (Optional)": (String) Describing missing fields
+    }
+}
+```
+The HTTP error codes might be 401 (Unauthorizedd => User session expired), 403 (Forbidden => Access not authorised for current user), 405 (Method Not Allowed => POST has not passed the validation check.) and 500 (Server Error => Error gueting user profile)
+
+## updateUserType
+Accessed by the route ```/user/changeType```. It handles user to log out in the back end. For that it requires the following POST elements:
+```
+userTokenId => Client's last issued token => String
+uid => The user's uid to whom the profile to update belongs to => String
+type => The new user type => int (0 - student, 1 - teacher, 2 - staff member, 3 - security guard, 10 - admin)
+```
+The API ensures that the user is still valid and has access to the route.
+
+It returns a JSON with the following configuration for a successful response:
+```JSON
+{
+    "user_agent": (String) Client user agent,
+    "client_ip": (String) Client external ip,
+    "url": (String) Client accessed route,
+    "request_date": (String) Client request time stamp,
+    "state": "ok",
+    "code": 200,
+    "data": {
+        "token": (String) Client's updated token,
     }
 }
 ```

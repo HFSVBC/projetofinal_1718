@@ -19,6 +19,15 @@ export class AdminComponent implements OnInit {
   user_type;
   user_avatar;
 
+  types = {
+    'student' : 0,
+    'teacher' : 1,
+    'staff member' : 2,
+    'security' : 3,
+    'admin' : 10
+  };
+
+
   constructor(private _cookieService: CookieService, private apiconnector: APIConnectorService) {
   }
 
@@ -66,16 +75,12 @@ export class AdminComponent implements OnInit {
     ];
   }
 
-  onChange(newValue) {
-    console.log('trocou');
-    for (const user of this.users) {
-      if (user.type === newValue) {
-        const url = this.apiconnector.changeType;
+  submitChange() {
+    const url = this.apiconnector.changeType;
         const data = new FormData();
         data.append('userTokenId', this._cookieService.get('token'));
         data.append('uid', this.user_uid);
-        data.append('type', user.id);
-        console.log(user.id);
+        data.append('type', this.types[this.user_type]);
 
         this.apiconnector.postData(url, data)
         .subscribe(res => {
@@ -83,7 +88,6 @@ export class AdminComponent implements OnInit {
           this._cookieService.put('token', res['data']['token']);
           alert('Trocou o id');
         });
-      }
-    }
   }
+
 }

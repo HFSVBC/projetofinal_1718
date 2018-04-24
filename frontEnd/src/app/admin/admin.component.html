@@ -1,42 +1,54 @@
-<div class="row">
-    <app-menu class="col-sm-2"></app-menu>
-    <div class="router col-sm-10 text-center">
-        <h1 class="h1">ADMIN</h1>
+<app-menu class="col-sm-2">
+</app-menu>
+<div class="router col-sm-10">
 
-        <form (ngSubmit)="onSubmit()" class="frow col-sm-8">
-            <input type="email" class="form-control mr-5" placeholder="Email" id="email" [(ngModel)]="email" name="email" required>
-            <button type="submit" class="btn btn-success">Submit</button>
-        </form>
-        <div class="card" *ngIf='user'>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="card-img-top">
-                        <img src={{user_avatar}} id='photoUser'>
+    <div class="card">
+        <h5 class="card-header">Alterar Tipo de Utilizador</h5>
+        <div class="card-body" style="margin:auto">
+            <form (ngSubmit)="onSubmit()">
+                <div class="form-row">
+                    <div class="input-group col-sm-8 mr-5">
+                        <div class="input-group-addon">
+                            <label class="input-group-text mb-0" for="email">Email</label>
+                        </div>
+                        <input type="email" class="form-control" id="email" [(ngModel)]="email" name="email" required>
                     </div>
+                    <button type="submit" class="btn btn-success ">Submit</button>
                 </div>
-                <div class="col-md-8">
-                    <div class="card-block">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">
-                                <label for="uid" class="col-sm-3 col-form-label">UID</label>
-                                <input type="text" readonly class="col-sm-8 form-control-plaintext" id="uid" value="{{user_uid}}">
-                            </li>
-                            <li class="list-group-item">
-                                <label for="nome" class="col-sm-3 col-form-label">Nome</label>
-                                <input type="text" readonly class="col-sm-8 form-control-plaintext" id="nome" value="{{user_name}}">
-                            </li>
-                            <li class="list-group-item">
-                                <label for="email" class="col-sm-3 col-form-label">Email</label>
-                                <input type="text" readonly class="col-sm-8 form-control-plaintext" id="email" value="{{user_email}}">
-                            </li>
-                            <li class="list-group-item">
-                                <label for="user_type" class="col-sm-3 col-form-label">Tipo</label>
-                                <select id="user_type" class="custom-select" [(ngModel)]="user_type" (ngModelChange)="onChange($event)">
-                                    <option *ngFor="let user of users" [ngValue]="user.type">{{user.type}}</option>
-                                </select>
-                            </li>
-                        </ul>
-                    </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="card " *ngIf='user'>
+        <div class="row ">
+            <div class="col-md-4 ">
+                <div class="card-img-top ">
+                    <img src={{user_avatar}} id='photoUser'>
+                </div>
+            </div>
+            <div class="col-md-8 ">
+                <div class="card-block ">
+                    <ul class="list-group list-group-flush ">
+                        <li class="list-group-item ">
+                            <label for="uid " class="col-sm-3 col-form-label ">UID</label>
+                            <input type="text " readonly class="col-sm-8 form-control-plaintext " id="uid " value="{{user_uid}} ">
+                        </li>
+                        <li class="list-group-item ">
+                            <label for="nome " class="col-sm-3 col-form-label ">Nome</label>
+                            <input type="text " readonly class="col-sm-8 form-control-plaintext " id="nome " value="{{user_name}} ">
+                        </li>
+                        <li class="list-group-item ">
+                            <label for="email " class="col-sm-3 col-form-label ">Email</label>
+                            <input type="text " readonly class="col-sm-8 form-control-plaintext " id="email " value="{{user_email}} ">
+                        </li>
+                        <li class="list-group-item ">
+                            <label for="user_type " class="col-sm-3 col-form-label ">Tipo</label>
+                            <select id="user_type " class="custom-select " [(ngModel)]="user_type">
+                  <option *ngFor="let user of users " [ngValue]="user.type ">{{user.type}}</option>
+                </select>
+                        </li>
+                    </ul>
+                    <button class="btn btn-primary" (click)="submitChange()" id="btnAlterar">Alterar</button>
                 </div>
             </div>
         </div>

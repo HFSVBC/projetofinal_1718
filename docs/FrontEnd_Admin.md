@@ -1,25 +1,13 @@
-## Auth
+# Admin
+---
 
-For authenticate a user in our aplication we use ```Google Firebase```
+Accessed by the route `/admin`, it allows an Admin to change the type of an user. The administrator provides the email and them the information about the user is showed for confirmation.
 
-## Routes
+The administrator can access the follwing information:
+* view his access records
+* check user access
+* check how many people are in a room
+* check the students attendece on classes
+* change user type
 
-For use our aplication a user has to use is Google Account and use the route ```/login``` to login in the aplication. 
-
-    /login 
-
-    /dashboard
-    /historico
-    /presencas
-    /espacos
-    /admin
-
-## User Types
-
-We will have diferent users that will use this aplication and we need to have a way to separate them. 
-
-So we got 5 types of users:
-
-- Student
-- Professor
-- ​
+![admin image](./admin.PNG)

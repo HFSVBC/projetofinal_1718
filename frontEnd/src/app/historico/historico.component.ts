@@ -16,7 +16,7 @@ class SearchOptions {
   data_fim: Date;
 }
 
-class histAc {
+class HistAc {
   sala: string;
   inicio: string;
   fim: string;
@@ -35,7 +35,7 @@ export class HistoricoComponent implements OnInit {
   dtOptions: any = {};
   // We use this trigger because fetching the list of persons can be quite long,
   // thus we ensure the data is fetched before rendering
-  histAc: histAc[] = [];
+  histAc: HistAc[] = [];
   dtTrigger: Subject<any> = new Subject();
 
   model = new SearchOptions();
@@ -88,10 +88,10 @@ export class HistoricoComponent implements OnInit {
 
   columnsToDisplay = ['Sala', 'Hora de Entrada', 'Hora de Saida'];
 
-  constructor(public authService: AuthService, private router: Router, private _cookieService: CookieService, private apiconnector: APIConnectorService) {
+  constructor(public authService: AuthService, private router: Router, private _cookieService: CookieService,
+     private apiconnector: APIConnectorService) {
   }
 
-    // Rebuild the product list every time the product type changes.
     edificioChanged() {
       console.log(this.model);
       this.pisos = this.edificios_pisos[this.model.edificio];
@@ -113,11 +113,15 @@ export class HistoricoComponent implements OnInit {
     }
 
   ngOnInit(): void {
+    this.createTable();
+  }
 
+  createTable() {
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 10,
       dom: 'Bfrtip',
+      searching: false,
       buttons: [
         'copy', 'csv', 'excel', 'pdf', 'print'
       ]
@@ -129,7 +133,7 @@ export class HistoricoComponent implements OnInit {
 
     this.apiconnector.postData(url, data)
       .subscribe(res => {
-        
+        console.log('res', res);
         this._cookieService.put('token', res['data']['token']);
         this.extractData(res['data']['accessHist']);
       });

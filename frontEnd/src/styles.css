@@ -17,13 +17,22 @@ img {
 }
 
 .row {
-    height: 100%;
     padding: 0;
     margin: 0
 }
 
+.h-max {
+    height: 100%;
+}
+
 .router {
     padding: 5em 3em 0;
+    background-color: #eeeeee;
+    padding-bottom: 10px;
+}
+
+.card {
+    box-shadow: 3px 3px 10px 0px rgba(0, 0, 0, 0.3);
 }
 
 app-menu {
@@ -33,7 +42,7 @@ app-menu {
 }
 
 @media only screen and (max-width: 767px) {
-    .row {
+    .h-max {
         height: auto;
     }
     .router {

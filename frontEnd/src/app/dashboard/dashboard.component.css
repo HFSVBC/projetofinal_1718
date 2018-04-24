@@ -1,0 +1,23 @@
+#photoUser {
+    padding: 25px
+}
+
+.drow {
+    height: 100%;
+}
+
+#pad {
+    padding: 25px
+}
+
+.btn {
+    border-color: #303F9F !important;
+    background-color: #303F9F !important;
+    color: white;
+}
+
+@media (max-width: 600px) {
+    #padBottom {
+        padding-bottom: 15px
+    }
+}

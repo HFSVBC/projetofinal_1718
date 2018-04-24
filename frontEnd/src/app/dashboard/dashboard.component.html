@@ -1,6 +1,80 @@
-<div class="row">
-    <app-menu class="col-sm-2"></app-menu>
-    <div class="router col-sm-10">
-        <h1>DASHBOARD</h1>
+<app-menu class="col-sm-2">
+</app-menu>
+<div class="router col-sm-10">
+
+    <div class="drow row">
+
+        <div class=" col-md-12" id="padBottom">
+            <div class="card">
+                <h5 class="card-header">Perfil</h5>
+                <div class="row">
+                    <div class="col-md-3 ">
+                        <div class="card-img-top">
+                            <img src={{user_avatar}} id='photoUser' class="rounded-circle">
+                        </div>
+                    </div>
+
+                    <div class="col-md-9" id="pad">
+                        <h5 class="card-title">{{user_name}}</h5>
+                        <p class="card-text">Email: {{user_email}}</p>
+                        <p class="card-text">UID: {{user_uid}}</p>
+                        <p class="card-text">Tipo: {{user_type}}</p>
+                        <a href="#" class="btn">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class=" col-md-6" id="padBottom">
+            <div class="card">
+                <h5 class="card-header">Histórico de Acessos</h5>
+                <div class="" id="pad">
+                    <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-striped table-bordered dataTable no-footer">
+                        <thead>
+                            <tr>
+                                <th>Sala</th>
+                                <th>Hora de Entrada</th>
+                                <th>Hora de Saida</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let pos of histAc" role="row" class="odd">
+                                <td>{{ pos.sala }}</td>
+                                <td>{{ pos.inicio }}</td>
+                                <td>{{ pos.fim }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <a href="/historico" class="btn">Mais informação</a>
+                </div>
+            </div>
+        </div>
+
+        <div class=" col-md-6" id="padBottom">
+            <div class="card">
+                <h5 class="card-header">Presenças</h5>
+                <div class="" id="pad">
+                    <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-striped table-bordered dataTable no-footer">
+                        <thead>
+                            <tr>
+                                <th>Sala</th>
+                                <th>Hora de Entrada</th>
+                                <th>Hora de Saida</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let pos of histAc" role="row" class="odd">
+                                <td>{{ pos.sala }}</td>
+                                <td>{{ pos.inicio }}</td>
+                                <td>{{ pos.fim }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <a href="/presencas" class="btn">Mais informação</a>
+                </div>
+            </div>
+        </div>
+
     </div>
+
 </div>
