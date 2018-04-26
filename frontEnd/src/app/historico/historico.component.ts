@@ -119,7 +119,7 @@ export class HistoricoComponent implements OnInit {
   createTable() {
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 10,
+      pageLength: 8,
       dom: 'Bfrtip',
       searching: false,
       buttons: [

@@ -14,7 +14,6 @@
 }
 
 .card {
-    margin-top: 2em;
     border: none;
 }
 
@@ -38,10 +37,10 @@
 }
 
 #btnAlterar {
-  float: right;
-  margin: 20px;
+    float: right;
+    margin: 20px;
 }
 
 #photoUser {
-  padding: 20px;
+    padding: 20px;
 }

@@ -26,9 +26,11 @@ img {
 }
 
 .router {
-    padding: 5em 3em 0;
+    padding: 5em 5em 0;
     background-color: #eeeeee;
     padding-bottom: 10px;
+    display: flow-root;
+    height: 100%;
 }
 
 .card {
