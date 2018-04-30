@@ -3,6 +3,16 @@
     box-shadow: 0 0 2em black;
 }
 
+#dashboard {
+    position: fixed;
+    left: 0;
+}
+
+.router {
+  position: absolute !important;
+  right: 0 !important;
+}
+
 .bg-primary {
     background-color: #303F9F !important;
 }

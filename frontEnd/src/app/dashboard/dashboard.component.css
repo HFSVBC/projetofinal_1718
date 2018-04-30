@@ -10,6 +10,12 @@
     margin: auto;
 }
 
+.router {
+  position: absolute !important;
+  right: 0 !important;
+}
+
+
 .drow {
     height: 100%;
 }

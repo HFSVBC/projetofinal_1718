@@ -7,6 +7,10 @@
     color: #5d5d5d;
     margin-top: -3em;
 }
+.router {
+  position: fixed !important;
+  right: 0 !important;
+}
 
 .frow {
     display: inline-flex;
