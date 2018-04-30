@@ -112,6 +112,7 @@
     /* transform: translateZ(10px) */
     background-color: #1a2358 !important;
     float: left;
+    width: 15em;
 }
 
 .container-fluid {
