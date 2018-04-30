@@ -29,7 +29,7 @@ img {
     padding: 5em 5em 0;
     background-color: #eeeeee;
     padding-bottom: 10px;
-    display: flow-root;
+    display: table;
     height: 100%;
 }
 
