@@ -1,4 +1,4 @@
 # Consultar Histórico
 ---
 
-Accessed by the route `/historico`, it allows an user to view all his access records. The information can by filtered by building, floor and/or room and date.
+Accessed by the route `/historico`, it allows a user to view all their access records. The information can be filtered by building, floor and/or room, and date.
