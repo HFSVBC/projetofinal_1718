@@ -1,5 +1,23 @@
+.text-center {
+    margin: auto 0;
+}
+
+.h1 {
+    font-size: 4em;
+    color: #5d5d5d;
+    margin-top: -3em;
+}
+.router {
+  position: fixed !important;
+  right: 0 !important;
+}
+
+.frow {
+    display: inline-flex;
+    padding: 5em 0 0;
+}
+
 .card {
-    margin-top: 2em;
     border: none;
 }
 
@@ -23,10 +41,10 @@
 }
 
 #btnAlterar {
-  float: right;
-  margin: 20px;
+    float: right;
+    margin: 20px;
 }
 
 #photoUser {
-  padding: 20px;
+    padding: 20px;
 }

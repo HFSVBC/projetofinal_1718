@@ -10,6 +10,12 @@ form {
     width: 100%;
 }
 
+.router {
+  position: absolute !important;
+  right: 0 !important;
+}
+
+
 @media only screen and (max-width: 767px) {
     div.datatable {
         padding: 1.5em 0 0!important;

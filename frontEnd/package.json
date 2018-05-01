@@ -51,7 +51,8 @@
     "popper.js": "^1.14.3",
     "rxjs": "^5.5.10",
     "save": "^2.3.2",
-    "zone.js": "^0.8.26"
+    "zone.js": "^0.8.26",
+    "hoek": "4.2.1"
   },
   "devDependencies": {
     "@angular/cli": "^1.7.4",
@@ -74,6 +75,7 @@
     "protractor": "~5.1.2",
     "ts-node": "~3.2.0",
     "tslint": "~5.7.0",
-    "typescript": "~2.4.2"
+    "typescript": "~2.4.2",
+    "hoek": "4.2.1"
   }
 }

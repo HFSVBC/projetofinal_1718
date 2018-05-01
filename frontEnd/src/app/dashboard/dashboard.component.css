@@ -1,19 +1,46 @@
 #photoUser {
-  padding: 25px
+    padding: 1em;
+}
+
+.card-user {
+    margin-bottom: 1em;
+}
+
+.card-img-middle {
+    margin: auto;
+}
+
+.router {
+  position: absolute !important;
+  right: 0 !important;
+}
+
+
+.drow {
+    height: 100%;
 }
 
 #pad {
-  padding: 25px
+    padding: 2em;
+}
+
+.col-md-6 {
+    padding: 0;
+}
+
+#padBottom {
+    padding-left: 1em;
 }
 
 .btn {
-  border-color: #303F9F !important;
-  background-color: #303F9F !important;
-  color: white;
+    border-color: #303F9F !important;
+    background-color: #303F9F !important;
+    color: white;
 }
 
 @media (max-width: 600px) {
-#padBottom {
-  padding-bottom: 15px
-}
+    #padBottom,
+    #padTop {
+        padding-bottom: 1em;
+    }
 }

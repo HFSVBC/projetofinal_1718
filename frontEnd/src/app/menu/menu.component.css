@@ -3,6 +3,16 @@
     box-shadow: 0 0 2em black;
 }
 
+#dashboard {
+    position: fixed;
+    left: 0;
+}
+
+.router {
+  position: absolute !important;
+  right: 0 !important;
+}
+
 .bg-primary {
     background-color: #303F9F !important;
 }
@@ -104,19 +114,15 @@
 }
 
 .sidebar {
-    position: relative;
     height: 100%!important;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 100;
-    padding: 2em 0 0;
+    padding: 5em 0 0;
     -webkit-box-shadow: 0 0 2.5em 0.1em grey;
     -moz-box-shadow: 0 0 2.5em 0.1em grey;
     box-shadow: 0 0 2.5em 0.1em grey;
     /* transform: translateZ(10px) */
     background-color: #1a2358 !important;
-    text-align: left!important;
+    float: left;
+    width: 15em;
 }
 
 .container-fluid {

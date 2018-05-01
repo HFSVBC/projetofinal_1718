@@ -1,0 +1,12 @@
+version: '3.6'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile
+    image: cafcul-backend-docker
+    ports:
+      - 8080:80
+    network_mode: "bridge"
+    extra_hosts:
+      - "cafculdatabase:160.153.128.44"
