@@ -10,25 +10,25 @@ There are five types of users:
 - Security
 - Admin
 
-###User type: Student
+### User type: Student
 
 Students can access the following information:
 * view their access records
 * check their own class attendance
 
-###User type: Professor
+### User type: Professor
 
 Professors can access the following information:
 * view their access records
 * check class attendance of their classes
 
-###User type: Staff Member
+### User type: Staff Member
 
 Staff members can access the following information:
 * check class attendance of students
 * alter class attendance of students
 
-###User type: Security
+### User type: Security
 
 Security personnel can access the following information:
 * view access records
@@ -36,7 +36,7 @@ Security personnel can access the following information:
 * check how many people are in a room
 * create access for temporary users
 
-###User type: Administrator
+### User type: Administrator
 
 The administrator can access the following information:
 * view access records
