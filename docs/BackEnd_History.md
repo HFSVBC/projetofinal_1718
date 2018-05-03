@@ -41,4 +41,4 @@ It returns a JSON with the following configuration for an unsuccessful response:
     }
 }
 ```
-The HTTP error codes might be 401 (Unauthorizedd => User session expired), 403 (Forbidden => Access not authorised for current user), 405 (Method Not Allowed => POST has not passed the validation check.) and 500 (Server Error => Error gueting user profile)
+The HTTP error codes might be 401 (Unauthorized => User session expired), 403 (Forbidden => Access not authorised for current user), 405 (Method Not Allowed => POST has not passed the validation check.) and 500 (Server Error => Error getting user profile)

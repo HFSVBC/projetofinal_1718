@@ -1,4 +1,4 @@
 # Espacos
 ---
 
-Accessed by the route `/espacos`, it allows the security and the administrator to check how many people are in a specific room. The information can by filtered date and user.
+Accessed by the route `/espacos`, it allows the security members and the administrator to verify how many people are present in a specific room. The information can be filtered by date and user.

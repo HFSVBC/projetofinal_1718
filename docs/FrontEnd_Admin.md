@@ -1,13 +1,13 @@
 # Admin
 ---
 
-Accessed by the route `/admin`, it allows an Admin to change the type of an user. The administrator provides the email and them the information about the user is showed for confirmation.
+Accessed by the route `/admin`, this page allows the administrator to change the type of an user. The administrator provides the email of the user, prompting the page to return that user's information for confirmation purposes.
 
-The administrator can access the follwing information:
-* view his access records
+The administrator can access the following information:
+* view access records
 * check user access
 * check how many people are in a room
-* check the students attendece on classes
+* check class attendance
 * change user type
 
 ![admin image](./admin.PNG)
