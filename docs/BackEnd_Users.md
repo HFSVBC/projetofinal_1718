@@ -1,4 +1,50 @@
 # Users
+
+Usage of the application relies on the existence of five different types of users within the same institution, each with specific needs and clearances for the use of features specific to their roles. 
+
+There are five types of users:
+
+- Student
+- Professor
+- ​Staff Member
+- Security
+- Admin
+
+### User type: Student
+
+Students can access the following information:
+* view their access records
+* check their own class attendance
+
+### User type: Professor
+
+Professors can access the following information:
+* view their access records
+* check class attendance of their classes
+
+### User type: Staff Member
+
+Staff members can access the following information:
+* check class attendance of students
+* alter class attendance of students
+
+### User type: Security
+
+Security personnel can access the following information:
+* view access records
+* check user access
+* check how many people are in a room
+* create access for temporary users
+
+### User type: Administrator
+
+The administrator can access the following information:
+* view access records
+* check user access
+* check how many people are in a room
+* check class attendance
+* change user type
+
 ---
 ## LogIn
 Accessed by the route ```/user/login```. It handles user registration and login in the back end. For that it requires the following POST elements:
@@ -8,7 +54,7 @@ name => User's name => String
 email => User's email => String
 avatar => User's avatar provided by Google => String
 ```
-It returns a JSON with the following configuration for a succesfull response:
+It returns a JSON with the following configuration for a successful response:
 ```JSON
 {
     "user_agent": (String) Client user agent,
@@ -23,7 +69,7 @@ It returns a JSON with the following configuration for a succesfull response:
     }
 }
 ```
-It returns a JSON with the following configuration for an unsuccesfull response:
+It returns a JSON with the following configuration for an unsuccessful response:
 ```JSON
 {
     "user_agent": (String) Client user agent,
@@ -57,7 +103,7 @@ It returns a JSON with the following configuration for a successful response:
     "data": {}
 }
 ```
-It returns a JSON with the following configuration for an unsuccesfull response:
+It returns a JSON with the following configuration for an unsuccessful response:
 ```JSON
 {
     "user_agent": (String) Client user agent,
@@ -103,7 +149,7 @@ It returns a JSON with the following configuration for a successful response:
     }
 }
 ```
-It returns a JSON with the following configuration for an unsuccesfull response:
+It returns a JSON with the following configuration for an unsuccessful response:
 ```JSON
 {
     "user_agent": (String) Client user agent,
@@ -118,7 +164,7 @@ It returns a JSON with the following configuration for an unsuccesfull response:
     }
 }
 ```
-The HTTP error codes might be 401 (Unauthorizedd => User session expired), 403 (Forbidden => Access not authorised for current user), 405 (Method Not Allowed => POST has not passed the validation check.) and 500 (Server Error => Error gueting user profile)
+The HTTP error codes might be 401 (Unauthorized => User session expired), 403 (Forbidden => Access not authorised for current user), 405 (Method Not Allowed => POST has not passed the validation check.) and 500 (Server Error => Error getting user profile)
 
 ## updateUserType
 Accessed by the route ```/user/changeType```. It handles user to log out in the back end. For that it requires the following POST elements:
@@ -143,7 +189,7 @@ It returns a JSON with the following configuration for a successful response:
     }
 }
 ```
-It returns a JSON with the following configuration for an unsuccesfull response:
+It returns a JSON with the following configuration for an unsuccessful response:
 ```JSON
 {
     "user_agent": (String) Client user agent,
@@ -158,4 +204,4 @@ It returns a JSON with the following configuration for an unsuccesfull response:
     }
 }
 ```
-The HTTP error codes might be 401 (Unauthorizedd => User session expired), 403 (Forbidden => Access not authorised for current user), 405 (Method Not Allowed => POST has not passed the validation check.) and 500 (Server Error => Error gueting user profile)
+The HTTP error codes might be 401 (Unauthorized => User session expired), 403 (Forbidden => Access not authorised for current user), 405 (Method Not Allowed => POST has not passed the validation check.) and 500 (Server Error => Error getting user profile)
