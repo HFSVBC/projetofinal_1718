@@ -7,8 +7,9 @@
     color: #5d5d5d;
     margin-top: -3em;
 }
+
 .router {
-  position: fixed !important;
+  position: absolute !important;
   right: 0 !important;
 }
 
