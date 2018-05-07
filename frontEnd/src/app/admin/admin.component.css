@@ -8,11 +8,6 @@
     margin-top: -3em;
 }
 
-.router {
-  position: absolute !important;
-  right: 0 !important;
-}
-
 .frow {
     display: inline-flex;
     padding: 5em 0 0;
