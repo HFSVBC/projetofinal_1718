@@ -1,4 +1,4 @@
-Criar alunos do 45006->50000
+Criar alunos do 45010->50000
 Professor, Funcionario e Segurança não pode ser dummy e os dummy não têm utilidade
 
 Criar 100 espaços
