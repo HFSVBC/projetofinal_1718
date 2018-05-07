@@ -12,7 +12,7 @@ class History extends CI_Controller {
 
 		$this->load->model('user_model');
     }
-	public function getUserAccessHistory($email="null")
+	public function getUserAccessHistory($limit="null")
 	{
 		$config = array(
 			array(
@@ -26,9 +26,7 @@ class History extends CI_Controller {
 		if($this->form_validation->run() === true){
 			if(isUserLoggedIn($this->input->post('token'))===true){
 				$token = $this->db->escape($this->input->post('userTokenId'));
-				if($email==="null"){
-					$email = $this->user_model->getEmailFromToken($token);
-				}
+				$email = $this->user_model->getEmailFromToken($token);
 				$email = $this->db->escape(urldecode($email));
 				$sql = "SELECT *
 						FROM conf_routesAccess
@@ -39,13 +37,17 @@ class History extends CI_Controller {
 					$json = file_get_contents(getUrlDataSim("/acessosuser/".$userId)); // save on our DB
 					$obj = json_decode($json);
 					$out = array("data"=>array());
-					for($i=0;$i<count($obj);$i++){
+					$i=0;
+					while($i<count($obj)){
 						$histOut = array(
 							"sala"=>"C".$obj[$i]->bloco.".".$obj[$i]->piso.".".$obj[$i]->sala,
 							"inicio"=>str_replace("T", " ", $obj[$i]->hora_entrada),
 							"fim"=>str_replace("T", " ", $obj[$i]->hora_saida)
 						);
 						array_push($out["data"], $histOut);
+						$i++;
+						if($limit!="null" && $i >= $limit)
+							$i = count($obj);
 					}
 					$data = array(
                         "accessHist"=>$out,
@@ -61,11 +63,6 @@ class History extends CI_Controller {
         }else{
             jsonExporter(405, validation_errors());
 		}
-		// if($email=="null"){
-			
-		// }else{
-		// 	$userUrl = urldecode($email);
-		// }
 	}
 }
 ?>
