@@ -6,16 +6,4 @@ version: 2
 general:
   branches:
     only:
-      - frontEnd-Deploy 
-jobs:
-  build:
-    docker:
-      # specify the version you desire here
-      - image: circleci/node:7.10
-
-#    working_directory: ~/frontEnd/
-
-    steps:
-      - checkout
-      - run: npm install
-      - run: npm test
+      - frontEnd-Deploy
