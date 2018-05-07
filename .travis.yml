@@ -16,6 +16,7 @@ deploy:
   on:
     branch: frontEnd-Deploy
   provider: s3
+  region: "eu-west-2"
   access_key_id: $AWS_ACCESS_KEY_ID
   secret_access_key: $AWS_SECRET_ACCESS_KEY
   bucket: $s3_bucket
