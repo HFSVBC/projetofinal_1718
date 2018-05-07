@@ -29,8 +29,11 @@ img {
     padding: 5em 5em 0;
     background-color: #eeeeee;
     padding-bottom: 10px;
-    display: flow-root;
+    display: table;
     height: 100%;
+    width: calc(100% - 15em);
+    position: absolute !important;
+    right: 0 !important;
 }
 
 .card {
@@ -48,6 +51,9 @@ app-menu {
         height: auto;
     }
     .router {
-        padding: 2em 2em 0;
+        /* padding: 2em 2em 0; */
+        display: block;
+        width: 100%;
+        padding: 5em 2em 0;
     }
 }
