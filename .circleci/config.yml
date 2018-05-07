@@ -15,11 +15,11 @@ jobs:
 
 #    working_directory: ~/frontEnd/
 
-    # steps:
+    steps:
     #   - checkout
     #   - run: npm install
     #   - run: npm test
-    - restore_cache:
+      - restore_cache:
           key: dependency-cache-{{ checksum "yarn.lock" }}
       - run:
           name: install-dependencies
