@@ -9,38 +9,55 @@ general:
       - frontEnd-Deploy 
 jobs:
   build:
+    working_directory: ~/frontEnd
     docker:
       # specify the version you desire here
-      - image: circleci/node:9.2.0-browsers
-
-    working_directory: ~/frontEnd
-
+      - image: circleci/node:9.2.0-browser
     steps:
-    #   - checkout
-    #   - run: npm install
-    #   - run: npm test
+      # Checkout the code from the branch into the working_directory
+      - checkout
+      # Restore local dependencies from cache
       - restore_cache:
-          key: dependency-cache-{{ checksum "yarn.lock" }}
+        keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          - v1-dependencies-
+      # Install project dependencies
       - run:
-          name: install-dependencies
-          command: yarn install
+        name: Install local dependencies
+        command: npm install
+      # Cache local dependencies if they don't exist
       - save_cache:
-          key: dependency-cache-{{ checksum "yarn.lock" }}
-          paths:
-            - ~/.cache/yarn
-            - ./node_modules
+        key: v1-dependencies-{{ checksum "package.json" }}
+        paths:
+          - node_modules
+      # Lint the source code
       - run:
-          name: angular-build
-          command: yarn ng -- build --prod --aot --no-progress
+        name: Linting
+        command: npm run lint
+      # Test the source code
       - run:
-          name: angular-test
-          command: yarn test -- --single-run --no-progress
-      - store_artifacts:
-          path: test-results.xml
-          prefix: tests
+        name: Testing
+        command: npm run test
       - run:
-          name: angular-lint
-          command: yarn lint -- --formatters-dir ./tslint-formatters --format junit -o tslint.xml
-      - store_artifacts:
-          path: tslint.xml
-          prefix: lint
+        name: Building
+        command: npm run build-prod
+      # Cache the dist folder for the deploy job
+      - save_cache:
+        key: v1-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
+        paths:
+          - dist
+
+#   deploy:
+#     working_directory: ~/frontEnd
+#     docker:
+#       # specify the version you desire here
+#       - image: circleci/node:9.2.0-browser
+#     steps:
+#       #to be added
+# workflows:
+#   version: 2
+#   # The build and deploy workflow
+#   build_and_deploy:
+#     jobs:
+#       - build
+#       - deploy  
