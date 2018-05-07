@@ -13,7 +13,7 @@ jobs:
       # specify the version you desire here
       - image: circleci/node:9.2.0-browsers
 
-#    working_directory: ~/frontEnd/
+   working_directory: ~/frontEnd
 
     steps:
     #   - checkout
