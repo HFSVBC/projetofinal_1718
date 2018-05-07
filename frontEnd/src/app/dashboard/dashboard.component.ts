@@ -60,9 +60,7 @@ export class DashboardComponent implements OnInit {
 
   createTable() {
     this.dtOptions = {
-      // pagingType: 'full_numbers',
       pageLength: 5,
-      // paging: false,
       searching: false,
       lengthChange: false
     };
