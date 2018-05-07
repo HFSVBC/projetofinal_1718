@@ -12,5 +12,6 @@ jobs:
     working_directory: frontEnd/
 
     steps:
+      - checkout
       - run: npm install
       - run: npm test
