@@ -13,7 +13,8 @@ create table espaco (
   id int primary key auto_increment,
   bloco int not null,
   piso int not null,
-  sala int not null
+  sala int not null,
+  lotacao int not null
 );
 
 create table disciplina_aluno (
