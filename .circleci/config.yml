@@ -32,3 +32,6 @@ workflows:
               paths:
                 - node_modules
               key: v1-dependencies-{{ checksum "package.json" }}
+          - run: # run tests
+            name: test
+            command: npm test
