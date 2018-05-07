@@ -5,15 +5,11 @@
 version: 2
 jobs:
   build:
-    general:
-      branches:
-        only:
-          - frontEnd-Deploy 
     docker:
       # specify the version you desire here
       - image: circleci/node:9.2.0
 
-    # working_directory: ~/repo
+    working_directory: frontEnd/
 
     steps:
       - run: npm install
