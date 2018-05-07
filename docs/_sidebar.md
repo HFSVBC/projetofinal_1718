@@ -18,3 +18,4 @@
 
 * Data Simulator
     * [Resources](dataSim.md)
+    * [Use Cases](UseCases.md)
