@@ -51,6 +51,7 @@ vendor/pkg/
 ######## ANGULARCLI GITIGNORE
 dist/
 node_modules/
+frontEnd/
 npm-debug.log*
 yarn-error.log*
 
