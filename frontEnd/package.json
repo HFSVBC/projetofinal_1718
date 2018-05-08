@@ -57,6 +57,7 @@
   },
   "devDependencies": {
     "@angular/cli": "^1.7.4",
+    "@angular/core": "^5.2.10",
     "@angular/compiler-cli": "^5.2.10",
     "@angular/language-service": "^5.2.10",
     "@types/datatables.net": "^1.10.9",
