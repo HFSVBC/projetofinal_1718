@@ -37,7 +37,7 @@ with open('populate_subjects.sql', 'w') as infile:
         infile.write("INSERT INTO disciplina(id,designacao, prof_t) VALUES (" + str(idd) + "," + "'" + disciplinas[i] + "'" + "," + "45004);\n")
         idd+=1
 
-with open('populate_subjects_students', 'w') as infile, open('presences_students_helper', 'w') as infile2:
+with open('populate_subjects_students.sql', 'w') as infile, open('presences_students_helper.txt', 'w') as infile2:
     idda=1
     for i in range(1,21):
         infile2.write(disciplinas[i-1] + ":")
@@ -92,7 +92,7 @@ def check_ten(args):
     else:
         return str(args)
 
-with open('populate_classes.sql', 'w') as infile, open('presencas_classes_helper', 'w') as infile2:
+with open('populate_classes.sql', 'w') as infile, open('presencas_classes_helper.txt', 'w') as infile2:
     idc=1
     cal_ids=1
     for i in range(1,21):
@@ -118,7 +118,7 @@ with open('populate_classes.sql', 'w') as infile, open('presencas_classes_helper
             mes=datas[0]
             dia=datas[1]
             infile.write("INSERT INTO aula(id, data_inicio, data_fim, tipo, espaco, disciplina) VALUES(" + str(idc) +\
-                        "," + "'" + datas[2] + "'" + "," + "'" + datas[3] + "'" + "," + "T," + str(espaco) + "," + str(i) + ");\n")
+                        "," + "'" + datas[2] + "'" + "," + "'" + datas[3] + "'" + "," + "'T'," + str(espaco) + "," + str(i) + ");\n")
             idc+=1
 
 with open('populate_acesses.sql', 'w') as infile:
@@ -134,7 +134,7 @@ with open('populate_acesses.sql', 'w') as infile:
         hora=r.randint(9,18)
         minutos=r.randint(1,60)
         datas=compute_date(ano,mes,dia,hora,minutos,True)
-        infile.write("INSERT INTO acesso(id,data_entrada,data_fim,espaco,user) VALUES(" + str(i) + "," + "'" + datas[2] + "'" +\
+        infile.write("INSERT INTO acesso(id,data_entrada,data_fim,espaco,user) VALUES(" + str(i+1) + "," + "'" + datas[2] + "'" +\
                      "," + "'" + datas[3] + "'" + "," + str(espaco) + "," + str(user) + ");\n")
 
 """
@@ -143,5 +143,32 @@ Ids das aulas das disciplinas estão no presencas_classes_helper
 
 """
 
-with open('populate_presences', 'w') as infile:
-    pass
+with open('populate_presences.sql', 'w') as infile, open('presencas_classes_helper.txt', 'r') as helper, open('presences_students_helper.txt', 'r') as helper2:
+    buffer_classes = helper.readlines()
+    buffer_students = helper2.readlines()
+    #impares 1 semestre
+    #pares 2 semestre
+
+    #1 semestre
+    for i in range(0, len(buffer_classes), 2):
+        alunos = buffer_students[i].split(":")[1].split(',')[:-1]
+        aulas = buffer_classes[i].split(':')[1]
+        primeira_aula = int(aulas.split(',')[0])
+        ultima_aula = int(aulas.split(',')[1])
+        for aula in range(primeira_aula,ultima_aula+1):
+            num_presencas = r.randint(len(alunos)-10,len(alunos))
+            alunos_presencas = r.sample(alunos,num_presencas)
+            for aluno_ir in alunos_presencas:
+                infile.write("INSERT INTO presencas(aula,aluno) VALUES (" + str(aula) + "," + (aluno_ir) + ");\n")
+
+    #2 semestre
+    for i in range(1, len(buffer_classes), 2):
+        alunos = buffer_students[i].split(":")[1].split(',')[:-1]
+        aulas = buffer_classes[i].split(':')[1]
+        primeira_aula = int(aulas.split(',')[0])
+        ultima_aula = int(aulas.split(',')[1])
+        for aula in range(primeira_aula,ultima_aula-8):
+            num_presencas = r.randint(len(alunos)-10,len(alunos))
+            alunos_presencas = r.sample(alunos,num_presencas)
+            for aluno_ir in alunos_presencas:
+                infile.write("INSERT INTO presencas(aula,aluno) VALUES (" + str(aula) + "," + (aluno_ir) + ");\n")
