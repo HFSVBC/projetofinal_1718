@@ -8,7 +8,7 @@
 		//
 		public function getAcessByUser($uid)
 		{
-			$uid = $this->db->escape($uid);
+			$uid = $this->db->escape($u id);
 
 			$sql = "SELECT a.data_entrada, a.data_fim, e.bloco, e.piso, e.sala FROM acesso a,
 					 espaco e WHERE a.user=$uid AND a.espaco=e.id";

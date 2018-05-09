@@ -11,7 +11,7 @@ class History extends CI_Controller {
 		parent::__construct();
 
 		$this->load->model('user_model');
-		$this->load->model('acess_model')
+		$this->load->model('acess_model');
     }
 	public function getUserAccessHistory($limit="null")
 	{
@@ -35,8 +35,6 @@ class History extends CI_Controller {
 							(user_type = 30 AND (SELECT id FROM users WHERE email = $email) = (SELECT id FROM users WHERE id = (SELECT user FROM users_loggedIn WHERE token=$token)))";
 				if(routeAccess($sql)===true){
 					$userId = $this->user_model->getUserIdFromEmail($email);
-					//ir buscar ao model atraves do user id
-					//bloco, piso, sala, hora_entrada, hora_saida
 					$obj = $this->acess_model->getAcessByUser($userId);
 					$out = array("data"=>array());
 					foreach($obj as $row){
