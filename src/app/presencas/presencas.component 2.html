@@ -1,0 +1,52 @@
+<app-menu class="col-sm-2"></app-menu>
+<div class="router">
+
+    <div class="card" style="margin-bottom: 10px">
+        <div class="card-body">
+
+            <form class="form-inline" (ngSubmit)="onSubmit()" #searchForm="ngForm">
+
+                <div class="form-row">
+                    <div class="form-group col-sm-3">
+                        <label for="edifico" class="col-sm-5 col-form-label">Disciplina</label>
+                        <select class="form-control col-sm-7" id="aula" (change)="aulaChange()" [(ngModel)]="model.aula" name="aula">
+                      <option *ngFor="let a of todasAulas" [value]="a">{{a}}</option>
+                    </select>
+                    </div>
+
+                    <div class="form-group col-sm-3">
+                        <label for="piso" class="col-sm-4 col-form-label">Sala</label>
+                        <select class="form-control col-sm-7" id="sala" [(ngModel)]="model.sala" name="sala">
+                      <option *ngFor="let s of salas" [value]="s">{{s}}</option>
+                    </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-success col-sm-2">Procurar</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Número</th>
+                        <th>Nome</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>43304</td>
+                        <td>André Nunes</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+</div>

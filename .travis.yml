@@ -23,8 +23,9 @@ deploy:
   skip_cleanup: true
   local_dir: dist
 
-# after_success:
-#   - firebase deploy --token $FIREBASE_TOKEN
-
 notifications:
-  slack: $slack
+  slack: 
+    rooms:
+      - $slack_id
+    on_success: always
+    on_failure: always
