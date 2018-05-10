@@ -11,6 +11,7 @@ class History extends CI_Controller {
 		parent::__construct();
 
 		$this->load->model('user_model');
+		$this->load->model('acess_model');
     }
 	public function getUserAccessHistory($limit="null")
 	{
@@ -34,9 +35,17 @@ class History extends CI_Controller {
 							(user_type = 30 AND (SELECT id FROM users WHERE email = $email) = (SELECT id FROM users WHERE id = (SELECT user FROM users_loggedIn WHERE token=$token)))";
 				if(routeAccess($sql)===true){
 					$userId = $this->user_model->getUserIdFromEmail($email);
-					$json = file_get_contents(getUrlDataSim("/acessosuser/".$userId)); // save on our DB
-					$obj = json_decode($json);
+					$obj = $this->acess_model->getAcessByUser($userId);
 					$out = array("data"=>array());
+					foreach($obj as $row){
+						$thisOut = array(
+								"sala"=>"C".$row->bloco.".".$row->piso.".".$row->sala,
+								"inico"=>$row->data_entrada,
+								"fim"=>$row->data_fim,
+							);
+						array_push($out["data"], $thisOut);
+					}
+					/**
 					$i=0;
 					while($i<count($obj)){
 						$histOut = array(
@@ -49,6 +58,7 @@ class History extends CI_Controller {
 						if($limit!="null" && $i >= $limit)
 							$i = count($obj);
 					}
+					**/
 					$data = array(
                         "accessHist"=>$out,
                         "token"=>regenerateUserToken($this->input->post('userTokenId'))[1]
