@@ -8,43 +8,46 @@
             <h5 class="card-header">Novo Acidente</h5>
             <div class="card-body" style="margin:auto">
 
-                <form (ngSubmit)="onSubmit()" #CriarAcidenteForm="ngForm">
+                <form (ngSubmit)="onSubmit()" #CriarAcidenteForm="ngForm" class="was-validated">
                     <div class="form-row">
 
                         <div class="input-group col-12 pb-3">
                             <div class="input-group-prepend">
-                                <label class="input-group-text mb-0" for="tipo"><i class="material-icons">assignment_late</i></label>
+                                <label class="input-group-text mb-0" for="na_tipo"><i class="material-icons">assignment_late</i></label>
                             </div><!--
                             <select class="form-control" id="tipo" [(ngModel)]="model.tipo" name="tipo" placeholder="Tipo" required>
                                 <option disabled hidden [ngValue]="a">Tipo</option>
                               <option *ngFor="let tipo of tipos" [ngValue]="tipo">{{tipo}}</option>
                             </select> -->
-                            <input type="text" class="form-control" placeholder="Tipo" id="tipo" [(ngModel)]="model.tipo" name="tipo" #tipo="ngModel" required>
+                            <input type="text" class="form-control" placeholder="Tipo" id="tipo" [(ngModel)]="model.tipo" name="na_tipo" #tipo="ngModel" required>
+                            <div class="invalid-feedback">É necessário um Tipo</div>
                         </div>
-                        <div class="pb-3" *ngIf="tipo.invalid && (tipo.dirty || tipo.touched)" class="alert alert-danger">É necessário um Tipo.</div>
+                        <!-- <div class="pb-3" *ngIf="tipo.invalid && (tipo.dirty || tipo.touched)" class="alert alert-danger">É necessário um Tipo.</div> -->
 
                         <div class="input-group col-12 pb-3">
                             <div class="input-group-prepend">
-                                <label class="input-group-text mb-0" for="espaco"><i class="material-icons">room</i></label>
+                                <label class="input-group-text mb-0" for="na_espaco"><i class="material-icons">room</i></label>
                             </div>
-                            <input type="text" class="form-control" pattern="[1-8].[1-5].[1-9]+" placeholder="Espaço" id="espaco" [(ngModel)]="model.espaco" name="espaco" #espaco="ngModel" required>
-
+                            <input type="text" class="form-control" pattern="[1-8].[1-5].[1-9]+" placeholder="Espaço" id="na_espaco" [(ngModel)]="model.espaco" name="na_espaco" #espaco="ngModel" required>
+                            <div class="invalid-feedback">É necessário um Espaço válido (Ex: 6.3.38)</div>
                         </div>
-                        <div class="pb-3" *ngIf="espaco.invalid && (espaco.dirty || espaco.touched)" class="alert alert-danger">É necessário um Espaço válido (Ex: 6.3.38).</div>
+                        <!-- <div class="pb-3" *ngIf="espaco.invalid && (espaco.dirty || espaco.touched)" class="alert alert-danger">É necessário um Espaço válido (Ex: 6.3.38).</div> -->
 
                         <div class="input-group col-12 pb-3">
                             <div class="input-group-prepend">
-                                <label class="input-group-text mb-0" for="data"><i class="material-icons">date_range</i></label>
+                                <label class="input-group-text mb-0" for="na_data"><i class="material-icons">date_range</i></label>
                             </div>
-                            <input type="text" class="form-control" placeholder="Data" id="data" [(ngModel)]="model.data" name="data" #data="ngModel" required>
+                            <input type="text" class="form-control" placeholder="Data" id="na_data" [(ngModel)]="model.data" name="na_data" #data="ngModel" data-toggle="datepicker" required>
+                            <div class="invalid-feedback">É necessário uma Data</div>
                         </div>
-                        <div class="pb-3" *ngIf="data.invalid && (data.dirty || data.touched)" class="alert alert-danger">É necessário uma Data.</div>
+                        <!-- <div class="pb-3" *ngIf="data.invalid && (data.dirty || data.touched)" class="alert alert-danger">É necessário uma Data.</div> -->
 
                         <div class="input-group col-12 pb-3">
                             <div class="input-group-prepend">
-                                <label class="input-group-text mb-0" for="descricao"><i class="material-icons">description</i></label>
+                                <label class="input-group-text mb-0" for="na_descricao"><i class="material-icons">description</i></label>
                             </div>
-                            <textarea class="form-control" placeholder="Descrição" rows="5" id="descricao" [(ngModel)]="model.descricao" name="descricao"></textarea>
+                            <textarea class="form-control" placeholder="Descrição" rows="5" id="na_descricao" [(ngModel)]="model.descricao" name="na_descricao" required></textarea>
+                            <div class="invalid-feedback">É necessário uma Descrição</div>
                         </div>
 
                         <div class="row">
@@ -53,7 +56,6 @@
                       </div>
                     </div>
                 </form>
-
             </div>
         </div>
     </div>
@@ -63,30 +65,38 @@
             <h5 class="card-header">Consultar Acidente</h5>
             <div class="card-body" style="margin:auto">
 
-                <form (ngSubmit)="onSubmit()">
+                <form (ngSubmit)="onSubmit()" id="find_accident_form">
                     <div class="form-row">
 
                         <div class="input-group col-12 pb-3">
                             <div class="input-group-prepend">
-                                <label class="input-group-text mb-0" for="tipo"><i class="material-icons">assignment_late</i></label>
+                                <label class="input-group-text mb-0" for="ca_tipo"><i class="material-icons">assignment_late</i></label>
                             </div>
-                            <input type="text" class="form-control" placeholder="Tipo" id="tipo" [(ngModel)]="model.tipo" name="tipo" required>
+                            <input type="text" class="form-control" placeholder="Tipo" id="ca_tipo" [(ngModel)]="model.tipo" name="ca_tipo" required>
                         </div>
 
                         <div class="input-group col-12 pb-3">
                             <div class="input-group-prepend">
-                                <label class="input-group-text mb-0" for="espaco"><i class="material-icons">room</i></label>
+                                <label class="input-group-text mb-0" for="ca_espaco"><i class="material-icons">room</i></label>
                             </div>
-                            <input type="text" class="form-control" placeholder="Espaço" id="espaco" [(ngModel)]="model.espaco" name="espaco" required>
+                            <input type="text" class="form-control" placeholder="Espaço" id="ca_espaco" [(ngModel)]="model.espaco" name="ca_espaco" required>
                         </div>
-
-                        <div class="input-group col-12 pb-3">
-                            <div class="input-group-prepend">
-                                <label class="input-group-text mb-0" for="data"><i class="material-icons">date_range</i></label>
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="input-group col-sm-6 pb-3 pl-0">
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text mb-0" for="ca_data_i"><i class="material-icons">date_range</i></label>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="Data Início" id="ca_data_i" [(ngModel)]="model.data" data-toggle="datepicker" name="ca_data" required>
+                                </div>
+                                <div class="input-group col-sm-6 pb-3 pr-0">
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text mb-0" for="ca_data_f"><i class="material-icons">date_range</i></label>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="Data Fim" id="ca_data_f" [(ngModel)]="model.data" data-toggle="datepicker" name="ca_data" required>
+                                </div>
                             </div>
-                            <input type="text" class="form-control" placeholder="Data" id="data" [(ngModel)]="model.data" name="data" required>
                         </div>
-
                         <button type="submit" class="btn btn-success" style="margin-left: 5px" >Consultar</button>
                     </div>
                 </form>
