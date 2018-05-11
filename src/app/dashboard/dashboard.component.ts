@@ -53,6 +53,7 @@ export class DashboardComponent implements OnInit {
     this.user_uid = this.user_info.uid;
     this.user_avatar = this.user_info.photoURL;
     this.user_type = this.types[this._cookieService.get('tipo')];
+    this.user_type = this.user_type.substring(0,1).toUpperCase()+this.user_type.substring(1);
 
     this.createTable();
 

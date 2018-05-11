@@ -68,7 +68,7 @@ import { SalasComponent } from './salas/salas.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     DataTablesModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [
     AuthService,
