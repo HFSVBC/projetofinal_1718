@@ -35,13 +35,13 @@ class History extends CI_Controller {
 							(user_type = 30 AND (SELECT id FROM users WHERE email = $email) = (SELECT id FROM users WHERE id = (SELECT user FROM users_loggedIn WHERE token=$token)))";
 				if(routeAccess($sql)===true){
 					$userId = $this->user_model->getUserIdFromEmail($email);
-					$obj = $this->acess_model->getAcessByUser($userId);
+					$obj = $this->acess_model->getAcessByUser($userId, $limit);
 					$out = array("data"=>array());
-					foreach($obj as $row){
+					foreach ($obj as $key => $value) {
 						$thisOut = array(
-								"sala"=>"C".$row->bloco.".".$row->piso.".".$row->sala,
-								"inico"=>$row->data_entrada,
-								"fim"=>$row->data_fim,
+								"sala"=>"C".$value['bloco'].".".$value['piso'].".".$value['sala'],
+								"inicio"=>$value['data_entrada'],
+								"fim"=>$value['data_fim'],
 							);
 						array_push($out["data"], $thisOut);
 					}
