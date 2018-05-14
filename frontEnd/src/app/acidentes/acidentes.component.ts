@@ -31,13 +31,13 @@ export class AcidentesComponent implements OnInit {
       'espaco': new FormControl(this.model.espaco, Validators.pattern('[1-8].[1-5].[1-9]*')),
       'data': new FormControl(this.model.data, Validators.required)
     });
-    $(document).ready(function(){
+    $(document).ready(function() {
       (<any>$('[data-toggle="datepicker"]')).datepicker({
         endDate: new Date(),
       });
     });
   }
-  
+
   newModel() {
     this.model = new Acidente();
     console.log('Modelo', this.model);
