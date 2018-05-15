@@ -9,8 +9,8 @@
 }
 
 .router {
-  position: absolute !important;
-  right: 0 !important;
+    position: absolute !important;
+    right: 0 !important;
 }
 
 .bg-primary {
@@ -123,6 +123,7 @@
     background-color: #1a2358 !important;
     float: left;
     width: 15em;
+    z-index: 1;
 }
 
 .container-fluid {
