@@ -29,7 +29,6 @@ export class AcidentesComponent implements OnInit {
     this.acidenteForm = new FormGroup({
       'tipo': new FormControl(this.model.tipo, Validators.required),
       'espaco': new FormControl(this.model.espaco, Validators.pattern('[1-8].[1-5].[1-9]*')),
-      'data': new FormControl(this.model.data, Validators.required)
     });
     $(document).ready(function() {
       (<any>$('[data-toggle="datepicker"]')).datepicker({
