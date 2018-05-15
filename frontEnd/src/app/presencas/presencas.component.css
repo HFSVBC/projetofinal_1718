@@ -2,19 +2,13 @@ div.datatable {
   padding: 5.5em 1em 0!important;
 }
 
-form {
-  display: flex;
-}
-
 .form-row {
   width: 100%;
-
-}
-.router {
-  position: absolute !important;
-  right: 0 !important;
 }
 
+select {
+  height: 36.5px !important;
+}
 
 @media only screen and (max-width: 767px) {
   div.datatable {

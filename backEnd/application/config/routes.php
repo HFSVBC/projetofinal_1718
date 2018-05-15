@@ -50,17 +50,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 // CONSULTA DE HISTORICO DE ACESSOS
-$route['history/user']        = 'history/getUserAccessHistory';
-$route['history/user/(:any)'] = 'history/getUserAccessHistory/$1';
+$route['history/user']                  = 'history/getUserAccessHistory';
+$route['history/user/(:any)']           = 'history/getUserAccessHistory/$1';
 // CONSULTA DE PRESENÇAS NAS AULAS
-
+$route['teacher/classes']               = 'attendance/getTeacherClasses';
+$route['teacher/class/dates/(:any)']    = 'attendance/getTeacherClassDates/$1';
+$route['teacher/class/students/(:any)'] = 'attendance/getStudentsByClass/$1';
+$route['teacher/course/getStudentsAttendance'] = 'attendance/getStudentAttendance_Teacher';
 // CONSULTA DE QUEM ESTA NUM ESPAÇO
 
 // UTILIZADOR
-$route['user/login']          = 'UserLoader/logIn'; // [20] registers user if not already registered | {token => String, user_type => String}
-$route['user/logout']         = 'UserLoader/logOut'; // [20] logs user out
-$route['user/retriveprofile'] = 'UserLoader/getUserProfile'; // [20, 30, 10]
-$route['user/changeType']     = 'UserLoader/updateUserType'; //[10]
+$route['user/login']                    = 'UserLoader/logIn'; // [20] registers user if not already registered | {token => String, user_type => String}
+$route['user/logout']                   = 'UserLoader/logOut'; // [20] logs user out
+$route['user/retriveprofile']           = 'UserLoader/getUserProfile'; // [20, 30, 10]
+$route['user/changeType']               = 'UserLoader/updateUserType'; //[10]
 // ROTAS GERAIS
-$route['default_controller'] = 'NotAuthorized';
-$route['404_override'] = '';
+$route['default_controller']            = 'NotAuthorized';
+$route['404_override']                  = '';

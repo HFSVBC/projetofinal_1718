@@ -37,6 +37,10 @@ import { SecurityService } from './providers/security.service';
 import { ProfessorService } from './providers/professor.service';
 import { AllService } from './providers/all.service';
 import { EspacosComponent } from './espacos/espacos.component';
+import { AltPresencasComponent } from './alt-presencas/alt-presencas.component';
+import { CriarAcessosComponent } from './criar-acessos/criar-acessos.component';
+import { AcidentesComponent } from './acidentes/acidentes.component';
+import { SalasComponent } from './salas/salas.component';
 
 
 @NgModule({
@@ -49,7 +53,11 @@ import { EspacosComponent } from './espacos/espacos.component';
     HistoricoComponent,
     PresencasComponent,
     AdminComponent,
-    EspacosComponent
+    EspacosComponent,
+    AltPresencasComponent,
+    CriarAcessosComponent,
+    AcidentesComponent,
+    SalasComponent
   ],
   imports: [
     routes,
@@ -60,7 +68,7 @@ import { EspacosComponent } from './espacos/espacos.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     DataTablesModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [
     AuthService,

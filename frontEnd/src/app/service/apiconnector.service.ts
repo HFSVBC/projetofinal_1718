@@ -12,7 +12,8 @@ export class APIConnectorService {
   constructor(private http: HttpClient) { }
 
   // private baseURL = 'http://localhost:8888/';
-   private baseURL = 'https://bcapi.hugocurado.info/';
+  private baseURL = 'https://bcapi.hugocurado.info/';
+  // private baseURL = 'https://cafcul.hugocurado.info/';
   // private baseURL = 'https://0a024cd4.ngrok.io/';
 
   // USER Routes
@@ -27,7 +28,7 @@ export class APIConnectorService {
   changeType = this.baseURL + 'user/changeType';
 
   historico = this.baseURL + 'history/user';
-  presencasGET = '/presencasGET';
+  presencas = this.baseURL +  'presencas';
 
   getDATA(URL: string) { }
 

@@ -1,0 +1,52 @@
+<app-menu class="col-sm-2"></app-menu>
+<div class="router">
+
+    <div class="card">
+        <h5 class="card-header">Alterar Presenças dos Alunos</h5>
+        <div class="card-body" style="margin:auto">
+
+            <form (ngSubmit)="onSubmit()" class="was-validated">
+                <div class="form-row">
+
+
+                    <div class="input-group col-lg-8 pb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text mb-0" for="na_nome"><i class="material-icons">person</i></label>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Nome" id="nome" [(ngModel)]="model.nome" name="nome" required>
+                        <div class="invalid-feedback">É necessário um Nome</div>
+                    </div>
+
+                    <div class="input-group col-lg-3 pb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text mb-0" for="na_numero"><i class="material-icons">person</i></label>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Número" id="numero" [(ngModel)]="model.numero" name="numero" required>
+                        <div class="invalid-feedback">É necessário um Número</div>
+                    </div>
+
+                    <div class="input-group col-lg-8 pb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text mb-0" for="na_aula"><i class="material-icons">person</i></label>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Aula" id="aula" [(ngModel)]="model.aula" name="aula" required>
+                        <div class="invalid-feedback">É necessário um Aula</div>
+                    </div>
+
+                    <div class="input-group col-lg-3 pb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text mb-0" for="na_data"><i class="material-icons">date_range</i></label>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Data" id="na_data" [(ngModel)]="model.data" name="na_data" #data="ngModel" data-toggle="datepicker" required>
+                        <div class="invalid-feedback">É necessário uma Data</div>
+                    </div>
+
+                    <button type="submit" class="btn btn-success col-lg-3 pb-3">Pesquisar</button>
+
+                  </div>
+            </form>
+
+        </div>
+    </div>
+
+</div>

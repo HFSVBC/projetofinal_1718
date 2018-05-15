@@ -53,6 +53,7 @@ export class DashboardComponent implements OnInit {
     this.user_uid = this.user_info.uid;
     this.user_avatar = this.user_info.photoURL;
     this.user_type = this.types[this._cookieService.get('tipo')];
+    this.user_type = this.user_type.substring(0,1).toUpperCase()+this.user_type.substring(1);
 
     this.createTable();
 
@@ -60,16 +61,19 @@ export class DashboardComponent implements OnInit {
 
   createTable() {
     this.dtOptions = {
-      pageLength: 5,
+      // pagingType: 'full_numbers',
+      paging: false,
       searching: false,
-      lengthChange: false
+      lengthChange: false,
+      ordering: false,
+      info: false
     };
 
     const url = this.apiconnector.historico;
     const data = new FormData();
     this.token = data.append('userTokenId', this._cookieService.get('token'));
 
-    this.apiconnector.postData(url, data)
+    this.apiconnector.postData(url+"/5", data)
       .subscribe(res => {
         console.log('res', res);
         this._cookieService.put('token', res['data']['token']);

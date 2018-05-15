@@ -8,6 +8,11 @@ import { HistoricoComponent } from './historico/historico.component';
 import { PresencasComponent } from './presencas/presencas.component';
 import { AdminComponent } from './admin/admin.component';
 import { EspacosComponent } from './espacos/espacos.component';
+import { AltPresencasComponent } from './alt-presencas/alt-presencas.component';
+import { CriarAcessosComponent } from './criar-acessos/criar-acessos.component';
+import { AcidentesComponent } from './acidentes/acidentes.component';
+import { SalasComponent } from './salas/salas.component';
+
 
 import { AuthService } from './providers/auth.service';
 import { AdminService } from './providers/admin.service';
@@ -46,13 +51,33 @@ export const router: Routes = [
     canActivate: [AllService]
   },
   {
+    path: 'salas',
+    component: SalasComponent,
+    canActivate: [AllService]
+  },
+  {
     path: 'presencas',
     component: PresencasComponent,
     canActivate: [ProfessorService]
   },
   {
+    path: 'alt-presencas',
+    component: AltPresencasComponent,
+    canActivate: [ProfessorService]
+  },
+  {
     path: 'espacos',
     component: EspacosComponent,
+    canActivate: [SecurityService]
+  },
+  {
+    path: 'criar-acessos',
+    component: CriarAcessosComponent,
+    canActivate: [SecurityService]
+  },
+  {
+    path: 'acidentes',
+    component: AcidentesComponent,
     canActivate: [SecurityService]
   },
   {

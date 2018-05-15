@@ -1,0 +1,6 @@
+branches:
+  only:
+    - frontEnd-Deploy
+
+notifications:
+  slack: $slack

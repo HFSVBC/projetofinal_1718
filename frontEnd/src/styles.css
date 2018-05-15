@@ -31,6 +31,8 @@ img {
     display: table;
     height: 100%;
     width: calc(100% - 15em);
+    position: absolute !important;
+    right: 0 !important;
 }
 
 .card {

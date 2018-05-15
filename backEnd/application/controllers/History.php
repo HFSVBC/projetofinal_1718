@@ -6,13 +6,14 @@ class History extends CI_Controller {
 	public function __construct($config = 'rest')
 	{
 		header('Access-Control-Allow-Origin: *');
-		header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+		header("Access-Control-Allow-Methods: GET, HEAD, OPTIONS, PUT, POST, PATCH, DELETE");
 		// header("Access-Control-Allow-Headers: Content-Type");
 		parent::__construct();
 
 		$this->load->model('user_model');
+		$this->load->model('access_model');
     }
-	public function getUserAccessHistory($email="null")
+	public function getUserAccessHistory($limit="null")
 	{
 		$config = array(
 			array(
@@ -26,9 +27,7 @@ class History extends CI_Controller {
 		if($this->form_validation->run() === true){
 			if(isUserLoggedIn($this->input->post('token'))===true){
 				$token = $this->db->escape($this->input->post('userTokenId'));
-				if($email==="null"){
-					$email = $this->user_model->getEmailFromToken($token);
-				}
+				$email = $this->user_model->getEmailFromToken($token);
 				$email = $this->db->escape(urldecode($email));
 				$sql = "SELECT *
 						FROM conf_routesAccess
@@ -36,16 +35,15 @@ class History extends CI_Controller {
 							(user_type = 30 AND (SELECT id FROM users WHERE email = $email) = (SELECT id FROM users WHERE id = (SELECT user FROM users_loggedIn WHERE token=$token)))";
 				if(routeAccess($sql)===true){
 					$userId = $this->user_model->getUserIdFromEmail($email);
-					$json = file_get_contents(getUrlDataSim("/acessosuser/".$userId)); // save on our DB
-					$obj = json_decode($json);
+					$obj = $this->access_model->getAccessByUser($userId, $limit);
 					$out = array("data"=>array());
-					for($i=0;$i<count($obj);$i++){
-						$histOut = array(
-							"sala"=>"C".$obj[$i]->bloco.".".$obj[$i]->piso.".".$obj[$i]->sala,
-							"inicio"=>str_replace("T", " ", $obj[$i]->hora_entrada),
-							"fim"=>str_replace("T", " ", $obj[$i]->hora_saida)
-						);
-						array_push($out["data"], $histOut);
+					foreach ($obj as $key => $value) {
+						$thisOut = array(
+								"sala"=>"C".$value['bloco'].".".$value['piso'].".".$value['sala'],
+								"inicio"=>$value['data_entrada'],
+								"fim"=>$value['data_fim'],
+							);
+						array_push($out["data"], $thisOut);
 					}
 					$data = array(
                         "accessHist"=>$out,
@@ -61,11 +59,7 @@ class History extends CI_Controller {
         }else{
             jsonExporter(405, validation_errors());
 		}
-		// if($email=="null"){
-			
-		// }else{
-		// 	$userUrl = urldecode($email);
-		// }
 	}
+
 }
 ?>

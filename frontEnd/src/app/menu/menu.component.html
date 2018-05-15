@@ -11,8 +11,7 @@
             <img src={{this.photo}} id='photoUser'>
         </button>
         <div class='dropdown-menu' aria-labelledby="togglerUser">
-            <span class="dropdown-item">Bem vindo
-                <a href="#">{{this.name}}</a>
+            <span class="dropdown-item">Bem vindo, {{this.name}}
             </span>
             <button type="button" class="dropdown-item btn btn-sm btn-outline-light" (click)="logout()"> Sair </button>
         </div>
@@ -34,11 +33,23 @@
             <li class="nav-item slide">
                 <a class="nav-link" routerLink="/historico" routerLinkActive="active">Consultar Histórico</a>
             </li>
+            <li class="nav-item slide">
+                <a class="nav-link" routerLink="/salas" routerLinkActive="active">Salas Disponívies</a>
+            </li>
             <li *ngIf="tipo=='1' || tipo=='10'" class="nav-item slide">
                 <a class="nav-link" routerLink="/presencas" routerLinkActive="active">Consultar Presenças</a>
             </li>
+            <li *ngIf="tipo=='1' || tipo=='10'" class="nav-item slide">
+                <a class="nav-link" routerLink="/alt-presencas" routerLinkActive="active">Alterar Presenças</a>
+            </li>
             <li *ngIf="tipo=='3' || tipo=='10'" class="nav-item slide">
                 <a class="nav-link" routerLink="/espacos" routerLinkActive="active">Consultar Espaços</a>
+            </li>
+            <li *ngIf="tipo=='3' || tipo=='10'" class="nav-item slide">
+                <a class="nav-link" routerLink="/criar-acessos" routerLinkActive="active">Criar Novo Acesso</a>
+            </li>
+            <li *ngIf="tipo=='3' || tipo=='10'" class="nav-item slide">
+                <a class="nav-link" routerLink="/acidentes" routerLinkActive="active">Acidentes</a>
             </li>
             <li *ngIf="tipo=='10'" class="nav-item slide">
                 <a class="nav-link" routerLink="/admin" routerLinkActive="active">Admin</a>
