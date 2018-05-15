@@ -2,11 +2,7 @@ import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { CookieService } from 'angular2-cookie/core';
 import { APIConnectorService } from '../service/apiconnector.service';
 import { Subject } from 'rxjs/Subject';
-import { TrackByFunction } from '@angular/core';
 import { DataTableDirective } from 'angular-datatables';
-import * as $ from 'jquery';
-import '@fengyuanchen/datepicker';
-import 'bootstrap-select';
 
 class SearchOptions {
   aula: string;
@@ -49,12 +45,6 @@ export class PresencasComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    $(document).ready(function() {
-      (<any>$('[data-toggle="datepicker"]')).datepicker({
-        endDate: new Date()
-      });
-      // (<any>$('.selectpicker')).selectpicker();
-    });
     const url = this.apiconnector.getAulas;
     const data = new FormData();
     this.token = data.append('userTokenId', this._cookieService.get('token'));
@@ -126,10 +116,6 @@ export class PresencasComponent implements OnInit, AfterViewInit {
       this.dtTrigger.next();
       this.hideLoader();
     });
-  }
-  bsRefresh(index, item) {
-    // console.log((<any>$('.selectpicker')).selectpicker('refresh'));
-    return index;
   }
 
   private showLoader(): void {

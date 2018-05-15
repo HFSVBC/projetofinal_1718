@@ -23,7 +23,7 @@
               </label>
             </div>
             <select class="form-control" id="aula" (change)="aulaChange()" [(ngModel)]="model.aula" name="na_aula" required>
-              <option *ngFor="let a of todasAulas; trackBy: bsRefresh" [value]="a['id']">{{a['name']}}</option>
+              <option *ngFor="let a of todasAulas" [value]="a['id']">{{a['name']}}</option>
             </select>
             <div class="invalid-feedback vi">É necessário uma Aula</div>
           </div>
@@ -36,7 +36,7 @@
             </div>
             <select class="form-control" id="data" [(ngModel)]="model.data" name="na_data" required>
               <option value="null">Todas</option>
-              <option *ngFor="let a of todasDatas; trackBy: bsRefresh" [value]="a['id']">{{a['d_init']}}</option>
+              <option *ngFor="let a of todasDatas" [value]="a['id']">{{a['d_init']}}</option>
             </select>
           </div>
 
@@ -48,7 +48,7 @@
             </div>
             <select class="form-control" id="aluno" [(ngModel)]="model.aluno" name="na_aluno" required>
                 <option value="null">Todos</option>
-                <option *ngFor="let a of todosAlunos; trackBy: bsRefresh" [value]="a['id']">{{a['id']}} - {{a['aluno']}}</option>
+                <option *ngFor="let a of todosAlunos" [value]="a['id']">{{a['id']}} - {{a['aluno']}}</option>
               </select>
           </div>
 
