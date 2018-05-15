@@ -5,9 +5,9 @@
 	*	-getAcessByUser -> array()
 	*	-getPresentStudentByClass -> array()
 	*/
-	class Acess_model extends CI_Model{
+	class Access_model extends CI_Model{
 		//
-		public function getAcessByUser($user, $lim)
+		public function getAccessByUser($user, $lim)
 		{
 			$user = $this->db->escape($user);
 			// $lim  = (int) $this->db->escape($lim);

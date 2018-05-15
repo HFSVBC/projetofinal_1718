@@ -7,25 +7,40 @@
 	*/
 	class Class_model extends CI_Model{
 		//consult subjects given prof
-		public function getSubjectsByProf($prof){
-			$prof = $this->db->escape($prof);
-			$sql = "SELECT d.id, d.designacao FROM disciplina d WHERE d.prof_t=$prof";
+		public function getSubjectsByProf($profToken){
+
+			$sql = "SELECT id, designacao 
+			        FROM disciplina
+			        WHERE prof_t=(SELECT user FROM users_loggedIn WHERE token = $profToken)";
 
 			$query = $this->db->query($sql);
-			$out = $query->result();
-			return $out;
+			return $query->result_array();
 		}
 
 		//consult classes given subject
 		public function getClassesBySubject($subject){
 			$subject = $this->db->escape($subject);
-			$sql = "SELECT a.id, a.data_inicio, a.data_inicio, a.espaco FROM aula a WHERE a.disciplina=$subject";
+
+			$sql = "SELECT id, data_inicio, data_inicio, espaco 
+					FROM aula
+					WHERE disciplina=$subject";
 
 			$query = $this->db->query($sql);
-			$out = $query->result();
-			return $out;
+            return $query->result_array();
 
 		}
+
+		public function getStudentByClass($subject)
+        {
+            $subject = $this->db->escape($subject);
+
+            $sql = "SELECT id, name
+                    FROM users
+                    WHERE id IN (SELECT id_aluno FROM disciplina_aluno WHERE id_disciplina = $subject)";
+
+            $query = $this->db->query($sql);
+            return $query->result_array();
+        }
 	}
 
 ?>
