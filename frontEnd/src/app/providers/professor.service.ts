@@ -25,7 +25,7 @@ export class ProfessorService implements CanActivate {
 
         const tipo = this._cookieService.get('tipo');
 
-        if (tipo === '2' || tipo === '10') {
+        if (tipo === '1') {
           return true;
         } else {
           this.router.navigate([ '/dashboard' ]);
