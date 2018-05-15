@@ -1,17 +1,25 @@
 div.datatable {
-  padding: 5.5em 1em 0!important;
+    padding: 5.5em 1em 0!important;
 }
 
 .form-row {
-  width: 100%;
+    width: 100%;
 }
 
-#searchAttendance .input-group{height: 3.5rem;}
-#searchAttendance select{
-  height: 100%;
+#searchAttendance .input-group {
+    height: 3.5rem;
 }
+
+#searchAttendance select {
+    height: 100%;
+}
+
+.card {
+    margin-bottom: 10px;
+}
+
 @media only screen and (max-width: 767px) {
-  div.datatable {
-      padding: 1.5em 0 0!important;
-  }
+    div.datatable {
+        padding: 1.5em 0 0!important;
+    }
 }
