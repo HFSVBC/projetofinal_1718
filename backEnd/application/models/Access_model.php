@@ -22,20 +22,23 @@
 			return $query->result_array();
 		}
 
-		public function  getPresentStudentsByClass($class){
+		public function getStudentAttendanceByClass_Teacher()
+		{
+            $course	  = $this->db->escape($this->input->post("course_id"));
+			$student  = $this->db->escape($this->input->post("student_id"));
+            $class    = $this->db->escape($this->input->post("class_id"));
 
-			$class = $this->db->escape($class);
+            $sql = "SELECT u.id, u.name, (SELECT d.designacao FROM disciplina d WHERE a.disciplina = d.id) AS disciplina, a.data_inicio, a.data_fim
+                    FROM users u, presencas p, aula a
+                    WHERE u.id = p.aluno AND p.aula = a.id AND a.disciplina = $course";
 
-			$sql = "SELECT p.aluno, 'presente' AS presente 
-					FROM aula a, disciplina_aluno da, presencas p
-					WHERE a.disciplina=da.id_disciplina AND a.id=$class AND p.aula=a.id AND p.aluno=da.id_aluno
-					UNION
-					SELECT da2.id_aluno, 'nao presente' AS presente 
-					FROM aula a2, disciplina_aluno da2
-					WHERE a2.disciplina=da2.id_disciplina AND a2.id=$class AND da2.id_aluno NOT IN (SELECT p3.aluno FROM presencas p3 WHERE p3.aula=$class);";
+            if($student != "''")
+                $sql .= " AND u.id = $student";
+            if($class != "''")
+                $sql .= " AND p.aula = $class";
 
-			$query = $this->db->query($sql);
-			return $query->result_array();
+            $query = $this->db->query($sql);
+            return $query->result_array();
 		}
 	}
 

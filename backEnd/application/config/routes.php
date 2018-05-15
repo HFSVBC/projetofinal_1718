@@ -50,12 +50,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 // CONSULTA DE HISTORICO DE ACESSOS
-$route['history/user']                   = 'history/getUserAccessHistory';
+$route['history/user']                  = 'history/getUserAccessHistory';
 $route['history/user/(:any)']           = 'history/getUserAccessHistory/$1';
 // CONSULTA DE PRESENÇAS NAS AULAS
 $route['teacher/classes']               = 'attendance/getTeacherClasses';
 $route['teacher/class/dates/(:any)']    = 'attendance/getTeacherClassDates/$1';
 $route['teacher/class/students/(:any)'] = 'attendance/getStudentsByClass/$1';
+$route['teacher/course/getStudentsAttendance'] = 'attendance/getStudentAttendance_Teacher';
 // CONSULTA DE QUEM ESTA NUM ESPAÇO
 
 // UTILIZADOR

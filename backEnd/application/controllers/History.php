@@ -35,7 +35,7 @@ class History extends CI_Controller {
 							(user_type = 30 AND (SELECT id FROM users WHERE email = $email) = (SELECT id FROM users WHERE id = (SELECT user FROM users_loggedIn WHERE token=$token)))";
 				if(routeAccess($sql)===true){
 					$userId = $this->user_model->getUserIdFromEmail($email);
-					$obj = $this->access_model->getAcessByUser($userId, $limit);
+					$obj = $this->access_model->getAccessByUser($userId, $limit);
 					$out = array("data"=>array());
 					foreach ($obj as $key => $value) {
 						$thisOut = array(
@@ -60,5 +60,6 @@ class History extends CI_Controller {
             jsonExporter(405, validation_errors());
 		}
 	}
+
 }
 ?>
