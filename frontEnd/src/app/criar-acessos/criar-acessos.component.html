@@ -1,185 +1,151 @@
 <app-menu class="col-sm-2"></app-menu>
 <div class="router">
-
-  <div class="col-lg-10 pb-3 mx-auto">
-    <div class="card">
-      <h5 class="card-header">Novo Acesso</h5>
-
-      <div class="p-2">
-        <nav class="nav-fill">
-          <div class="nav nav-tabs" id="nav-tab" role="tablist">
-            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home"
-              aria-selected="true" >Responsável</a>
-            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile"
-              aria-selected="false">Visitante</a>
-            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact"
-              aria-selected="false">Dados</a>
-          </div>
-        </nav>
-      </div>
-
-      <div class="card-body mx-auto" style="width:100%">
-
-        <form (ngSubmit)="onSubmit()" class="tab-content" id="nav-tabContent">
-
-          <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-
-            <div class="row">
-
-              <div class="input-group pb-3 col-sm-6">
-                <div class="input-group-prepend">
-                  <label class="input-group-text mb-0" for="tipo">
-                    <i class="material-icons">assignment_late</i>
-                  </label>
-                </div>
-                <input type="text" class="form-control" placeholder="Nome do Responsável" id="nome_responsavel" [(ngModel)]="model.nome_responsavel"
-                  name="nome_responsavel" required>
-              </div>
-
-              <div class="input-group pb-3 col-sm-6">
-                <div class="input-group-prepend">
-                  <label class="input-group-text mb-0" for="tipo">
-                    <i class="material-icons">assignment_late</i>
-                  </label>
-                </div>
-                <input type="number" class="form-control" placeholder="Número do Responsável" id="numero_responsavel" [(ngModel)]="model.numero_responsavel"
-                  name="numero_responsavel" required>
-              </div>
-
-              <div class="input-group pb-3 col-sm-6">
-                <div class="input-group-prepend">
-                  <label class="input-group-text mb-0" for="tipo">
-                    <i class="material-icons">assignment_late</i>
-                  </label>
-                </div>
-                <input type="tel" maxlength="9" size="9" class="form-control" placeholder="Contacto do Responsável" id="contacto_responsavel"
-                  [(ngModel)]="model.contacto_responsavel" name="contacto_responsavel" required>
-              </div>
-
-              <div class="input-group pb-3 col-sm-6">
-                <div class="input-group-prepend">
-                  <label class="input-group-text mb-0" for="tipo">
-                    <i class="material-icons">assignment_late</i>
-                  </label>
-                </div>
-                <input type="email" class="form-control" placeholder="Email do Responsável" id="email_responsavel" [(ngModel)]="model.email_responsavel"
-                  name="email_responsavel" required>
-              </div>
-
+    <div class="col-lg-10 pb-3 mx-auto">
+        <div class="card">
+            <h5 class="card-header">Novo Acesso</h5>
+            <div class="p-2">
+                <nav class="nav-fill">
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Responsável</a>
+                        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Visitante</a>
+                        <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Dados</a>
+                    </div>
+                </nav>
             </div>
 
-          </div>
+            <div class="card-body mx-auto">
+                <form (ngSubmit)="onSubmit()" class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                        <div class="row">
+                            <div class="input-group pb-3 col-sm-6">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text mb-0" for="tipo">
+                                        <i class="material-icons">assignment_late</i>
+                                    </label>
+                                </div>
+                                <input type="text" class="form-control" placeholder="Nome do Responsável" id="nome_responsavel" [(ngModel)]="model.nome_responsavel" name="nome_responsavel" required>
+                            </div>
 
-          <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                            <div class="input-group pb-3 col-sm-6">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text mb-0" for="tipo">
+                                        <i class="material-icons">assignment_late</i>
+                                    </label>
+                                </div>
+                                <input type="number" class="form-control" placeholder="Número do Responsável" id="numero_responsavel" [(ngModel)]="model.numero_responsavel" name="numero_responsavel" required>
+                            </div>
 
-            <div class="row">
+                            <div class="input-group pb-3 col-sm-6">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text mb-0" for="tipo">
+                                        <i class="material-icons">assignment_late</i>
+                                    </label>
+                                </div>
+                                <input type="tel" maxlength="9" size="9" class="form-control" placeholder="Contacto do Responsável" id="contacto_responsavel" [(ngModel)]="model.contacto_responsavel" name="contacto_responsavel" required>
+                            </div>
 
-              <div class="input-group pb-3 col-sm-6">
-                <div class="input-group-prepend">
-                  <label class="input-group-text mb-0" for="tipo">
-                    <i class="material-icons">assignment_late</i>
-                  </label>
-                </div>
-                <input type="text" class="form-control" placeholder="Nome do Visitante" id="nome_visitante" [(ngModel)]="model.nome_visitante"
-                  name="nome_visitante" required>
-              </div>
+                            <div class="input-group pb-3 col-sm-6">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text mb-0" for="tipo">
+                                        <i class="material-icons">assignment_late</i>
+                                    </label>
+                                </div>
+                                <input type="email" class="form-control" placeholder="Email do Responsável" id="email_responsavel" [(ngModel)]="model.email_responsavel" name="email_responsavel" required>
+                            </div>
+                        </div>
+                    </div>
 
-              <div class="input-group pb-3 col-sm-6">
-                <div class="input-group-prepend">
-                  <label class="input-group-text mb-0" for="tipo">
-                    <i class="material-icons">assignment_late</i>
-                  </label>
-                </div>
-                <input type="tel" class="form-control" placeholder="BI / CC / Passaporte do Visitante" id="cc_visitante" [(ngModel)]="model.cc_visitante"
-                  name="cc_visitante" required>
-              </div>
+                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                        <div class="row">
+                            <div class="input-group pb-3 col-sm-6">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text mb-0" for="tipo">
+                                        <i class="material-icons">assignment_late</i>
+                                    </label>
+                                </div>
+                                <input type="text" class="form-control" placeholder="Nome do Visitante" id="nome_visitante" [(ngModel)]="model.nome_visitante" name="nome_visitante" required>
+                            </div>
 
-              <div class="input-group pb-3 col-sm-6">
-                <div class="input-group-prepend">
-                  <label class="input-group-text mb-0" for="tipo">
-                    <i class="material-icons">assignment_late</i>
-                  </label>
-                </div>
-                <input type="number" class="form-control" placeholder="Contacto do Visitante" id="contacto_visitante" [(ngModel)]="model.contacto_visitante"
-                  name="contacto_visitante" required>
-              </div>
+                            <div class="input-group pb-3 col-sm-6">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text mb-0" for="tipo">
+                                        <i class="material-icons">assignment_late</i>
+                                    </label>
+                                </div>
+                                <input type="tel" class="form-control" placeholder="BI / CC / Passaporte do Visitante" id="cc_visitante" [(ngModel)]="model.cc_visitante" name="cc_visitante" required>
+                            </div>
 
-              <div class="input-group pb-3 col-sm-6">
-                <div class="input-group-prepend">
-                  <label class="input-group-text mb-0" for="tipo">
-                    <i class="material-icons">assignment_late</i>
-                  </label>
-                </div>
-                <input type="email" class="form-control" placeholder="Email do Visitante" id="email_visitante" [(ngModel)]="model.email_visitante"
-                  name="email_visitante" required>
-              </div>
+                            <div class="input-group pb-3 col-sm-6">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text mb-0" for="tipo">
+                                        <i class="material-icons">assignment_late</i>
+                                    </label>
+                                </div>
+                                <input type="number" class="form-control" placeholder="Contacto do Visitante" id="contacto_visitante" [(ngModel)]="model.contacto_visitante" name="contacto_visitante" required>
+                            </div>
 
+                            <div class="input-group pb-3 col-sm-6">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text mb-0" for="tipo">
+                                        <i class="material-icons">assignment_late</i>
+                                    </label>
+                                </div>
+                                <input type="email" class="form-control" placeholder="Email do Visitante" id="email_visitante" [(ngModel)]="model.email_visitante" name="email_visitante" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                        <div class="row">
+                            <div class="input-group pb-3 col-sm-6">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text mb-0" for="tipo">
+                                        <i class="material-icons">assignment_late</i>
+                                    </label>
+                                </div>
+                                <input type="number" class="form-control" placeholder="Número de Pessoas" id="num_pessoas" [(ngModel)]="model.num_pessoas" name="num_pessoas" required>
+                            </div>
+
+                            <div class="input-group pb-3 col-sm-6">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text mb-0" for="tipo">
+                                        <i class="material-icons">assignment_late</i>
+                                    </label>
+                                </div>
+                                <input type="text" class="form-control" placeholder="Data de Entrada" id="data" [(ngModel)]="model.data_entrada" name="data" required>
+                            </div>
+
+                            <div class="input-group pb-3 col-sm-6">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text mb-0" for="tipo">
+                                        <i class="material-icons">assignment_late</i>
+                                    </label>
+                                </div>
+                                <input type="text" class="form-control" placeholder="Data de Saída" id="data_saida" [(ngModel)]="model.data_saida" name="data_saida" required>
+                            </div>
+
+                            <div class="input-group pb-3 col-sm-6">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text mb-0" for="tipo">
+                                        <i class="material-icons">assignment_late</i>
+                                    </label>
+                                </div>
+                                <input type="text" class="form-control" placeholder="Motivo" id="motivo" [(ngModel)]="model.motivo" name="motivo" required>
+                            </div>
+
+                            <div class="input-group col-12 pb-3">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text mb-0" for="descricao">
+                                        <i class="material-icons">description</i>
+                                    </label>
+                                </div>
+                                <textarea class="form-control" placeholder="Descrição" rows="5" id="descricao" [(ngModel)]="model.descricao" name="descricao" required></textarea>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-success" id="bu"> Criar Acesso </button>
+                    </div>
+                </form>
             </div>
-
-          </div>
-
-          <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-
-            <div class="row">
-
-              <div class="input-group pb-3 col-sm-6">
-                <div class="input-group-prepend">
-                  <label class="input-group-text mb-0" for="tipo">
-                    <i class="material-icons">assignment_late</i>
-                  </label>
-                </div>
-                <input type="number" class="form-control" placeholder="Número de Pessoas" id="num_pessoas" [(ngModel)]="model.num_pessoas"
-                  name="num_pessoas" required>
-              </div>
-
-              <div class="input-group pb-3 col-sm-6">
-                <div class="input-group-prepend">
-                  <label class="input-group-text mb-0" for="tipo">
-                    <i class="material-icons">assignment_late</i>
-                  </label>
-                </div>
-                <input type="text" class="form-control" placeholder="Data de Entrada" id="data" [(ngModel)]="model.data_entrada" name="data"
-                  required>
-              </div>
-
-              <div class="input-group pb-3 col-sm-6">
-                <div class="input-group-prepend">
-                  <label class="input-group-text mb-0" for="tipo">
-                    <i class="material-icons">assignment_late</i>
-                  </label>
-                </div>
-                <input type="text" class="form-control" placeholder="Data de Saída" id="data_saida" [(ngModel)]="model.data_saida" name="data_saida"
-                  required>
-              </div>
-
-              <div class="input-group pb-3 col-sm-6">
-                <div class="input-group-prepend">
-                  <label class="input-group-text mb-0" for="tipo">
-                    <i class="material-icons">assignment_late</i>
-                  </label>
-                </div>
-                <input type="text" class="form-control" placeholder="Motivo" id="motivo" [(ngModel)]="model.motivo" name="motivo" required>
-              </div>
-
-              <div class="input-group col-12 pb-3">
-                <div class="input-group-prepend">
-                  <label class="input-group-text mb-0" for="descricao">
-                    <i class="material-icons">description</i>
-                  </label>
-                </div>
-                <textarea class="form-control" placeholder="Descrição" rows="5" id="descricao" [(ngModel)]="model.descricao" name="descricao"
-                  required></textarea>
-              </div>
-
-            </div>
-
-            <button type="submit" class="btn btn-success" id="bu"> Criar Acesso </button>
-          </div>
-
-        </form>
-
-      </div>
+        </div>
     </div>
-  </div>
-
 </div>

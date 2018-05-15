@@ -1,4 +1,8 @@
 #bu {
-  float: right;
-  margin-right: 15px;
+    float: right;
+    margin-right: 15px;
+}
+
+.card-body {
+    width: 100%;
 }
