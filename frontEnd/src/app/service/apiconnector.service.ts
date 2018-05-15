@@ -27,6 +27,11 @@ export class APIConnectorService {
   // ADMIN Routes
   changeType = this.baseURL + 'user/changeType';
 
+  getAulas = this.baseURL + 'teacher/classes';
+  getDatasAulas = this.baseURL + 'teacher/class/dates/';
+  getAlunosNomesAulas = this.baseURL + 'teacher/class/students/';
+  getAlunosAulas = this.baseURL + 'teacher/course/getStudentsAttendance';
+
   historico = this.baseURL + 'history/user';
   presencas = this.baseURL +  'presencas';
 

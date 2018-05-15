@@ -6,10 +6,10 @@ div.datatable {
   width: 100%;
 }
 
-select {
-  height: 36.5px !important;
+#searchAttendance .input-group{height: 3.5rem;}
+#searchAttendance select{
+  height: 100%;
 }
-
 @media only screen and (max-width: 767px) {
   div.datatable {
       padding: 1.5em 0 0!important;
