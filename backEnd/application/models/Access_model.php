@@ -11,9 +11,9 @@
 		{
 			$user = $this->db->escape($user);
 			// $lim  = (int) $this->db->escape($lim);
-			
-			$sql = "SELECT a.data_entrada, a.data_fim, e.bloco, e.piso, e.sala 
-					FROM acesso a, espaco e 
+
+			$sql = "SELECT a.data_entrada, a.data_fim, e.bloco, e.piso, e.sala
+					FROM acesso a, espaco e
 					WHERE a.user=$user AND a.espaco=e.id";
 			if($lim !== "null")
 				$sql .= " ORDER BY a.id DESC LIMIT $lim";
@@ -39,6 +39,12 @@
 
             $query = $this->db->query($sql);
             return $query->result_array();
+		}
+
+		public function getAvailableRooms($hora){
+			$sql = "SELECT *
+							FROM espaco e
+							WHERE e.lotacao > (SELECT COUNT(a.id) FROM acesso a WHERE a.espaco=e.id AND $hora BETWEEN a.data_entrada AND a.data_fim)";
 		}
 	}
 
