@@ -21,7 +21,7 @@
 		public function getClassesBySubject($subject){
 			$subject = $this->db->escape($subject);
 
-			$sql = "SELECT id, data_inicio, data_inicio, espaco 
+			$sql = "SELECT id, data_inicio, data_fim, espaco 
 					FROM aula
 					WHERE disciplina=$subject";
 

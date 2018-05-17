@@ -32,9 +32,9 @@
                     FROM users u, presencas p, aula a
                     WHERE u.id = p.aluno AND p.aula = a.id AND a.disciplina = $course";
 
-            if($student != "''")
+            if($student != "'null'")
                 $sql .= " AND u.id = $student";
-            if($class != "''")
+            if($class != "'null'")
                 $sql .= " AND p.aula = $class";
 
             $query = $this->db->query($sql);

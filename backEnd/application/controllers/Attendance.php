@@ -157,12 +157,12 @@ class Attendance extends CI_Controller
             array(
                 'field' => 'student_id',
                 'label' => "Student id",
-                'rules' => 'trim|numeric'
+                'rules' => 'trim'
             ),
             array(
                 'field' => 'class_id',
                 'label' => "Class id",
-                'rules' => 'trim|numeric'
+                'rules' => 'trim'
             )
         );
         $this->form_validation->set_rules($config);
