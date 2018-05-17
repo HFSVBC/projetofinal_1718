@@ -22,8 +22,8 @@
                 <i class="material-icons">class</i>
               </label>
             </div>
-            <select class="form-control" id="aula" (change)="aulaChange()" [(ngModel)]="model.aula" name="na_aula" required>
-              <option *ngFor="let a of todasAulas; trackBy: bsRefresh" [value]="a['id']">{{a['name']}}</option>
+            <select class="custom-select form-control" id="na_aula" (change)="aulaChange()" [(ngModel)]="model.aula" name="na_aula" required>
+              <option *ngFor="let a of todasAulas" [value]="a['id']">{{a['name']}}</option>
             </select>
             <div class="invalid-feedback vi">É necessário uma Aula</div>
           </div>
@@ -34,26 +34,26 @@
                 <i class="material-icons">date_range</i>
               </label>
             </div>
-            <select class="form-control" id="data" [(ngModel)]="model.data" name="na_data" required>
+            <select class="custom-select form-control" id="na_data" [(ngModel)]="model.data" name="na_data" required>
               <option value="null">Todas</option>
-              <option *ngFor="let a of todasDatas; trackBy: bsRefresh" [value]="a['id']">{{a['d_init']}}</option>
+              <option *ngFor="let a of todasDatas" [value]="a['id']">{{a['d_init']}}</option>
             </select>
           </div>
 
-          <div class="input-group col-lg-3 pb-3">
+          <div class="input-group col-lg-4 pb-3">
             <div class="input-group-prepend">
-              <label class="input-group-text mb-0" for="na_data">
+              <label class="input-group-text mb-0" for="na_aluno">
                 <i class="material-icons">person</i>
               </label>
             </div>
-            <select class="form-control" id="aluno" [(ngModel)]="model.aluno" name="na_aluno" required>
+            <select class="custom-select form-control" id="na_aluno" [(ngModel)]="model.aluno" name="na_aluno" required>
                 <option value="null">Todos</option>
-                <option *ngFor="let a of todosAlunos; trackBy: bsRefresh" [value]="a['id']">{{a['id']}} - {{a['aluno']}}</option>
+                <option *ngFor="let a of todosAlunos" [value]="a['id']">{{a['id']}} - {{a['aluno']}}</option>
               </select>
           </div>
 
           <div class="input-group col-lg-1 pb-3">
-            <button type="submit" class="btn btn-success">Procurar</button>
+            <button type="submit" class="btn btn-success" [disabled]="loader">Procurar</button>
           </div>
         </div>
       </form>

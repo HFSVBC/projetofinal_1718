@@ -21,6 +21,10 @@ img {
     margin: 0
 }
 
+.card-body {
+    margin: auto;
+}
+
 .h-max {
     height: 100%;
 }

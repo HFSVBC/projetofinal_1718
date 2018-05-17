@@ -54,6 +54,8 @@ export class PresencasComponent implements OnInit, AfterViewInit {
       console.log('res', res);
       this._cookieService.put('token', res['data']['token']);
       this.todasAulas = res['data']['teacherSubjects']['data'];
+      this.model.aula = this.todasAulas[0]['id'];
+      this.aulaChange();
     });
     // faz o pedido a bd das aulas do user
     // todasAulas
@@ -126,5 +128,4 @@ export class PresencasComponent implements OnInit, AfterViewInit {
     console.log('Hide loader');
     this.loader = false;
   }
-
 }
