@@ -37,11 +37,11 @@ def check_ten(args):
         return "0" + str(args)
     else:
         return str(args)
-        
+
 with open('populate_acesses_stress.sql', 'w') as infile:
-    for i in range(0,3001):
+    for i in range(0,10001):
         espaco=r.randint(101,200)
-        if i<500:
+        if i<200:
             user=r.randint(45000,45005)
         else:
             user=r.randint(45010,49999)
