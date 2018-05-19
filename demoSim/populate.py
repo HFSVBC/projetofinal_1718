@@ -18,7 +18,7 @@ with open('populate_students.sql', 'w') as infile:
         email = name.split(" ")[0] + name.split(" ")[1] + str(i) + "@gmail.com"
         confid = "d3034e8f8c717c1065beac83fep" + str(i)
         avatar = "https://i.ytimg.com/vi/x9Jr9JKpsX8/maxresdefault.jpg"
-        infile.write("INSERT INTO users (id,googleUID,name,email,confid,avatar,account_type) VALUES (" + str(i) + ","  + "'" + googleUID + "'" + "," + "'" + name + "'" + ","\
+        infile.write("INSERT INTO users(id,googleUID,name,email,confid,avatar,account_type) VALUES (" + str(i) + ","  + "'" + googleUID + "'" + "," + "'" + name + "'" + ","\
                     + "'" + email  + "'" + "," + "'" + confid + "'" + "," + "'" + avatar + "'" + "," + "0);\n")
 
 with open('populate_space.sql', 'w') as infile:
@@ -92,7 +92,7 @@ def check_ten(args):
     else:
         return str(args)
 
-with open('populate_classes.sql', 'w') as infile, open('presencas_classes_helper.txt', 'w') as infile2:
+with open('populate_classes.sql', 'w') as infile, open('presences_classes_helper.txt', 'w') as infile2:
     idc=1
     cal_ids=1
     for i in range(1,21):
@@ -143,7 +143,7 @@ Ids das aulas das disciplinas estão no presencas_classes_helper
 
 """
 
-with open('populate_presences.sql', 'w') as infile, open('presencas_classes_helper.txt', 'r') as helper, open('presences_students_helper.txt', 'r') as helper2:
+with open('populate_presences.sql', 'w') as infile, open('presences_classes_helper.txt', 'r') as helper, open('presences_students_helper.txt', 'r') as helper2:
     buffer_classes = helper.readlines()
     buffer_students = helper2.readlines()
     #impares 1 semestre
@@ -160,6 +160,7 @@ with open('populate_presences.sql', 'w') as infile, open('presencas_classes_help
             alunos_presencas = r.sample(alunos,num_presencas)
             for aluno_ir in alunos_presencas:
                 infile.write("INSERT INTO presencas(aula,aluno) VALUES (" + str(aula) + "," + (aluno_ir) + ");\n")
+                infile.write("INSERT INTO acesso(data_entrada,data_fim,espaco,user) SELECT a.data_inicio, a.data_fim, a.espaco, " + aluno_ir + " FROM aula a WHERE a.id=" + str(aula) + ";\n")
 
     #2 semestre
     for i in range(1, len(buffer_classes), 2):
@@ -172,3 +173,4 @@ with open('populate_presences.sql', 'w') as infile, open('presencas_classes_help
             alunos_presencas = r.sample(alunos,num_presencas)
             for aluno_ir in alunos_presencas:
                 infile.write("INSERT INTO presencas(aula,aluno) VALUES (" + str(aula) + "," + (aluno_ir) + ");\n")
+                infile.write("INSERT INTO acesso(data_entrada,data_fim,espaco,user) SELECT a.data_inicio, a.data_fim, a.espaco, " + aluno_ir + " FROM aula a WHERE a.id=" + str(aula) + ";\n")
