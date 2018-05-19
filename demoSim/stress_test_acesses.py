@@ -51,5 +51,5 @@ with open('populate_acesses_stress.sql', 'w') as infile:
         hora=r.randint(9,18)
         minutos=r.randint(1,60)
         datas=compute_date(ano,mes,dia,hora,minutos,True)
-        infile.write("INSERT INTO acesso(id,data_entrada,data_fim,espaco,user) VALUES(" + str(i+1) + "," + "'" + datas[2] + "'" +\
+        infile.write("INSERT INTO acesso(data_entrada,data_fim,espaco,user) VALUES(" + "'" + datas[2] + "'" +\
                      "," + "'" + datas[3] + "'" + "," + str(espaco) + "," + str(user) + ");\n")

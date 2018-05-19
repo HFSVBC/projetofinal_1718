@@ -1,5 +1,5 @@
 import random as r
-with open('populate_presences_stress_test.sql', 'w') as infile, open('presencas_classes_helper.txt', 'r') as helper, open('presences_students_helper.txt', 'r') as helper2:
+with open('populate_presences_stress_test.sql', 'w') as infile, open('presences_classes_helper.txt', 'r') as helper, open('presences_students_helper.txt', 'r') as helper2:
     buffer_classes = helper.readlines()
     buffer_students = helper2.readlines()
 
