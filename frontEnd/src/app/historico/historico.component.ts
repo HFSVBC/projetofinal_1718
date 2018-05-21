@@ -33,8 +33,6 @@ export class HistoricoComponent implements OnInit {
   token;
 
   dtOptions: any = {};
-  // We use this trigger because fetching the list of persons can be quite long,
-  // thus we ensure the data is fetched before rendering
   histAc: HistAc[] = [];
   dtTrigger: Subject<any> = new Subject();
 
