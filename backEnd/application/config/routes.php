@@ -57,6 +57,7 @@ $route['teacher/classes']               = 'attendance/getTeacherClasses';
 $route['teacher/class/dates/(:any)']    = 'attendance/getTeacherClassDates/$1';
 $route['teacher/class/students/(:any)'] = 'attendance/getStudentsByClass/$1';
 $route['teacher/course/getStudentsAttendance'] = 'attendance/getStudentAttendance_Teacher';
+$route['teacher/individual/getStudentsAttendance'] = 'attendance/getIndvStudentAttendance_Teacher';
 // CONSULTA DE QUEM ESTA NUM ESPAÇO
 
 // UTILIZADOR

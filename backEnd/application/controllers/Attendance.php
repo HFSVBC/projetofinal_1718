@@ -201,5 +201,65 @@ class Attendance extends CI_Controller
             jsonExporter(405, validation_errors());
         }
     }
+
+    public function getIndvStudentAttendance_Teacher()
+    {
+        $config = array(
+            array(
+                'field' => 'userTokenId',
+                'label' => "User's Token",
+                'rules' => 'trim|required'
+            ),
+            array(
+                'field' => 'course_id',
+                'label' => "Course id",
+                'rules' => 'trim|required|numeric'
+            ),
+            array(
+                'field' => 'student_id',
+                'label' => "Student id",
+                'rules' => 'trim'
+            ),
+            array(
+                'field' => 'class_id',
+                'label' => "Class id",
+                'rules' => 'trim'
+            )
+        );
+        $this->form_validation->set_rules($config);
+        $this->form_validation->set_error_delimiters('', '');
+        if($this->form_validation->run() === true){
+            if(isUserLoggedIn($this->input->post('token'))===true){
+                $token = $this->db->escape($this->input->post('userTokenId'));
+                $sql = "SELECT *
+                        FROM conf_routesAccess
+                        WHERE user_type = (SELECT account_type FROM users WHERE id = (SELECT user FROM users_loggedIn WHERE token = $token)) AND route = 'teacher/individual/getStudentsAttendance'";
+                if(routeAccess($sql)===true){
+                    $result = $this->access_model->getIndividualStudentAttendance_Teacher();
+                    $out = array("data"=>array());
+                    foreach ($result as $key => $value) {
+                        $thisOut = array(
+                            "student_id"=>$this->input->post('student_id'),
+                            "name"=>$value['name'],
+                            "date_ini"=>$value['data_inicio'],
+                            "attended"=>$value['attended']
+                        );
+                        array_push($out["data"], $thisOut);
+                    }
+                    $data = array(
+                        "studentAttendance"=>$out,
+                        "token"=>regenerateUserToken($this->input->post('userTokenId'))[1]
+                    );
+                    jsonExporter(200, $data);
+                }else{
+                    jsonExporter(403);
+                }
+            }else{
+                jsonExporter(401);
+            }
+        }else{
+            jsonExporter(405, validation_errors());
+        }
+    }
 }
 ?>
