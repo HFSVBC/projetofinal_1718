@@ -45,9 +45,8 @@
 		public function createSubject($designation, $prof)
 		{
 			$designation = $this->db->escape($designation);
-			$prof = $this->db->escape($prof);
 
-			$sql = "INSERT INTO disciplina(designacao, prof_t) VALUES ($designation, $prof)";
+			$sql = "INSERT INTO disciplina(designacao, prof_t) SELECT $designation, user FROM users_loggedIn WHERE token = $prof";
 
 			if($this->db->query($sql)){
 				return true;
