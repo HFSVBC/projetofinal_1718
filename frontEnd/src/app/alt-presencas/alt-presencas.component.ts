@@ -36,6 +36,8 @@ export class AltPresencasComponent implements OnInit, AfterViewInit {
   // dtOptions: DataTables.Settings = {};
   dtOptions: any = {};
   presencas = new Presencas();
+  student_id;
+  date_id;
 
   constructor(private _cookieService: CookieService, private apiconnector: APIConnectorService) {
     this.model.aluno = '';
@@ -86,7 +88,6 @@ export class AltPresencasComponent implements OnInit, AfterViewInit {
       this._cookieService.put('token', res['data']['token']);
       console.log('studant', res['data']['studentAttendance']);
       this.extractData(res['data']['studentAttendance']);
-      this.hideLoader();
     });
   }
 
@@ -100,7 +101,6 @@ export class AltPresencasComponent implements OnInit, AfterViewInit {
       //   (<any>$('[data-toggle="tooltip"]')).tooltip();
       // });
     });
-
   }
 
   aulaChange() {
@@ -119,7 +119,22 @@ export class AltPresencasComponent implements OnInit, AfterViewInit {
   }
 
   alterarPresenca() {
+    const url = this.apiconnector.changetAulasDeUmAluno;
+    const data = new FormData();
+    this.token = data.append('userTokenId', this._cookieService.get('token'));
+    data.append('userId', this.student_id);
+    data.append('dateId', this.date_id);
 
+    this.apiconnector.postData(url, data).subscribe(res => {
+      console.log('res', res);
+      this._cookieService.put('token', res['data']['token']);
+      this.extractData(res['data']['studentAttendance']);
+    });
+  }
+
+  clickModal(student, date) {
+    this.student_id = student;
+    this.date_id = date;
   }
 
   verify(field) {
