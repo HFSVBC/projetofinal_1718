@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
     //computes date
-    function computeDate($year, $month, $day, $hour, $minutes, $acess)
+    function computeDate($year, $month, $day, $hour, $minutes, $duration)
     {
       $month30=array(4,6,9,11);
       $month31=array(1,3,5,7,8,10,12);
@@ -27,20 +27,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       $s_minutes = check_ten($minutes);
       $initial_date=$year."-".$s_month."-".$s_day." ".$s_hour.":".$s_minutes.":00";
 
-      if($acess==1){
-        $minutes+=20;
-        if($minutes>59){
-          $hour+=1;
-          $minutes-=60;
-        }
-      } else{
-        if($minutes==30){
-          $hour+=2;
-          $minutes=0;
-        } else{
-          $hour+=1;
-          $minutes+=30;
-        }
+      $minutes+=$duration;
+      while($minutes>59){
+        $hour+=1;
+        $minutes-=60;
       }
 
       $s2_hour = check_ten($hour);
