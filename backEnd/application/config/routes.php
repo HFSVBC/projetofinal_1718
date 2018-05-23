@@ -62,6 +62,8 @@ $route['teacher/individual/getStudentsAttendance'] = 'attendance/getIndvStudentA
 $route['teacher/createSubject'] = 'classes/createSubject';
 // CRIAR AULAS
 $route['teacher/createClasses'] = 'classes/createClasses';
+// MATRICULAR ALUNOS
+$route['teacher/matriculateStudent'] = 'classes/matriculateStudent';
 // CONSULTA DE QUEM ESTA NUM ESPAÇO
 
 // UTILIZADOR
