@@ -53,5 +53,74 @@ class Classes extends CI_Controller
     }
   }
 
+  public function createClasses(){
+    $config = array(
+        array(
+            'field' => 'userTokenId',
+            'label' => "User's Token",
+            'rules' => 'trim|required'
+        ),
+        array(
+            'field' => 'semester',
+            'label' => "Course semester",
+            'rules' => 'trim|required|numeric'
+        ),
+        array(
+            'field' => 'date',
+            'label' => "first class date",
+            'rules' => 'trim|required'
+        ),
+        array(
+            'field' => 'duration',
+            'label' => "class duration",
+            'rules' => 'trim|required|numeric'
+        ),
+        array(
+            'field' => 'type',
+            'label' => "class type",
+            'rules' => 'trim|required'
+        ),
+        array(
+            'field' => 'room',
+            'label' => "class room",
+            'rules' => 'trim|required|numeric'
+        ),
+        array(
+            'field' => 'subject',
+            'label' => "class subject",
+            'rules' => 'trim|required|numeric'
+        )
+    );
+    $this->form_validation->set_rules($config);
+    $this->form_validation->set_error_delimiters('', '');
+    if($this->form_validation->run() === true){
+      if(isUserLoggedIn($this->input->post('token'))===true){
+        $token = $this->db->escape($this->input->post('userTokenId'));
+        $sql = "SELECT *
+                FROM conf_routesAccess
+                WHERE user_type = (SELECT account_type FROM users WHERE id = (SELECT user FROM users_loggedIn WHERE token = $token)) AND route = 'teacher/createClasses'";
+        if(routeAccess($sql)===true){
+          //falta verificar se o professor pode criar aulas daquela disciplina
+          $semester = $this->input->post('semester');
+          $date = $this->input->post('date');
+          $duration = $this->input->post('duration');
+          $type = $this->input->post('type');
+          $space = $this->input->post('space');
+          $subject = $this->input->post('subject');
+          $this->class_model->createClasses($semester, $date, $duration, $type, $space, $subject);
+          $data = array(
+              "token"=>regenerateUserToken($this->input->post('userTokenId'))[1]
+          );
+          jsonExporter(200, $data);
+        }else{
+            jsonExporter(403);
+        }
+      }else{
+          jsonExporter(401);
+      }
+    }else{
+        jsonExporter(405, validation_errors());
+    }
+  }
 }
 ?>

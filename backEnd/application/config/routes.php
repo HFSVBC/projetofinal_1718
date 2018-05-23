@@ -58,8 +58,10 @@ $route['teacher/class/dates/(:any)']    = 'attendance/getTeacherClassDates/$1';
 $route['teacher/class/students/(:any)'] = 'attendance/getStudentsByClass/$1';
 $route['teacher/course/getStudentsAttendance'] = 'attendance/getStudentAttendance_Teacher';
 $route['teacher/individual/getStudentsAttendance'] = 'attendance/getIndvStudentAttendance_Teacher';
-// CRIAR DISCIPLINA falta por na bd
+// CRIAR DISCIPLINA
 $route['teacher/createSubject'] = 'classes/createSubject';
+// CRIAR AULAS falta por na bd
+$route['teacher/createClasses'] = 'classes/createClasses';
 // CONSULTA DE QUEM ESTA NUM ESPAÇO
 
 // UTILIZADOR
