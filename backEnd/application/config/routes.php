@@ -60,7 +60,7 @@ $route['teacher/course/getStudentsAttendance'] = 'attendance/getStudentAttendanc
 $route['teacher/individual/getStudentsAttendance'] = 'attendance/getIndvStudentAttendance_Teacher';
 // CRIAR DISCIPLINA
 $route['teacher/createSubject'] = 'classes/createSubject';
-// CRIAR AULAS falta por na bd
+// CRIAR AULAS
 $route['teacher/createClasses'] = 'classes/createClasses';
 // CONSULTA DE QUEM ESTA NUM ESPAÇO
 
