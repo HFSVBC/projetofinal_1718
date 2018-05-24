@@ -30,21 +30,29 @@
     padding: .5em;
 }
 
-.card .custom-select {
+/* .card .custom-select {
     margin-right: 15px;
     margin-left: 15px;
     width: 61%;
+} */
+.btn-warning{
+    color: #ffffff;
 }
-
-#btnAlterar {
+/* #btnAlterar {
     float: right;
     margin: 20px;
-}
+    color: #ffffff;
+} */
 
 #photoUser {
-    padding: 1.5em 4em;
+    padding: 1.5em 2em;
 }
 
 #user_row {
     justify-content: center;
 }
+
+.col-form-label {padding-left: 0;}
+.col-md-9 {padding: 15px;}
+.col-md-3{text-align: center;}
+.mainInfo{padding-bottom: 15px;}

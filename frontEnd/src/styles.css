@@ -45,6 +45,15 @@ app-menu {
     margin: 0;
 }
 
+.btn-cafcul{
+    border-color: #1f0273 !important;
+    background-color: #303F9F !important;
+    color: white;
+}
+#btnCont{
+    flex: none;
+    width: auto;
+}
 @media only screen and (max-width: 767px) {
     .h-max {
         height: auto;
