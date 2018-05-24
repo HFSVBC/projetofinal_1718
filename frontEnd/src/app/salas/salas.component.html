@@ -1,39 +1,34 @@
 <app-menu class="col-sm-2"></app-menu>
 <div class="router">
-
-    <div class="card mb-1">
+    <div class="card mb-3">
         <h5 class="card-header">Consultar Salas Disponíveis</h5>
         <div class="card-body">
-
             <form class="form-inline" (ngSubmit)="onSubmit()" #searchForm="ngForm">
-
                 <div class="form-row">
                     <div class="form-group col-sm-3">
                         <label for="edifico" class="col-sm-5 col-form-label">Edifício</label>
                         <select class="form-control col-sm-7" id="edifico" (change)="edificioChanged()" [(ngModel)]="model.edificio" name="edificio">
-                <option *ngFor="let ed of edificios" [value]="ed">{{ed}}</option>
-              </select>
+                            <option *ngFor="let ed of edificios" [value]="ed">{{ed}}</option>
+                        </select>
                     </div>
 
                     <div class="form-group col-sm-3">
                         <label for="piso" class="col-sm-4 col-form-label">Piso</label>
                         <select class="form-control col-sm-7" id="piso" (change)="pisoChanged()" [(ngModel)]="model.piso" name="piso">
-                <option *ngFor="let p of pisos" [value]="p">{{p}}</option>
-              </select>
+                            <option *ngFor="let p of pisos" [value]="p">{{p}}</option>
+                        </select>
                     </div>
 
                     <div class="form-group col-sm-3">
                         <label for="sala" class="col-sm-4 col-form-label">Sala</label>
                         <select class="form-control col-sm-7" id="sala" (change)="salaChanged()" [(ngModel)]="model.sala" name="sala">
-                <option *ngFor="let s of salas" [value]="s">{{s}}</option>
-              </select>
+                            <option *ngFor="let s of salas" [value]="s">{{s}}</option>
+                        </select>
                     </div>
 
                     <button type="submit" class="btn btn-success col-sm-2">Procurar</button>
                 </div>
             </form>
-
         </div>
     </div>
-
 </div>

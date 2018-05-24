@@ -18,6 +18,7 @@ export class MenuComponent implements OnInit {
   photo;
   private user;
   tipo;
+  toggleMenu = false;
 
   constructor(public authService: AuthService, public angularAuth: AngularFireAuth, private router: Router,
   private _cookieService: CookieService) {
@@ -34,4 +35,11 @@ export class MenuComponent implements OnInit {
     this.authService.logout();
   }
 
+  onToggleMenu(){
+    if (this.toggleMenu === true) {
+      this.toggleMenu = false;
+    } else{
+      this.toggleMenu = true;
+    }
+  }
 }

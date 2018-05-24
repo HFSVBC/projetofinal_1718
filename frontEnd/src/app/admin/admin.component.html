@@ -6,7 +6,7 @@
         <div class="card-body">
 
             <form (ngSubmit)="onSubmit()">
-                <div class="form-row">
+                <div class="form-row" id='user_row'>
                     <div class="input-group col-sm-8">
                         <div class="input-group-prepend">
                             <label class="input-group-text mb-0" for="na_email"><i class="material-icons">person</i></label>
@@ -23,8 +23,8 @@
     <div class="card mt-3" *ngIf='user'>
         <div class="row ">
             <div class="col-md-4 ">
-                <div class="card-img-top ">
-                    <img src={{user_avatar}} id='photoUser'>
+                <div class="card-img-middle">
+                    <img src={{user_avatar}} class="rounded-circle" id='photoUser'>
                 </div>
             </div>
             <div class="col-md-8 ">

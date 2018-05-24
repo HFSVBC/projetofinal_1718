@@ -1,6 +1,6 @@
 <nav class="col-sm-12 navbar fixed-top navbar-expand-lg navbar-dark bg-primary" id="menu">
     <div class="brand">
-        <button ng-click="dashboard='fadein'" class="navbar-toggler" type="button" data-target="#dashboard" aria-controls="dashboard" aria-expanded="false" id="dashToggle">
+        <button class="navbar-toggler" type="button" aria-controls="dashboard" aria-expanded="false" id="dashToggle" (click)="onToggleMenu()">
             <span class="navbar-toggler-icon"></span>
         </button>
         <a class="navbar-brand" href="#">CA FCUL</a>
@@ -18,10 +18,10 @@
     </div>
 </nav>
 
-<nav ng-class="dashboard" class="d-md-block bg-dark sidebar" id='dashboard' aria-labelledby="dashToggle">
+<nav [ngClass]="{'toggleMenuStyle':toggleMenu === true}" class="d-md-block bg-dark sidebar" id='dashboard' aria-labelledby="dashToggle">
     <li class="nav-item" id="mobileLogo">
         <a class="navbar-brand" href="#">CA FCUL</a>
-        <button ng-click="dashboard='fadeout'" class="close" type="button" data-target="#dashboard" aria-controls="dashboard" aria-expanded="false" id="dashToggle">
+        <button (click)="onToggleMenu()" class="close" type="button" aria-controls="dashboard" aria-expanded="false" id="dashToggle">
             <span aria-hidden="true">&times;</span>
         </button>
     </li>

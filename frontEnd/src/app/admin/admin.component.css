@@ -42,5 +42,9 @@
 }
 
 #photoUser {
-    padding: 20px;
+    padding: 1.5em 4em;
+}
+
+#user_row {
+    justify-content: center;
 }
