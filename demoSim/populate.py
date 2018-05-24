@@ -11,17 +11,17 @@ disciplinas = ["Elementos de Matematica I", "Elementos de Matematica II", "Fisic
                 "Aplicações Distribuidas", "Conceção de Produto", "Analise e Desenho de Software", "Testes de Software I", "Testes de Software II", "IoT I", "IoT II"\
                 , "Projeto de Tecnologias de Informação", "Projecto de Tecnologias de Redes", "Segurança Informática", "Estatistica I", "Estatistica II", "Redes de Computadores"]
 
-with open('populate_students.sql', 'w') as infile:
+with open('sqlscripts/populate_students.sql', 'w') as infile:
     for i in range(45010,50000):
         googleUID = str(700000000000000001984 + i)
         name = primeiro_nome[r.randint(0,len(primeiro_nome)-1)] + " " + ultimo_nome[r.randint(0,len(ultimo_nome)-1)]
         email = name.split(" ")[0] + name.split(" ")[1] + str(i) + "@gmail.com"
         confid = "d3034e8f8c717c1065beac83fep" + str(i)
         avatar = "https://i.ytimg.com/vi/x9Jr9JKpsX8/maxresdefault.jpg"
-        infile.write("INSERT INTO users (id,googleUID,name,email,confid,avatar,account_type) VALUES (" + str(i) + ","  + "'" + googleUID + "'" + "," + "'" + name + "'" + ","\
+        infile.write("INSERT INTO users(id,googleUID,name,email,confid,avatar,account_type) VALUES (" + str(i) + ","  + "'" + googleUID + "'" + "," + "'" + name + "'" + ","\
                     + "'" + email  + "'" + "," + "'" + confid + "'" + "," + "'" + avatar + "'" + "," + "0);\n")
 
-with open('populate_space.sql', 'w') as infile:
+with open('sqlscripts/populate_space.sql', 'w') as infile:
     ids=1
     for i in range(1,6):
         for j in range(1,5):
@@ -31,13 +31,13 @@ with open('populate_space.sql', 'w') as infile:
                     lot=100
                 infile.write("INSERT INTO espaco(id, bloco, piso, sala, lotacao) VALUES ("  + str(ids) + "," + str(i) + "," + str(j) + "," + str(k) + "," + str(lot) + ");\n")
                 ids+=1
-with open('populate_subjects.sql', 'w') as infile:
+with open('sqlscripts/populate_subjects.sql', 'w') as infile:
     idd=1
     for i in range(0,20):
         infile.write("INSERT INTO disciplina(id,designacao, prof_t) VALUES (" + str(idd) + "," + "'" + disciplinas[i] + "'" + "," + "45004);\n")
         idd+=1
 
-with open('populate_subjects_students.sql', 'w') as infile, open('presences_students_helper.txt', 'w') as infile2:
+with open('sqlscripts/populate_subjects_students.sql', 'w') as infile, open('presences_students_helper.txt', 'w') as infile2:
     idda=1
     for i in range(1,21):
         infile2.write(disciplinas[i-1] + ":")
@@ -92,7 +92,7 @@ def check_ten(args):
     else:
         return str(args)
 
-with open('populate_classes.sql', 'w') as infile, open('presencas_classes_helper.txt', 'w') as infile2:
+with open('sqlscripts/populate_classes.sql', 'w') as infile, open('helpers/presences_classes_helper.txt', 'w') as infile2:
     idc=1
     cal_ids=1
     for i in range(1,21):
@@ -121,7 +121,7 @@ with open('populate_classes.sql', 'w') as infile, open('presencas_classes_helper
                         "," + "'" + datas[2] + "'" + "," + "'" + datas[3] + "'" + "," + "'T'," + str(espaco) + "," + str(i) + ");\n")
             idc+=1
 
-with open('populate_acesses.sql', 'w') as infile:
+with open('sqlscripts/populate_acesses.sql', 'w') as infile:
     for i in range(0,2001):
         espaco=r.randint(101,200)
         if i<200:
@@ -143,7 +143,7 @@ Ids das aulas das disciplinas estão no presencas_classes_helper
 
 """
 
-with open('populate_presences.sql', 'w') as infile, open('presencas_classes_helper.txt', 'r') as helper, open('presences_students_helper.txt', 'r') as helper2:
+with open('sqlscripts/populate_presences.sql', 'w') as infile, open('helpers/presences_classes_helper.txt', 'r') as helper, open('helpers/presences_students_helper.txt', 'r') as helper2:
     buffer_classes = helper.readlines()
     buffer_students = helper2.readlines()
     #impares 1 semestre
@@ -160,6 +160,7 @@ with open('populate_presences.sql', 'w') as infile, open('presencas_classes_help
             alunos_presencas = r.sample(alunos,num_presencas)
             for aluno_ir in alunos_presencas:
                 infile.write("INSERT INTO presencas(aula,aluno) VALUES (" + str(aula) + "," + (aluno_ir) + ");\n")
+                infile.write("INSERT INTO acesso(data_entrada,data_fim,espaco,user) SELECT a.data_inicio, a.data_fim, a.espaco, " + aluno_ir + " FROM aula a WHERE a.id=" + str(aula) + ";\n")
 
     #2 semestre
     for i in range(1, len(buffer_classes), 2):
@@ -172,3 +173,4 @@ with open('populate_presences.sql', 'w') as infile, open('presencas_classes_help
             alunos_presencas = r.sample(alunos,num_presencas)
             for aluno_ir in alunos_presencas:
                 infile.write("INSERT INTO presencas(aula,aluno) VALUES (" + str(aula) + "," + (aluno_ir) + ");\n")
+                infile.write("INSERT INTO acesso(data_entrada,data_fim,espaco,user) SELECT a.data_inicio, a.data_fim, a.espaco, " + aluno_ir + " FROM aula a WHERE a.id=" + str(aula) + ";\n")

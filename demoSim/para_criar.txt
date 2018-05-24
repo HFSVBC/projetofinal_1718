@@ -1,9 +1,0 @@
-Criar alunos do 45010->50000
-Professor, Funcionario e Segurança não pode ser dummy e os dummy não têm utilidade
-
-Criar 100 espaços
-Criar 20 disciplinas
-Matricular alunos, random
-Criar as aulas correspondentes
-Criar 2000 acessos
-Criar presenças random para as aulas que já aconteceram

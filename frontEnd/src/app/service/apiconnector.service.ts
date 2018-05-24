@@ -31,6 +31,8 @@ export class APIConnectorService {
   getDatasAulas = this.baseURL + 'teacher/class/dates/';
   getAlunosNomesAulas = this.baseURL + 'teacher/class/students/';
   getAlunosAulas = this.baseURL + 'teacher/course/getStudentsAttendance';
+  getAulasDeUmAluno = this.baseURL + 'teacher/individual/getStudentsAttendance';
+  changetAulasDeUmAluno = this.baseURL + 'teacher/individual/changeStudentsAttendance';
 
   historico = this.baseURL + 'history/user';
   presencas = this.baseURL +  'presencas';

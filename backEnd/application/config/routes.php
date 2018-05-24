@@ -57,6 +57,13 @@ $route['teacher/classes']               = 'attendance/getTeacherClasses';
 $route['teacher/class/dates/(:any)']    = 'attendance/getTeacherClassDates/$1';
 $route['teacher/class/students/(:any)'] = 'attendance/getStudentsByClass/$1';
 $route['teacher/course/getStudentsAttendance'] = 'attendance/getStudentAttendance_Teacher';
+$route['teacher/individual/getStudentsAttendance'] = 'attendance/getIndvStudentAttendance_Teacher';
+// CRIAR DISCIPLINA
+$route['teacher/createSubject'] = 'classes/createSubject';
+// CRIAR AULAS
+$route['teacher/createClasses'] = 'classes/createClasses';
+// MATRICULAR ALUNOS
+$route['teacher/matriculateStudent'] = 'classes/matriculateStudent';
 // CONSULTA DE QUEM ESTA NUM ESPAÇO
 
 // UTILIZADOR

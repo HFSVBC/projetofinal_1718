@@ -11,9 +11,9 @@
 		{
 			$user = $this->db->escape($user);
 			// $lim  = (int) $this->db->escape($lim);
-			
-			$sql = "SELECT a.data_entrada, a.data_fim, e.bloco, e.piso, e.sala 
-					FROM acesso a, espaco e 
+
+			$sql = "SELECT a.data_entrada, a.data_fim, e.bloco, e.piso, e.sala
+					FROM acesso a, espaco e
 					WHERE a.user=$user AND a.espaco=e.id";
 			if($lim !== "null")
 				$sql .= " ORDER BY a.id DESC LIMIT $lim";
@@ -32,14 +32,35 @@
                     FROM users u, presencas p, aula a
                     WHERE u.id = p.aluno AND p.aula = a.id AND a.disciplina = $course";
 
-            if($student != "''")
+            if($student != "'null'" || is_null($student))
                 $sql .= " AND u.id = $student";
-            if($class != "''")
+            if($class != "'null'" || is_null($class))
                 $sql .= " AND p.aula = $class";
 
             $query = $this->db->query($sql);
             return $query->result_array();
 		}
+
+		public function getIndividualStudentAttendance_Teacher()
+        {
+            $course	  = $this->db->escape($this->input->post("course_id"));
+            $student  = $this->db->escape($this->input->post("student_id"));
+            $class    = $this->db->escape($this->input->post("class_id"));
+
+            $sql = "SELECT (SELECT u.name FROM users u WHERE u.id = $student) AS 'name', data_inicio, IF(ISNULL((SELECT p.aluno FROM presencas p WHERE p.aula = a.id AND p.aluno = $student)), 0, 1) AS 'attended' 
+                    FROM aula a 
+                    WHERE (SELECT u.name FROM users u WHERE u.id = $student) IS NOT NULL AND a.disciplina = $course";
+            if($class != "'null'" || is_null($class))
+                $sql .= " AND a.id = $class";
+
+            $query = $this->db->query($sql);
+            return $query->result_array();
+        }
+//		public function getAvailableRooms($hora){
+//			$sql = "SELECT *
+//							FROM espaco e
+//							WHERE e.lotacao > (SELECT COUNT(a.id) FROM acesso a WHERE a.espaco=e.id AND $hora BETWEEN a.data_entrada AND a.data_fim)";
+//		}
 	}
 
 ?>
