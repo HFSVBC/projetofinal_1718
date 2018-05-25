@@ -1,9 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { CookieService } from 'angular2-cookie/core';
+import { APIConnectorService } from '../service/apiconnector.service';
+import { Subject } from 'rxjs/Subject';
+import { DataTableDirective } from 'angular-datatables';
 
 class SalasDisp {
   edificio: string;
   piso: string;
-  sala: string;
+}
+
+class SalasDisponiveis {
+  space: string;
+  seats: string;
 }
 
 @Component({
@@ -11,82 +19,104 @@ class SalasDisp {
   templateUrl: './salas.component.html',
   styleUrls: ['./salas.component.css']
 })
-export class SalasComponent implements OnInit {
+export class SalasComponent implements OnInit, AfterViewInit {
 
-  edificios_pisos = {
-    'C1' : ['1', '2', '3', '4', '5'],
-    'C2' : ['1', '2', '3', '4', '5'],
-    'C3' : ['1', '2'],
-    'C4' : ['1', '2'],
-    'C5' : ['1', '2'],
-    'C6' : ['1', '2', '3', '4', '5'],
-    'C7' : ['1', '2'],
-    'C8' : ['1', '2', '3', '4', '5'],
-    };
-
-  edificios_pisos_salas = {
-    'C1.1' : ['1', '2', '3', '4', '5'],
-    'C1.2' : ['1', '2', '3', '4', '5'],
-    'C1.3' : ['1', '2', '3', '4', '5'],
-    'C1.4' : ['1', '2', '3', '4', '5'],
-    'C1.5' : ['1', '2', '3', '4', '5'],
-    'C2.1' : ['1', '2', '3', '4', '5'],
-    'C2.2' : ['1', '2', '3', '4', '5'],
-    'C2.3' : ['1', '2', '3', '4', '5'],
-    'C2.4' : ['1', '2', '3', '4', '5'],
-    'C2.5' : ['1', '2', '3', '4', '5'],
-    'C3.1' : ['1', '2', '3', '4', '5'],
-    'C3.2' : ['1', '2', '3', '4', '5'],
-    'C4.1' : ['1', '2', '3', '4', '5'],
-    'C4.2' : ['1', '2', '3', '4', '5'],
-    'C5.1' : ['1', '2', '3', '4', '5'],
-    'C5.2' : ['1', '2', '3', '4', '5'],
-    'C6.1' : ['1', '2', '3', '4', '5'],
-    'C6.2' : ['1', '2', '3', '4', '5'],
-    'C6.3' : ['1', '2', '3', '4', '5'],
-    'C6.4' : ['1', '2', '3', '4', '5'],
-    'C6.5' : ['1', '2', '3', '4', '5'],
-    'C7.1' : ['1', '2', '3', '4', '5'],
-    'C7.2' : ['1', '2', '3', '4', '5'],
-    'C8.1' : ['1', '2', '3', '4', '5'],
-    'C8.2' : ['1', '2', '3', '4', '5'],
-    'C8.3' : ['1', '2', '3', '4', '5'],
-    'C8.4' : ['1', '2', '3', '4', '5'],
-    'C8.5' : ['1', '2', '3', '4', '5'],
-    };
-
-    edificios = Object.keys(this.edificios_pisos);
-    pisos = [];
-    salas = [];
-    loader = false;
-
+  edificios_pisos; edificios; token;
+  pisos = [];  salas = [];
+  loader = false;
+  active = false;
+  @ViewChild(DataTableDirective)
+  dtElement: DataTableDirective;
+  dtTrigger: Subject<any> = new Subject();
+  dtOptions: any = {};
   model = new SalasDisp();
+  salasDisponiveis = new SalasDisponiveis();
 
-  constructor() { }
+  constructor(private _cookieService: CookieService, private apiconnector: APIConnectorService) {
+    this.model.piso = '';
+  }
+
+  ngOnInit() {
+    const url = this.apiconnector.getEdificios;
+    const data = new FormData();
+
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      };
+
+    this.token = data.append('userTokenId', this._cookieService.get('token'));
+    this.dtTrigger.next();
+
+    this.apiconnector.postData(url, data).subscribe(res => {
+      console.log('res', res);
+      this._cookieService.put('token', res['data']['token']);
+
+      this.edificios = res['data']['blocks']['data'];
+    });
+  }
+
+  ngAfterViewInit() {
+    this.dtTrigger.next();
+  }
 
   edificioChanged() {
-    console.log(this.model);
-    this.pisos = this.edificios_pisos[this.model.edificio];
-    console.log(this.pisos);
-    this.loader = true;
+    const url = this.apiconnector.getPisosEdificio;
+    const data = new FormData();
+
+    this.token = data.append('userTokenId', this._cookieService.get('token'));
+    data.append('block', this.model.edificio);
+
+    this.apiconnector.postData(url, data).subscribe(res => {
+      console.log('res', res);
+      this._cookieService.put('token', res['data']['token']);
+
+      this.pisos = res['data']['floors']['data'];
+      console.log('pisos',  this.model.edificio, this.pisos);
+    });
   }
 
   pisoChanged() {
     console.log(this.model);
-    const ed_p = this.model.edificio + '.' + this.model.piso;
-    this.salas = this.edificios_pisos_salas[ed_p];
-  }
-
-  salaChanged() {
-    console.log(this.model);
-  }
-
-  ngOnInit() {
-    this.model.edificio = 'C1';
   }
 
   onSubmit() {
-    console.log('Modelo', this.model);
+    this.showLoader();
+    const url = this.apiconnector.getLuagresDisponiveis;
+    const data = new FormData();
+    this.token = data.append('userTokenId', this._cookieService.get('token'));
+    data.append('block', this.model.edificio);
+    data.append('floor', this.model.piso);
+
+    this.apiconnector.postData(url, data).subscribe(res => {
+      console.log('res', res);
+      this._cookieService.put('token', res['data']['token']);
+      this.extractData(res['data']['availableRooms']);
+    });
   }
 
+  private extractData(myDataArray) {
+    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      dtInstance.destroy();
+      this.salasDisponiveis = myDataArray.data || {};
+      this.dtTrigger.next();
+      this.hideLoader();
+    });
+  }
+
+  verify(field) {
+    let act = false;
+    for (const f in field) {
+      if (field[f].length === 0 && field[f] === '') {
+        act = true;
+      }
+    }
+    act ? this.active = ! 1 : this.active = ! 0;
+  }
+
+  private showLoader(): void {
+    this.loader = true;
+  }
+  private hideLoader(): void {
+    this.loader = false;
+  }
 }

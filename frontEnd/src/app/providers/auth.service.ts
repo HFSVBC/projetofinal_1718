@@ -101,8 +101,9 @@ export class AuthService {
     const data = new FormData();
     data.append('userTokenId', this._cookieService.get('token'));
 
-    const a$ = this.apiconnector.postData(url, data);
-    console.log('cenas fixes', a$);
+    this.apiconnector.postData(url, data).subscribe(res => {
+      console.log('res', res);
+    });
 
     this.current = null;
     this._firebaseAuth.auth.signOut();

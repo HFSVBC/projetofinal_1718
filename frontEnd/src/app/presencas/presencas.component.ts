@@ -27,20 +27,20 @@ export class PresencasComponent implements OnInit, AfterViewInit {
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;
   model = new SearchOptions();
-  todasAulas;
-  todasDatas;
-  todosAlunos;
+  todasAulas; todasDatas; todosAlunos;
   salas = [];
   token;
   dtTrigger: Subject<any> = new Subject();
   // dtOptions: DataTables.Settings = {};
   dtOptions: any = {};
-
+  active = false;
   presencas: Presencas[] = [];
   loader = false;
 
   constructor(private _cookieService: CookieService, private apiconnector: APIConnectorService) {
-    this.model = new SearchOptions();
+    this.model.aula = '';
+    this.model.data = '';
+    this.model.aluno = '';
   }
 
   ngOnInit() {
@@ -61,8 +61,6 @@ export class PresencasComponent implements OnInit, AfterViewInit {
       this.aulaChange();
       console.log('data no pedido', this.model.aula, this.model.aluno, this.model.data);
     });
-    // faz o pedido a bd das aulas do user
-    // todasAulas
   }
 
   ngAfterViewInit() {
@@ -70,14 +68,10 @@ export class PresencasComponent implements OnInit, AfterViewInit {
   }
 
   aulaChange() {
-    // faz o pedido a bd das salas da aula do user
-    // salas
     console.log('aula id', this.model.aula);
     const url = this.apiconnector.getDatasAulas + this.model.aula;
     const data = new FormData();
     this.token = data.append('userTokenId', this._cookieService.get('token'));
-
-    console.log('aula trocou', data);
 
     this.apiconnector.postData(url, data).subscribe(res => {
       console.log('res', res);
@@ -86,6 +80,7 @@ export class PresencasComponent implements OnInit, AfterViewInit {
       this.loadStudents();
     });
   }
+
   loadStudents() {
     const url = this.apiconnector.getAlunosNomesAulas + this.model.aula;
     const data = new FormData();
@@ -96,9 +91,9 @@ export class PresencasComponent implements OnInit, AfterViewInit {
       this.todosAlunos = res['data']['classStudents']['data'];
     });
   }
+
   onSubmit() {
     this.showLoader();
-    // Cria a tabela com as opcoesconst
     const url = this.apiconnector.getAlunosAulas;
     const data = new FormData();
     this.token = data.append('userTokenId', this._cookieService.get('token'));
@@ -122,6 +117,16 @@ export class PresencasComponent implements OnInit, AfterViewInit {
       this.dtTrigger.next();
       this.hideLoader();
     });
+  }
+
+  verify(field) {
+    let act = false;
+    for (const f in field) {
+      if (field[f].length === 0 && field[f] === '') {
+        act = true;
+      }
+    }
+    act ? this.active = ! 1 : this.active = ! 0;
   }
 
   private showLoader(): void {
