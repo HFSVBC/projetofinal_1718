@@ -63,11 +63,12 @@ def createAccess(number_acesses, duracao=0, space=0, date=0, user_choice=0):
             data_horas = date[1].split(':')
             ano=data_dias[0]; mes=data_dias[1]; dia=data_dias[2]; hora=data_horas[0]; minutos=data_horas[1];
         datas=compute_date(ano,mes,dia,hora,minutos, duracao)
-        out = {'data_entrada':data[2],'data_saida':data[3],'espaco':espaco,'user':user}
+
+        out = {'data_entrada':datas[2],'data_saida':datas[3],'espaco':espaco,'user':user}
         ###requests.post('url', data=out)
         sql="INSERT INTO acesso(data_entrada,data_fim,espaco,user) VALUES(" + "'" + datas[2] + "'" +\
              "," + "'" + datas[3] + "'" + "," + str(espaco) + "," + str(user) + ");\n"
-        print sql
+        print out
 
 
 createAccess(10)

@@ -70,7 +70,8 @@ $route['teacher/createClasses'] = 'classes/createClasses';
 // MATRICULAR ALUNOS
 $route['teacher/matriculateStudent'] = 'classes/matriculateStudent';
 // CONSULTA DE QUEM ESTA NUM ESPAÇO
-
+//CRIAR ACESSOS
+$route['testcase/createAcess'] = 'testcaseaccess/CreateAccess';
 // UTILIZADOR
 $route['user/login']                    = 'UserLoader/logIn'; // [20] registers user if not already registered | {token => String, user_type => String}
 $route['user/logout']                   = 'UserLoader/logOut'; // [20] logs user out
