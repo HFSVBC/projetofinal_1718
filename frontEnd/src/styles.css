@@ -50,9 +50,15 @@ app-menu {
     background-color: #303F9F !important;
     color: white;
 }
+.btn-warning{
+  color: #ffffff;
+}
 #btnCont{
     flex: none;
     width: auto;
+}
+.custom-select{
+  height: 100%;
 }
 @media only screen and (max-width: 767px) {
     .h-max {

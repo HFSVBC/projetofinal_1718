@@ -58,6 +58,7 @@ export class SalasComponent implements OnInit {
     edificios = Object.keys(this.edificios_pisos);
     pisos = [];
     salas = [];
+    loader = false;
 
   model = new SalasDisp();
 
@@ -67,6 +68,7 @@ export class SalasComponent implements OnInit {
     console.log(this.model);
     this.pisos = this.edificios_pisos[this.model.edificio];
     console.log(this.pisos);
+    this.loader = true;
   }
 
   pisoChanged() {
@@ -80,6 +82,7 @@ export class SalasComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.model.edificio = 'C1';
   }
 
   onSubmit() {

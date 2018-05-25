@@ -2,7 +2,7 @@
 <div class="router">
 
     <div class="card mb-1">
-        <h5 class="card-header">Consultar Preesenças nas Aulas</h5>
+        <h5 class="card-header">Consultar Presenças nas Aulas</h5>
 
         <div *ngIf="loader">
             <div class="loader-overlay">
@@ -50,7 +50,7 @@
                     </div>
 
                     <div class="input-group col-lg-1 pb-3">
-                        <button type="submit" class="btn btn-success" [disabled]="loader">Procurar</button>
+                        <button type="submit" class="btn btn-success" [disabled]="!active || loader">Procurar</button>
                     </div>
                 </div>
             </form>

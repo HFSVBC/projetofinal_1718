@@ -15,7 +15,7 @@ class Presencas {
   student_id: string;
   student_name: string;
   date_ini: string;
-  date_end: string;
+  aula_id: string;
 }
 
 @Component({
@@ -37,7 +37,11 @@ export class AltPresencasComponent implements OnInit, AfterViewInit {
   dtOptions: any = {};
   presencas = new Presencas();
   student_id;
+  aula_id;
   date_id;
+  state_now;
+  ErroAlterar;
+  alterarLoader = false;
 
   constructor(private _cookieService: CookieService, private apiconnector: APIConnectorService) {
     this.model.aluno = '';
@@ -51,14 +55,15 @@ export class AltPresencasComponent implements OnInit, AfterViewInit {
       pagingType: 'full_numbers',
       dom: 'Bfrtip',
       buttons: [
-        {extend: 'copy', exportOptions: {columns: [0, 1, 2, 3]}},
-        {extend: 'csv', exportOptions: {columns: [0, 1, 2, 3]}},
-        {extend: 'print', exportOptions: {columns: [0, 1, 2, 3]}}
+        {extend: 'copy', exportOptions: {columns: [0, 1, 2, 4]}},
+        {extend: 'csv', exportOptions: {columns: [0, 1, 2, 4]}},
+        {extend: 'print', exportOptions: {columns: [0, 1, 2, 4]}}
       ],
       columnDefs: [
         {'width': '50px', 'targets' : -1},
         {'orderable': false, 'targets' : -1},
-        {'visible': false, 'targets': -2}
+        {'visible': false, 'targets': -2},
+        {'visible': false, 'targets': -3}
       ]
     };
     this.dtTrigger.next();
@@ -109,8 +114,6 @@ export class AltPresencasComponent implements OnInit, AfterViewInit {
     const data = new FormData();
     this.token = data.append('userTokenId', this._cookieService.get('token'));
 
-    console.log('aula trocou', data);
-
     this.apiconnector.postData(url, data).subscribe(res => {
       console.log('res', res);
       this._cookieService.put('token', res['data']['token']);
@@ -122,19 +125,30 @@ export class AltPresencasComponent implements OnInit, AfterViewInit {
     const url = this.apiconnector.changetAulasDeUmAluno;
     const data = new FormData();
     this.token = data.append('userTokenId', this._cookieService.get('token'));
-    data.append('userId', this.student_id);
-    data.append('dateId', this.date_id);
+    data.append('student_id', this.student_id);
+    data.append('class_id', this.aula_id);
+    data.append('state_now', this.state_now);
+
+    this.alterarLoader = true;
 
     this.apiconnector.postData(url, data).subscribe(res => {
       console.log('res', res);
       this._cookieService.put('token', res['data']['token']);
-      this.extractData(res['data']['studentAttendance']);
+
+      this.ErroAlterar = (res['data']['changeStudentAttendance']);
+
+      this.onSubmit();
+
+      this.alterarLoader = false;
+
     });
   }
 
-  clickModal(student, date) {
+  clickModal(student, date, aula, state) {
     this.student_id = student;
+    this.aula_id = aula;
     this.date_id = date;
+    this.state_now = state;
   }
 
   verify(field) {
