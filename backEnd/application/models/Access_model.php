@@ -7,14 +7,14 @@
 	*/
 	class Access_model extends CI_Model{
 		//
-		public function getAccessByUser($user, $lim)
+		public function getAccessByUser($lim)
 		{
-			$user = $this->db->escape($user);
+			$token = $this->db->escape($this->input->post("userTokenId"));
 			// $lim  = (int) $this->db->escape($lim);
 
 			$sql = "SELECT a.data_entrada, a.data_fim, e.bloco, e.piso, e.sala
 					FROM acesso a, espaco e
-					WHERE a.user=$user AND a.espaco=e.id";
+					WHERE a.user=(SELECT user FROM users_loggedIn WHERE token = $token) AND a.espaco=e.id";
 			if($lim !== "null")
 				$sql .= " ORDER BY a.id DESC LIMIT $lim";
 
@@ -47,7 +47,7 @@
             $student  = $this->db->escape($this->input->post("student_id"));
             $class    = $this->db->escape($this->input->post("class_id"));
 
-            $sql = "SELECT (SELECT u.name FROM users u WHERE u.id = $student) AS 'name', data_inicio, IF(ISNULL((SELECT p.aluno FROM presencas p WHERE p.aula = a.id AND p.aluno = $student)), 0, 1) AS 'attended' 
+            $sql = "SELECT (SELECT u.name FROM users u WHERE u.id = $student) AS 'name', data_inicio, id, IF(ISNULL((SELECT p.aluno FROM presencas p WHERE p.aula = a.id AND p.aluno = $student)), 0, 1) AS 'attended' 
                     FROM aula a 
                     WHERE (SELECT u.name FROM users u WHERE u.id = $student) IS NOT NULL AND a.disciplina = $course";
             if($class != "'null'" || is_null($class))
@@ -56,11 +56,60 @@
             $query = $this->db->query($sql);
             return $query->result_array();
         }
-//		public function getAvailableRooms($hora){
-//			$sql = "SELECT *
-//							FROM espaco e
-//							WHERE e.lotacao > (SELECT COUNT(a.id) FROM acesso a WHERE a.espaco=e.id AND $hora BETWEEN a.data_entrada AND a.data_fim)";
-//		}
+
+        public function changeStudentAttendanceState()
+		{
+            $student  = $this->db->escape($this->input->post("student_id"));
+            $class    = $this->db->escape($this->input->post("class_id"));
+            $stateNow = $this->input->post("state_now");
+
+            if($stateNow == 0){
+            	$r = $this->addClassAttendance($student, $class);
+			}else if($stateNow == 1){
+                $r = $this->removeClassAttendance($student, $class);
+			}
+
+            return $r;
+		}
+        public function getAvailableRooms(){
+            $bloco = $this->db->escape($this->input->post("block"));
+            $piso = $this->db->escape($this->input->post("floor"));
+
+            $sql = "SELECT e.id, CONCAT_WS('.', e.bloco, e.piso, e.sala) AS espaco, IFNULL((e.lotacao - (SELECT COUNT(ac.espaco) FROM acesso ac WHERE e.id = ac.espaco AND ac.data_fim >= NOW() AND ac.data_entrada <= NOW() GROUP BY ac.espaco)),e.lotacao) AS available
+			        FROM espaco e 
+			        WHERE e.id NOT IN (SELECT a.espaco FROM aula a WHERE (NOW() + INTERVAL 8 HOUR) >= a.data_inicio AND (NOW() + INTERVAL 8 HOUR) <= a.data_fim) AND e.bloco = $bloco AND e.piso = $piso";
+
+            $query = $this->db->query($sql);
+            return $query->result_array();
+        }
+		# AUX Methods --------------------------------------------------------------------
+        public function getFacultyBlocks()
+        {
+            $sql = "SELECT DISTINCT bloco FROM espaco";
+
+            $query = $this->db->query($sql);
+            return $query->result_array();
+        }
+        public function getBlockFloors()
+        {
+            $block = $this->db->escape($this->input->post("block"));
+
+            $sql = "SELECT DISTINCT piso FROM espaco where bloco = $block";
+
+            $query = $this->db->query($sql);
+            return $query->result_array();
+        }
+		private function addClassAttendance($s, $c){
+			$sql = "INSERT INTO presencas (aluno, aula) VALUES($s, $c)";
+
+			return $this->db->query($sql);
+		}
+
+		private function removeClassAttendance($s, $c){
+			$sql = "DELETE FROM presencas WHERE aluno = $s AND aula = $c";
+
+            return $this->db->query($sql);
+        }
 	}
 
 ?>

@@ -19,7 +19,7 @@
       $day     = mt_rand(1,31);
       $hour    = mt_rand(9,18);
       $minutes = mt_rand(1,60);
-      $date    = computeDate($year, $month, $day, $hour, $minute, 1);
+      $date    = computeDate($year, $month, $day, $hour, $minutes, 1);
 
       $sql     = "INSERT INTO acesso(data_entrada,data_fim,espaco,user) VALUES($date[2], $date[3], $space, $user)";
 

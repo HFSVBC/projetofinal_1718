@@ -14,7 +14,8 @@
 		public function login()
 		{
 			$email 			= $this->db->escape($this->input->post('email'));
-			$token 			= $this->db->escape(bin2hex(openssl_random_pseudo_bytes(16)));
+			$tokenS 		= bin2hex(openssl_random_pseudo_bytes(16));
+			$token          = $this->db->escape($tokenS);
 			$timeOut 		= new DateTime();
 			$timeOut->add(new DateInterval('PT21600S'));
 			$timeOut 		= $this->db->escape($timeOut->format('Y-m-d H:i:s'));
@@ -26,7 +27,7 @@
 					WHERE users.email = $email";
 
 			if($this->db->query($sql)){
-				return array(true, $token);
+				return array(true, $tokenS);
 			}else{
 				return array(false, '');
 			}
@@ -35,7 +36,7 @@
 		// adds user to the users_loggedOut table
 		public function logOut()
 		{
-			$token = $this->input->post('userTokenId');
+			$token = $this->db->escape($this->input->post('userTokenId'));
 
 			$this->db->trans_start();
 			$sql = "INSERT INTO users_loggedOut (user, login_timestamp, externalIP)
@@ -211,9 +212,8 @@
 					WHERE `timeOut` > CURRENT_TIMESTAMP AND token=$token";
 
 			$query = $this->db->query($sql);
-			$row   = $query->row();
-
-			if(!empty($row)){
+            $row   = $query->row();
+			if(!is_null($row->token)){
 				return true;
 			}else{
 				return false;

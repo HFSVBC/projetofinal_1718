@@ -49,6 +49,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
+// GENERAL
+$route['general/getFacultyBlocks'] = 'spaces/getFacultyBuildings';
+$route['general/getBlockFloors'] = 'spaces/getFacultyFloors';
+$route['general/availableSpaces'] = 'spaces/getFacultyAvailableRooms';
 // CONSULTA DE HISTORICO DE ACESSOS
 $route['history/user']                  = 'history/getUserAccessHistory';
 $route['history/user/(:any)']           = 'history/getUserAccessHistory/$1';
@@ -58,6 +62,7 @@ $route['teacher/class/dates/(:any)']    = 'attendance/getTeacherClassDates/$1';
 $route['teacher/class/students/(:any)'] = 'attendance/getStudentsByClass/$1';
 $route['teacher/course/getStudentsAttendance'] = 'attendance/getStudentAttendance_Teacher';
 $route['teacher/individual/getStudentsAttendance'] = 'attendance/getIndvStudentAttendance_Teacher';
+$route['teacher/individual/changeStudentsAttendance'] = 'attendance/changeUserAttendance';
 // CRIAR DISCIPLINA
 $route['teacher/createSubject'] = 'classes/createSubject';
 // CRIAR AULAS

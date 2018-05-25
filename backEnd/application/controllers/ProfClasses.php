@@ -30,7 +30,7 @@ class ProfClasses extends CI_Controller
     $this->form_validation->set_rules($config);
     $this->form_validation->set_error_delimiters('', '');
     if($this->form_validation->run() === true){
-        if(isUserLoggedIn($this->input->post('token'))===true){
+        if(isUserLoggedIn($this->input->post('userTokenId'))===true){
             $token = $this->db->escape($this->input->post('userTokenId'));
             $sql = "SELECT *
                     FROM conf_routesAccess
@@ -94,7 +94,7 @@ class ProfClasses extends CI_Controller
     $this->form_validation->set_rules($config);
     $this->form_validation->set_error_delimiters('', '');
     if($this->form_validation->run() === true){
-      if(isUserLoggedIn($this->input->post('token'))===true){
+      if(isUserLoggedIn($this->input->post('userTokenId'))===true){
         $token = $this->db->escape($this->input->post('userTokenId'));
         $sql = "SELECT *
                 FROM conf_routesAccess
@@ -145,7 +145,7 @@ class ProfClasses extends CI_Controller
     $this->form_validation->set_rules($config);
     $this->form_validation->set_error_delimiters('', '');
     if($this->form_validation->run() === true){
-      if(isUserLoggedIn($this->input->post('token'))===true){
+      if(isUserLoggedIn($this->input->post('userTokenId'))===true){
         $token = $this->db->escape($this->input->post('userTokenId'));
         $sql = "SELECT *
                 FROM conf_routesAccess
