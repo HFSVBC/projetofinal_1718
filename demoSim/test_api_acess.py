@@ -67,8 +67,7 @@ def createAccess(number_acesses, duracao=0, space=0, date=0, user_choice=0, aula
 
         out = {'data_entrada':datas[2],'data_saida':datas[3],'espaco':espaco,'user':str(user), 'aula':aula}
         ###requests.post('url/testcase/createAcess', data=out)
-        ###sql="INSERT INTO acesso(data_entrada,data_fim,espaco,user) VALUES(" + "'" + datas[2] + "'" +\
-             "," + "'" + datas[3] + "'" + "," + str(espaco) + "," + str(user) + ");\n"
+        ###sql="INSERT INTO acesso(data_entrada,data_fim,espaco,user) VALUES(" + "'" + datas[2] + "'" + "," + "'" + datas[3] + "'" + "," + str(espaco) + "," + str(user) + ");\n"
         print out
 
 
