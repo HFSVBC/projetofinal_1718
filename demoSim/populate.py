@@ -21,23 +21,46 @@ with open('sqlscripts/populate_students.sql', 'w') as infile:
         infile.write("INSERT INTO users(id,googleUID,name,email,confid,avatar,account_type) VALUES (" + str(i) + ","  + "'" + googleUID + "'" + "," + "'" + name + "'" + ","\
                     + "'" + email  + "'" + "," + "'" + confid + "'" + "," + "'" + avatar + "'" + "," + "0);\n")
 
-with open('sqlscripts/populate_space.sql', 'w') as infile:
-    ids=1
-    for i in range(1,6):
-        for j in range(1,5):
-            for k in range(1,11):
-                lot=30
-                if k==10:
-                    lot=100
-                infile.write("INSERT INTO espaco(id, bloco, piso, sala, lotacao) VALUES ("  + str(ids) + "," + str(i) + "," + str(j) + "," + str(k) + "," + str(lot) + ");\n")
-                ids+=1
+with open('sqlscripts/populate_space.sql', 'w') as infile, open('helpers/salas1semestre.csv') as sem1, open('helpers/salas2semestre.csv') as sem2:
+    sem1buff = sem1.readlines()
+    sem2buff = sem2.readlines()
+    toCreate =[]
+    sem1rooms = []
+    sem2rooms = []
+    for linha in sem1buff:
+        toCreate.append(linha)
+        sem1rooms.append(toCreate.index(linha))
+    for linha in sem2buff:
+        if linha not in toCreate:
+            toCreate.append(linha)
+        sem2rooms.append(toCreate.index(linha))
+
+    for i in range(len(toCreate)):
+        room = toCreate[i].split(';')
+        sem1exists = 0
+        sem2exists = 0
+        if i in sem1rooms:
+            sem1exists = 1
+        if i in sem2rooms:
+            sem2exists = 1
+        if room[0] == '3' and room[1] == '2':
+            lot = r.randint(100,200)
+        else:
+            lot = r.randint(30,50)
+        infile.write("INSERT INTO espaco(id, bloco, piso, sala, lotacao, 1semestre, 2semestre)\
+                    VALUES ("  + str(i) + "," + str(room[0]) + "," + str(room[1]) + "," + "'" + str(room[2]) + "'" + "," + str(lot) + "," + str(sem1exists) + "," + str(sem2exists) + ");\n")
+
 with open('sqlscripts/populate_subjects.sql', 'w') as infile:
     idd=1
     for i in range(0,20):
-        infile.write("INSERT INTO disciplina(id,designacao, prof_t) VALUES (" + str(idd) + "," + "'" + disciplinas[i] + "'" + "," + "45004);\n")
+        if i<10:
+            user_prof = "45000"
+        else:
+            user_prof = "45004"
+        infile.write("INSERT INTO disciplina(id,designacao, prof_t) VALUES (" + str(idd) + "," + "'" + disciplinas[i] + "'" + "," + user_prof + ");\n")
         idd+=1
 
-with open('sqlscripts/populate_subjects_students.sql', 'w') as infile, open('presences_students_helper.txt', 'w') as infile2:
+with open('sqlscripts/populate_subjects_students.sql', 'w') as infile, open('helpers/presences_students_helper.txt', 'w') as infile2:
     idda=1
     for i in range(1,21):
         infile2.write(disciplinas[i-1] + ":")
@@ -102,14 +125,15 @@ with open('sqlscripts/populate_classes.sql', 'w') as infile, open('helpers/prese
             mes=2
             dia=r.randint(12,16)
             duracao=15
+            espaco=r.choice(sem1rooms)
         else:
             ano=2017
             mes=9
             dia=r.randint(11,15)
             duracao=14
+            espaco=r.choice(sem2rooms)
         hora=r.randint(8,17)
         minutos=r.choice([0,30])
-        espaco=r.randint(1,100)
         cal_ids+=duracao
         infile2.write(disciplinas[i-1] + ":" + str(cal_ids-duracao) + "," + str(cal_ids-1) + "\n")
         for _ in range(duracao):
@@ -123,7 +147,7 @@ with open('sqlscripts/populate_classes.sql', 'w') as infile, open('helpers/prese
 
 with open('sqlscripts/populate_acesses.sql', 'w') as infile:
     for i in range(0,2001):
-        espaco=r.randint(101,200)
+        espaco=r.randint(1,len(toCreate)-1)
         if i<200:
             user=r.randint(45000,45005)
         else:

@@ -34,7 +34,7 @@ def check_ten(args):
     else:
         return str(args)
 
-def createAccess(number_acesses, duracao=0, space=0, date=0, user_choice=0):
+def createAccess(number_acesses, duracao=0, space=0, date=0, user_choice=0, aula=0):
     """
     number_acesses int
     space int
@@ -50,7 +50,8 @@ def createAccess(number_acesses, duracao=0, space=0, date=0, user_choice=0):
         if user_choice==0:
             user=r.randint(45000,49999)
         else:
-            user=user_choice
+            user_list = user_choice.split(',')
+            user = r.choice(user_list)
         if date==0:
             ano=r.choice([2017,2018])
             mes=r.choice([1,2,3,4,5,6,7,9,10,11,12])
@@ -64,9 +65,9 @@ def createAccess(number_acesses, duracao=0, space=0, date=0, user_choice=0):
             ano=data_dias[0]; mes=data_dias[1]; dia=data_dias[2]; hora=data_horas[0]; minutos=data_horas[1];
         datas=compute_date(ano,mes,dia,hora,minutos, duracao)
 
-        out = {'data_entrada':datas[2],'data_saida':datas[3],'espaco':espaco,'user':user}
-        ###requests.post('url', data=out)
-        sql="INSERT INTO acesso(data_entrada,data_fim,espaco,user) VALUES(" + "'" + datas[2] + "'" +\
+        out = {'data_entrada':datas[2],'data_saida':datas[3],'espaco':espaco,'user':str(user), 'aula':aula}
+        ###requests.post('url/testcase/createAcess', data=out)
+        ###sql="INSERT INTO acesso(data_entrada,data_fim,espaco,user) VALUES(" + "'" + datas[2] + "'" +\
              "," + "'" + datas[3] + "'" + "," + str(espaco) + "," + str(user) + ");\n"
         print out
 

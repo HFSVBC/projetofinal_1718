@@ -35,6 +35,11 @@ class TestCaseAccess extends CI_Controller
                 'field' => 'user',
                 'label' => "Access user",
                 'rules' => 'trim|required'
+            ),
+            array(
+                'field' => 'aula',
+                'label' => "Class access",
+                'rules' => 'trim|required'
             )
         );
         $this->form_validation->set_rules($config);
