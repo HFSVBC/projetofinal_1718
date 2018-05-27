@@ -19,7 +19,7 @@ public function verifyAcessStatus($user, $space){
 
 //Verifica se naquele espaço naquela hora está a haver alguma aula (array vazio se não houver aula)
 public function verifyClass($date, $space){
-  $sql = "SELECT a.id FROM aula a WHERE $date BETWEEN a.data_inicio-10 AND a.data_inicio+10 AND a.espaco=$space";
+  $sql = "SELECT a.id FROM aula a WHERE $date BETWEEN a.data_inicio - INTERVAL 10 MINUTE AND a.data_inicio + INTERVAL 10 MINUTE AND a.espaco=$space";
 
   $result = $this->db->query($sql);
   return $result->result();
