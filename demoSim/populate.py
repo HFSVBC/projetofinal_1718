@@ -29,13 +29,13 @@ with open('sqlscripts/populate_space.sql', 'w') as infile, open('helpers/salas1s
     sem2rooms = []
     for linha in sem1buff:
         toCreate.append(linha)
-        sem1rooms.append(toCreate.index(linha))
+        sem1rooms.append(toCreate.index(linha)+1)
     for linha in sem2buff:
         if linha not in toCreate:
             toCreate.append(linha)
-        sem2rooms.append(toCreate.index(linha))
+        sem2rooms.append(toCreate.index(linha)+1)
 
-    for i in range(len(toCreate)):
+    for i in range(1,len(toCreate)):
         room = toCreate[i].split(';')
         sem1exists = 0
         sem2exists = 0

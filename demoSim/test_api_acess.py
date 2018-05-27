@@ -72,3 +72,26 @@ def createAccess(number_acesses, duracao=0, space=0, date=0, user_choice=0, aula
 
 
 createAccess(10)
+###----Todo---###
+"""
+Reformular bd depois disto
+Caso consiga, tornar os acesso mais realistas.
+
+SEMPRE:
+Verifica se o utilizador ainda não saiu de outro espaço, data_saida a null
+
+1-não enviar aula, o backend tem que perceber onde é a aula
+1.1-O backend recebe o acesso e faz os seguintes passos.
+1.1.1-Verifica se está a haver alguma aula naquele espaço naquela hora +10 minutos.
+1.1.2-Verifica se o aluno está inscrito nessa disciplina
+1.1.4-Se ainda não tiver saido fazer update, caso contrário fazer insert
+1.1.5-Caso esteja inscrito meter nas presenças, caso contrário por só nos acessos.(ver se é para avisar)
+
+2-mandar so a data, o backend faz update em vez de insert
+2.1-O backend recebe o acesso e verifica se o utilizado fez um acesso aquele espaço (data_saida a null)
+2.2-Caso tenha feito faz update à tabela
+
+3-Basta mandar apenas uma data e o backend ve se e data de entrada ou saida
+
+4-Basta enviar assim (data,espaço e user)
+"""
