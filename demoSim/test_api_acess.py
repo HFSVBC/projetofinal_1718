@@ -95,3 +95,35 @@ Verifica se o utilizador ainda não saiu de outro espaço, data_saida a null
 
 4-Basta enviar assim (data,espaço e user)
 """
+
+def generateAcess(date, users, room):
+    """
+    """
+    for user in users.split(','):
+        out = {'data':date, 'espaco':room, 'user':user}
+        #request.post('url/testcase/createAcess', data=out)
+
+def generateRandomAcess(number, room_choice=0, date_choice=0, user_choice=0):
+    user_choice=user_choice.split(',')
+    for i in range(number):
+        if date_choice==0:
+            ano=r.choice([2017,2018])
+            mes=r.choice([1,2,3,4,5,6,7,9,10,11,12])
+            dia=r.randint(1,31)
+            hora=r.randint(9,18)
+            minutos=r.randint(1,60)
+            date=compute_date(ano,mes,dia,hora,minutos, duracao)[2]
+        else:
+            date=date_choice
+
+        if user_choice==0:
+            user=r.randint(45000,49999)
+        else:
+            user=user_choice[i%len(user_choice)]
+            
+        if room_choice==0:
+            room=r.randint(1,200)
+        else:
+            room=room_choice[i%len(room_choice)]
+        out = {'data':date, 'espaco':room, 'user':user}
+        #request.post('url/testcase/createAcess', data=out)
