@@ -84,8 +84,8 @@ Verifica se o utilizador ainda não saiu de outro espaço, data_saida a null
 1.1-O backend recebe o acesso e faz os seguintes passos.
 1.1.1-Verifica se está a haver alguma aula naquele espaço naquela hora +10 minutos.
 1.1.2-Verifica se o aluno está inscrito nessa disciplina
-1.1.4-Se ainda não tiver saido fazer update, caso contrário fazer insert
-1.1.5-Caso esteja inscrito meter nas presenças, caso contrário por só nos acessos.(ver se é para avisar)
+1.1.3-Se ainda não tiver saido fazer update, caso contrário fazer insert
+1.1.4-Caso esteja inscrito meter nas presenças, caso contrário por só nos acessos.(ver se é para avisar)
 
 2-mandar so a data, o backend faz update em vez de insert
 2.1-O backend recebe o acesso e verifica se o utilizado fez um acesso aquele espaço (data_saida a null)
