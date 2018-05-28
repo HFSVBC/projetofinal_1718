@@ -34,18 +34,13 @@ export class AltPresencasComponent implements OnInit, AfterViewInit {
   active = false;
   model = new AltPresenca();
   dtTrigger: Subject<any> = new Subject();
-  // dtOptions: DataTables.Settings = {};
   dtOptions: any = {};
   presencas = new Presencas();
-  student_id;
-  aula_id;
-  date_id;
-  state_now;
-  ErroAlterar;
+  student_id; aula_id; date_id; state_now; ErroAlterar;
   alterarLoader = false;
 
   constructor(private _cookieService: CookieService, private apiconnector: APIConnectorService, private loaderService: LoaderService) {
-    this.model.aluno = '';
+
   }
 
   ngOnInit() {
@@ -117,6 +112,7 @@ export class AltPresencasComponent implements OnInit, AfterViewInit {
       console.log('res', res);
       this._cookieService.put('token', res['data']['token']);
       this.todasDatas = res['data']['classDates']['data'];
+      this.model.data = 'null';
     });
   }
 

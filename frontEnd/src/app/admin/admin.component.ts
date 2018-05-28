@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'angular2-cookie/core';
 import { APIConnectorService } from '../service/apiconnector.service';
+import { LoaderService } from '../loader/loader.service';
 import { EmailValidator } from '@angular/forms';
 
 @Component({
@@ -28,14 +29,14 @@ export class AdminComponent implements OnInit {
   };
 
 
-  constructor(private _cookieService: CookieService, private apiconnector: APIConnectorService) {
+  constructor(private _cookieService: CookieService, private apiconnector: APIConnectorService, private loaderService: LoaderService) {
   }
 
   ngOnInit() {
   }
 
   onSubmit() {
-    console.log('email', this.email);
+    this.loaderService.show();
 
     const url = this.apiconnector.retriveprofilePOST;
     const data = new FormData();
@@ -52,6 +53,8 @@ export class AdminComponent implements OnInit {
       this.user_uid = this.user.uid;
       this.user_type = this.user.user_type;
       this.user_avatar = this.user.avatar;
+
+      this.loaderService.hide();
     });
 
     this.users = [{
@@ -71,23 +74,22 @@ export class AdminComponent implements OnInit {
     }, {
       'id': 10,
       'type': 'admin'
-    }
-    ];
+    }];
   }
 
   submitChange() {
     const url = this.apiconnector.changeType;
-        const data = new FormData();
-        data.append('userTokenId', this._cookieService.get('token'));
-        data.append('uid', this.user_uid);
-        data.append('type', this.types[this.user_type]);
+    const data = new FormData();
+    data.append('userTokenId', this._cookieService.get('token'));
+    data.append('uid', this.user_uid);
+    data.append('type', this.types[this.user_type]);
 
-        this.apiconnector.postData(url, data)
-        .subscribe(res => {
-          console.log('cenas', res);
-          this._cookieService.put('token', res['data']['token']);
-          alert('Trocou o id');
-        });
+    this.apiconnector.postData(url, data)
+    .subscribe(res => {
+      console.log('cenas', res);
+      this._cookieService.put('token', res['data']['token']);
+      alert('Trocou o id');
+    });
   }
 
 }

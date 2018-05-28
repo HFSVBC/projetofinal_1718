@@ -3,11 +3,7 @@
   <div class="card mb-3">
     <h5 class="card-header">Consultar Salas Disponíveis</h5>
 
-    <div *ngIf="loader">
-        <div class="loader-overlay">
-            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
-    </div>
+    <app-loader></app-loader>
 
     <div class="card-body">
 
@@ -19,7 +15,7 @@
                 <i class="material-icons">business</i>
               </label>
             </div>
-            <select class="custom-select" id="edifico" (change)="edificioChanged(); verify([model.edificio, model.piso])" [(ngModel)]="model.edificio" name="na_edificio" required>
+            <select class="custom-select" id="edifico" (change)="edificioChanged()" [(ngModel)]="model.edificio" name="na_edificio" required>
               <option *ngFor="let ed of edificios" [value]="ed['bloco']">C{{ed['bloco']}}</option>
             </select>
           </div>
@@ -30,12 +26,12 @@
                 <i class="material-icons">trending_up</i>
               </label>
             </div>
-            <select class="custom-select" id="piso" (change)="pisoChanged(); verify([model.edificio, model.piso])" [(ngModel)]="model.piso" name="na_piso" required>
+            <select class="custom-select" id="piso" [(ngModel)]="model.piso" name="na_piso" required>
               <option *ngFor="let p of pisos" [value]="p['piso']">{{p['piso']}}</option>
             </select>
           </div>
 
-          <button type="submit" class="btn btn-success" (click)="verify([model.edificio, model.piso])" [disabled]="!active || loader">Procurar</button>
+          <button type="submit" class="btn btn-success">Procurar</button>
         </div>
       </form>
 

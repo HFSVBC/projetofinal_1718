@@ -28,20 +28,12 @@ export class PresencasComponent implements OnInit, AfterViewInit {
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;
   model = new SearchOptions();
-  todasAulas; todasDatas; todosAlunos;
-  salas = [];
-  token;
+  todasAulas; todasDatas; todosAlunos; token;
   dtTrigger: Subject<any> = new Subject();
-  // dtOptions: DataTables.Settings = {};
   dtOptions: any = {};
-  active = false;
   presencas: Presencas[] = [];
-  loader = false;
 
   constructor(private _cookieService: CookieService, private apiconnector: APIConnectorService, private loaderService: LoaderService) {
-    this.model.aula = '';
-    this.model.data = '';
-    this.model.aluno = '';
   }
 
   ngOnInit() {
@@ -76,6 +68,7 @@ export class PresencasComponent implements OnInit, AfterViewInit {
 
     this.apiconnector.postData(url, data).subscribe(res => {
       console.log('res', res);
+      this.model.data = 'null';
       this._cookieService.put('token', res['data']['token']);
       this.todasDatas = res['data']['classDates']['data'];
       this.loadStudents();
@@ -88,6 +81,7 @@ export class PresencasComponent implements OnInit, AfterViewInit {
     this.token = data.append('userTokenId', this._cookieService.get('token'));
     this.apiconnector.postData(url, data).subscribe(res => {
       console.log('res', res);
+      this.model.aluno = 'null';
       this._cookieService.put('token', res['data']['token']);
       this.todosAlunos = res['data']['classStudents']['data'];
     });
@@ -118,15 +112,5 @@ export class PresencasComponent implements OnInit, AfterViewInit {
       this.presencas = myDataArray.data || {};
       this.dtTrigger.next();
     });
-  }
-
-  verify(field) {
-    let act = false;
-    for (const f in field) {
-      if (field[f].length === 0 && field[f] === '') {
-        act = true;
-      }
-    }
-    act ? this.active = ! 1 : this.active = ! 0;
   }
 }

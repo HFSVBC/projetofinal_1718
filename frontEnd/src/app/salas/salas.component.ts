@@ -3,6 +3,7 @@ import { CookieService } from 'angular2-cookie/core';
 import { APIConnectorService } from '../service/apiconnector.service';
 import { Subject } from 'rxjs/Subject';
 import { DataTableDirective } from 'angular-datatables';
+import { LoaderService } from '../loader/loader.service';
 
 class SalasDisp {
   edificio: string;
@@ -20,19 +21,16 @@ class SalasDisponiveis {
   styleUrls: ['./salas.component.css']
 })
 export class SalasComponent implements OnInit, AfterViewInit {
-
+  @ViewChild(DataTableDirective)
   edificios_pisos; edificios; token;
   pisos = [];  salas = [];
-  loader = false;
-  active = false;
-  @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;
   dtTrigger: Subject<any> = new Subject();
   dtOptions: any = {};
   model = new SalasDisp();
   salasDisponiveis = new SalasDisponiveis();
 
-  constructor(private _cookieService: CookieService, private apiconnector: APIConnectorService) {
+  constructor(private _cookieService: CookieService, private apiconnector: APIConnectorService, private loaderService: LoaderService) {
     this.model.piso = '';
   }
 
@@ -52,6 +50,8 @@ export class SalasComponent implements OnInit, AfterViewInit {
       this._cookieService.put('token', res['data']['token']);
 
       this.edificios = res['data']['blocks']['data'];
+      this.model.edificio = '1';
+      this.edificioChanged();
     });
   }
 
@@ -60,6 +60,7 @@ export class SalasComponent implements OnInit, AfterViewInit {
   }
 
   edificioChanged() {
+    this.loaderService.show();
     const url = this.apiconnector.getPisosEdificio;
     const data = new FormData();
 
@@ -69,19 +70,15 @@ export class SalasComponent implements OnInit, AfterViewInit {
     this.apiconnector.postData(url, data).subscribe(res => {
       console.log('res', res);
       this._cookieService.put('token', res['data']['token']);
-
       this.pisos = res['data']['floors']['data'];
-      console.log('pisos',  this.model.edificio, this.pisos);
+      this.model.piso = '1';
+      this.loaderService.hide();
     });
   }
 
-  pisoChanged() {
-    console.log(this.model);
-  }
-
   onSubmit() {
-    this.showLoader();
-    const url = this.apiconnector.getLuagresDisponiveis;
+    this.loaderService.show();
+    const url = this.apiconnector.getLugaresDisponiveis;
     const data = new FormData();
     this.token = data.append('userTokenId', this._cookieService.get('token'));
     data.append('block', this.model.edificio);
@@ -91,6 +88,7 @@ export class SalasComponent implements OnInit, AfterViewInit {
       console.log('res', res);
       this._cookieService.put('token', res['data']['token']);
       this.extractData(res['data']['availableRooms']);
+      this.loaderService.hide();
     });
   }
 
@@ -99,24 +97,6 @@ export class SalasComponent implements OnInit, AfterViewInit {
       dtInstance.destroy();
       this.salasDisponiveis = myDataArray.data || {};
       this.dtTrigger.next();
-      this.hideLoader();
     });
-  }
-
-  verify(field) {
-    let act = false;
-    for (const f in field) {
-      if (field[f].length === 0 && field[f] === '') {
-        act = true;
-      }
-    }
-    act ? this.active = ! 1 : this.active = ! 0;
-  }
-
-  private showLoader(): void {
-    this.loader = true;
-  }
-  private hideLoader(): void {
-    this.loader = false;
   }
 }

@@ -5,6 +5,7 @@ import { Http, Response } from '@angular/http';
 import { Subject } from 'rxjs/Subject';
 import { CookieService } from 'angular2-cookie/core';
 import { APIConnectorService } from '../service/apiconnector.service';
+import { LoaderService } from '../loader/loader.service';
 
 class SearchOptions {
   edificio: string;
@@ -29,8 +30,6 @@ export class EspacosComponent implements OnInit {
   token;
 
   dtOptions: any = {};
-  // We use this trigger because fetching the list of persons can be quite long,
-  // thus we ensure the data is fetched before rendering
   histAc: HistAc[] = [];
   dtTrigger: Subject<any> = new Subject();
 
@@ -85,7 +84,7 @@ export class EspacosComponent implements OnInit {
   columnsToDisplay = ['Sala', 'Hora de Entrada', 'Hora de Saida'];
 
   constructor(public authService: AuthService, private router: Router, private _cookieService: CookieService,
-     private apiconnector: APIConnectorService) {
+     private apiconnector: APIConnectorService, private loaderService: LoaderService) {
   }
 
     edificioChanged() {
