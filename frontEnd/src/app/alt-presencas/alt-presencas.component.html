@@ -2,12 +2,8 @@
 <div class="router">
   <div class="card">
     <h5 class="card-header">Alterar Presenças dos Alunos</h5>
-    <div *ngIf="loader">
-      <div class="loader-overlay">
-        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0"
-          aria-valuemax="100"></div>
-      </div>
-    </div>
+
+    <app-loader></app-loader>
 
     <div class="card-body">
       <form class="was-validated" id="changeAttendance" (ngSubmit)="onSubmit()" #searchForm="ngForm">
@@ -109,11 +105,11 @@
             </button>
           </div>
           <div *ngIf="ErroAlterar && ErroAlterar != null" class="alert alert-success alert-dismissible fade show" role="alert">
-              <strong>Yay!</strong> Presença alterada com sucesso.
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
+            <strong>Yay!</strong> Presença alterada com sucesso.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="student " class="col-sm-3 col-form-label ">Aluno</label>

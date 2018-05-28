@@ -3,6 +3,7 @@ import { CookieService } from 'angular2-cookie/core';
 import { APIConnectorService } from '../service/apiconnector.service';
 import { Subject } from 'rxjs/Subject';
 import { DataTableDirective } from 'angular-datatables';
+import { LoaderService } from '../loader/loader.service';
 
 class SearchOptions {
   aula: string;
@@ -37,7 +38,7 @@ export class PresencasComponent implements OnInit, AfterViewInit {
   presencas: Presencas[] = [];
   loader = false;
 
-  constructor(private _cookieService: CookieService, private apiconnector: APIConnectorService) {
+  constructor(private _cookieService: CookieService, private apiconnector: APIConnectorService, private loaderService: LoaderService) {
     this.model.aula = '';
     this.model.data = '';
     this.model.aluno = '';
@@ -93,7 +94,7 @@ export class PresencasComponent implements OnInit, AfterViewInit {
   }
 
   onSubmit() {
-    this.showLoader();
+    this.loaderService.show();
     const url = this.apiconnector.getAlunosAulas;
     const data = new FormData();
     this.token = data.append('userTokenId', this._cookieService.get('token'));
@@ -107,6 +108,7 @@ export class PresencasComponent implements OnInit, AfterViewInit {
       console.log('res', res);
       this._cookieService.put('token', res['data']['token']);
       this.extractData(res['data']['studentAttendance']);
+      this.loaderService.hide();
     });
   }
 
@@ -115,7 +117,6 @@ export class PresencasComponent implements OnInit, AfterViewInit {
       dtInstance.destroy();
       this.presencas = myDataArray.data || {};
       this.dtTrigger.next();
-      this.hideLoader();
     });
   }
 
@@ -127,14 +128,5 @@ export class PresencasComponent implements OnInit, AfterViewInit {
       }
     }
     act ? this.active = ! 1 : this.active = ! 0;
-  }
-
-  private showLoader(): void {
-    // console.log('Show loader');
-    this.loader = true;
-  }
-  private hideLoader(): void {
-    // console.log('Hide loader');
-    this.loader = false;
   }
 }
