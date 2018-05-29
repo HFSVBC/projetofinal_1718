@@ -9,40 +9,43 @@
 
       <form class="form-inline" (ngSubmit)="onSubmit()" #searchForm="ngForm">
         <div class="form-row justify-content-center">
-          <div class="input-group col-sm-2">
+          <div class="input-group col-sm-3">
             <div class="input-group-prepend">
               <label for="edifico" class="input-group-text" title="Edifício">
                 <i class="material-icons">business</i>
               </label>
             </div>
             <select class="custom-select" id="edifico" (change)="edificioChanged()" [(ngModel)]="model.edificio" name="na_edificio" required>
+              <option value="null">Todas os Edifícios</option>
               <option *ngFor="let ed of edificios" [value]="ed['bloco']">C{{ed['bloco']}}</option>
             </select>
           </div>
 
-          <div class="input-group col-sm-2">
+          <div class="input-group col-sm-3">
             <div class="input-group-prepend">
               <label for="piso" class="input-group-text" title="Piso">
                 <i class="material-icons">trending_up</i>
               </label>
             </div>
             <select class="custom-select" id="piso" (change)="pisoChanged()" [(ngModel)]="model.piso" name="na_piso" required>
+                <option value="null">Todas os Pisos</option>
               <option *ngFor="let p of pisos" [value]="p['piso']">{{p['piso']}}</option>
             </select>
           </div>
 
-          <div class="input-group col-sm-2">
+          <div class="input-group col-sm-3">
             <div class="input-group-prepend">
               <label for="sala" class="input-group-text" title="Piso">
                 <i class="material-icons">room</i>
               </label>
             </div>
-            <select class="custom-select" id="sala" (change)="salaChanged(); verify([model.sala, model.piso, model.edificio])" [(ngModel)]="model.sala" name="na_sala" required>
-              <option *ngFor="let p of pisos" [value]="p['piso']">{{p['piso']}}</option>
+            <select class="custom-select" id="sala" (change)="salaChanged()" [(ngModel)]="model.sala" name="na_sala" required>
+              <option value="null">Todas as Salas</option>
+              <option *ngFor="let p of salas" [value]="p['sala']">{{p['sala']}}</option>
             </select>
           </div>
 
-          <button type="submit" class="btn btn-success" (click)="verify([model.sala, model.piso, model.edificio])" [disabled]="!active || loader">Procurar</button>
+          <button type="submit" class="btn btn-success" [disabled]="loader">Procurar</button>
         </div>
       </form>
     </div>

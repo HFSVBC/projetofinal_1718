@@ -32,6 +32,7 @@ export class PresencasComponent implements OnInit, AfterViewInit {
   dtTrigger: Subject<any> = new Subject();
   dtOptions: any = {};
   presencas: Presencas[] = [];
+  loader = true;
 
   constructor(private _cookieService: CookieService, private apiconnector: APIConnectorService, private loaderService: LoaderService) {
   }
@@ -61,7 +62,7 @@ export class PresencasComponent implements OnInit, AfterViewInit {
   }
 
   aulaChange() {
-    console.log('aula id', this.model.aula);
+    this.loader = true;
     const url = this.apiconnector.getDatasAulas + this.model.aula;
     const data = new FormData();
     this.token = data.append('userTokenId', this._cookieService.get('token'));
@@ -84,6 +85,7 @@ export class PresencasComponent implements OnInit, AfterViewInit {
       this.model.aluno = 'null';
       this._cookieService.put('token', res['data']['token']);
       this.todosAlunos = res['data']['classStudents']['data'];
+      this.loader = false;
     });
   }
 

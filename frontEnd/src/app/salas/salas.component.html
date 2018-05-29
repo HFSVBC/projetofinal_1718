@@ -20,18 +20,19 @@
             </select>
           </div>
 
-          <div class="input-group col-sm-2">
+          <div class="input-group col-sm-3">
             <div class="input-group-prepend">
               <label for="piso" class="input-group-text" title="Piso">
                 <i class="material-icons">trending_up</i>
               </label>
             </div>
             <select class="custom-select" id="piso" [(ngModel)]="model.piso" name="na_piso" required>
+              <option value="null">Todas os Pisos</option>
               <option *ngFor="let p of pisos" [value]="p['piso']">{{p['piso']}}</option>
             </select>
           </div>
 
-          <button type="submit" class="btn btn-success">Procurar</button>
+          <button type="submit" class="btn btn-success" [disabled]="loader">Procurar</button>
         </div>
       </form>
 

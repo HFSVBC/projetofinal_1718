@@ -27,9 +27,7 @@ class Presencas {
 export class AltPresencasComponent implements OnInit, AfterViewInit {
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;
-  token;
-  todasAulas;
-  todasDatas;
+  token; todasAulas; todasDatas;
   loader = false;
   active = false;
   model = new AltPresenca();
@@ -75,6 +73,7 @@ export class AltPresencasComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.dtTrigger.next();
   }
+
   onSubmit() {
     this.loaderService.show();
 

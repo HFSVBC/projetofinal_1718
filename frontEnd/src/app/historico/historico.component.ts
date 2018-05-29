@@ -31,15 +31,13 @@ class HistAc {
 export class HistoricoComponent implements OnInit, AfterViewInit {
   token;
   @ViewChild(DataTableDirective)
+  dtElement: DataTableDirective;
   dtOptions: any = {};
   histAc: HistAc[] = [];
   dtTrigger: Subject<any> = new Subject();
   pisos = [];  salas = [];
   model = new SearchOptions();
-  edificios; active = false; loader = false;
-  dtElement: DataTableDirective;
-
-  columnsToDisplay = ['Sala', 'Hora de Entrada', 'Hora de Saida'];
+  edificios; loader = true;
 
   constructor(public authService: AuthService, private router: Router, private _cookieService: CookieService,
      private apiconnector: APIConnectorService, private loaderService: LoaderService) {
@@ -51,7 +49,6 @@ export class HistoricoComponent implements OnInit, AfterViewInit {
       pagingType: 'full_numbers',
       pageLength: 8,
       dom: 'Bfrtip',
-      searching: false,
       buttons: [
         'copy', 'csv', 'excel', 'pdf', 'print'
       ]
@@ -67,13 +64,14 @@ export class HistoricoComponent implements OnInit, AfterViewInit {
       console.log('res', res);
       this._cookieService.put('token', res['data']['token']);
       this.edificios = res['data']['blocks']['data'];
-      this.model.edificio = '1';
+      this.model.edificio = 'null';
       this.edificioChanged();
     });
   }
 
     edificioChanged() {
       this.loaderService.show();
+      this.loader = true;
       const url = this.apiconnector.getPisosEdificio;
       const data = new FormData();
 
@@ -84,15 +82,16 @@ export class HistoricoComponent implements OnInit, AfterViewInit {
         console.log('res', res);
         this._cookieService.put('token', res['data']['token']);
         this.pisos = res['data']['floors']['data'];
-        this.model.piso = '1';
+        this.model.piso = 'null';
+        this.pisoChanged();
         this.loaderService.hide();
       });
     }
 
     pisoChanged() {
       this.loaderService.show();
-      // const url = this.apiconnector.getSalasPisos;
-      const url = this.apiconnector.getPisosEdificio;
+      this.loader = true;
+      const url = this.apiconnector.getSalasPisos;
       const data = new FormData();
 
       this.token = data.append('userTokenId', this._cookieService.get('token'));
@@ -102,8 +101,9 @@ export class HistoricoComponent implements OnInit, AfterViewInit {
       this.apiconnector.postData(url, data).subscribe(res => {
         console.log('res', res);
         this._cookieService.put('token', res['data']['token']);
-        this.pisos = res['data']['floors']['data'];
-        this.model.sala = '1';
+        this.salas = res['data']['rooms']['data'];
+        this.model.sala = 'null';
+        this.loader = false;
         this.loaderService.hide();
       });
     }
@@ -140,15 +140,4 @@ export class HistoricoComponent implements OnInit, AfterViewInit {
       this.dtTrigger.next();
     });
   }
-
-  verify(field) {
-    let act = false;
-    for (const f in field) {
-      if (field[f].length === 0 && field[f] === '') {
-        act = true;
-      }
-    }
-    act ? this.active = ! 1 : this.active = ! 0;
-  }
-
 }
