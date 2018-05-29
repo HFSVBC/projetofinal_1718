@@ -4,6 +4,7 @@ import { APIConnectorService } from '../service/apiconnector.service';
 import { LoaderService } from '../loader/loader.service';
 import { EmailValidator } from '@angular/forms';
 import { AuthService } from '../providers/auth.service';
+import { ResponseStatusValidatorService } from '../service/response-status-validator.service';
 
 @Component({
   selector: 'app-admin',
@@ -32,7 +33,8 @@ export class AdminComponent implements OnInit {
 
 
   constructor(public authService: AuthService, private _cookieService: CookieService,
-     private apiconnector: APIConnectorService, private loaderService: LoaderService) {
+     private apiconnector: APIConnectorService, private loaderService: LoaderService,
+    private respVal: ResponseStatusValidatorService) {
   }
 
   ngOnInit() {
@@ -48,33 +50,20 @@ export class AdminComponent implements OnInit {
 
     this.apiconnector.postData(url, data)
     .subscribe(res => {
-      if (res['code'] === 500) {
-        this._cookieService.put('token', res['data']['token']);
-        alert('cenas erradas 500');
-        console.log('token antigo', this._cookieService.get('token'));
-        this.authService.logout();
-      } else if (res['code'] === 401) {
-        this._cookieService.put('token', res['data']['token']);
-        alert('Sessao expirada');
-        this.authService.logout();
-      } else if (res['code'] === 403) {
-        this._cookieService.put('token', res['data']['token']);
-        alert('Nao tens permissoes');
-      } else if (res['code'] === 405) {
-        this._cookieService.put('token', res['data']['token']);
-        alert('Post informaçao errada');
-      } else {
-        console.log('tudo ok');
-        console.log('user', res);
-        this.user = res['data']['user'];
-        this.user_name = this.user.name;
-        this.user_email = this.user.email;
-        this.user_uid = this.user.uid;
-        this.user_type = this.user.user_type;
-        this.user_avatar = this.user.avatar;
 
-        this.loaderService.hide();
-      }
+      this.respVal.validate(res);
+
+      this._cookieService.put('token', res['data']['token']);
+      console.log('user', res);
+      this.user = res['data']['user'];
+      this.user_name = this.user.name;
+      this.user_email = this.user.email;
+      this.user_uid = this.user.uid;
+      this.user_type = this.user.user_type;
+      this.user_avatar = this.user.avatar;
+
+      this.loaderService.hide();
+
     });
 
     this.users = [{

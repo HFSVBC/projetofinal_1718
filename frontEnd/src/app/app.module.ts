@@ -29,6 +29,8 @@ import { SecurityService } from './providers/security.service';
 import { ProfessorService } from './providers/professor.service';
 import { AllService } from './providers/all.service';
 import { LoaderService } from './loader/loader.service';
+import { AlertService } from './alerts/alert.service';
+import { ResponseStatusValidatorService } from './service/response-status-validator.service';
 
 // Components
 import { AppComponent } from './app.component';
@@ -45,6 +47,7 @@ import { CriarAcessosComponent } from './criar-acessos/criar-acessos.component';
 import { AcidentesComponent } from './acidentes/acidentes.component';
 import { SalasComponent } from './salas/salas.component';
 import { LoaderComponent } from './loader/loader.component';
+import { AlertsComponent } from './alerts/alerts.component';
 
 
 @NgModule({
@@ -62,7 +65,8 @@ import { LoaderComponent } from './loader/loader.component';
     CriarAcessosComponent,
     AcidentesComponent,
     SalasComponent,
-    LoaderComponent
+    LoaderComponent,
+    AlertsComponent
   ],
   imports: [
     routes,
@@ -83,7 +87,9 @@ import { LoaderComponent } from './loader/loader.component';
     SecurityService,
     ProfessorService,
     AllService,
-    LoaderService
+    LoaderService,
+    ResponseStatusValidatorService,
+    AlertService
   ],
   bootstrap: [AppComponent]
 })

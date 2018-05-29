@@ -1,0 +1,27 @@
+.cont{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.container.alert.alert-danger.alert-dismissible{
+  position: fixed;
+  top: 2rem;
+  opacity: 0.9;
+}
+.animated{
+  animation-duration:0.75s;
+  animation-fill-mode:both
+}
+.fadeInDown{
+  animation-name:fadeInDown
+}
+@keyframes fadeInDown{
+  0%{
+      opacity:0;
+      transform:translate3d(0,-100%,0)
+  }
+  to{
+      opacity:1;
+      transform:none
+  }
+}
