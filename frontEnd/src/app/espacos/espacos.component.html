@@ -21,7 +21,7 @@
                             <option *ngFor="let ed of edificios" [value]="ed['bloco']">C{{ed['bloco']}}</option>
                         </select>
                     </div>
-        
+
                     <div class="input-group col-sm-3">
                         <div class="input-group-prepend">
                             <label for="piso" class="input-group-text" title="Piso">
@@ -33,7 +33,7 @@
                             <option *ngFor="let p of pisos" [value]="p['piso']">{{p['piso']}}</option>
                         </select>
                     </div>
-        
+
                     <div class="input-group col-sm-3">
                         <div class="input-group-prepend">
                             <label for="sala" class="input-group-text" title="Piso">
@@ -45,7 +45,7 @@
                             <option *ngFor="let p of salas" [value]="p['sala']">{{p['sala']}}</option>
                         </select>
                     </div>
-        
+
                     <button type="submit" class="btn btn-success" [disabled]="loader">Procurar</button>
                 </div>
             </form>

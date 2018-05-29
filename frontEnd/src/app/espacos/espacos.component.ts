@@ -125,4 +125,27 @@ export class EspacosComponent implements OnInit, AfterViewInit {
     });
   }
 
+  salaChanged() {
+    console.log('cenas', this.model);
+  }
+
+  onSubmit() {
+    this.loaderService.show();
+    const url = this.apiconnector.historico;
+    const data = new FormData();
+    this.token = data.append('userTokenId', this._cookieService.get('token'));
+    data.append('block', this.model.edificio);
+    data.append('floor', this.model.piso);
+    data.append('room', this.model.sala);
+
+    this.apiconnector.postData(url, data).subscribe(res => {
+      this.respVal.validate(res);
+
+      console.log('res', res);
+      this._cookieService.put('token', res['data']['token']);
+      this.extractData(res['data']['accessHist']);
+      this.loaderService.hide();
+    });
+  }
+
 }

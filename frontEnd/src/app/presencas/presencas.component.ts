@@ -40,6 +40,7 @@ export class PresencasComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+    this.loaderService.show();
     const url = this.apiconnector.getAulas;
     const data = new FormData();
     this.dtOptions = {
@@ -94,6 +95,7 @@ export class PresencasComponent implements OnInit, AfterViewInit {
       this._cookieService.put('token', res['data']['token']);
       this.todosAlunos = res['data']['classStudents']['data'];
       this.loader = false;
+      this.loaderService.hide();
     });
   }
 

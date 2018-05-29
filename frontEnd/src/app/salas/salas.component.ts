@@ -38,6 +38,7 @@ export class SalasComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+    this.loaderService.show();
     const url = this.apiconnector.getEdificios;
     const data = new FormData();
     this.token = data.append('userTokenId', this._cookieService.get('token'));
@@ -52,7 +53,6 @@ export class SalasComponent implements OnInit, AfterViewInit {
 
       console.log('res', res);
       this._cookieService.put('token', res['data']['token']);
-
       this.edificios = res['data']['blocks']['data'];
       this.model.edificio = '1';
       this.edificioChanged();
@@ -66,7 +66,6 @@ export class SalasComponent implements OnInit, AfterViewInit {
   edificioChanged() {
     const url = this.apiconnector.getPisosEdificio;
     const data = new FormData();
-    this.loader = true;
     this.token = data.append('userTokenId', this._cookieService.get('token'));
     data.append('block', this.model.edificio);
 
@@ -78,6 +77,7 @@ export class SalasComponent implements OnInit, AfterViewInit {
       this.pisos = res['data']['floors']['data'];
       this.model.piso = 'null';
       this.loader = false;
+      this.loaderService.hide();
     });
   }
 
