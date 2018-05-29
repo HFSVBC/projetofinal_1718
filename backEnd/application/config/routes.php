@@ -52,6 +52,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 // GENERAL
 $route['general/getFacultyBlocks'] = 'spaces/getFacultyBuildings';
 $route['general/getBlockFloors'] = 'spaces/getFacultyFloors';
+$route['general/getFloorsRooms'] = 'spaces/getFacultyRooms';
 $route['general/availableSpaces'] = 'spaces/getFacultyAvailableRooms';
 // CONSULTA DE HISTORICO DE ACESSOS
 $route['history/user']                  = 'history/getUserAccessHistory';

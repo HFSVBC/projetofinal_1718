@@ -92,7 +92,7 @@ class UserLoader extends CI_Controller {
 			array(
 					'field' => 'userTokenId',
 					'label' => "User's Token",
-					'rules' => 'trim|required'
+					'rules' => 'trim'
 			)
 		);
 		$this->form_validation->set_rules($config);

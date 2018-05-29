@@ -39,7 +39,6 @@ function jsonExporter($code, $extraInfo = Null)
 }
 function displayError($errorMessage, $errorCode)
 {
-    $CI =& get_instance();
     $out_array = array(
         "state" => $errorMessage,
         "code" => $errorCode,

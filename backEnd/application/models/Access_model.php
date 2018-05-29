@@ -10,11 +10,22 @@
 		public function getAccessByUser($lim)
 		{
 			$token = $this->db->escape($this->input->post("userTokenId"));
-			// $lim  = (int) $this->db->escape($lim);
+
+            $block = $this->db->escape($this->input->post("block"));
+            $floor = $this->db->escape($this->input->post("floor"));
+            $room  = $this->db->escape($this->input->post("room"));
+
 
 			$sql = "SELECT a.data_entrada, a.data_fim, e.bloco, e.piso, e.sala
 					FROM acesso a, espaco e
 					WHERE a.user=(SELECT user FROM users_loggedIn WHERE token = $token) AND a.espaco=e.id";
+
+			if($block != "'null'")
+			    $sql .= " AND e.bloco = $block";
+            if($floor != "'null'")
+                $sql .= " AND e.piso = $floor";
+            if($room != "'null'")
+                $sql .= " AND e.sala = $room";
 			if($lim !== "null")
 				$sql .= " ORDER BY a.id DESC LIMIT $lim";
 
@@ -77,7 +88,10 @@
 
             $sql = "SELECT e.id, CONCAT_WS('.', e.bloco, e.piso, e.sala) AS espaco, IFNULL((e.lotacao - (SELECT COUNT(ac.espaco) FROM acesso ac WHERE e.id = ac.espaco AND ac.data_fim >= NOW() AND ac.data_entrada <= NOW() GROUP BY ac.espaco)),e.lotacao) AS available
 			        FROM espaco e 
-			        WHERE e.id NOT IN (SELECT a.espaco FROM aula a WHERE (NOW() + INTERVAL 8 HOUR) >= a.data_inicio AND (NOW() + INTERVAL 8 HOUR) <= a.data_fim) AND e.bloco = $bloco AND e.piso = $piso";
+			        WHERE e.id NOT IN (SELECT a.espaco FROM aula a WHERE (NOW() + INTERVAL 8 HOUR) >= a.data_inicio AND (NOW() + INTERVAL 8 HOUR) <= a.data_fim) AND e.bloco = $bloco";
+
+            if($piso != "'null'")
+                $sql .= " AND e.piso = $piso";
 
             $query = $this->db->query($sql);
             return $query->result_array();
@@ -95,6 +109,16 @@
             $block = $this->db->escape($this->input->post("block"));
 
             $sql = "SELECT DISTINCT piso FROM espaco where bloco = $block";
+
+            $query = $this->db->query($sql);
+            return $query->result_array();
+        }
+        public function getFloorRooms()
+        {
+            $block = $this->db->escape($this->input->post("block"));
+            $floor = $this->db->escape($this->input->post("floor"));
+
+            $sql = "SELECT DISTINCT sala FROM espaco where bloco = $block AND piso = $floor";
 
             $query = $this->db->query($sql);
             return $query->result_array();

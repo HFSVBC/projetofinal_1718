@@ -213,7 +213,7 @@
 
 			$query = $this->db->query($sql);
             $row   = $query->row();
-			if(!is_null($row->token)){
+			if(!is_null($row) && !is_null($row->token)){
 				return true;
 			}else{
 				return false;

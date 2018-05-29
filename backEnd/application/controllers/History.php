@@ -17,10 +17,25 @@ class History extends CI_Controller {
 	{
 		$config = array(
 			array(
-					'field' => 'userTokenId',
-					'label' => "User's Token",
-					'rules' => 'trim|required'
-			)
+				'field' => 'userTokenId',
+				'label' => "User's Token",
+				'rules' => 'trim|required'
+			),
+            array(
+                'field' => 'block',
+                'label' => "Block number",
+                'rules' => 'trim|required'
+            ),
+            array(
+                'field' => 'floor',
+                'label' => "Floor number",
+                'rules' => 'trim|required'
+            ),
+            array(
+                'field' => 'room',
+                'label' => "Room number",
+                'rules' => 'trim|required'
+            )
 		);
 		$this->form_validation->set_rules($config);
 		$this->form_validation->set_error_delimiters('', '');
@@ -33,6 +48,57 @@ class History extends CI_Controller {
                             "sala"=>"C".$value['bloco'].".".$value['piso'].".".$value['sala'],
                             "inicio"=>$value['data_entrada'],
                             "fim"=>$value['data_fim'],
+                        );
+                    array_push($out["data"], $thisOut);
+                }
+                $data = array(
+                    "accessHist"=>$out,
+                    "token"=>regenerateUserToken($this->input->post('userTokenId'))[1]
+                );
+                jsonExporter(200, $data);
+            }else{
+                jsonExporter(401);
+            }
+        }else{
+            jsonExporter(405, validation_errors());
+		}
+    }
+    
+    public function getUsersAccessHistory()
+	{
+		$config = array(
+			array(
+				'field' => 'userTokenId',
+				'label' => "User's Token",
+				'rules' => 'trim|required'
+			),
+            array(
+                'field' => 'block',
+                'label' => "Block number",
+                'rules' => 'trim|required'
+            ),
+            array(
+                'field' => 'floor',
+                'label' => "Floor number",
+                'rules' => 'trim|required'
+            ),
+            array(
+                'field' => 'room',
+                'label' => "Room number",
+                'rules' => 'trim|required'
+            )
+		);
+		$this->form_validation->set_rules($config);
+		$this->form_validation->set_error_delimiters('', '');
+		if($this->form_validation->run() === true){
+			if(isUserLoggedIn($this->input->post('userTokenId'))===true){
+                $obj = $this->access_model->getAccessBySpace();
+                $out = array("data"=>array());
+                foreach ($obj as $key => $value) {
+                    $thisOut = array(
+                            "space"=>"C".$value['bloco'].".".$value['piso'].".".$value['sala'],
+                            "people"=>$value[''],
+                            "max"=>$value[''],
                         );
                     array_push($out["data"], $thisOut);
                 }
