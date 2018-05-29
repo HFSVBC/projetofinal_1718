@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ResponseStatusValidatorService } from '../service/response-status-validator.service';
 
 
 class Acesso {
@@ -25,7 +26,7 @@ export class CriarAcessosComponent implements OnInit {
 
   model = new Acesso;
 
-  constructor() { }
+  constructor(private respVal: ResponseStatusValidatorService) { }
 
   ngOnInit() {
   }

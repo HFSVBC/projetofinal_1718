@@ -20,7 +20,7 @@ export class ResponseStatusValidatorService {
       case 403: {
         // alert('Sem Permissão 403');
         this.alertService.show('Erro 403');
-        setTimeout(() => { this.authService.logout(); }, 3500);
+        // setTimeout(() => { this.authService.logout(); }, 3500);
         break;
       }
       case 405: {
@@ -31,7 +31,7 @@ export class ResponseStatusValidatorService {
       case 500: {
         // alert('Erro 500');
         this.alertService.show('Erro 500');
-        setTimeout(() => { this.authService.logout(); }, 3500);
+        // setTimeout(() => { this.authService.logout(); }, 3500);
         break;
       }
     }

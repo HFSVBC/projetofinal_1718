@@ -16,7 +16,7 @@
                 <i class="material-icons">person</i>
               </label>
             </div>
-            <input type="email" class="form-control" (keyup)="emailChanged()" id="email" [(ngModel)]="email" name="email" required>
+            <input type="email" class="form-control" (keyup)="emailChanged()" placeholder="Email do utilizador" id="email" [(ngModel)]="email" name="email" required>
             <div class="invalid-feedback">É necessário um Email válido</div>
           </div>
           <button type="submit" class="btn btn-success" [disabled]="loader">Pesquisar</button>

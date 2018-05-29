@@ -7,7 +7,7 @@ import { CookieService } from 'angular2-cookie/core';
 import { APIConnectorService } from '../service/apiconnector.service';
 import { LoaderService } from '../loader/loader.service';
 import { DataTableDirective } from 'angular-datatables';
-
+import { ResponseStatusValidatorService } from '../service/response-status-validator.service';
 import 'rxjs/add/operator/map';
 
 class SearchOptions {
@@ -40,7 +40,7 @@ export class HistoricoComponent implements OnInit, AfterViewInit {
   edificios; loader = true;
 
   constructor(public authService: AuthService, private router: Router, private _cookieService: CookieService,
-     private apiconnector: APIConnectorService, private loaderService: LoaderService) {
+     private apiconnector: APIConnectorService, private loaderService: LoaderService, private respVal: ResponseStatusValidatorService) {
   }
 
   ngOnInit(): void {
@@ -61,6 +61,8 @@ export class HistoricoComponent implements OnInit, AfterViewInit {
     this.token = data.append('userTokenId', this._cookieService.get('token'));
 
     this.apiconnector.postData(url, data).subscribe(res => {
+      this.respVal.validate(res);
+
       console.log('res', res);
       this._cookieService.put('token', res['data']['token']);
       this.edificios = res['data']['blocks']['data'];
@@ -79,6 +81,8 @@ export class HistoricoComponent implements OnInit, AfterViewInit {
       data.append('block', this.model.edificio);
 
       this.apiconnector.postData(url, data).subscribe(res => {
+        this.respVal.validate(res);
+
         console.log('res', res);
         this._cookieService.put('token', res['data']['token']);
         this.pisos = res['data']['floors']['data'];
@@ -99,6 +103,8 @@ export class HistoricoComponent implements OnInit, AfterViewInit {
       data.append('floor', this.model.piso);
 
       this.apiconnector.postData(url, data).subscribe(res => {
+        this.respVal.validate(res);
+
         console.log('res', res);
         this._cookieService.put('token', res['data']['token']);
         this.salas = res['data']['rooms']['data'];
@@ -122,6 +128,8 @@ export class HistoricoComponent implements OnInit, AfterViewInit {
       data.append('room', this.model.sala);
 
       this.apiconnector.postData(url, data).subscribe(res => {
+        this.respVal.validate(res);
+
         console.log('res', res);
         this._cookieService.put('token', res['data']['token']);
         this.extractData(res['data']['accessHist']);

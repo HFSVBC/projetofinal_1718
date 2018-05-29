@@ -4,6 +4,7 @@ import { APIConnectorService } from '../service/apiconnector.service';
 import { Subject } from 'rxjs/Subject';
 import { DataTableDirective } from 'angular-datatables';
 import { LoaderService } from '../loader/loader.service';
+import { ResponseStatusValidatorService } from '../service/response-status-validator.service';
 
 class SearchOptions {
   aula: string;
@@ -34,7 +35,8 @@ export class PresencasComponent implements OnInit, AfterViewInit {
   presencas: Presencas[] = [];
   loader = true;
 
-  constructor(private _cookieService: CookieService, private apiconnector: APIConnectorService, private loaderService: LoaderService) {
+  constructor(private _cookieService: CookieService, private apiconnector: APIConnectorService, private loaderService: LoaderService,
+    private respVal: ResponseStatusValidatorService) {
   }
 
   ngOnInit() {
@@ -48,6 +50,8 @@ export class PresencasComponent implements OnInit, AfterViewInit {
     this.dtTrigger.next();
 
     this.apiconnector.postData(url, data).subscribe(res => {
+      this.respVal.validate(res);
+
       console.log('res', res);
       this._cookieService.put('token', res['data']['token']);
       this.todasAulas = res['data']['teacherSubjects']['data'];
@@ -68,6 +72,8 @@ export class PresencasComponent implements OnInit, AfterViewInit {
     this.token = data.append('userTokenId', this._cookieService.get('token'));
 
     this.apiconnector.postData(url, data).subscribe(res => {
+      this.respVal.validate(res);
+
       console.log('res', res);
       this.model.data = 'null';
       this._cookieService.put('token', res['data']['token']);
@@ -81,6 +87,8 @@ export class PresencasComponent implements OnInit, AfterViewInit {
     const data = new FormData();
     this.token = data.append('userTokenId', this._cookieService.get('token'));
     this.apiconnector.postData(url, data).subscribe(res => {
+      this.respVal.validate(res);
+
       console.log('res', res);
       this.model.aluno = 'null';
       this._cookieService.put('token', res['data']['token']);
@@ -101,6 +109,8 @@ export class PresencasComponent implements OnInit, AfterViewInit {
     console.log('data', this.model.aula, this.model.aluno, this.model.data);
 
     this.apiconnector.postData(url, data).subscribe(res => {
+      this.respVal.validate(res);
+
       console.log('res', res);
       this._cookieService.put('token', res['data']['token']);
       this.extractData(res['data']['studentAttendance']);

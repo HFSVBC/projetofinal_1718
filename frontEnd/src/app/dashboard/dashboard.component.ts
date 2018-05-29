@@ -6,6 +6,7 @@ import { APIConnectorService } from '../service/apiconnector.service';
 import { CookieService } from 'angular2-cookie/core';
 import { Subject } from 'rxjs/Subject';
 import { HistoricoComponent } from '../historico/historico.component';
+import { ResponseStatusValidatorService } from '../service/response-status-validator.service';
 
 class HistAc {
   sala: string;
@@ -41,7 +42,8 @@ export class DashboardComponent implements OnInit {
   };
 
   constructor(public authService: AuthService, private router: Router, private _cookieService: CookieService,
-    private apiconnector: APIConnectorService, private historico: HistoricoComponent) {
+    private apiconnector: APIConnectorService, private historico: HistoricoComponent,
+    private respVal: ResponseStatusValidatorService) {
     this.user = authService.getUser();
     this.user_info = this.user.providerData[0];
   }
@@ -78,6 +80,8 @@ export class DashboardComponent implements OnInit {
 
     this.apiconnector.postData(url + '/5', data)
       .subscribe(res => {
+        this.respVal.validate(res);
+
         console.log('res', res);
         this._cookieService.put('token', res['data']['token']);
         this.extractData(res['data']['accessHist']);

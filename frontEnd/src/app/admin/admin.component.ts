@@ -103,6 +103,8 @@ export class AdminComponent implements OnInit {
 
     this.apiconnector.postData(url, data)
     .subscribe(res => {
+      this.respVal.validate(res);
+
       console.log('cenas', res);
       this._cookieService.put('token', res['data']['token']);
       alert('Trocou o id');

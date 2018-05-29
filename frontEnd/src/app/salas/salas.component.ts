@@ -4,6 +4,7 @@ import { APIConnectorService } from '../service/apiconnector.service';
 import { Subject } from 'rxjs/Subject';
 import { DataTableDirective } from 'angular-datatables';
 import { LoaderService } from '../loader/loader.service';
+import { ResponseStatusValidatorService } from '../service/response-status-validator.service';
 
 class SalasDisp {
   edificio: string;
@@ -31,7 +32,8 @@ export class SalasComponent implements OnInit, AfterViewInit {
   salasDisponiveis = new SalasDisponiveis();
   loader = true;
 
-  constructor(private _cookieService: CookieService, private apiconnector: APIConnectorService, private loaderService: LoaderService) {
+  constructor(private _cookieService: CookieService, private apiconnector: APIConnectorService, private loaderService: LoaderService,
+    private respVal: ResponseStatusValidatorService) {
     this.model.piso = '';
   }
 
@@ -46,6 +48,8 @@ export class SalasComponent implements OnInit, AfterViewInit {
     this.dtTrigger.next();
 
     this.apiconnector.postData(url, data).subscribe(res => {
+      this.respVal.validate(res);
+
       console.log('res', res);
       this._cookieService.put('token', res['data']['token']);
 
@@ -67,6 +71,8 @@ export class SalasComponent implements OnInit, AfterViewInit {
     data.append('block', this.model.edificio);
 
     this.apiconnector.postData(url, data).subscribe(res => {
+      this.respVal.validate(res);
+
       console.log('res', res);
       this._cookieService.put('token', res['data']['token']);
       this.pisos = res['data']['floors']['data'];
@@ -84,6 +90,8 @@ export class SalasComponent implements OnInit, AfterViewInit {
     data.append('floor', this.model.piso);
 
     this.apiconnector.postData(url, data).subscribe(res => {
+      this.respVal.validate(res);
+
       console.log('res', res);
       this._cookieService.put('token', res['data']['token']);
       console.log('cenas', res['data']['availableRooms']['data']);

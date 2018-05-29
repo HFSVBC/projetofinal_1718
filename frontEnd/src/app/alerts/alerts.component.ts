@@ -1,6 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
-
 import { AlertService } from './alert.service';
 import { AlertState } from './alert';
 
@@ -29,6 +28,11 @@ export class AlertsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-      this.subscription.unsubscribe();
+    this.show = false;
+    this.subscription.unsubscribe();
+  }
+
+  showFalse() {
+    this.show = false;
   }
 }
