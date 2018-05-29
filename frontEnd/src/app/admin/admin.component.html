@@ -10,14 +10,14 @@
 
             <form (ngSubmit)="onSubmit()">
                 <div class="form-row" id='user_row'>
-                    <div class="input-group col-sm-8">
+                    <div class="input-group col-sm-5">
                         <div class="input-group-prepend">
                             <label class="input-group-text mb-0" for="na_email"><i class="material-icons">person</i></label>
                         </div>
-                        <input type="email" class="form-control" id="email" [(ngModel)]="email" name="email" required>
+                        <input type="email" class="form-control" (keyup)="emailChanged()" id="email" [(ngModel)]="email" name="email" required>
                         <div class="invalid-feedback">É necessário um Email válido</div>
                     </div>
-                    <button type="submit" class="btn btn-success ">Pesquisar</button>
+                    <button type="submit" class="btn btn-success" [disabled]="loader">Pesquisar</button>
                 </div>
             </form>
         </div>

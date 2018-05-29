@@ -98,6 +98,7 @@ export class AuthService {
 
   logout() {
     const url = this.apiconnector.logoutPOST;
+    console.log('current', this.current.email);
     const data = new FormData();
     data.append('userTokenId', this._cookieService.get('token'));
 
