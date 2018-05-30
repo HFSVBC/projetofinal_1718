@@ -4,6 +4,7 @@ import { APIConnectorService } from '../service/apiconnector.service';
 import { LoaderService } from '../loader/loader.service';
 import { EmailValidator } from '@angular/forms';
 import { AuthService } from '../providers/auth.service';
+import { AlertService } from '../alerts/alert.service';
 import { ResponseStatusValidatorService } from '../service/response-status-validator.service';
 
 @Component({
@@ -14,7 +15,6 @@ import { ResponseStatusValidatorService } from '../service/response-status-valid
 export class AdminComponent implements OnInit {
   email;
   user;
-  users;
   u_number;
   user_name;
   user_email;
@@ -30,11 +30,29 @@ export class AdminComponent implements OnInit {
     'security' : 3,
     'admin' : 10
   };
+  users = [{
+    'id': 0,
+    'type': 'student'
+  }, {
+    'id': 1,
+    'type': 'teacher'
+  },
+  {
+    'id': 2,
+    'type': 'staff member'
+  },
+  {
+    'id': 3,
+    'type': 'security'
+  }, {
+    'id': 10,
+    'type': 'admin'
+  }];
 
 
   constructor(public authService: AuthService, private _cookieService: CookieService,
      private apiconnector: APIConnectorService, private loaderService: LoaderService,
-    private respVal: ResponseStatusValidatorService) {
+    private respVal: ResponseStatusValidatorService, private alertService: AlertService) {
   }
 
   ngOnInit() {
@@ -65,25 +83,6 @@ export class AdminComponent implements OnInit {
       this.loaderService.hide();
 
     });
-
-    this.users = [{
-      'id': 0,
-      'type': 'student'
-    }, {
-      'id': 1,
-      'type': 'teacher'
-    },
-    {
-      'id': 2,
-      'type': 'staff member'
-    },
-    {
-      'id': 3,
-      'type': 'security'
-    }, {
-      'id': 10,
-      'type': 'admin'
-    }];
   }
 
   emailChanged() {
@@ -105,9 +104,10 @@ export class AdminComponent implements OnInit {
     .subscribe(res => {
       this.respVal.validate(res);
 
+      this.alertService.show('Tipo de utilizador trocado', 'success');
+
       console.log('cenas', res);
       this._cookieService.put('token', res['data']['token']);
-      alert('Trocou o id');
     });
   }
 

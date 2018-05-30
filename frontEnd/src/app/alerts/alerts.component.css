@@ -3,7 +3,7 @@
   align-items: center;
   justify-content: center;
 }
-.container.alert.alert-danger.alert-dismissible{
+.container.alert{
   position: fixed;
   top: 2rem;
   opacity: 0.9;

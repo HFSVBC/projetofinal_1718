@@ -12,18 +12,18 @@ export class AlertsComponent implements OnInit, OnDestroy {
 
   show = false;
   msg;
+  type;
 
   private subscription: Subscription;
 
-  constructor(
-      private alertService: AlertService
-  ) { }
+  constructor(private alertService: AlertService) { }
 
   ngOnInit() {
     this.subscription = this.alertService.alertState
     .subscribe((state: AlertState) => {
         this.show = state.show;
         this.msg = state.msg;
+        this.type = state.type;
     });
   }
 

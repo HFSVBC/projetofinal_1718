@@ -13,8 +13,8 @@ export class AlertService {
 
   constructor() { }
 
-  show(msg) {
-    this.loaderSubject.next(<AlertState>{show: true, msg: msg});
+  show(msg, type) {
+    this.loaderSubject.next(<AlertState>{show: true, msg: msg, type: type});
   }
 
   hide() {

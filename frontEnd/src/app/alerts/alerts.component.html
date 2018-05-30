@@ -1,5 +1,6 @@
 <div class="cont">
-  <div *ngIf="show" class="container alert alert-danger alert-dismissible fadeInDown" [ngClass]="{'animated': show}" role="alert">
+  <div *ngIf="show" class="container alert alert-dismissible fadeInDown"
+   [ngClass]="{'animated': show, 'alert-danger': type==='danger', 'alert-success': type ==='success'}" role="alert">
     <strong>Alerta!</strong> {{msg}}
     <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="showFalse();">
       <span aria-hidden="true">&times;</span>
