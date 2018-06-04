@@ -39,6 +39,28 @@ export class AcidentesComponent implements OnInit {
   acidenteForm; token;
   edificios = []; pisos = []; salas = [];
   loader = false; active = false;
+  showAcidentes = false;
+
+  acidentes = [{
+    id: '1',
+    tipo: 'Incendio',
+    edificio: '6',
+    sala: '3',
+    piso: '38',
+    data: '09-05-2018',
+    descricao: 'Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon offici' +
+     'aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqu' +
+     'put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes ' +
+     'anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table'
+  }, {
+    id: '2',
+    tipo: 'Incendio',
+    edificio: '3',
+    sala: '2',
+    piso: '14',
+    data: '10-04-2018',
+    descricao: 'Cenas que aconteceram'
+  }];
 
   constructor(private apiconnector: APIConnectorService,  private respVal: ResponseStatusValidatorService,
       private _cookieService: CookieService, private loaderService: LoaderService, private alertService: AlertService) { }
@@ -145,29 +167,32 @@ export class AcidentesComponent implements OnInit {
   }
 
   onSubmit1() {
-    console.log('Modelo', this.model);
-    this.loaderService.show();
+    (<any>$('#collapseOne')).removeClass('show');
+    (<any>$('#collapseTwo')).removeClass('show');
+    this.showAcidentes = true;
+    // console.log('Modelo', this.model);
+    // this.loaderService.show();
 
-    const url = this.apiconnector.getAulasDeUmAluno;
-    const data = new FormData();
+    // const url = this.apiconnector.getAulasDeUmAluno;
+    // const data = new FormData();
 
-    this.token = data.append('userTokenId', this._cookieService.get('token'));
-    data.append('type', this.model1.tipo);
-    data.append('block', this.model1.edificio);
-    data.append('floor', this.model1.piso);
-    data.append('room', this.model1.sala);
-    data.append('date_ini', this.model1.data_ini);
-    data.append('date_end', this.model1.data_fim);
+    // this.token = data.append('userTokenId', this._cookieService.get('token'));
+    // data.append('type', this.model1.tipo);
+    // data.append('block', this.model1.edificio);
+    // data.append('floor', this.model1.piso);
+    // data.append('room', this.model1.sala);
+    // data.append('date_ini', this.model1.data_ini);
+    // data.append('date_end', this.model1.data_fim);
 
-    this.apiconnector.postData(url, data).subscribe(res => {
-      this.respVal.validate(res);
+    // this.apiconnector.postData(url, data).subscribe(res => {
+    //   this.respVal.validate(res);
 
-      this.alertService.show('Acidente criado com sucesso!', 'success');
+    //   this.alertService.show('Acidente criado com sucesso!', 'success');
 
-      console.log('res', res);
-      this._cookieService.put('token', res['data']['token']);
-      this.loaderService.hide();
-    });
+    //   console.log('res', res);
+    //   this._cookieService.put('token', res['data']['token']);
+    //   this.loaderService.hide();
+    // });
   }
 
   verify(field) {
