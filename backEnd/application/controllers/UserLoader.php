@@ -138,10 +138,13 @@ class UserLoader extends CI_Controller {
 							"token" => regenerateUserToken($this->input->post('userTokenId'))[1],
 							"user" => array(
 								"uid" => $result[1]->googleUID,
+                                "id" => $result[1]->id,
 								"name" => $result[1]->name,
 								"email" => $result[1]->email,
 								"avatar" => $result[1]->avatar,
-								"user_type" => $result[1]->description
+								"user_type" => $result[1]->description,
+                                "active"=> $result[1]->active,
+                                "last_login"=> $result[1]->LastLogIN,
 							)
 						);
 						jsonExporter(200, $data);

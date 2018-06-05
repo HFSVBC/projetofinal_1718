@@ -32,20 +32,20 @@
           <h3>{{user_name}}</h3>
           <div class="row">
             <div class="col-md-6">
-              <label for="uid " class="col-sm-3 col-form-label ">UID</label>
-              <input type="text " readonly class="form-control col-sm-11 " id="uid " value="{{user_uid}} ">
+              <label for="uid " class="col-sm-3 col-form-label ">ID</label>
+              <input type="text " readonly class="form-control col-sm-11 " id="uid " value="{{user_id}}">
             </div>
             <div class="col-md-6">
               <label for="email " class="col-sm-3 col-form-label ">Active Now</label>
-              <input type="text " readonly class="form-control col-sm-11 " id="email " value="{{user_email}} ">
+              <input type="text " readonly class="form-control col-sm-11 " id="email " value="{{user_active === '1' ? 'True' : 'False'}}">
             </div>
             <div class="col-md-6">
               <label for="uid " class="col-sm-3 col-form-label ">UID</label>
-              <input type="text " readonly class="form-control col-sm-11 " id="uid " value="{{user_uid}} ">
+              <input type="text " readonly class="form-control col-sm-11 " id="uid " value="{{user_uid}}">
             </div>
             <div class="col-md-6">
               <label for="uid " class="col-sm-3 col-form-label ">Last Login</label>
-              <input type="text " readonly class="form-control col-sm-11" id="uid " value="{{user_uid}} ">
+              <input type="text " readonly class="form-control col-sm-11" id="uid " value="{{user_lastLogin}}">
             </div>
             <div class="col-md-6">
               <label for="user_type " class="col-sm-3 col-form-label ">Tipo</label>

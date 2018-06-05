@@ -80,9 +80,9 @@
 		{
 			$email = $this->db->escape($this->input->post('userEmail'));
 
-			$sql = "SELECT u.googleUID, u.name, u.email, u.avatar, uat.description
-					FROM users u, users_accountType uat
-					WHERE u.account_type = uat.id AND u.email = $email";
+			$sql = "SELECT u.id, u.googleUID, u.name, u.email, u.avatar, uat.description, IF(ISNULL((SELECT timestamp FROM users_loggedIn WHERE user = u.id)), 0, 1) AS 'active', IFNULL((SELECT timestamp FROM users_loggedIn WHERE user = u.id), (SELECT login_timestamp FROM users_loggedOut WHERE user = u.id)) AS 'LastLogIN'
+                    FROM users u, users_accountType uat
+                    WHERE u.account_type = uat.id AND u.email = $email";
 
 			$query = $this->db->query($sql);
 			$row   = $query->row();

@@ -18,7 +18,10 @@ export class AdminComponent implements OnInit {
   u_number;
   user_name;
   user_email;
+  user_active;
+  user_lastLogin;
   user_uid;
+  user_id;
   user_type;
   user_avatar;
   loader = true;
@@ -77,8 +80,11 @@ export class AdminComponent implements OnInit {
       this.user_name = this.user.name;
       this.user_email = this.user.email;
       this.user_uid = this.user.uid;
+      this.user_id = this.user.id;
       this.user_type = this.user.user_type;
       this.user_avatar = this.user.avatar;
+      this.user_active = this.user.active;
+      this.user_lastLogin = this.user.last_login;
 
       this.loaderService.hide();
 
