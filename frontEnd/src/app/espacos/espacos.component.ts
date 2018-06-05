@@ -131,7 +131,7 @@ export class EspacosComponent implements OnInit, AfterViewInit {
 
   onSubmit() {
     this.loaderService.show();
-    const url = this.apiconnector.historico;
+    const url = this.apiconnector.getPessoasEspaco;
     const data = new FormData();
     this.token = data.append('userTokenId', this._cookieService.get('token'));
     data.append('block', this.model.edificio);

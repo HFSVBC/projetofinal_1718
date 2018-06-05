@@ -27,7 +27,7 @@
               </label>
             </div>
             <select class="custom-select form-control" id="na_data" [(ngModel)]="model.data" name="na_data" required>
-              <option value="null">Todas datas</option>
+              <option value="null">Todas as Datas</option>
               <option *ngFor="let a of todasDatas" [value]="a['id']">{{a['d_init']}}</option>
             </select>
           </div>
@@ -39,7 +39,7 @@
               </label>
             </div>
             <select class="custom-select form-control" id="na_aluno" [(ngModel)]="model.aluno" name="na_aluno" required>
-              <option value="null">Todos alunos</option>
+              <option value="null">Todos os Alunos</option>
               <option *ngFor="let a of todosAlunos" [value]="a['id']">{{a['id']}} - {{a['aluno']}}</option>
             </select>
           </div>

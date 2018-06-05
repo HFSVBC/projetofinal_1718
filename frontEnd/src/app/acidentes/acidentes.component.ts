@@ -170,6 +170,7 @@ export class AcidentesComponent implements OnInit {
     (<any>$('#collapseOne')).removeClass('show');
     (<any>$('#collapseTwo')).removeClass('show');
     this.showAcidentes = true;
+    (<any>$('#collapse1')).addClass('show');
     // console.log('Modelo', this.model);
     // this.loaderService.show();
 
