@@ -15,6 +15,7 @@ This solution will assure the availability, confidentiality, and accuracy of the
 * Alteration of class attendance records
 * Alteration of user type and corresponding permissions
 * Creation of temporary visitor access
+* Creation and control of events for catastrophe management
 
 ## Authors {docsify-ignore}
 * Ana Catarina Sousa (1)

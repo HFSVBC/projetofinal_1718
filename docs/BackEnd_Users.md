@@ -1,6 +1,6 @@
 # Users
 
-Usage of the application relies on the existence of five different types of users within the same institution, each with specific needs and clearances for the use of features specific to their roles. 
+Usage of the application relies on the existence of different types of users within the same institution, each with specific needs and clearances for the use of features specific to their roles. 
 
 There are five types of users:
 
@@ -44,6 +44,7 @@ The administrator can access the following information:
 * check how many people are in a room
 * check class attendance
 * change user type
+* create and verify accident logs
 
 ---
 ## LogIn
