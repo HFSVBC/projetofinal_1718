@@ -1,5 +1,4 @@
 # Cafcul
-[![Build Status](https://travis-ci.com/HFSVBC/projetofinal_1718.svg?token=oMbXaaDosdmpfQUCdqRx&branch=frontEnd-Deploy)](https://travis-ci.com/HFSVBC/projetofinal_1718)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.1.
 

@@ -1,19 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../providers/auth.service';
 import { Http, Response } from '@angular/http';
 import { Subject } from 'rxjs/Subject';
 import { CookieService } from 'angular2-cookie/core';
 import { APIConnectorService } from '../service/apiconnector.service';
-
+import { LoaderService } from '../loader/loader.service';
+import { DataTableDirective } from 'angular-datatables';
+import { ResponseStatusValidatorService } from '../service/response-status-validator.service';
 import 'rxjs/add/operator/map';
 
 class SearchOptions {
   edificio: string;
   piso: string;
   sala: string;
-  data_inicio: Date;
-  data_fim: Date;
 }
 
 class HistAc {
@@ -28,120 +28,124 @@ class HistAc {
   styleUrls: ['./historico.component.css'],
 })
 
-export class HistoricoComponent implements OnInit {
-
+export class HistoricoComponent implements OnInit, AfterViewInit {
   token;
-
+  @ViewChild(DataTableDirective)
+  dtElement: DataTableDirective;
   dtOptions: any = {};
-  // We use this trigger because fetching the list of persons can be quite long,
-  // thus we ensure the data is fetched before rendering
   histAc: HistAc[] = [];
   dtTrigger: Subject<any> = new Subject();
-
+  pisos = [];  salas = [];
   model = new SearchOptions();
-
-  edificios_pisos = {
-    'C1' : ['1', '2', '3', '4', '5'],
-    'C2' : ['1', '2', '3', '4', '5'],
-    'C3' : ['1', '2'],
-    'C4' : ['1', '2'],
-    'C5' : ['1', '2'],
-    'C6' : ['1', '2', '3', '4', '5'],
-    'C7' : ['1', '2'],
-    'C8' : ['1', '2', '3', '4', '5'],
-    };
-
-  edificios_pisos_salas = {
-    'C1.1' : ['1', '2', '3', '4', '5'],
-    'C1.2' : ['1', '2', '3', '4', '5'],
-    'C1.3' : ['1', '2', '3', '4', '5'],
-    'C1.4' : ['1', '2', '3', '4', '5'],
-    'C1.5' : ['1', '2', '3', '4', '5'],
-    'C2.1' : ['1', '2', '3', '4', '5'],
-    'C2.2' : ['1', '2', '3', '4', '5'],
-    'C2.3' : ['1', '2', '3', '4', '5'],
-    'C2.4' : ['1', '2', '3', '4', '5'],
-    'C2.5' : ['1', '2', '3', '4', '5'],
-    'C3.1' : ['1', '2', '3', '4', '5'],
-    'C3.2' : ['1', '2', '3', '4', '5'],
-    'C4.1' : ['1', '2', '3', '4', '5'],
-    'C4.2' : ['1', '2', '3', '4', '5'],
-    'C5.1' : ['1', '2', '3', '4', '5'],
-    'C5.2' : ['1', '2', '3', '4', '5'],
-    'C6.1' : ['1', '2', '3', '4', '5'],
-    'C6.2' : ['1', '2', '3', '4', '5'],
-    'C6.3' : ['1', '2', '3', '4', '5'],
-    'C6.4' : ['1', '2', '3', '4', '5'],
-    'C6.5' : ['1', '2', '3', '4', '5'],
-    'C7.1' : ['1', '2', '3', '4', '5'],
-    'C7.2' : ['1', '2', '3', '4', '5'],
-    'C8.1' : ['1', '2', '3', '4', '5'],
-    'C8.2' : ['1', '2', '3', '4', '5'],
-    'C8.3' : ['1', '2', '3', '4', '5'],
-    'C8.4' : ['1', '2', '3', '4', '5'],
-    'C8.5' : ['1', '2', '3', '4', '5'],
-    };
-
-    edificios = Object.keys(this.edificios_pisos);
-    pisos = [];
-    salas = [];
-
-  columnsToDisplay = ['Sala', 'Hora de Entrada', 'Hora de Saida'];
+  edificios; loader = true;
 
   constructor(public authService: AuthService, private router: Router, private _cookieService: CookieService,
-     private apiconnector: APIConnectorService) {
+     private apiconnector: APIConnectorService, private loaderService: LoaderService, private respVal: ResponseStatusValidatorService) {
   }
-
-    edificioChanged() {
-      console.log(this.model);
-      this.pisos = this.edificios_pisos[this.model.edificio];
-      console.log(this.pisos);
-    }
-
-    pisoChanged() {
-      console.log(this.model);
-      const ed_p = this.model.edificio + '.' + this.model.piso;
-      this.salas = this.edificios_pisos_salas[ed_p];
-    }
-
-    salaChanged() {
-      console.log(this.model);
-    }
-
-    onSubmit() {
-      console.log('Form Data', this.model);
-    }
 
   ngOnInit(): void {
-    this.createTable();
-  }
 
-  createTable() {
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 8,
       dom: 'Bfrtip',
-      searching: false,
       buttons: [
         'copy', 'csv', 'excel', 'pdf', 'print'
       ]
     };
+    this.dtTrigger.next();
 
-    const url = this.apiconnector.historico;
+    const url = this.apiconnector.getEdificios;
     const data = new FormData();
+
     this.token = data.append('userTokenId', this._cookieService.get('token'));
 
-    this.apiconnector.postData(url, data)
-      .subscribe(res => {
+    this.apiconnector.postData(url, data).subscribe(res => {
+      this.respVal.validate(res);
+
+      console.log('res', res);
+      this._cookieService.put('token', res['data']['token']);
+      this.edificios = res['data']['blocks']['data'];
+      this.model.edificio = 'null';
+      this.edificioChanged();
+    });
+  }
+
+    edificioChanged() {
+      this.loaderService.show();
+      this.loader = true;
+      const url = this.apiconnector.getPisosEdificio;
+      const data = new FormData();
+
+      this.token = data.append('userTokenId', this._cookieService.get('token'));
+      data.append('block', this.model.edificio);
+
+      this.apiconnector.postData(url, data).subscribe(res => {
+        this.respVal.validate(res);
+
+        console.log('res', res);
+        this._cookieService.put('token', res['data']['token']);
+        this.pisos = res['data']['floors']['data'];
+        this.model.piso = 'null';
+        this.pisoChanged();
+        this.loaderService.hide();
+      });
+    }
+
+    pisoChanged() {
+      this.loaderService.show();
+      this.loader = true;
+      const url = this.apiconnector.getSalasPisos;
+      const data = new FormData();
+
+      this.token = data.append('userTokenId', this._cookieService.get('token'));
+      data.append('block', this.model.edificio);
+      data.append('floor', this.model.piso);
+
+      this.apiconnector.postData(url, data).subscribe(res => {
+        this.respVal.validate(res);
+
+        console.log('res', res);
+        this._cookieService.put('token', res['data']['token']);
+        this.salas = res['data']['rooms']['data'];
+        this.model.sala = 'null';
+        this.loader = false;
+        this.loaderService.hide();
+      });
+    }
+
+    salaChanged() {
+      console.log('cenas', this.model);
+    }
+
+    onSubmit() {
+      this.loaderService.show();
+      const url = this.apiconnector.historico;
+      const data = new FormData();
+      this.token = data.append('userTokenId', this._cookieService.get('token'));
+      data.append('block', this.model.edificio);
+      data.append('floor', this.model.piso);
+      data.append('room', this.model.sala);
+
+      this.apiconnector.postData(url, data).subscribe(res => {
+        this.respVal.validate(res);
+
         console.log('res', res);
         this._cookieService.put('token', res['data']['token']);
         this.extractData(res['data']['accessHist']);
+        this.loaderService.hide();
       });
-  }
+    }
+
+    ngAfterViewInit() {
+      this.dtTrigger.next();
+    }
 
   private extractData(myDataArray) {
-    this.histAc = myDataArray.data || {};
-    this.dtTrigger.next();
+    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      dtInstance.destroy();
+      this.histAc = myDataArray.data || {};
+      this.dtTrigger.next();
+    });
   }
-
 }

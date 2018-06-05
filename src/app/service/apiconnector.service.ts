@@ -12,7 +12,8 @@ export class APIConnectorService {
   constructor(private http: HttpClient) { }
 
   // private baseURL = 'http://localhost:8888/';
-   private baseURL = 'https://bcapi.hugocurado.info/';
+  private baseURL = 'https://bcapi.hugocurado.info/';
+  // private baseURL = 'https://cafcul.hugocurado.info/';
   // private baseURL = 'https://0a024cd4.ngrok.io/';
 
   // USER Routes
@@ -26,8 +27,19 @@ export class APIConnectorService {
   // ADMIN Routes
   changeType = this.baseURL + 'user/changeType';
 
+  getLugaresDisponiveis = this.baseURL + 'general/availableSpaces';
+  getEdificios = this.baseURL + 'general/getFacultyBlocks';
+  getPisosEdificio = this.baseURL + 'general/getBlockFloors';
+  getSalasPisos = this.baseURL + 'general/getFloorsRooms';
+  getAulas = this.baseURL + 'teacher/classes';
+  getDatasAulas = this.baseURL + 'teacher/class/dates/';
+  getAlunosNomesAulas = this.baseURL + 'teacher/class/students/';
+  getAlunosAulas = this.baseURL + 'teacher/course/getStudentsAttendance';
+  getAulasDeUmAluno = this.baseURL + 'teacher/individual/getStudentsAttendance';
+  changetAulasDeUmAluno = this.baseURL + 'teacher/individual/changeStudentsAttendance';
+
   historico = this.baseURL + 'history/user';
-  presencasGET = '/presencasGET';
+  presencas = this.baseURL +  'presencas';
 
   getDATA(URL: string) { }
 

@@ -1,37 +1,54 @@
 <app-menu class="col-sm-2"></app-menu>
 <div class="router">
 
-    <div class="card" style="margin-bottom: 10px">
+    <div class="card mb-3">
+        <h5 class="card-header">Consultar Espaços</h5>
+
+        <app-loader></app-loader>
+
         <div class="card-body">
 
             <form class="form-inline" (ngSubmit)="onSubmit()" #searchForm="ngForm">
-
-                <div class="form-row">
-                    <div class="form-group col-sm-3">
-                        <label for="edifico" class="col-sm-5 col-form-label">Edifício</label>
-                        <select class="form-control col-sm-7" id="edifico" (change)="edificioChanged()" [(ngModel)]="model.edificio" name="edificio">
-                <option *ngFor="let ed of edificios" [value]="ed">{{ed}}</option>
-              </select>
+                <div class="form-row justify-content-center">
+                    <div class="input-group col-sm-3">
+                        <div class="input-group-prepend">
+                            <label for="edifico" class="input-group-text" title="Edifício">
+                            <i class="material-icons">business</i>
+                            </label>
+                        </div>
+                        <select class="custom-select" id="edifico" (change)="edificioChanged()" [(ngModel)]="model.edificio" name="na_edificio" required>
+                            <option value="null">Todas os Edifícios</option>
+                            <option *ngFor="let ed of edificios" [value]="ed['bloco']">C{{ed['bloco']}}</option>
+                        </select>
                     </div>
 
-                    <div class="form-group col-sm-3">
-                        <label for="piso" class="col-sm-4 col-form-label">Piso</label>
-                        <select class="form-control col-sm-7" id="piso" (change)="pisoChanged()" [(ngModel)]="model.piso" name="piso">
-                <option *ngFor="let p of pisos" [value]="p">{{p}}</option>
-              </select>
+                    <div class="input-group col-sm-3">
+                        <div class="input-group-prepend">
+                            <label for="piso" class="input-group-text" title="Piso">
+                            <i class="material-icons">trending_up</i>
+                            </label>
+                        </div>
+                        <select class="custom-select" id="piso" (change)="pisoChanged()" [(ngModel)]="model.piso" name="na_piso" required>
+                            <option value="null">Todas os Pisos</option>
+                            <option *ngFor="let p of pisos" [value]="p['piso']">{{p['piso']}}</option>
+                        </select>
                     </div>
 
-                    <div class="form-group col-sm-3">
-                        <label for="sala" class="col-sm-4 col-form-label">Sala</label>
-                        <select class="form-control col-sm-7" id="sala" (change)="salaChanged()" [(ngModel)]="model.sala" name="sala">
-                <option *ngFor="let s of salas" [value]="s">{{s}}</option>
-              </select>
+                    <div class="input-group col-sm-3">
+                        <div class="input-group-prepend">
+                            <label for="sala" class="input-group-text" title="Piso">
+                            <i class="material-icons">room</i>
+                            </label>
+                        </div>
+                        <select class="custom-select" id="sala" (change)="salaChanged()" [(ngModel)]="model.sala" name="na_sala" required>
+                            <option value="null">Todas as Salas</option>
+                            <option *ngFor="let p of salas" [value]="p['sala']">{{p['sala']}}</option>
+                        </select>
                     </div>
 
-                    <button type="submit" class="btn btn-success col-sm-2">Procurar</button>
+                    <button type="submit" class="btn btn-success" [disabled]="loader">Procurar</button>
                 </div>
             </form>
-
         </div>
     </div>
 
@@ -42,15 +59,15 @@
                 <thead>
                     <tr>
                         <th>Sala</th>
-                        <th>Hora de Entrada</th>
-                        <th>Hora de Saida</th>
+                        <th>Número de Pessoas</th>
+                        <th>Lotação</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let pos of histAc" role="row" class="odd">
-                        <td>{{ pos.sala }}</td>
-                        <td>{{ pos.inicio }}</td>
-                        <td>{{ pos.fim }}</td>
+                    <tr *ngFor="let pos of si" role="row" class="odd">
+                        <td>{{ pos.space }}</td>
+                        <td>{{ pos.people }}</td>
+                        <td>{{ pos.max }}</td>
                     </tr>
                 </tbody>
             </table>

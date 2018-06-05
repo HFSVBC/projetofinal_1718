@@ -1,54 +1,54 @@
 .text-center {
-  margin: auto 0;
+    margin: auto 0;
 }
 
 .h1 {
-  font-size: 4em;
-  color: #5d5d5d;
-  margin-top: -3em;
+    font-size: 4em;
+    color: #5d5d5d;
+    margin-top: -3em;
 }
 
 .frow {
-  display: inline-flex;
-  padding: 5em 0 0;
+    display: inline-flex;
+    padding: 5em 0 0;
 }
 
 .card {
-  border: none;
+    border: none;
 }
 
 .card .col-md-6,
 .card .col-md-4 {
-  padding: 0;
+    padding: 0;
 }
 
 .card-img-top img {
-  height: 15em;
+    height: 15em;
 }
 
 .card .list-group-item {
-  padding: .5em;
+    padding: .5em;
 }
 
 .card .custom-select {
-  margin-right: 15px;
-  margin-left: 15px;
-  width: 61%;
+    margin-right: 15px;
+    margin-left: 15px;
+    width: 61%;
 }
 
 #btnAlterar {
-  float: right;
-  margin: 20px;
+    float: right;
+    margin: 20px;
 }
 
 #photoUser {
-  padding: 20px;
+    padding: 20px;
 }
 
 #tipo {
-  height: 41.5px;
+    height: 41.5px;
 }
 
 #limpar {
-  margin: 0 10px 0 5px;
+    margin: 0 10px 0 5px;
 }
