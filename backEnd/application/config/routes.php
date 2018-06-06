@@ -71,6 +71,7 @@ $route['teacher/createClasses'] = 'classes/createClasses';
 // MATRICULAR ALUNOS
 $route['teacher/matriculateStudent'] = 'classes/matriculateStudent';
 // CONSULTA DE QUEM ESTA NUM ESPAÇO
+$route['spaces/getPeopleNumerInSpace'] = 'spaces/getPeopleNumInFacultyRooms';
 //CRIAR ACESSOS
 $route['testcase/createAcess'] = 'testcaseaccess/CreateAccess';
 // UTILIZADOR

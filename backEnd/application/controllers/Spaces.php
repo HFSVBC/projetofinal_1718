@@ -58,6 +58,57 @@ class Spaces extends CI_Controller
         }
     }
 
+    public function getPeopleNumInFacultyRooms()
+    {
+        $config = array(
+            array(
+                'field' => 'userTokenId',
+                'label' => "User's Token",
+                'rules' => 'trim|required'
+            ),
+            array(
+                'field' => 'block',
+                'label' => "Block number",
+                'rules' => 'trim|required'
+            ),
+            array(
+                'field' => 'floor',
+                'label' => "Floor number",
+                'rules' => 'trim|required'
+            ),
+            array(
+                'field' => 'room',
+                'label' => "Room number",
+                'rules' => 'trim|required'
+            )
+        );
+        $this->form_validation->set_rules($config);
+        $this->form_validation->set_error_delimiters('', '');
+        if($this->form_validation->run() === true){
+            if(isUserLoggedIn($this->input->post('userTokenId'))===true){
+                $result = $this->access_model->getNumberOfPeopleInRooms();
+                $out = array("data"=>array());
+                foreach ($result as $key => $value) {
+                    $thisOut = array(
+                        "space"=>$value['espaco'],
+                        "peopel"=>$value['now'],
+                        "max"=>$value['lotacao']
+                    );
+                    array_push($out["data"], $thisOut);
+                }
+                $data = array(
+                    "rooms"=>$out,
+                    "token"=>regenerateUserToken($this->input->post('userTokenId'))[1]
+                );
+                jsonExporter(200, $data);
+            }else{
+                jsonExporter(401);
+            }
+        }else{
+            jsonExporter(405, validation_errors());
+        }
+    }
+
     # AUX Methods -----------------------------------------------------------------------------------
     public function getFacultyBuildings()
     {

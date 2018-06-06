@@ -96,6 +96,25 @@
             $query = $this->db->query($sql);
             return $query->result_array();
         }
+        public function getNumberOfPeopleInRooms(){
+            $bloco = $this->db->escape($this->input->post("block"));
+            $piso = $this->db->escape($this->input->post("floor"));
+            $room = $this->db->escape($this->input->post("room"));
+
+            $sql = "SELECT e.id, CONCAT_WS('.', e.bloco, e.piso, e.sala) AS espaco, e.lotacao, COUNT(e.id) as 'now'
+                    FROM espaco e, acesso a 
+                    WHERE a.espaco = e.id AND ((NOW() + INTERVAL 8 HOUR) >= a.data_entrada AND (NOW() + INTERVAL 8 HOUR) <= a.data_fim) AND e.bloco = $bloco";
+
+            if($piso != "'null'")
+                $sql .= " AND e.piso = $piso";
+            if($room != "'null'")
+                $sql .= " AND e.sala = $room";
+
+            $sql .= " GROUP BY e.id";
+
+            $query = $this->db->query($sql);
+            return $query->result_array();
+        }
 		# AUX Methods --------------------------------------------------------------------
         public function getFacultyBlocks()
         {
