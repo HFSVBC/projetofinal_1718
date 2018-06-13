@@ -28,6 +28,7 @@ import { AdminService } from './providers/admin.service';
 import { SecurityService } from './providers/security.service';
 import { ProfessorService } from './providers/professor.service';
 import { AllService } from './providers/all.service';
+import { AlunoService } from './providers/aluno.service';
 import { LoaderService } from './loader/loader.service';
 import { AlertService } from './alerts/alert.service';
 import { ResponseStatusValidatorService } from './service/response-status-validator.service';
@@ -48,6 +49,7 @@ import { AcidentesComponent } from './acidentes/acidentes.component';
 import { SalasComponent } from './salas/salas.component';
 import { LoaderComponent } from './loader/loader.component';
 import { AlertsComponent } from './alerts/alerts.component';
+import { PresencasAlunoComponent } from './presencas-aluno/presencas-aluno.component';
 
 
 @NgModule({
@@ -66,7 +68,8 @@ import { AlertsComponent } from './alerts/alerts.component';
     AcidentesComponent,
     SalasComponent,
     LoaderComponent,
-    AlertsComponent
+    AlertsComponent,
+    PresencasAlunoComponent
   ],
   imports: [
     routes,
@@ -86,6 +89,7 @@ import { AlertsComponent } from './alerts/alerts.component';
     AdminService,
     SecurityService,
     ProfessorService,
+    AlunoService,
     AllService,
     LoaderService,
     ResponseStatusValidatorService,
