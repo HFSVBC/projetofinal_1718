@@ -46,13 +46,15 @@ export class AuthService {
     firebase.auth().signInWithPopup(provider)
     .then(result => {
       this.current = result.user;
-      console.log('result', result);
-      console.log('New user just signin', this.current);
+
+      // console.log('result', firebase.auth().currentUser);
+      // console.log('New user just signin', this.current);
 
       // Send info to backend that user just login
       const user_info = this.current.providerData[0];
+      const idToken = this.current.qa;
 
-      this.apiconnector.loginPost(user_info)
+      this.apiconnector.loginPost(idToken)
       .subscribe(res => {
         // Process code
         const code = res['code'];

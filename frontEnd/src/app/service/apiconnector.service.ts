@@ -44,13 +44,10 @@ export class APIConnectorService {
 
   getDATA(URL: string) { }
 
-  loginPost(user_info): Observable<any> {
+  loginPost(idToken): Observable<any> {
     const url = this.loginPOST;
     const data = new FormData();
-    data.append('name', user_info.displayName);
-    data.append('avatar', user_info.photoURL);
-    data.append('email', user_info.email);
-    data.append('uid', user_info.uid);
+    data.append('idToken', idToken);
 
     return this.http.post(url, data)
     .map(res => res,
