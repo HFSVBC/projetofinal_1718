@@ -92,7 +92,7 @@ class UserLoader extends CI_Controller {
 			array(
 					'field' => 'userTokenId',
 					'label' => "User's Token",
-					'rules' => 'trim|required'
+					'rules' => 'trim'
 			)
 		);
 		$this->form_validation->set_rules($config);
@@ -124,7 +124,7 @@ class UserLoader extends CI_Controller {
 		$this->form_validation->set_rules($config);
 		$this->form_validation->set_error_delimiters('', '');
 		if($this->form_validation->run() === true){
-			if(isUserLoggedIn($this->input->post('token'))===true){
+			if(isUserLoggedIn($this->input->post('userTokenId'))===true){
 				$token = $this->db->escape($this->input->post('userTokenId'));
 				$email = $this->db->escape($this->input->post('userEmail'));
 				$sql = "SELECT *
@@ -138,10 +138,13 @@ class UserLoader extends CI_Controller {
 							"token" => regenerateUserToken($this->input->post('userTokenId'))[1],
 							"user" => array(
 								"uid" => $result[1]->googleUID,
+                                "id" => $result[1]->id,
 								"name" => $result[1]->name,
 								"email" => $result[1]->email,
 								"avatar" => $result[1]->avatar,
-								"user_type" => $result[1]->description
+								"user_type" => $result[1]->description,
+                                "active"=> $result[1]->active,
+                                "last_login"=> $result[1]->LastLogIN,
 							)
 						);
 						jsonExporter(200, $data);
@@ -181,7 +184,7 @@ class UserLoader extends CI_Controller {
 		$this->form_validation->set_rules($config);
 		$this->form_validation->set_error_delimiters('', '');
 		if($this->form_validation->run() === true){
-			if(isUserLoggedIn($this->input->post('token'))===true){
+			if(isUserLoggedIn($this->input->post('userTokenId'))===true){
 				$token = $this->db->escape($this->input->post('userTokenId'));
 				$sql = "SELECT *
 						FROM conf_routesAccess

@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Classes extends CI_Controller
+class ProfClasses extends CI_Controller
 {
   public function __construct($config = 'rest')
   {
@@ -10,7 +10,7 @@ class Classes extends CI_Controller
       // header("Access-Control-Allow-Headers: Content-Type");
       parent::__construct();
 
-      $this->load->model('class_model');
+      $this->load->model('prof_class_model');
   }
 
   public function createSubject()
@@ -30,14 +30,14 @@ class Classes extends CI_Controller
     $this->form_validation->set_rules($config);
     $this->form_validation->set_error_delimiters('', '');
     if($this->form_validation->run() === true){
-        if(isUserLoggedIn($this->input->post('token'))===true){
+        if(isUserLoggedIn($this->input->post('userTokenId'))===true){
             $token = $this->db->escape($this->input->post('userTokenId'));
             $sql = "SELECT *
                     FROM conf_routesAccess
                     WHERE user_type = (SELECT account_type FROM users WHERE id = (SELECT user FROM users_loggedIn WHERE token = $token)) AND route = 'teacher/createSubject'";
             if(routeAccess($sql)===true){
                 $designation = $this->input->post('course_designation');
-                $this->class_model->createSubject($designation, $token);
+                $this->prof_class_model->createSubject($designation, $token);
                 $data = array(
                     "token"=>regenerateUserToken($this->input->post('userTokenId'))[1]
                 );
@@ -94,7 +94,7 @@ class Classes extends CI_Controller
     $this->form_validation->set_rules($config);
     $this->form_validation->set_error_delimiters('', '');
     if($this->form_validation->run() === true){
-      if(isUserLoggedIn($this->input->post('token'))===true){
+      if(isUserLoggedIn($this->input->post('userTokenId'))===true){
         $token = $this->db->escape($this->input->post('userTokenId'));
         $sql = "SELECT *
                 FROM conf_routesAccess
@@ -107,7 +107,7 @@ class Classes extends CI_Controller
           $type = $this->input->post('type');
           $space = $this->input->post('space');
           $subject = $this->input->post('subject');
-          $this->class_model->createClasses($semester, $date, $duration, $type, $space, $subject);
+          $this->prof_class_model->createClasses($semester, $date, $duration, $type, $space, $subject);
           $data = array(
               "token"=>regenerateUserToken($this->input->post('userTokenId'))[1]
           );
@@ -145,7 +145,7 @@ class Classes extends CI_Controller
     $this->form_validation->set_rules($config);
     $this->form_validation->set_error_delimiters('', '');
     if($this->form_validation->run() === true){
-      if(isUserLoggedIn($this->input->post('token'))===true){
+      if(isUserLoggedIn($this->input->post('userTokenId'))===true){
         $token = $this->db->escape($this->input->post('userTokenId'));
         $sql = "SELECT *
                 FROM conf_routesAccess

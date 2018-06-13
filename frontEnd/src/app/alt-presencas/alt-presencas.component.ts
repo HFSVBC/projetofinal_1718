@@ -1,9 +1,11 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { CookieService } from 'angular2-cookie/core';
 import { APIConnectorService } from '../service/apiconnector.service';
+import { LoaderService } from '../loader/loader.service';
 import { Subject } from 'rxjs/Subject';
 import { DataTableDirective } from 'angular-datatables';
 import * as $ from 'jquery';
+import { ResponseStatusValidatorService } from '../service/response-status-validator.service';
 
 class AltPresenca {
   aluno: string;
@@ -15,7 +17,7 @@ class Presencas {
   student_id: string;
   student_name: string;
   date_ini: string;
-  date_end: string;
+  aula_id: string;
 }
 
 @Component({
@@ -26,21 +28,19 @@ class Presencas {
 export class AltPresencasComponent implements OnInit, AfterViewInit {
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;
-  token;
-  todasAulas;
-  todasDatas;
+  token; todasAulas; todasDatas;
   loader = false;
   active = false;
   model = new AltPresenca();
   dtTrigger: Subject<any> = new Subject();
-  // dtOptions: DataTables.Settings = {};
   dtOptions: any = {};
   presencas = new Presencas();
-  student_id;
-  date_id;
+  student_id; aula_id; date_id; state_now; ErroAlterar;
+  alterarLoader = false;
 
-  constructor(private _cookieService: CookieService, private apiconnector: APIConnectorService) {
-    this.model.aluno = '';
+  constructor(private _cookieService: CookieService, private apiconnector: APIConnectorService,
+     private loaderService: LoaderService, private respVal: ResponseStatusValidatorService) {
+
   }
 
   ngOnInit() {
@@ -51,19 +51,22 @@ export class AltPresencasComponent implements OnInit, AfterViewInit {
       pagingType: 'full_numbers',
       dom: 'Bfrtip',
       buttons: [
-        {extend: 'copy', exportOptions: {columns: [0, 1, 2, 3]}},
-        {extend: 'csv', exportOptions: {columns: [0, 1, 2, 3]}},
-        {extend: 'print', exportOptions: {columns: [0, 1, 2, 3]}}
+        {extend: 'copy', exportOptions: {columns: [0, 1, 2, 4]}},
+        {extend: 'csv', exportOptions: {columns: [0, 1, 2, 4]}},
+        {extend: 'print', exportOptions: {columns: [0, 1, 2, 4]}}
       ],
       columnDefs: [
         {'width': '50px', 'targets' : -1},
         {'orderable': false, 'targets' : -1},
-        {'visible': false, 'targets': -2}
+        {'visible': false, 'targets': -2},
+        {'visible': false, 'targets': -3}
       ]
     };
     this.dtTrigger.next();
 
     this.apiconnector.postData(url, data).subscribe(res => {
+      this.respVal.validate(res);
+
       console.log('res', res);
       this._cookieService.put('token', res['data']['token']);
       this.todasAulas = res['data']['teacherSubjects']['data'];
@@ -74,8 +77,10 @@ export class AltPresencasComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.dtTrigger.next();
   }
+
   onSubmit() {
-    this.showLoader();
+    this.loaderService.show();
+
     const url = this.apiconnector.getAulasDeUmAluno;
     const data = new FormData();
     this.token = data.append('userTokenId', this._cookieService.get('token'));
@@ -84,10 +89,13 @@ export class AltPresencasComponent implements OnInit, AfterViewInit {
     data.append('class_id', this.model.data);
 
     this.apiconnector.postData(url, data).subscribe(res => {
+      this.respVal.validate(res);
+
       console.log('res', res);
       this._cookieService.put('token', res['data']['token']);
       console.log('studant', res['data']['studentAttendance']);
       this.extractData(res['data']['studentAttendance']);
+      this.loaderService.hide();
     });
   }
 
@@ -96,10 +104,6 @@ export class AltPresencasComponent implements OnInit, AfterViewInit {
       dtInstance.destroy();
       this.presencas = myDataArray.data || {};
       this.dtTrigger.next();
-      this.hideLoader();
-      // $(document).ready(function() {
-      //   (<any>$('[data-toggle="tooltip"]')).tooltip();
-      // });
     });
   }
 
@@ -109,12 +113,13 @@ export class AltPresencasComponent implements OnInit, AfterViewInit {
     const data = new FormData();
     this.token = data.append('userTokenId', this._cookieService.get('token'));
 
-    console.log('aula trocou', data);
-
     this.apiconnector.postData(url, data).subscribe(res => {
+      this.respVal.validate(res);
+
       console.log('res', res);
       this._cookieService.put('token', res['data']['token']);
       this.todasDatas = res['data']['classDates']['data'];
+      this.model.data = 'null';
     });
   }
 
@@ -122,19 +127,28 @@ export class AltPresencasComponent implements OnInit, AfterViewInit {
     const url = this.apiconnector.changetAulasDeUmAluno;
     const data = new FormData();
     this.token = data.append('userTokenId', this._cookieService.get('token'));
-    data.append('userId', this.student_id);
-    data.append('dateId', this.date_id);
+    data.append('student_id', this.student_id);
+    data.append('class_id', this.aula_id);
+    data.append('state_now', this.state_now);
+
+    this.alterarLoader = true;
 
     this.apiconnector.postData(url, data).subscribe(res => {
+      this.respVal.validate(res);
+
       console.log('res', res);
       this._cookieService.put('token', res['data']['token']);
-      this.extractData(res['data']['studentAttendance']);
+      this.ErroAlterar = (res['data']['changeStudentAttendance']);
+      this.onSubmit();
+      this.alterarLoader = false;
     });
   }
 
-  clickModal(student, date) {
+  clickModal(student, date, aula, state) {
     this.student_id = student;
+    this.aula_id = aula;
     this.date_id = date;
+    this.state_now = state;
   }
 
   verify(field) {
@@ -146,14 +160,4 @@ export class AltPresencasComponent implements OnInit, AfterViewInit {
     }
     act ? this.active = ! 1 : this.active = ! 0;
   }
-
-  private showLoader(): void {
-    // console.log('Show loader');
-    this.loader = true;
-  }
-  private hideLoader(): void {
-    // console.log('Hide loader');
-    this.loader = false;
-  }
-
 }

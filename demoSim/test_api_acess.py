@@ -34,7 +34,7 @@ def check_ten(args):
     else:
         return str(args)
 
-def createAccess(number_acesses, duracao=0, space=0, date=0, user_choice=0):
+def createAccess(number_acesses, duracao=0, space=0, date=0, user_choice=0, aula=0):
     """
     number_acesses int
     space int
@@ -50,7 +50,8 @@ def createAccess(number_acesses, duracao=0, space=0, date=0, user_choice=0):
         if user_choice==0:
             user=r.randint(45000,49999)
         else:
-            user=user_choice
+            user_list = user_choice.split(',')
+            user = r.choice(user_list)
         if date==0:
             ano=r.choice([2017,2018])
             mes=r.choice([1,2,3,4,5,6,7,9,10,11,12])
@@ -63,11 +64,68 @@ def createAccess(number_acesses, duracao=0, space=0, date=0, user_choice=0):
             data_horas = date[1].split(':')
             ano=data_dias[0]; mes=data_dias[1]; dia=data_dias[2]; hora=data_horas[0]; minutos=data_horas[1];
         datas=compute_date(ano,mes,dia,hora,minutos, duracao)
-        out = {'data_entrada':data[2],'data_saida':data[3],'espaco':espaco,'user':user}
-        ###requests.post('url', data=out)
-        sql="INSERT INTO acesso(data_entrada,data_fim,espaco,user) VALUES(" + "'" + datas[2] + "'" +\
-             "," + "'" + datas[3] + "'" + "," + str(espaco) + "," + str(user) + ");\n"
-        print sql
+
+        out = {'data_entrada':datas[2],'data_saida':datas[3],'espaco':espaco,'user':str(user), 'aula':aula}
+        ###requests.post('url/testcase/createAcess', data=out)
+        ###sql="INSERT INTO acesso(data_entrada,data_fim,espaco,user) VALUES(" + "'" + datas[2] + "'" + "," + "'" + datas[3] + "'" + "," + str(espaco) + "," + str(user) + ");\n"
+        print out
 
 
 createAccess(10)
+###----Todo---###
+"""
+Reformular bd depois disto
+Caso consiga, tornar os acesso mais realistas.
+
+SEMPRE:
+Verifica se o utilizador ainda não saiu de outro espaço, data_saida a null
+
+1-não enviar aula, o backend tem que perceber onde é a aula
+1.1-O backend recebe o acesso e faz os seguintes passos.
+1.1.1-Verifica se está a haver alguma aula naquele espaço naquela hora +10 minutos.
+1.1.2-Verifica se o aluno está inscrito nessa disciplina
+1.1.3-Se ainda não tiver saido fazer update, caso contrário fazer insert
+1.1.4-Caso esteja inscrito meter nas presenças, caso contrário por só nos acessos.(ver se é para avisar)
+
+2-mandar so a data, o backend faz update em vez de insert
+2.1-O backend recebe o acesso e verifica se o utilizado fez um acesso aquele espaço (data_saida a null)
+2.2-Caso tenha feito faz update à tabela
+
+3-Basta mandar apenas uma data e o backend ve se e data de entrada ou saida
+
+4-Basta enviar assim (data,espaço e user)
+"""
+
+def generateAcess(date, users, room):
+    """
+    users sao utilizadores separados por virgulas
+    """
+    for user in users.split(','):
+        out = {'data':date, 'espaco':room, 'user':user}
+        #requests.post('url/testcase/createAcess', data=out)
+
+def generateRandomAcess(number, room_choice=0, date_choice=0, user_choice=0):
+    user_choice=user_choice.split(',')
+    room_choice=room_choice.split(',')
+    for i in range(number):
+        if date_choice==0:
+            ano=r.choice([2017,2018])
+            mes=r.choice([1,2,3,4,5,6,7,9,10,11,12])
+            dia=r.randint(1,31)
+            hora=r.randint(9,18)
+            minutos=r.randint(1,60)
+            date=compute_date(ano,mes,dia,hora,minutos, duracao)[2]
+        else:
+            date=date_choice
+
+        if user_choice==0:
+            user=r.randint(45000,49999)
+        else:
+            user=user_choice[i%len(user_choice)]
+
+        if room_choice==0:
+            room=r.randint(1,200)
+        else:
+            room=room_choice[i%len(room_choice)]
+        out = {'data':date, 'espaco':room, 'user':user}
+        #requests.post('url/testcase/createAcess', data=out)

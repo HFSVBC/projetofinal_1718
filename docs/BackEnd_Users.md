@@ -1,6 +1,6 @@
 # Users
 
-Usage of the application relies on the existence of five different types of users within the same institution, each with specific needs and clearances for the use of features specific to their roles. 
+Usage of the application relies on the existence of different types of users within the same institution, each with specific needs and clearances for the use of features specific to their roles. 
 
 There are five types of users:
 
@@ -44,6 +44,7 @@ The administrator can access the following information:
 * check how many people are in a room
 * check class attendance
 * change user type
+* create and verify accident logs
 
 ---
 ## LogIn
@@ -87,7 +88,7 @@ It returns a JSON with the following configuration for an unsuccessful response:
 The HTTP error codes might be 405 (Method Not Allowed => POST has not passed the validation check.) and 500 (Server Error => Error completing signup process / Error completing login process)
 
 ## LogOut
-Accessed by the route ```/user/logout```. It handles user to log out in the back end. For that it requires the following POST elements:
+Accessed by the route ```/user/logout```. It handles user logout in the back end. For that it requires the following POST elements:
 ```
 userTokenId => Client's last issued token => String
 ```
@@ -121,7 +122,7 @@ It returns a JSON with the following configuration for an unsuccessful response:
 The HTTP error codes might be 405 (Method Not Allowed => POST has not passed the validation check.) and 500 (Server Error => Error completing logout process)
 
 ## getUserProfile
-Accessed by the route ```/user/retriveprofile```. It handles user to log out in the back end. For that it requires the following POST elements:
+Accessed by the route ```/user/retriveprofile```. It retrieves user profile information in the back end. For that it requires the following POST elements:
 ```
 userTokenId => Client's last issued token => String
 userEmail => The user's email to whom the profile to retrieve belongs to => String
@@ -167,7 +168,7 @@ It returns a JSON with the following configuration for an unsuccessful response:
 The HTTP error codes might be 401 (Unauthorized => User session expired), 403 (Forbidden => Access not authorised for current user), 405 (Method Not Allowed => POST has not passed the validation check.) and 500 (Server Error => Error getting user profile)
 
 ## updateUserType
-Accessed by the route ```/user/changeType```. It handles user to log out in the back end. For that it requires the following POST elements:
+Accessed by the route ```/user/changeType```. It handles the user type change in the back end. For that it requires the following POST elements:
 ```
 userTokenId => Client's last issued token => String
 uid => The user's uid to whom the profile to update belongs to => String

@@ -23,6 +23,15 @@ import { CookieService } from 'angular2-cookie/services/cookies.service';
 // Routes
 import { routes } from './app.routes';
 
+// Services
+import { AdminService } from './providers/admin.service';
+import { SecurityService } from './providers/security.service';
+import { ProfessorService } from './providers/professor.service';
+import { AllService } from './providers/all.service';
+import { LoaderService } from './loader/loader.service';
+import { AlertService } from './alerts/alert.service';
+import { ResponseStatusValidatorService } from './service/response-status-validator.service';
+
 // Components
 import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
@@ -32,15 +41,13 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { HistoricoComponent } from './historico/historico.component';
 import { PresencasComponent } from './presencas/presencas.component';
 import { AdminComponent } from './admin/admin.component';
-import { AdminService } from './providers/admin.service';
-import { SecurityService } from './providers/security.service';
-import { ProfessorService } from './providers/professor.service';
-import { AllService } from './providers/all.service';
 import { EspacosComponent } from './espacos/espacos.component';
 import { AltPresencasComponent } from './alt-presencas/alt-presencas.component';
 import { CriarAcessosComponent } from './criar-acessos/criar-acessos.component';
 import { AcidentesComponent } from './acidentes/acidentes.component';
 import { SalasComponent } from './salas/salas.component';
+import { LoaderComponent } from './loader/loader.component';
+import { AlertsComponent } from './alerts/alerts.component';
 
 
 @NgModule({
@@ -57,7 +64,9 @@ import { SalasComponent } from './salas/salas.component';
     AltPresencasComponent,
     CriarAcessosComponent,
     AcidentesComponent,
-    SalasComponent
+    SalasComponent,
+    LoaderComponent,
+    AlertsComponent
   ],
   imports: [
     routes,
@@ -77,7 +86,10 @@ import { SalasComponent } from './salas/salas.component';
     AdminService,
     SecurityService,
     ProfessorService,
-    AllService
+    AllService,
+    LoaderService,
+    ResponseStatusValidatorService,
+    AlertService
   ],
   bootstrap: [AppComponent]
 })

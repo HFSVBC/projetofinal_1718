@@ -26,7 +26,7 @@ class Attendance extends CI_Controller
         $this->form_validation->set_rules($config);
         $this->form_validation->set_error_delimiters('', '');
         if($this->form_validation->run() === true){
-            if(isUserLoggedIn($this->input->post('token'))===true){
+            if(isUserLoggedIn($this->input->post('userTokenId'))===true){
                 $token = $this->db->escape($this->input->post('userTokenId'));
                 $sql = "SELECT *
                         FROM conf_routesAccess
@@ -68,7 +68,7 @@ class Attendance extends CI_Controller
         $this->form_validation->set_rules($config);
         $this->form_validation->set_error_delimiters('', '');
         if($this->form_validation->run() === true){
-            if(isUserLoggedIn($this->input->post('token'))===true){
+            if(isUserLoggedIn($this->input->post('userTokenId'))===true){
                 $token = $this->db->escape($this->input->post('userTokenId'));
                 $sql = "SELECT *
                         FROM conf_routesAccess
@@ -111,7 +111,7 @@ class Attendance extends CI_Controller
         $this->form_validation->set_rules($config);
         $this->form_validation->set_error_delimiters('', '');
         if($this->form_validation->run() === true){
-            if(isUserLoggedIn($this->input->post('token'))===true){
+            if(isUserLoggedIn($this->input->post('userTokenId'))===true){
                 $token = $this->db->escape($this->input->post('userTokenId'));
                 $sql = "SELECT *
                         FROM conf_routesAccess
@@ -168,7 +168,7 @@ class Attendance extends CI_Controller
         $this->form_validation->set_rules($config);
         $this->form_validation->set_error_delimiters('', '');
         if($this->form_validation->run() === true){
-            if(isUserLoggedIn($this->input->post('token'))===true){
+            if(isUserLoggedIn($this->input->post('userTokenId'))===true){
                 $token = $this->db->escape($this->input->post('userTokenId'));
                 $sql = "SELECT *
                         FROM conf_routesAccess
@@ -229,7 +229,7 @@ class Attendance extends CI_Controller
         $this->form_validation->set_rules($config);
         $this->form_validation->set_error_delimiters('', '');
         if($this->form_validation->run() === true){
-            if(isUserLoggedIn($this->input->post('token'))===true){
+            if(isUserLoggedIn($this->input->post('userTokenId'))===true){
                 $token = $this->db->escape($this->input->post('userTokenId'));
                 $sql = "SELECT *
                         FROM conf_routesAccess
@@ -242,12 +242,62 @@ class Attendance extends CI_Controller
                             "student_id"=>$this->input->post('student_id'),
                             "name"=>$value['name'],
                             "date_ini"=>$value['data_inicio'],
+                            "aula_id"=>$value['id'],
                             "attended"=>$value['attended']
                         );
                         array_push($out["data"], $thisOut);
                     }
                     $data = array(
                         "studentAttendance"=>$out,
+                        "token"=>regenerateUserToken($this->input->post('userTokenId'))[1]
+                    );
+                    jsonExporter(200, $data);
+                }else{
+                    jsonExporter(403);
+                }
+            }else{
+                jsonExporter(401);
+            }
+        }else{
+            jsonExporter(405, validation_errors());
+        }
+    }
+
+    public function changeUserAttendance()
+    {
+        $config = array(
+            array(
+                'field' => 'userTokenId',
+                'label' => "User's Token",
+                'rules' => 'trim|required'
+            ),
+            array(
+                'field' => 'student_id',
+                'label' => "Student id",
+                'rules' => 'trim'
+            ),
+            array(
+                'field' => 'class_id',
+                'label' => "Class id",
+                'rules' => 'trim'
+            ),
+            array(
+                'field' => 'state_now',
+                'label' => "Attendance state now",
+                'rules' => 'trim'
+            )
+        );
+        $this->form_validation->set_rules($config);
+        $this->form_validation->set_error_delimiters('', '');
+        if($this->form_validation->run() === true){
+            if(isUserLoggedIn($this->input->post('userTokenId'))===true){
+                $token = $this->db->escape($this->input->post('userTokenId'));
+                $sql = "SELECT *
+                        FROM conf_routesAccess
+                        WHERE user_type = (SELECT account_type FROM users WHERE id = (SELECT user FROM users_loggedIn WHERE token = $token)) AND route = 'teacher/individual/changeStudentsAttendance'";
+                if(routeAccess($sql)===true){
+                    $data = array(
+                        "changeStudentAttendance"=>$this->access_model->changeStudentAttendanceState(),
                         "token"=>regenerateUserToken($this->input->post('userTokenId'))[1]
                     );
                     jsonExporter(200, $data);

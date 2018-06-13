@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     {
         $CI =& get_instance();
         $CI->load->model('user_model');
-        return !$CI->user_model->userLoggedin($token);
+        return $CI->user_model->userLoggedin($token);
     }
     // generate new token
     function regenerateUserToken($token)

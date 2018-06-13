@@ -51,9 +51,17 @@ app-menu {
     color: white;
 }
 
+.btn-warning {
+    color: #ffffff;
+}
+
 #btnCont {
     flex: none;
     width: auto;
+}
+
+.custom-select {
+    height: 100%;
 }
 
 @media only screen and (max-width: 767px) {
@@ -65,5 +73,9 @@ app-menu {
         display: block;
         width: 100%;
         padding: 5em 2em 0;
+        position: initial!important;
+    }
+    body {
+        background-color: #eeeeee;
     }
 }

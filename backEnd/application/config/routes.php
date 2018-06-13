@@ -49,6 +49,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
+// GENERAL
+$route['general/getFacultyBlocks'] = 'spaces/getFacultyBuildings';
+$route['general/getBlockFloors'] = 'spaces/getFacultyFloors';
+$route['general/getFloorsRooms'] = 'spaces/getFacultyRooms';
+$route['general/availableSpaces'] = 'spaces/getFacultyAvailableRooms';
 // CONSULTA DE HISTORICO DE ACESSOS
 $route['history/user']                  = 'history/getUserAccessHistory';
 $route['history/user/(:any)']           = 'history/getUserAccessHistory/$1';
@@ -58,6 +63,7 @@ $route['teacher/class/dates/(:any)']    = 'attendance/getTeacherClassDates/$1';
 $route['teacher/class/students/(:any)'] = 'attendance/getStudentsByClass/$1';
 $route['teacher/course/getStudentsAttendance'] = 'attendance/getStudentAttendance_Teacher';
 $route['teacher/individual/getStudentsAttendance'] = 'attendance/getIndvStudentAttendance_Teacher';
+$route['teacher/individual/changeStudentsAttendance'] = 'attendance/changeUserAttendance';
 // CRIAR DISCIPLINA
 $route['teacher/createSubject'] = 'classes/createSubject';
 // CRIAR AULAS
@@ -65,7 +71,9 @@ $route['teacher/createClasses'] = 'classes/createClasses';
 // MATRICULAR ALUNOS
 $route['teacher/matriculateStudent'] = 'classes/matriculateStudent';
 // CONSULTA DE QUEM ESTA NUM ESPAÇO
-
+$route['spaces/getPeopleNumerInSpace'] = 'spaces/getPeopleNumInFacultyRooms';
+//CRIAR ACESSOS
+$route['testcase/createAcess'] = 'testcaseaccess/CreateAccess';
 // UTILIZADOR
 $route['user/login']                    = 'UserLoader/logIn'; // [20] registers user if not already registered | {token => String, user_type => String}
 $route['user/logout']                   = 'UserLoader/logOut'; // [20] logs user out
