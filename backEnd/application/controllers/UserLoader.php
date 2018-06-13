@@ -16,55 +16,50 @@ class UserLoader extends CI_Controller {
 		parent::__construct();
 
 		$this->load->model('user_model');
+		$this->load->library('firebase_lib');
 	}
 	// add the necessary fields for user login
 	//login user by adding a line to the LoggedIn_Users table
 	public function logIn()
 	{
 		$config = array(
-			array(
-					'field' => 'uid',
-					'label' => "User's UID",
-					'rules' => 'trim|required'
-			),
-			array(
-					'field' => 'name',
-					'label' => "User's Name",
-					'rules' => 'trim|required'
-			),
-			array(
-					'field' => 'email',
-					'label' => "User's e-mail",
-					'rules' => 'trim|required'
-			),
-			array(
-					'field' => 'avatar',
-					'label' => "User's Avatar",
+			array (
+					'field' => 'idToken',
+					'label' => "User's Token",
 					'rules' => 'trim|required'
 			)
 		);
 		//verify if user is already loggedin
 		$this->form_validation->set_rules($config);
 		$this->form_validation->set_error_delimiters('', '');
+		// var_dump($_POST);
 		if($this->form_validation->run() === true){
-			if($this->user_model->isRegistered($this->input->post("uid"))===true){
-				$this->loginHelper();
-			}else{
-				if($this->user_model->register()===true){
-					$this->loginHelper();
+			// echo $this->input->post('idToken');
+			$idToken = $this->input->post('idToken');
+			$result = $this->firebase_lib->verifyToken($idToken);
+			if(is_string($result)===FALSE){
+				$provData = $result->providerData[0];
+				if($this->user_model->isRegistered($provData->uid)===true){
+					$this->loginHelper($provData);
 				}else{
-					jsonExporter(500, 'Error completing signup process');
+					if($this->user_model->register($provData)===true){
+						$this->loginHelper($provData);
+					}else{
+						jsonExporter(500, 'Error completing signup process');
+					}
 				}
-			}	
+			}else{
+				jsonExporter(403);
+			}				
 		}else{
 			jsonExporter(405, validation_errors());
 		}
 	}
 	// login's user in the database and generates ser first token
-	private function loginHelper()
+	private function loginHelper($provData)
 	{
 		// verificar se ja se encontra logado
-		$result = $this->user_model->isLoggedIn($this->input->post("uid"));
+		$result = $this->user_model->isLoggedIn($provData->uid);
 		if($result[0]===true){
 			$data = array(
 				'token' => $result[1][0],
@@ -72,11 +67,11 @@ class UserLoader extends CI_Controller {
 			);
 			jsonExporter(200, $data);
 		}else{
-			$result = $this->user_model->login();
+			$result = $this->user_model->login($provData);
 			if($result[0]===true){
 				$data = array(
 					'token' => $result[1],
-					'user_type' => $this->user_model->getUserType($this->input->post("uid"))
+					'user_type' => $this->user_model->getUserType($provData->uid)
 				);
 				jsonExporter(200, $data);
 			}else{

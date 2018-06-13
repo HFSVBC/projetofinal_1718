@@ -11,9 +11,9 @@
 	*/
 	class User_model extends CI_Model{
 		// user login method -> adds user to the users_loggedIn table
-		public function login()
+		public function login($provData)
 		{
-			$email 			= $this->db->escape($this->input->post('email'));
+			$email 			= $this->db->escape($provData->email);
 			$tokenS 		= bin2hex(openssl_random_pseudo_bytes(16));
 			$token          = $this->db->escape($tokenS);
 			$timeOut 		= new DateTime();
@@ -57,14 +57,14 @@
 				return true;
 			}
 		}	
-		public function register()
+		public function register($provData)
 		{
-			$googleUID = $this->db->escape($this->input->post('uid'));
-			$name	   = $this->db->escape($this->input->post('name'));
-			$email	   = $this->input->post('email');
+			$googleUID = $this->db->escape($provData->uid);
+			$name	   = $this->db->escape($provData->displayName);
+			$email	   = $provData->email;
 			$confCode  = $this->db->escape(md5($email.time()));
 			$email     = $this->db->escape($email);
-			$avatar	   = $this->db->escape($this->input->post('avatar'));
+			$avatar	   = $this->db->escape($provData->photoUrl);
 
 
 			$sql = "INSERT INTO users (`googleUID`, `name`, `email`, `confId`, `avatar`)
