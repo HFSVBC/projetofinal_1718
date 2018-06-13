@@ -19,6 +19,8 @@
 * Back End
     * [Users](BackEnd_Users.md)
     * [History](BackEnd_History.md)
+	* [Spaces](BackEnd_Spaces.md)
+	* [Temporary Accesses](BackEnd_TempAccess.md)
 
 * Data Simulator
     * [Resources](dataSim.md)
