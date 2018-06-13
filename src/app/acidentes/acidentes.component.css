@@ -1,3 +1,7 @@
+.acordion {
+    padding: 0 15px;
+}
+
 .text-center {
     margin: auto 0;
 }
@@ -49,6 +53,15 @@
     height: 41.5px;
 }
 
-#limpar {
-    margin: 0 10px 0 5px;
+@media only screen and (max-width: 767px) {
+    .input-group,
+    .col-12 {
+        padding-left: 0!important;
+        padding-right: 0!important;
+    }
+    .form-row,
+    .btn-success {
+        margin-right: 0!important;
+        margin-left: 0!important;
+    }
 }

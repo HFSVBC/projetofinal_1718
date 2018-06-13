@@ -36,7 +36,7 @@ img {
 }
 
 .card {
-    box-shadow: 3px 3px 10px 0px rgba(0, 0, 0, 0.3);
+    box-shadow: .2em .2em .7em 0 rgba(0, 0, 0, 0.3);
 }
 
 app-menu {
@@ -45,21 +45,25 @@ app-menu {
     margin: 0;
 }
 
-.btn-cafcul{
+.btn-cafcul {
     border-color: #1f0273 !important;
     background-color: #303F9F !important;
     color: white;
 }
-.btn-warning{
-  color: #ffffff;
+
+.btn-warning {
+    color: #ffffff;
 }
-#btnCont{
+
+#btnCont {
     flex: none;
     width: auto;
 }
-.custom-select{
-  height: 100%;
+
+.custom-select {
+    height: 100%;
 }
+
 @media only screen and (max-width: 767px) {
     .h-max {
         height: auto;
@@ -69,5 +73,9 @@ app-menu {
         display: block;
         width: 100%;
         padding: 5em 2em 0;
+        position: initial!important;
+    }
+    body {
+        background-color: #eeeeee;
     }
 }

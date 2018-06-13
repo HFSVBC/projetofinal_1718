@@ -12,11 +12,13 @@ import { AltPresencasComponent } from './alt-presencas/alt-presencas.component';
 import { CriarAcessosComponent } from './criar-acessos/criar-acessos.component';
 import { AcidentesComponent } from './acidentes/acidentes.component';
 import { SalasComponent } from './salas/salas.component';
+import { PresencasAlunoComponent } from './presencas-aluno/presencas-aluno.component';
 
 
 import { AuthService } from './providers/auth.service';
 import { AdminService } from './providers/admin.service';
 import { ProfessorService } from './providers/professor.service';
+import { AlunoService } from './providers/aluno.service';
 import { SecurityService } from './providers/security.service';
 import { AllService } from './providers/all.service';
 
@@ -54,6 +56,11 @@ export const router: Routes = [
     path: 'salas',
     component: SalasComponent,
     canActivate: [AllService]
+  },
+  {
+    path: 'presencas-aulas',
+    component: PresencasAlunoComponent,
+    canActivate: [AlunoService]
   },
   {
     path: 'presencas',

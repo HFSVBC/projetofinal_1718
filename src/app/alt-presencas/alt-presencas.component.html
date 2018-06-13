@@ -29,7 +29,7 @@
             </div>
             <select class="custom-select form-control" id="na_data" [(ngModel)]="model.data" (change)="verify([model.aula, model.data, model.aluno])"
               name="na_data" required>
-              <option value="null">Todas</option>
+              <option value="null">Todas as Aulas</option>
               <option *ngFor="let a of todasDatas" [value]="a['id']">{{a['d_init']}}</option>
             </select>
           </div>

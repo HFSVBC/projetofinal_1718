@@ -28,7 +28,7 @@
               </label>
             </div>
             <select class="custom-select" id="piso" (change)="pisoChanged()" [(ngModel)]="model.piso" name="na_piso" required>
-                <option value="null">Todas os Pisos</option>
+                <option value="null">Todos os Pisos</option>
               <option *ngFor="let p of pisos" [value]="p['piso']">{{p['piso']}}</option>
             </select>
           </div>

@@ -1,341 +1,243 @@
 <app-menu class="col-sm-2"></app-menu>
 <div class="router">
-  <div class="row">
-    <div class="col-lg-6 pb-3">
+    <div class="row">
+        <div class="col-lg-6 pb-3">
 
-        <div id="accordion">
-            <div class="card">
-              <div class="card-header" id="headingOne">
-                <h5 class="" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    Novo Acidente
-                </h5>
-              </div>
+            <div id="accordion">
+                <div class="card">
+                    <div class="card-header" id="headingOne">
+                        <h5 class="" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Novo Acidente
+                        </h5>
+                    </div>
 
-              <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-                  <div class="card-body">
+                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div class="card-body">
 
-                      <form (ngSubmit)="onSubmit()" #CriarAcidenteForm="ngForm" class="was-validated">
-                        <div class="form-row">
-                          <div class="input-group col-12 pb-3">
-                            <div class="input-group-prepend">
-                              <label class="input-group-text mb-0" for="na_tipo">
+                            <form (ngSubmit)="onSubmit()" #CriarAcidenteForm="ngForm" class="was-validated">
+                                <div class="form-row">
+                                    <div class="input-group col-12 pb-3">
+                                        <div class="input-group-prepend">
+                                            <label class="input-group-text mb-0" for="na_tipo">
                                 <i class="material-icons">assignment_late</i>
                               </label>
-                            </div>
-                            <input type="text" class="form-control" placeholder="Tipo" id="tipo" [(ngModel)]="model.tipo" (keyup)="verify([model.tipo, model.data, model.descricao])"
-                              name="na_tipo" #tipo="ngModel" required>
-                            <div class="invalid-feedback">É necessário um Tipo</div>
-                          </div>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="Tipo" id="tipo" [(ngModel)]="model.tipo" (keyup)="verify([model.tipo, model.data, model.descricao])" name="na_tipo" #tipo="ngModel" required>
+                                        <div class="invalid-feedback">É necessário um Tipo</div>
+                                    </div>
 
-                          <div class="input-group col-12 pb-3">
-                            <div class="input-group-prepend">
-                              <label class="input-group-text mb-0" for="na_espaco">
-                                <i class="material-icons">room</i>
+
+                                    <div class="input-group col-4 pb-3">
+                                        <div class="input-group-prepend">
+                                            <label class="input-group-text mb-0" for="na_espaco">
+                                <i class="material-icons">business</i>
                               </label>
-                            </div>
+                                        </div>
 
-                            <select class="col" id="edifico" (change)="edificioChanged()" [(ngModel)]="model.edificio" name="na_edificio" required>
+                                        <select class="col" id="edifico" (change)="edificioChanged()" [(ngModel)]="model.edificio" name="na_edificio" required>
                               <option *ngFor="let ed of edificios" [value]="ed['bloco']">C{{ed['bloco']}}</option>
                             </select>
-                            <select class="col" id="piso" (change)="pisoChanged()" [(ngModel)]="model.piso" name="na_piso" required>
+                                    </div>
+                                    <div class="input-group col-4 pb-3">
+                                        <div class="input-group-prepend">
+                                            <label class="input-group-text mb-0" for="na_espaco">
+                                <i class="material-icons">trending_up</i>
+                              </label>
+                                        </div>
+
+                                        <select class="col" id="piso" (change)="pisoChanged()" [(ngModel)]="model.piso" name="na_piso" required>
                               <option *ngFor="let p of pisos" [value]="p['piso']">{{p['piso']}}</option>
                             </select>
-                            <select class="col" id="sala" [(ngModel)]="model.sala" name="na_sala" required>
+                                    </div>
+
+                                    <div class="input-group col-4 pb-3">
+                                        <div class="input-group-prepend">
+                                            <label class="input-group-text mb-0" for="na_espaco">
+                                <i class="material-icons">room</i>
+                              </label>
+                                        </div>
+
+                                        <select class="col" id="sala" [(ngModel)]="model.sala" name="na_sala" required>
                               <option *ngFor="let p of salas" [value]="p['sala']">{{p['sala']}}</option>
                             </select>
-                          </div>
+                                    </div>
+                                </div>
 
-                          <div class="input-group col-12 pb-3">
-                            <div class="input-group-prepend">
-                              <label class="input-group-text mb-0" for="na_data">
+
+                                <div class="input-group pb-3">
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text mb-0" for="na_data">
                                 <i class="material-icons">date_range</i>
                               </label>
-                            </div>
-                            <input type="text" class="form-control" placeholder="Data" id="na_data" (click)="dataChanged()" name="na_data" data-toggle="datepicker"
-                              required>
-                            <div class="invalid-feedback">É necessário uma Data</div>
-                          </div>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="Data" id="na_data" (click)="dataChanged()" name="na_data" data-toggle="datepicker" required>
+                                    <div class="invalid-feedback">É necessário uma Data</div>
+                                </div>
 
-                          <div class="input-group col-12 pb-3">
-                            <div class="input-group-prepend">
-                              <label class="input-group-text mb-0" for="na_descricao">
+                                <div class="input-group pb-3">
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text mb-0" for="na_descricao">
                                 <i class="material-icons">description</i>
                               </label>
-                            </div>
-                            <textarea class="form-control" placeholder="Descrição" rows="5" id="na_descricao" [(ngModel)]="model.descricao" (keyup)="verify([model.tipo, model.data, model.descricao])"
-                              name="na_descricao" required></textarea>
-                            <div class="invalid-feedback">É necessário uma Descrição</div>
-                          </div>
+                                    </div>
+                                    <textarea class="form-control" placeholder="Descrição" rows="5" id="na_descricao" [(ngModel)]="model.descricao" (keyup)="verify([model.tipo, model.data, model.descricao])" name="na_descricao" required></textarea>
+                                    <div class="invalid-feedback">É necessário uma Descrição</div>
+                                </div>
 
-                          <div class="row">
-                            <button type="button" id="limpar" class="btn btn-default" (click)="newModel(); CriarAcidenteForm.reset()">Limpar</button>
-                            <button type="submit" class="btn btn-success" [disabled]="!active || loader"> Criar Acidente </button>
-                          </div>
+                                <div class="row">
+                                    <button type="button" id="limpar" class="btn btn-default mr-3" (click)="newModel(); CriarAcidenteForm.reset()">Limpar</button>
+                                    <button type="submit" class="btn btn-success" [disabled]="!active || loader"> Criar Acidente </button>
+                                </div>
+
+                            </form>
                         </div>
-                      </form>
                     </div>
-              </div>
+                </div>
             </div>
-            </div>
 
-            <!--
-      <div class="card">
-        <h5 class="card-header">Novo Acidente</h5>
-        <div class="card-body">
-
-          <form (ngSubmit)="onSubmit()" #CriarAcidenteForm="ngForm" class="was-validated">
-            <div class="form-row">
-              <div class="input-group col-12 pb-3">
-                <div class="input-group-prepend">
-                  <label class="input-group-text mb-0" for="na_tipo">
-                    <i class="material-icons">assignment_late</i>
-                  </label>
-                </div>
-                <input type="text" class="form-control" placeholder="Tipo" id="tipo" [(ngModel)]="model.tipo" (keyup)="verify([model.tipo, model.data, model.descricao])"
-                  name="na_tipo" #tipo="ngModel" required>
-                <div class="invalid-feedback">É necessário um Tipo</div>
-              </div>
-
-              <div class="input-group col-12 pb-3">
-                <div class="input-group-prepend">
-                  <label class="input-group-text mb-0" for="na_espaco">
-                    <i class="material-icons">room</i>
-                  </label>
-                </div>
-
-                <select class="col" id="edifico" (change)="edificioChanged()" [(ngModel)]="model.edificio" name="na_edificio" required>
-                  <option *ngFor="let ed of edificios" [value]="ed['bloco']">C{{ed['bloco']}}</option>
-                </select>
-                <select class="col" id="piso" (change)="pisoChanged()" [(ngModel)]="model.piso" name="na_piso" required>
-                  <option *ngFor="let p of pisos" [value]="p['piso']">{{p['piso']}}</option>
-                </select>
-                <select class="col" id="sala" [(ngModel)]="model.sala" name="na_sala" required>
-                  <option *ngFor="let p of salas" [value]="p['sala']">{{p['sala']}}</option>
-                </select>
-              </div>
-
-              <div class="input-group col-12 pb-3">
-                <div class="input-group-prepend">
-                  <label class="input-group-text mb-0" for="na_data">
-                    <i class="material-icons">date_range</i>
-                  </label>
-                </div>
-                <input type="text" class="form-control" placeholder="Data" id="na_data" (click)="dataChanged()" name="na_data" data-toggle="datepicker"
-                  required>
-                <div class="invalid-feedback">É necessário uma Data</div>
-              </div>
-
-              <div class="input-group col-12 pb-3">
-                <div class="input-group-prepend">
-                  <label class="input-group-text mb-0" for="na_descricao">
-                    <i class="material-icons">description</i>
-                  </label>
-                </div>
-                <textarea class="form-control" placeholder="Descrição" rows="5" id="na_descricao" [(ngModel)]="model.descricao" (keyup)="verify([model.tipo, model.data, model.descricao])"
-                  name="na_descricao" required></textarea>
-                <div class="invalid-feedback">É necessário uma Descrição</div>
-              </div>
-
-              <div class="row">
-                <button type="button" id="limpar" class="btn btn-default" (click)="newModel(); CriarAcidenteForm.reset()">Limpar</button>
-                <button type="submit" class="btn btn-success" [disabled]="!active || loader"> Criar Acidente </button>
-              </div>
-            </div>
-          </form>
         </div>
-      </div> -->
 
+        <div class="col-lg-6 pb-3">
 
-    </div>
+            <div id="accordion">
+                <div class="card">
+                    <div class="card-header" id="headingTwo">
+                        <h5 class="" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                            Consultar Acidente <i class="material-icons cenas">
+                        keyboard_arrow_right
+                        </i>
+                        </h5>
+                    </div>
 
-    <div class="col-lg-6 pb-3">
-
-        <div id="accordion">
-            <div class="card">
-              <div class="card-header" id="headingTwo">
-                  <h5 class="" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                      Novo Acidente
-                  </h5>
-              </div>
-
-              <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
-                <div class="card-body">
-                    <form (ngSubmit)="onSubmit1()" id="find_accident_form">
-                        <div class="form-row">
-                          <div class="input-group col-12 pb-3">
-                            <div class="input-group-prepend">
-                              <label class="input-group-text mb-0" for="ca_tipo">
+                    <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
+                        <div class="card-body">
+                            <form (ngSubmit)="onSubmit1()" id="find_accident_form">
+                                <div class="form-row">
+                                    <div class="input-group col-12 pb-3">
+                                        <div class="input-group-prepend">
+                                            <label class="input-group-text mb-0" for="ca_tipo">
                                 <i class="material-icons">assignment_late</i>
                               </label>
-                            </div>
-                            <input type="text" class="form-control" placeholder="Tipo" id="ca_tipo" [(ngModel)]="model1.tipo" (keyup)="verify([model1.tipo, model1.data_ini, model1.data_fim])"
-                              name="ca_tipo" required>
-                          </div>
-
-                          <div class="input-group col-12 pb-3">
-                            <div class="input-group-prepend">
-                              <label class="input-group-text mb-0" for="ca_espaco">
-                                <i class="material-icons">room</i>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="Tipo" id="ca_tipo" [(ngModel)]="model1.tipo" (keyup)="verify([model1.tipo, model1.data_ini, model1.data_fim])" name="ca_tipo" required>
+                                    </div>
+                                    <div class="input-group col-4 pb-3">
+                                        <div class="input-group-prepend">
+                                            <label class="input-group-text mb-0" for="na_espaco">
+                                <i class="material-icons">business</i>
                               </label>
-                            </div>
-                            <select class="col" id="edifico1" (change)="edificioChanged()" [(ngModel)]="model1.edificio" name="na_edificio" required>
+                                        </div>
+
+                                        <select class="col" id="edifico" (change)="edificioChanged()" [(ngModel)]="model1.edificio" name="na_edificio" required>
                               <option *ngFor="let ed of edificios" [value]="ed['bloco']">C{{ed['bloco']}}</option>
                             </select>
-                            <select class="col" id="piso1" (change)="pisoChanged()" [(ngModel)]="model1.piso" name="na_piso" required>
+                                    </div>
+                                    <div class="input-group col-4 pb-3">
+                                        <div class="input-group-prepend">
+                                            <label class="input-group-text mb-0" for="na_espaco">
+                                <i class="material-icons">trending_up</i>
+                              </label>
+                                        </div>
+
+                                        <select class="col" id="piso" (change)="pisoChanged()" [(ngModel)]="model1.piso" name="na_piso" required>
                               <option *ngFor="let p of pisos" [value]="p['piso']">{{p['piso']}}</option>
                             </select>
-                            <select class="col" id="sala1" [(ngModel)]="model1.sala" name="na_sala" required>
+                                    </div>
+
+                                    <div class="input-group col-4 pb-3">
+                                        <div class="input-group-prepend">
+                                            <label class="input-group-text mb-0" for="na_espaco">
+                                <i class="material-icons">room</i>
+                              </label>
+                                        </div>
+
+                                        <select class="col" id="sala" [(ngModel)]="model1.sala" name="na_sala" required>
                               <option *ngFor="let p of salas" [value]="p['sala']">{{p['sala']}}</option>
                             </select>
-                          </div>
-                          <div class="col-12">
-                            <div class="row">
-                              <div class="input-group col-sm-6 pb-3 pl-0">
-                                <div class="input-group-prepend">
-                                  <label class="input-group-text mb-0" for="ca_data_i">
+                                    </div>
+
+                                    <div class="col-12">
+                                        <div class="row">
+                                            <div class="input-group col-sm-6 pb-3 pl-0">
+                                                <div class="input-group-prepend">
+                                                    <label class="input-group-text mb-0" for="ca_data_i">
                                     <i class="material-icons">date_range</i>
                                   </label>
-                                </div>
-                                <input type="text" class="form-control" placeholder="Data Início" id="na_data" [(ngModel)]="model1.data_ini" onchange="dataChanged()"
-                                  name="na_data" #data="ngModel" data-toggle="datepicker" required>
-                                <div class="invalid-feedback">É necessário uma Data</div>
-                              </div>
-                              <div class="input-group col-sm-6 pb-3 pr-0">
-                                <div class="input-group-prepend">
-                                  <label class="input-group-text mb-0" for="ca_data_f">
+                                                </div>
+                                                <input type="text" class="form-control" placeholder="Data Início" id="na_data" [(ngModel)]="model1.data_ini" onchange="dataChanged()" name="na_data" #data="ngModel" data-toggle="datepicker" required>
+                                                <div class="invalid-feedback">É necessário uma Data</div>
+                                            </div>
+                                            <div class="input-group col-sm-6 pb-3 pr-0">
+                                                <div class="input-group-prepend">
+                                                    <label class="input-group-text mb-0" for="ca_data_f">
                                     <i class="material-icons">date_range</i>
                                   </label>
+                                                </div>
+                                                <input type="text" class="form-control" placeholder="Data Fim" id="na_data" [(ngModel)]="model1.data_fim" (click)="dataChanged()" name="na_data" #data="ngModel" data-toggle="datepicker" required>
+                                                <div class="invalid-feedback">É necessário uma Data</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-success ml-1">Consultar</button>
                                 </div>
-                                <input type="text" class="form-control" placeholder="Data Fim" id="na_data" [(ngModel)]="model1.data_fim" (click)="dataChanged()"
-                                  name="na_data" #data="ngModel" data-toggle="datepicker" required>
-                                <div class="invalid-feedback">É necessário uma Data</div>
-                              </div>
-                            </div>
-                          </div>
-                          <button type="submit" class="btn btn-success ml-1">Consultar</button>
+                            </form>
                         </div>
-                      </form>
-                </div>
-              </div>
-            </div>
-            </div>
-
-            <!--
-      <div class="card">
-        <h5 class="card-header">Consultar Acidente</h5>
-        <div class="card-body">
-
-          <form (ngSubmit)="onSubmit1()" id="find_accident_form">
-            <div class="form-row">
-              <div class="input-group col-12 pb-3">
-                <div class="input-group-prepend">
-                  <label class="input-group-text mb-0" for="ca_tipo">
-                    <i class="material-icons">assignment_late</i>
-                  </label>
-                </div>
-                <input type="text" class="form-control" placeholder="Tipo" id="ca_tipo" [(ngModel)]="model1.tipo" (keyup)="verify([model1.tipo, model1.data_ini, model1.data_fim])"
-                  name="ca_tipo" required>
-              </div>
-
-              <div class="input-group col-12 pb-3">
-                <div class="input-group-prepend">
-                  <label class="input-group-text mb-0" for="ca_espaco">
-                    <i class="material-icons">room</i>
-                  </label>
-                </div>
-                <select class="col" id="edifico1" (change)="edificioChanged()" [(ngModel)]="model1.edificio" name="na_edificio" required>
-                  <option *ngFor="let ed of edificios" [value]="ed['bloco']">C{{ed['bloco']}}</option>
-                </select>
-                <select class="col" id="piso1" (change)="pisoChanged()" [(ngModel)]="model1.piso" name="na_piso" required>
-                  <option *ngFor="let p of pisos" [value]="p['piso']">{{p['piso']}}</option>
-                </select>
-                <select class="col" id="sala1" [(ngModel)]="model1.sala" name="na_sala" required>
-                  <option *ngFor="let p of salas" [value]="p['sala']">{{p['sala']}}</option>
-                </select>
-              </div>
-              <div class="col-12">
-                <div class="row">
-                  <div class="input-group col-sm-6 pb-3 pl-0">
-                    <div class="input-group-prepend">
-                      <label class="input-group-text mb-0" for="ca_data_i">
-                        <i class="material-icons">date_range</i>
-                      </label>
                     </div>
-                    <input type="text" class="form-control" placeholder="Data Início" id="na_data" [(ngModel)]="model1.data_ini" onchange="dataChanged()"
-                      name="na_data" #data="ngModel" data-toggle="datepicker" required>
-                    <div class="invalid-feedback">É necessário uma Data</div>
-                  </div>
-                  <div class="input-group col-sm-6 pb-3 pr-0">
-                    <div class="input-group-prepend">
-                      <label class="input-group-text mb-0" for="ca_data_f">
-                        <i class="material-icons">date_range</i>
-                      </label>
-                    </div>
-                    <input type="text" class="form-control" placeholder="Data Fim" id="na_data" [(ngModel)]="model1.data_fim" (click)="dataChanged()"
-                      name="na_data" #data="ngModel" data-toggle="datepicker" required>
-                    <div class="invalid-feedback">É necessário uma Data</div>
-                  </div>
                 </div>
-              </div>
-              <button type="submit" class="btn btn-success ml-1">Consultar</button>
             </div>
-          </form>
         </div>
-      </div>
-    -->
     </div>
-  </div>
 
-  <div class="acordion" *ngIf="showAcidentes">
+    <div class="acordion" *ngIf="showAcidentes">
 
-    <div class="card" style="margin-bottom: 0.3rem" *ngFor="let acid of acidentes">
-      <div class="card-header" [attr.id]="'heading' + acid.id">
-        <h5 class="" data-toggle="collapse" [attr.data-target]="'#collapse' + acid.id" aria-expanded="true" [attr.aria-controls]="'collapse' + acid.id">
-          Acidente {{acid.data}}
-        </h5>
-      </div>
+        <div class="card" style="margin-bottom: 0.3rem" *ngFor="let acid of acidentes; let i = index">
+            <div class="card-header" [attr.id]="'heading' + acid.id">
+                <h5 class="" data-toggle="collapse" [attr.data-target]="'#collapse' + acid.id" aria-expanded="true" [attr.aria-controls]="'collapse' + acid.id">
+                    Acidente {{acid.data}}
+                </h5>
+            </div>
 
-      <div [attr.id]="'collapse' + acid.id" class="collapse" [attr.aria-labelledby]="'heading' + acid.id" data-parent="#accordion">
-        <div class="card-body">
-          <div class="row">
+            <div [attr.id]="'collapse' + acid.id" class="collapse" [ngClass]="{'show': i == 0}" [attr.aria-labelledby]="'heading' + acid.id" data-parent="#accordion">
+                <div class="card-body">
+                    <div class="row">
 
-            <div class="input-group col-4 pb-3">
-              <div class="input-group-prepend">
-                <label class="input-group-text mb-0" for="na_tipo">
+                        <div class="input-group col-4 pb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text mb-0" for="na_tipo">
                   <i class="material-icons">assignment_late</i>
                 </label>
-              </div>
-              <input type="text " readonly class="form-control" id="uid " value="{{acid.tipo}}">
-            </div>
-            <div class="input-group col-4 pb-3">
-              <div class="input-group-prepend">
-                <label class="input-group-text mb-0" for="na_tipo">
+                            </div>
+                            <input type="text " readonly class="form-control" id="uid " value="{{acid.tipo}}">
+                        </div>
+                        <div class="input-group col-4 pb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text mb-0" for="na_tipo">
                   <i class="material-icons">room</i>
                 </label>
-              </div>
-              <input type="text " readonly class="form-control " id="email " value="C{{acid.edificio}}.{{acid.sala}}.{{acid.piso}}">
-            </div>
-            <div class="input-group col-4 pb-3">
-              <div class="input-group-prepend">
-                <label class="input-group-text mb-0" for="na_tipo">
+                            </div>
+                            <input type="text " readonly class="form-control " id="email " value="C{{acid.edificio}}.{{acid.sala}}.{{acid.piso}}">
+                        </div>
+                        <div class="input-group col-4 pb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text mb-0" for="na_tipo">
                   <i class="material-icons">date_range</i>
                 </label>
-              </div>
-              <input type="text " readonly class="form-control " id="email " value="{{acid.data}}">
-            </div>
+                            </div>
+                            <input type="text " readonly class="form-control " id="email " value="{{acid.data}}">
+                        </div>
 
-            <div class="input-group mx-auto col-12 pb-3">
-              <div class="input-group-prepend">
-                <label class="input-group-text mb-0" for="na_descricao">
+                        <div class="input-group mx-auto col-12 pb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text mb-0" for="na_descricao">
                   <i class="material-icons">description</i>
                 </label>
-              </div>
-              <div type="text" readonly class="form-control col-sm-12" id="uid ">{{acid.descricao}}</div>
+                            </div>
+                            <div type="text" readonly class="form-control col-sm-12" id="uid ">{{acid.descricao}}</div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
+
         </div>
-      </div>
 
     </div>
-
-  </div>

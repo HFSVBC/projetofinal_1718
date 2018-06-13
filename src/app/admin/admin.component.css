@@ -30,14 +30,18 @@
     padding: .5em;
 }
 
+
 /* .card .custom-select {
     margin-right: 15px;
     margin-left: 15px;
     width: 61%;
 } */
-.btn-warning{
+
+.btn-warning {
     color: #ffffff;
 }
+
+
 /* #btnAlterar {
     float: right;
     margin: 20px;
@@ -52,7 +56,24 @@
     justify-content: center;
 }
 
-.col-form-label {padding-left: 0;}
-.col-md-9 {padding: 15px;}
-.col-md-3{text-align: center;}
-.mainInfo{padding-bottom: 15px;}
+.col-form-label {
+    padding-left: 0;
+}
+
+.col-md-9 {
+    padding: 15px;
+}
+
+.col-md-3 {
+    text-align: center;
+}
+
+.mainInfo {
+    padding-bottom: 15px;
+}
+
+@media only screen and (max-width: 767px) {
+    .btn-success {
+        margin-top: 1em;
+    }
+}

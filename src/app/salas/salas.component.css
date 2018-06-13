@@ -1,17 +1,20 @@
 div.datatable {
-  padding: 5.5em 1em 0!important;
+    padding: 5.5em 1em 0!important;
 }
 
 form {
-  display: flex;
+    display: flex;
 }
 
 .form-row {
-  width: 100%;
+    width: 100%;
 }
 
 @media only screen and (max-width: 767px) {
-  div.datatable {
-      padding: 1.5em 0 0!important;
-  }
+    div.datatable {
+        padding: 1.5em 0 0!important;
+    }
+    .btn-success {
+        margin-top: 1em;
+    }
 }
