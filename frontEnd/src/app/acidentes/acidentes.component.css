@@ -34,12 +34,6 @@
     padding: .5em;
 }
 
-.card .custom-select {
-    margin-right: 15px;
-    margin-left: 15px;
-    width: 61%;
-}
-
 #btnAlterar {
     float: right;
     margin: 20px;
