@@ -6,7 +6,7 @@ services:
       dockerfile: .docker/Dockerfile
     image: cafcul-backend-api
     ports:
-      - 8080:80
+      - 80:80
     network_mode: "bridge"
     extra_hosts:
       - "cafculdatabase:160.153.128.44"
