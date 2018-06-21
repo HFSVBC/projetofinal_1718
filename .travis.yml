@@ -8,11 +8,18 @@ branches:
 services:
   - docker
 
+env:
+    global:
+        - ${AWS_ACCESS_KEY_ID}
+        - ${AWS_SECRET_ACCESS_KEY}
+
 before_script:
   - docker --version
   - pip install --user awscli
   - export PATH=$PATH:$HOME/.local/bin
-  - eval $(aws ecr get-login --region us-east-1)
+  - ./ecr_credentials.sh
+  - 'aws configure'
+  - aws ecr get-login --no-include-email --region eu-west-1
 script:
   - docker build -t cafcul-backend-api .
   - docker tag cafcul-backend-api:latest 365892155626.dkr.ecr.eu-west-1.amazonaws.com/cafcul-backend-api:latest
