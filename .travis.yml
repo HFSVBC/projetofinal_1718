@@ -5,21 +5,29 @@ branches:
   only:
     - backEnd-Deploy
 
+env:
+  DOCKER_COMPOSE_VERSION: 1.21.0
+  global:
+    - ${AWS_ACCESS_KEY_ID}
+    - ${AWS_SECRET_ACCESS_KEY}
+
 services:
   - docker
 
-env:
-    global:
-        - ${AWS_ACCESS_KEY_ID}
-        - ${AWS_SECRET_ACCESS_KEY}
+before_install:
+  - sudo rm /usr/local/bin/docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
 
 before_script:
-  - docker --version
   - pip install --user awscli
   - export PATH=$PATH:$HOME/.local/bin
   - ./ecr_credentials.sh
   - aws ecr get-login --no-include-email --region eu-west-1
+
 script:
-  - docker build -t cafcul-backend-api .
+  # - docker build -t cafcul-backend-api .
+  - docker-compose build
   - docker tag cafcul-backend-api:latest 365892155626.dkr.ecr.eu-west-1.amazonaws.com/cafcul-backend-api:latest
   - docker push 365892155626.dkr.ecr.eu-west-1.amazonaws.com/cafcul-backend-api:latest
