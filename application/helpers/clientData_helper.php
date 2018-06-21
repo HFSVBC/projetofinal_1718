@@ -1,6 +1,5 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
     // gets client real ip
     function get_client_ip() {
         if (!empty($_SERVER['HTTP_CLIENT_IP'])) {   //check ip from share internet
