@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
     //computes date
+    
     function computeDate($year, $month, $day, $hour, $minutes, $duration)
     {
       $month30=array(4,6,9,11);

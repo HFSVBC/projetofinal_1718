@@ -1,15 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-// function jsonExporter($conf)
-// {
-//     echo json_encode(
-//         array_merge(
-//             displayError($conf["description"],$conf["code"]), 
-//             array("data"=>$conf["data"])
-//         )
-//     );
-// }
 function jsonExporter($code, $extraInfo = Null)
 {
     $jsonConf = array("code"=>null,"description"=>"","data"=>array());
