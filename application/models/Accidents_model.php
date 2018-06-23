@@ -10,12 +10,12 @@
         public function createNewAccident()
         {
             // name	space	date_open	date_close	description	creator
-            $accident_name = $this->db->escape($this->input->post('accidentName'));
-            $accident_block = $this->db->escape($this->input->post('accidentBlock'));
-            $accident_floor = $this->db->escape($this->input->post('accidentFloor'));
-            $accident_room = $this->db->escape($this->input->post('accidentRoom'));
-            $accident_date = $this->db->escape($this->input->post('accidentDate'));
-            $accident_description = $this->db->escape($this->input->post('accidentDescription'));
+            $accident_name = $this->db->escape($this->input->post('type'));
+            $accident_block = $this->db->escape($this->input->post('block'));
+            $accident_floor = $this->db->escape($this->input->post('floor'));
+            $accident_room = $this->db->escape($this->input->post('room'));
+            $accident_date = $this->db->escape($this->input->post('date'));
+            $accident_description = $this->db->escape($this->input->post('description'));
             $user = $this->db->escape($this->input->post('userTokenId'));
 
             $sql = "INSERT INTO accident (name, space, date_open, description, creator)
