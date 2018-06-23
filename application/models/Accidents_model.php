@@ -36,7 +36,7 @@
         //     return $this->db->query($sql);
         // }
 
-        public function getAccidents($token = 'null')
+        public function getAccidents($token = "'null'")
         {
             $accident_name = $this->db->escape($this->input->post('type'));
             $accident_block = $this->db->escape($this->input->post('block'));
@@ -45,7 +45,7 @@
             $accident_date_init = $this->db->escape($this->input->post('date_ini'));
             $accident_date_end = $this->db->escape($this->input->post('date_end'));
 
-            $sql = "SELECT id, name, CONCAT_WS('.', e.bloco, e.piso, e.sala) as 'espaco', date_open, date_close, description
+            $sql = "SELECT a.id, name, CONCAT_WS('.', e.bloco, e.piso, e.sala) as 'espaco', date_open, date_close, description
                     FROM accident a, espaco e, users u
                     WHERE a.space = e.id AND u.id = a.creator AND $accident_date_init < date_open < $accident_date_end";
             
@@ -57,7 +57,7 @@
                 $sql .= " AND e.piso = $accident_floor";
             if($accident_room != "'null'")
                 $sql .= " AND e.sala = $accident_room";
-            if($token != "null")
+            if($token != "'null'")
                 $sql .= " AND u.user IN (SELECT u.id
                                          FROM users u
                                          WHERE u.account_type = (SELECT u2.account_type

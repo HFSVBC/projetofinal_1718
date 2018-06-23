@@ -88,22 +88,22 @@ class AccidentsLoader extends CI_Controller {
             array(
                 'field' => 'type',
                 'label' => "Accident type",
-                'rules' => 'trim|required'
+                'rules' => 'trim'
 			),
             array(
                 'field' => 'block',
                 'label' => "Accident building block",
-                'rules' => 'trim|required'
+                'rules' => 'trim'
 			),
             array(
                 'field' => 'floor',
                 'label' => "Accident building floor",
-                'rules' => 'trim|required'
+                'rules' => 'trim'
 			),
             array(
                 'field' => 'room',
                 'label' => "Accident building room",
-                'rules' => 'trim|required'
+                'rules' => 'trim'
 			),
             array(
                 'field' => 'data_ini',
@@ -164,22 +164,22 @@ class AccidentsLoader extends CI_Controller {
             array(
                 'field' => 'type',
                 'label' => "Accident type",
-                'rules' => 'trim|required'
+                'rules' => 'trim'
 			),
             array(
                 'field' => 'block',
                 'label' => "Accident building block",
-                'rules' => 'trim|required'
+                'rules' => 'trim'
 			),
             array(
                 'field' => 'floor',
                 'label' => "Accident building floor",
-                'rules' => 'trim|required'
+                'rules' => 'trim'
 			),
             array(
                 'field' => 'room',
                 'label' => "Accident building room",
-                'rules' => 'trim|required'
+                'rules' => 'trim'
 			),
             array(
                 'field' => 'data_ini',
