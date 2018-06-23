@@ -125,7 +125,7 @@ export class AltPresencasComponent implements OnInit, AfterViewInit {
   }
 
   alterarPresenca() {
-    const url = this.apiconnector.changetAulasDeUmAluno;
+    const url = this.apiconnector.changeAulasDeUmAluno;
     const data = new FormData();
     this.token = data.append('userTokenId', this._cookieService.get('token'));
     data.append('student_id', this.student_id);

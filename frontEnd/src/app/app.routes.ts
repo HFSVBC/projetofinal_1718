@@ -85,7 +85,7 @@ export const router: Routes = [
   {
     path: 'acidentes',
     component: AcidentesComponent,
-    canActivate: [SecurityService]
+    canActivate: [AllService]
   },
   {
     path: 'admin',

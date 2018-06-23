@@ -76,6 +76,7 @@ export class AcidentesComponent implements OnInit {
     this.model.tipo = '';
     this.model.descricao = '';
     this.model.data = '';
+    this.model.tipo = 'Perda';
 
     const url = this.apiconnector.getEdificios;
     const data = new FormData();
@@ -145,7 +146,7 @@ export class AcidentesComponent implements OnInit {
     console.log('Modelo', this.model);
     this.loaderService.show();
 
-    const url = this.apiconnector.getAulasDeUmAluno;
+    const url = this.apiconnector.newAcidente;
 
     const data = new FormData();
     this.token = data.append('userTokenId', this._cookieService.get('token'));
