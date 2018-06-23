@@ -18,7 +18,7 @@
             </div>
             <input type="email" class="form-control" (keyup)="emailChanged()" placeholder="Email do utilizador" id="email" [(ngModel)]="email"
               name="email" required>
-            <div class="invalid-feedback">É necessário um Email válido</div>
+            <div title="É necessário um email válido" class="invalid-feedback">É necessário um Email válido</div>
           </div>
           <button type="submit" class="btn btn-success" [disabled]="loader" title="Pesquisar email">Pesquisar</button>
         </div>
@@ -55,7 +55,7 @@
                   <option *ngFor="let user of users " [ngValue]="user.type ">{{user.type}}</option>
                 </select>
                 <div class="input-group-append">
-                  <button class="btn btn-warning" (click)="submitChange()">Alterar</button>
+                  <button title="Alterar" class="btn btn-warning" (click)="submitChange()">Alterar</button>
                 </div>
               </div>
 

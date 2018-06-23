@@ -3,7 +3,7 @@
     <button class="navbar-toggler" type="button" aria-controls="dashboard" aria-expanded="false" id="dashToggle" (click)="onToggleMenu()">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-brand" href="#">CA FCUL</a>
+    <a title="Controle de acessos da FCUL" class="navbar-brand" href="#">CA FCUL</a>
   </div>
 
   <div class="user">
@@ -11,9 +11,9 @@
       <img src={{this.photo}} id='photoUser'>
     </button>
     <div class='dropdown-menu' aria-labelledby="togglerUser">
-      <span class="dropdown-item">Bem vindo, {{this.name}}
+      <span title="Bem vindo" class="dropdown-item">Bem vindo, {{this.name}}
       </span>
-      <button type="button" class="dropdown-item btn btn-sm btn-outline-light" (click)="logout()"> Sair </button>
+      <button title="Sair" type="button" class="dropdown-item btn btn-sm btn-outline-light" (click)="logout()"> Sair </button>
     </div>
   </div>
   <app-alerts></app-alerts>
@@ -21,7 +21,7 @@
 
 <nav [ngClass]="{'toggleMenuStyle':toggleMenu === true}" class="d-md-block bg-dark sidebar" id='dashboard' aria-labelledby="dashToggle">
   <li class="nav-item" id="mobileLogo">
-    <a class="navbar-brand" href="#">CA FCUL</a>
+    <a title="Controle de Acessos da FCUL" class="navbar-brand" href="#">CA FCUL</a>
     <button (click)="onToggleMenu()" class="close" type="button" aria-controls="dashboard" aria-expanded="false" id="dashToggle">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -29,34 +29,34 @@
   <div id="sidenav-sticky">
     <ul class="nav nav-tabs flex-column" id="accordion">
       <li class="nav-item slide">
-        <a class="nav-link" routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+        <a title="Dashboard" class="nav-link" routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
       </li>
       <li class="nav-item slide">
-        <a class="nav-link" routerLink="/historico" routerLinkActive="active">Consultar Histórico</a>
+        <a title="Consultar Histórico" class="nav-link" routerLink="/historico" routerLinkActive="active">Consultar Histórico</a>
       </li>
       <li *ngIf="tipo=='0'" class="nav-item slide">
-        <a class="nav-link" routerLink="/presencas-aulas" routerLinkActive="active">Consultar Presenças</a>
+        <a title="Consultar Presenças" class="nav-link" routerLink="/presencas-aulas" routerLinkActive="active">Consultar Presenças</a>
       </li>
       <li class="nav-item slide">
-        <a class="nav-link" routerLink="/salas" routerLinkActive="active">Salas Disponíveis</a>
+        <a title="Salas Disponíveis" class="nav-link" routerLink="/salas" routerLinkActive="active">Salas Disponíveis</a>
       </li>
       <li *ngIf="tipo=='1'" class="nav-item slide">
-        <a class="nav-link" routerLink="/presencas" routerLinkActive="active">Consultar Presenças</a>
+        <a title="Consultar Presenças" class="nav-link" routerLink="/presencas" routerLinkActive="active">Consultar Presenças</a>
       </li>
       <li *ngIf="tipo=='1'" class="nav-item slide">
-        <a class="nav-link" routerLink="/alt-presencas" routerLinkActive="active">Alterar Presenças</a>
+        <a title="Alterar Presenças" class="nav-link" routerLink="/alt-presencas" routerLinkActive="active">Alterar Presenças</a>
       </li>
       <li *ngIf="tipo=='3' || tipo=='10'" class="nav-item slide">
-        <a class="nav-link" routerLink="/espacos" routerLinkActive="active">Consultar Espaços</a>
+        <a title="Consultar Espaços" class="nav-link" routerLink="/espacos" routerLinkActive="active">Consultar Espaços</a>
       </li>
       <li *ngIf="tipo=='3' || tipo=='10'" class="nav-item slide">
-        <a class="nav-link" routerLink="/criar-acessos" routerLinkActive="active">Criar Novo Acesso</a>
+        <a title="Criar Novo Acesso" class="nav-link" routerLink="/criar-acessos" routerLinkActive="active">Criar Novo Acesso</a>
       </li>
       <li *ngIf="tipo=='3' || tipo=='10'" class="nav-item slide">
-        <a class="nav-link" routerLink="/acidentes" routerLinkActive="active">Acidentes</a>
+        <a title="Acidentes" class="nav-link" routerLink="/acidentes" routerLinkActive="active">Acidentes</a>
       </li>
       <li *ngIf="tipo=='10'" class="nav-item slide">
-        <a class="nav-link" routerLink="/admin" routerLinkActive="active">Admin</a>
+        <a title="Admin" class="nav-link" routerLink="/admin" routerLinkActive="active">Admin</a>
       </li>
     </ul>
   </div>
