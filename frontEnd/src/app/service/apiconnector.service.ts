@@ -36,7 +36,8 @@ export class APIConnectorService {
   getAulasDeUmAluno = this.baseURL + 'teacher/individual/getStudentsAttendance';
   changeAulasDeUmAluno = this.baseURL + 'teacher/individual/changeStudentsAttendance';
   newAcidente = this.baseURL + 'accident/new';
-  getAcidente = this.baseURL + 'accident/get';
+  getAcidenteAll = this.baseURL + 'accident/getAll';
+  getAcidenteOthers = this.baseURL + 'accident/getOthers';
 
   historico = this.baseURL + 'history/user';
   presencas = this.baseURL +  'presencas';

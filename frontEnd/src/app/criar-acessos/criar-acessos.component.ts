@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import * as $ from 'jquery';
+import 'bootstrap';
 import { ResponseStatusValidatorService } from '../service/response-status-validator.service';
 // import { CookieService } from 'angular2-cookie/core';
 import { CookieService } from 'ngx-cookie';
@@ -35,5 +37,15 @@ export class CriarAcessosComponent implements OnInit {
   onSubmit() {
     console.log('modelo', this.model);
   }
+
+  next1() {
+    console.log((<any>$('#nav-visitor-tab')));
+    (<any>$('#nav-visitor-tab')).tab('show');
+  }
+
+  next2() {
+    (<any>$('#nav-contact-tab')).tab('show');
+  }
+
 
 }
