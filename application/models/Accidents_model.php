@@ -47,7 +47,7 @@
 
             $sql = "SELECT a.id, a.name, CONCAT_WS('.', e.bloco, e.piso, e.sala) as 'espaco', a.date_open, a.date_close, a.description
                     FROM accident a, espaco e, users u
-                    WHERE a.space = e.id AND u.id = a.creator AND $accident_date_init < a.date_open < $accident_date_end";
+                    WHERE a.space = e.id AND u.id = a.creator AND $accident_date_init < a.date_open AND a.date_open < $accident_date_end";
             
             if($accident_name != "'null'")
                 $sql .= " AND a.name = $accident_name";
