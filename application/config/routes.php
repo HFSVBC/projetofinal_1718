@@ -65,9 +65,9 @@ $route['teacher/course/getStudentsAttendance'] = 'attendance/getStudentAttendanc
 $route['teacher/individual/getStudentsAttendance'] = 'attendance/getIndvStudentAttendance_Teacher';
 $route['teacher/individual/changeStudentsAttendance'] = 'attendance/changeUserAttendance';
 // ACCIDENTS
-$route['accident/new'] = 'accidentLoader/registerAccident';
-$route['accident/getAll'] = 'accidentLoader/getAccidents';
-$route['accident/getOthers'] = 'accidentLoader/getAccidentsOthers';
+$route['accident/new'] = 'accidentsLoader/registerAccident';
+$route['accident/getAll'] = 'accidentsLoader/getAccidents';
+$route['accident/getOthers'] = 'accidentsLoader/getAccidentsOthers';
 // CRIAR DISCIPLINA
 $route['teacher/createSubject'] = 'classes/createSubject';
 // CRIAR AULAS
