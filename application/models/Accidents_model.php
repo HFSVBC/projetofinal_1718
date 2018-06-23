@@ -42,8 +42,8 @@
             $accident_block = $this->db->escape($this->input->post('block'));
             $accident_floor = $this->db->escape($this->input->post('floor'));
             $accident_room = $this->db->escape($this->input->post('room'));
-            $accident_date_init = $this->db->escape($this->input->post('date_ini'));
-            $accident_date_end = $this->db->escape($this->input->post('date_end'));
+            $accident_date_init = $this->db->escape($this->input->post('data_ini'));
+            $accident_date_end = $this->db->escape($this->input->post('data_fim'));
 
             $sql = "SELECT a.id, a.name, CONCAT_WS('.', e.bloco, e.piso, e.sala) as 'espaco', a.date_open, a.date_close, a.description
                     FROM accident a, espaco e, users u
