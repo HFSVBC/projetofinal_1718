@@ -8,5 +8,5 @@ services:
     ports:
       - 80:80
     network_mode: "bridge"
-    extra_hosts:
-      - "cafculdatabase:db.cafcul.hugocurado.info"
+    # extra_hosts:
+    #   - "cafculdatabase:db.cafcul.hugocurado.info"
