@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ResponseStatusValidatorService } from '../service/response-status-validator.service';
-
+// import { CookieService } from 'angular2-cookie/core';
+import { CookieService } from 'ngx-cookie';
 
 class Acesso {
   nome_responsavel: string;

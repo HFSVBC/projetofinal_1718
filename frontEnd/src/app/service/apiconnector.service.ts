@@ -5,11 +5,13 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/take';
 import 'rxjs/add/observable/from';
+import { CookieService, CookieOptions } from 'ngx-cookie';
 
 @Injectable()
 export class APIConnectorService {
 
   constructor(private http: HttpClient) { }
+
 
   // private baseURL = 'http://localhost:8888/';
   private baseURL = 'https://bcapi.hugocurado.info/';
@@ -20,7 +22,6 @@ export class APIConnectorService {
   loginPOST = this.baseURL + 'user/login';
   logoutPOST = this.baseURL + 'user/logout';
   isloggedinPOST = this.baseURL + 'user/isloggedin';
-  // registerPOST = this.baseURL + 'user/register';
   existsPOST = this.baseURL + 'user/exists';
   retriveprofilePOST = this.baseURL + 'user/retriveprofile';
 
@@ -74,3 +75,12 @@ export class APIConnectorService {
     });*/
   }
 }
+
+export const options: CookieOptions = {
+  path: '/',
+  // domain: 'cafcul.hugocurado.info',
+  domain: 'localhost',
+  secure: false,
+  httpOnly: true,
+  storeUnencoded: false
+};

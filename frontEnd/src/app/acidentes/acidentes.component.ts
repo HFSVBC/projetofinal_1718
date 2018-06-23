@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import * as $ from 'jquery';
-import { APIConnectorService } from '../service/apiconnector.service';
+import { APIConnectorService, options } from '../service/apiconnector.service';
 import { ResponseStatusValidatorService } from '../service/response-status-validator.service';
-import { CookieService } from 'angular2-cookie/core';
 import { LoaderService } from '../loader/loader.service';
 import { AlertService } from '../alerts/alert.service';
 import '@fengyuanchen/datepicker';
+// import { CookieService } from 'angular2-cookie/core';
+import { CookieService } from 'ngx-cookie';
 
 class Acidente {
   tipo: string;
@@ -83,7 +84,7 @@ export class AcidentesComponent implements OnInit {
     this.apiconnector.postData(url, data).subscribe(res => {
       this.respVal.validate(res);
 
-      this._cookieService.put('token', res['data']['token']);
+      this._cookieService.put('token', res['data']['token'], options);
 
       this.edificios = res['data']['blocks']['data'];
       this.model.edificio = res['data']['blocks']['data'][0]['bloco'];
@@ -101,7 +102,7 @@ export class AcidentesComponent implements OnInit {
     this.apiconnector.postData(url, data).subscribe(res => {
       this.respVal.validate(res);
 
-      this._cookieService.put('token', res['data']['token']);
+      this._cookieService.put('token', res['data']['token'], options);
 
       this.pisos = res['data']['floors']['data'];
       this.model.piso = res['data']['floors']['data'][0]['piso'];
@@ -121,7 +122,7 @@ export class AcidentesComponent implements OnInit {
     this.apiconnector.postData(url, data).subscribe(res => {
       this.respVal.validate(res);
 
-      this._cookieService.put('token', res['data']['token']);
+      this._cookieService.put('token', res['data']['token'], options);
       this.salas = res['data']['rooms']['data'];
       console.log('cenas', res['data']['rooms']['data']);
       this.model.sala = res['data']['rooms']['data'][0]['sala'];
@@ -161,7 +162,7 @@ export class AcidentesComponent implements OnInit {
       this.alertService.show('Acidente criado com sucesso!', 'success');
 
       console.log('res', res);
-      this._cookieService.put('token', res['data']['token']);
+      this._cookieService.put('token', res['data']['token'], options);
       this.loaderService.hide();
     });
   }

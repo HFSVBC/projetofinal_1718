@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { CookieService } from 'angular2-cookie/core';
-import { APIConnectorService } from '../service/apiconnector.service';
+import { APIConnectorService, options } from '../service/apiconnector.service';
 import { Subject } from 'rxjs/Subject';
 import { DataTableDirective } from 'angular-datatables';
 import { LoaderService } from '../loader/loader.service';
 import { ResponseStatusValidatorService } from '../service/response-status-validator.service';
+// import { CookieService } from 'angular2-cookie/core';
+import { CookieService } from 'ngx-cookie';
 
 class SalasDisp {
   edificio: string;
@@ -52,7 +53,7 @@ export class SalasComponent implements OnInit, AfterViewInit {
       this.respVal.validate(res);
 
       console.log('res', res);
-      this._cookieService.put('token', res['data']['token']);
+      this._cookieService.put('token', res['data']['token'], options);
       this.edificios = res['data']['blocks']['data'];
       this.model.edificio = '1';
       this.edificioChanged();
@@ -73,7 +74,7 @@ export class SalasComponent implements OnInit, AfterViewInit {
       this.respVal.validate(res);
 
       console.log('res', res);
-      this._cookieService.put('token', res['data']['token']);
+      this._cookieService.put('token', res['data']['token'], options);
       this.pisos = res['data']['floors']['data'];
       this.model.piso = 'null';
       this.loader = false;
@@ -93,7 +94,7 @@ export class SalasComponent implements OnInit, AfterViewInit {
       this.respVal.validate(res);
 
       console.log('res', res);
-      this._cookieService.put('token', res['data']['token']);
+      this._cookieService.put('token', res['data']['token'], options);
       console.log('cenas', res['data']['availableRooms']['data']);
       this.extractData(res['data']['availableRooms']);
       this.loaderService.hide();
