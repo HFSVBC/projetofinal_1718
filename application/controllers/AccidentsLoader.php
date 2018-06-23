@@ -139,7 +139,7 @@ class AccidentsLoader extends CI_Controller {
                         array_push($out["data"], $thisOut);
                     }
                     $data = array(
-                        "accidents"=>$out,
+                        "accidents"=>json_encode($result),
                         "token"=>regenerateUserToken($this->input->post('userTokenId'))[1]
                     );
                     jsonExporter(200, $data);
