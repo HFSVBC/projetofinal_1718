@@ -9,4 +9,4 @@ services:
       - 80:80
     network_mode: "bridge"
     extra_hosts:
-      - "cafculdatabase:160.153.128.44"
+      - "cafculdatabase:db.cafcul.hugocurado.info"
