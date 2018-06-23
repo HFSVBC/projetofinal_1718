@@ -173,29 +173,29 @@ export class AcidentesComponent implements OnInit {
     (<any>$('#collapseTwo')).removeClass('show');
     this.showAcidentes = true;
     (<any>$('#collapse1')).addClass('show');
-    // console.log('Modelo', this.model);
-    // this.loaderService.show();
+    console.log('Modelo1', this.model);
+    this.loaderService.show();
 
-    // const url = this.apiconnector.getAulasDeUmAluno;
-    // const data = new FormData();
+    const url = this.apiconnector.getAcidente;
+    const data = new FormData();
 
-    // this.token = data.append('userTokenId', this._cookieService.get('token'));
-    // data.append('type', this.model1.tipo);
-    // data.append('block', this.model1.edificio);
-    // data.append('floor', this.model1.piso);
-    // data.append('room', this.model1.sala);
-    // data.append('date_ini', this.model1.data_ini);
-    // data.append('date_end', this.model1.data_fim);
+    this.token = data.append('userTokenId', this._cookieService.get('token'));
+    data.append('type', this.model1.tipo);
+    data.append('block', this.model1.edificio);
+    data.append('floor', this.model1.piso);
+    data.append('room', this.model1.sala);
+    data.append('date_ini', this.model1.data_ini);
+    data.append('date_end', this.model1.data_fim);
 
-    // this.apiconnector.postData(url, data).subscribe(res => {
-    //   this.respVal.validate(res);
+    this.apiconnector.postData(url, data).subscribe(res => {
+      this.respVal.validate(res);
 
-    //   this.alertService.show('Acidente criado com sucesso!', 'success');
+      this.alertService.show('Acidente criado com sucesso!', 'success');
 
-    //   console.log('res', res);
-    //   this._cookieService.put('token', res['data']['token']);
-    //   this.loaderService.hide();
-    // });
+      console.log('res', res);
+      this._cookieService.put('token', res['data']['token'], options);
+      this.loaderService.hide();
+    });
   }
 
   verify(field) {

@@ -2,6 +2,17 @@
     padding: 0 15px;
 }
 
+.head-card {
+  position:  absolute;
+  bottom: 1rem;
+  margin:  0;
+
+}
+
+.card-header {
+  position: relative !important;
+}
+
 .text-center {
     margin: auto 0;
 }

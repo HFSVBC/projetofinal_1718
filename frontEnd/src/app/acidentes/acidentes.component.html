@@ -24,7 +24,6 @@
                   <select class="custom-select" id="tipo" [(ngModel)]="model.tipo" name="na_tipo" required>
                     <option *ngFor="let t of tipos" [value]="t">{{t}}</option>
                   </select>
-                  <div class="invalid-feedback">É necessário um Tipo</div>
                 </div>
                 <div *ngIf="model.tipo == 'Outro'" class="text-danger pt-1">
                   Indicar na descrição o tipo de acidente.
@@ -126,8 +125,9 @@
                       <i class="material-icons">assignment_late</i>
                     </label>
                   </div>
-                  <input type="text" class="form-control" placeholder="Tipo" id="ca_tipo" [(ngModel)]="model1.tipo" (keyup)="verify([model1.tipo, model1.data_ini, model1.data_fim])"
-                    name="ca_tipo" required>
+                  <select class="custom-select" id="tipo" [(ngModel)]="model1.tipo" name="na_tipo" required>
+                      <option *ngFor="let t of tipos" [value]="t">{{t}}</option>
+                    </select>
                 </div>
                 <div class="form-row">
                   <div class="input-group col-4 pb-3">
@@ -204,9 +204,12 @@
 
     <div class="card" style="margin-bottom: 0.3rem" *ngFor="let acid of acidentes; let i = index">
       <div class="card-header" [attr.id]="'heading' + acid.id">
-        <h5 class="" data-toggle="collapse" [attr.data-target]="'#collapse' + acid.id" aria-expanded="true" [attr.aria-controls]="'collapse' + acid.id">
+        <h5 class="head-card" data-toggle="collapse" [attr.data-target]="'#collapse' + acid.id" aria-expanded="true" [attr.aria-controls]="'collapse' + acid.id">
           Acidente {{acid.data}}
         </h5>
+        <button type="button" class="btn btn-primary float-right">
+            Estado <span class="badge badge-light">V</span>
+          </button>
       </div>
 
       <div [attr.id]="'collapse' + acid.id" class="collapse" [ngClass]="{'show': i == 0}" [attr.aria-labelledby]="'heading' + acid.id"
