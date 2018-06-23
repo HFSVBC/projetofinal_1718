@@ -92,7 +92,7 @@ export class AdminComponent implements OnInit {
   }
 
   emailChanged() {
-    if (this.email.length > 0) {
+    if (this.email.length > 0 && this.email.search('@') > 0) {
       this.loader = false;
     } else {
       this.loader = true;

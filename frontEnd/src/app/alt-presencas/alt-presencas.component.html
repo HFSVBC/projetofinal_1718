@@ -11,7 +11,7 @@
           <div class="input-group col-lg-4 pb-3">
             <div class="input-group-prepend">
               <label class="input-group-text mb-0" for="na_aula">
-                <i class="material-icons">class</i>
+                <i class="material-icons" title="Aula">class</i>
               </label>
             </div>
             <select class="custom-select form-control" id="na_aula" (change)="aulaChange(); verify([model.aula, model.data, model.aluno])"
@@ -24,7 +24,7 @@
           <div class="input-group col-lg-4 pb-3">
             <div class="input-group-prepend">
               <label class="input-group-text mb-0" for="na_data">
-                <i class="material-icons">date_range</i>
+                <i class="material-icons" title="Data da aula">date_range</i>
               </label>
             </div>
             <select class="custom-select form-control" id="na_data" [(ngModel)]="model.data" (change)="verify([model.aula, model.data, model.aluno])"
@@ -37,7 +37,7 @@
           <div class="input-group col-lg-3 pb-3">
             <div class="input-group-prepend">
               <label class="input-group-text mb-0" for="na_aluno">
-                <i class="material-icons">person</i>
+                <i class="material-icons" title="Nome do aluno">person</i>
               </label>
             </div>
             <input class="form-control" id="na_aluno" [(ngModel)]="model.aluno" (keyup)="verify([model.aula, model.data, model.aluno])"
