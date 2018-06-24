@@ -26,29 +26,29 @@
     </div>
 
     <div class="card mt-3" *ngIf='user'>
-        <div class="row mainInfo">
-            <div class="col-md-9 ">
+        <div class="row mainInfo pb-2">
+            <div class="col-md-9 p-4">
                 <div class="card-block ">
                     <h3>{{user_name}}</h3>
                     <div class="row">
                         <div class="col-md-6">
-                            <label for="uid " class="col-sm-3 col-form-label ">ID</label>
+                            <label for="uid " class="col-form-label ">ID</label>
                             <input type="text " readonly class="form-control col-sm-11 " id="uid " value="{{user_id}}">
                         </div>
                         <div class="col-md-6">
-                            <label for="email " class="col-sm-3 col-form-label ">Active Now</label>
+                            <label for="email " class="col-form-label ">Active Now</label>
                             <input type="text " readonly class="form-control col-sm-11 " id="email " value="{{user_active === '1' ? 'True' : 'False'}}">
                         </div>
                         <div class="col-md-6">
-                            <label for="uid " class="col-sm-3 col-form-label ">UID</label>
+                            <label for="uid " class="col-form-label ">UID</label>
                             <input type="text " readonly class="form-control col-sm-11 " id="uid " value="{{user_uid}}">
                         </div>
                         <div class="col-md-6">
-                            <label for="uid " class="col-sm-3 col-form-label ">Last Login</label>
+                            <label for="uid " class="col-form-label ">Last Login</label>
                             <input type="text " readonly class="form-control col-sm-11" id="uid " value="{{user_lastLogin}}">
                         </div>
                         <div class="col-md-6">
-                            <label for="user_type " class="col-sm-3 col-form-label ">Tipo</label>
+                            <label for="user_type " class="col-form-label ">Tipo</label>
                             <div class="input-group col-sm-11 p-0">
                                 <select id="user_type " class="custom-select" [(ngModel)]="user_type">
                   <option *ngFor="let user of users " [ngValue]="user.type ">{{user.type}}</option>

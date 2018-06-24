@@ -1,7 +1,3 @@
-.acordion {
-    padding: 0 15px;
-}
-
 .text-center {
     margin: auto 0;
 }
@@ -34,23 +30,8 @@
     padding: .5em;
 }
 
-.card .custom-select {
-    margin-right: 15px;
-    margin-left: 15px;
-    width: 61%;
-}
-
-#btnAlterar {
-    float: right;
-    margin: 20px;
-}
-
-#photoUser {
-    padding: 20px;
-}
-
-#tipo {
-    height: 41.5px;
+.cenas {
+    vertical-align: middle;
 }
 
 @media only screen and (max-width: 767px) {
