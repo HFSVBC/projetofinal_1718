@@ -39,14 +39,21 @@
 			$student  = $this->db->escape($this->input->post("student_id"));
             $class    = $this->db->escape($this->input->post("class_id"));
 
-            $sql = "SELECT u.id, u.name, (SELECT d.designacao FROM disciplina d WHERE a.disciplina = d.id) AS disciplina, a.data_inicio, a.data_fim
-                    FROM users u, presencas p, aula a
-                    WHERE u.id = p.aluno AND p.aula = a.id AND a.disciplina = $course";
+            if($student != "'null'" && $class != "'null'"){
+                $sql = "SELECT u.id, u.name, COUNT(u.name) AS 'attended_classes', (SELECT d.designacao FROM disciplina d WHERE a.disciplina = d.id) AS disciplina, a.data_inicio, a.data_fim
+                        FROM users u, presencas p, aula a
+                        WHERE u.id = p.aluno AND p.aula = a.id AND a.disciplina = $course
+                        GROUP BY u.name";
+            }else{
+                $sql = "SELECT u.id, u.name, (SELECT d.designacao FROM disciplina d WHERE a.disciplina = d.id) AS disciplina, a.data_inicio, a.data_fim
+                        FROM users u, presencas p, aula a
+                        WHERE u.id = p.aluno AND p.aula = a.id AND a.disciplina = $course";
 
-            if($student != "'null'" || is_null($student))
-                $sql .= " AND u.id = $student";
-            if($class != "'null'" || is_null($class))
-                $sql .= " AND p.aula = $class";
+                if($student != "'null'" || is_null($student))
+                    $sql .= " AND u.id = $student";
+                if($class != "'null'" || is_null($class))
+                    $sql .= " AND p.aula = $class";
+            }
 
             $query = $this->db->query($sql);
             return $query->result_array();

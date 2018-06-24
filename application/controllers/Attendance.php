@@ -184,6 +184,8 @@ class Attendance extends CI_Controller
                             "date_ini"=>$value['data_inicio'],
                             "date_end"=>$value['data_fim'],
                         );
+                        if(!is_null($value['attended_classes']))
+                            array_push($thisOut, array("attended_classes"=>$value['attended_classes']));
                         array_push($out["data"], $thisOut);
                     }
                     $data = array(
