@@ -77,8 +77,8 @@ def generateAcess(date, users, room):
     """
     for user in users:
         out = {'data':date, 'espaco':room, 'user':str(user)}
-        requests.post('api.cafcul.hugocurado.info/testcase/createAcess', data=out)
-        print out
+        r = requests.post('https://api.cafcul.hugocurado.info/testcase/createAcess', data=out)
+        print r.text
 
 def generateRandomAcess(number, room_choice=0, date_choice=0, user_choice=0):
     user_choice=user_choice.split(',')
@@ -112,11 +112,13 @@ def generateRandomAcess(number, room_choice=0, date_choice=0, user_choice=0):
 ## Uma Pessoa
 #Entrada
 generateAcess("2018-06-22 16:50:00", range(45600,45601), "40")
+"""
 #Saida
 generateAcess("2018-06-22 17:20:00", range(45600,45601), "40")
 
-##Várias pessoas
+##Varias pessoas
 #Entrada
 generateAcess("2018-06-26 09:25:00", range(45009,45014), "20")
 #Saida
 generateAcess("2018-06-26 10:02:00", range(45009,45014), "20")
+"""
