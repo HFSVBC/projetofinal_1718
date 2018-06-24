@@ -10,7 +10,7 @@ class TestCaseAccess extends CI_Controller
         // header("Access-Control-Allow-Headers: Content-Type");
         parent::__construct();
 
-        $this->load->model('testcaseaccess_model');
+        $this->load->model('testCaseAccess_model');
     }
 
     public function createAcess()
