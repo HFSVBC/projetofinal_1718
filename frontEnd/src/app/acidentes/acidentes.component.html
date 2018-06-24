@@ -74,8 +74,8 @@
                       <i class="material-icons">date_range</i>
                     </label>
                   </div>
-                  <input type="text" class="form-control" placeholder="Data" id="na_data" (click)="dataChanged()" [(ngModel)]="model.data" name="na_data" data-toggle="datepicker"
-                    required>
+                  <input type="text" class="form-control" placeholder="Data" id="na_data" (click)="dataChanged()" [(ngModel)]="model.data"
+                    name="na_data" data-toggle="datepicker" required>
                   <div title="É necessário uma data" class="invalid-feedback">É necessário uma Data</div>
                 </div>
 
@@ -179,8 +179,8 @@
                             <i class="material-icons">date_range</i>
                           </label>
                         </div>
-                        <input type="text" class="form-control" placeholder="Data Início" id="na_data_ini" (click)="dataIniChanged()" [(ngModel)]="model1.data_ini" name="na_data_ini"
-                          data-toggle="datepicker" required>
+                        <input type="text" class="form-control" placeholder="Data Início" id="na_data_ini" (click)="dataIniChanged()" [(ngModel)]="model1.data_ini"
+                          name="na_data_ini" data-toggle="datepicker" required>
                         <div title="É necessário uma data de Início" class="invalid-feedback">É necessário uma Data de Início</div>
                       </div>
                       <div class="input-group col-sm-6 pb-3 pr-0">
@@ -189,8 +189,8 @@
                             <i class="material-icons">date_range</i>
                           </label>
                         </div>
-                        <input type="text" class="form-control" placeholder="Data Fim" id="na_data_fim" (click)="dataFimChanged()" [(ngModel)]="model1.data_fim" name="na_data_fim"
-                          data-toggle="datepicker" required>
+                        <input type="text" class="form-control" placeholder="Data Fim" id="na_data_fim" (click)="dataFimChanged()" [(ngModel)]="model1.data_fim"
+                          name="na_data_fim" data-toggle="datepicker" required>
                         <div title="É necessário uma data de Fim" class="invalid-feedback">É necessário uma Data de Fim</div>
                       </div>
                     </div>
@@ -204,6 +204,20 @@
       </div>
     </div>
   </div>
+
+  <div *ngIf="semAcidentes" class="card">
+      <div class="card-header">
+        <h5 title="Novo acidente" class="" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Sem Acidentes
+        </h5>
+      </div>
+
+      <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+        <div class="card-body">
+          <p>Não existem acidentes para esses critérios.</p>
+        </div>
+      </div>
+    </div>
 
   <div class="acordion" *ngIf="showAcidentes">
 

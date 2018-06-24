@@ -40,6 +40,7 @@ export class AcidentesComponent implements OnInit {
   edificios = []; pisos = []; salas = [];
   loader = false; active = false;
   showAcidentes = false; active1 = false;
+  semAcidentes = false;
 
   acidentes = [];
 
@@ -239,6 +240,8 @@ export class AcidentesComponent implements OnInit {
       console.log('res', res);
 
       this._cookieService.put('token', res['data']['token'], options);
+
+      this.semAcidentes = (res['data']['accidents']['data'] === 0);
 
       this.acidentes = res['data']['accidents']['data'];
 
