@@ -35,7 +35,7 @@
 
 		//Fazer update caso seja saida
 		public function CreateExit($date, $aid){
-		  $sql = "UPDATE acesso SET data_saida=$date WHERE id=$aid";
+		  $sql = "UPDATE acesso SET data_saida=$date WHERE id=$aid AND data_saida=NULL";
 
 		  $this->db->query($sql);
 		}
