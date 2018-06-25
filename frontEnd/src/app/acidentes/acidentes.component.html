@@ -105,6 +105,8 @@
 
         </div>
 
+
+
         <div class="col-lg-6 pb-3 pr-0">
 
             <div id="accordion">
@@ -222,19 +224,6 @@
             <h5 class="head-card" data-toggle="collapse" [attr.data-target]="'#collapse' + acid.id" aria-expanded="true" [attr.aria-controls]="'collapse' + acid.id">
                 Acidente {{acid.date_open}}
             </h5>
-            <!-- <button type="button" class="btn btn-primary float-right">
-          <h5 class="float-left pr-3" >Estado</h5>
-          <span class="badge badge-success">
-            <i class="material-icons" title="Acidente fechado">
-              check
-            </i>
-          </span>
-          <span class="badge badge-warning" (click)="closeAccident()">
-            <i class="material-icons" title="Fechar Acidente" >
-              close
-            </i>
-          </span>
-        </button> -->
         </div>
 
         <div [attr.id]="'collapse' + acid.id" class="collapse" [ngClass]="{'show': i == 0}" [attr.aria-labelledby]="'heading' + acid.id" data-parent="#accordion">

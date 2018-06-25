@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery';
-import { APIConnectorService, options } from '../service/apiconnector.service';
+// import { APIConnectorService, options } from '../service/apiconnector.service';
+import { APIConnectorService } from '../service/apiconnector.service';
 import { ResponseStatusValidatorService } from '../service/response-status-validator.service';
 import { LoaderService } from '../loader/loader.service';
 import { AlertService } from '../alerts/alert.service';
 import '@fengyuanchen/datepicker';
 // import { CookieService } from 'angular2-cookie/core';
-import { CookieService } from 'ngx-cookie';
+import { CookieService } from 'ngx-cookie-service';
+// import { CookieService } from 'ngx-cookie';
 
 class Acidente {
   tipo: string;
@@ -107,7 +109,8 @@ export class AcidentesComponent implements OnInit {
     this.apiconnector.postData(url, data).subscribe(res => {
       this.respVal.validate(res);
 
-      this._cookieService.put('token', res['data']['token'], options);
+      // this._cookieService.put('token', res['data']['token'], options);
+      this._cookieService.set('token', res['data']['token']);
 
       this.edificios = res['data']['blocks']['data'];
       this.model.edificio = res['data']['blocks']['data'][0]['bloco'];
@@ -125,7 +128,8 @@ export class AcidentesComponent implements OnInit {
     this.apiconnector.postData(url, data).subscribe(res => {
       this.respVal.validate(res);
 
-      this._cookieService.put('token', res['data']['token'], options);
+      // this._cookieService.put('token', res['data']['token'], options);
+      this._cookieService.set('token', res['data']['token']);
 
       this.pisos = res['data']['floors']['data'];
       this.model.piso = res['data']['floors']['data'][0]['piso'];
@@ -145,7 +149,8 @@ export class AcidentesComponent implements OnInit {
     this.apiconnector.postData(url, data).subscribe(res => {
       this.respVal.validate(res);
 
-      this._cookieService.put('token', res['data']['token'], options);
+      // this._cookieService.put('token', res['data']['token'], options);
+      this._cookieService.set('token', res['data']['token']);
       this.salas = res['data']['rooms']['data'];
       console.log('cenas', res['data']['rooms']['data']);
       this.model.sala = res['data']['rooms']['data'][0]['sala'];
@@ -200,7 +205,8 @@ export class AcidentesComponent implements OnInit {
       this.alertService.show('Acidente criado com sucesso!', 'success');
 
       console.log('res', res);
-      this._cookieService.put('token', res['data']['token'], options);
+      // this._cookieService.put('token', res['data']['token'], options);
+      this._cookieService.set('token', res['data']['token']);
       this.loaderService.hide();
     });
   }
@@ -225,7 +231,7 @@ export class AcidentesComponent implements OnInit {
     }
 
     const data = new FormData();
-
+    console.log('url', url);
     this.token = data.append('userTokenId', this._cookieService.get('token'));
     data.append('type', this.model1.tipo);
     data.append('block', this.model1.edificio);
@@ -239,20 +245,16 @@ export class AcidentesComponent implements OnInit {
 
       console.log('res', res);
 
-      this._cookieService.put('token', res['data']['token'], options);
+      // this._cookieService.put('token', res['data']['token'], options);
+      this._cookieService.set('token', res['data']['token']);
 
-      this.semAcidentes = (res['data']['accidents']['data'] === 0);
+      this.semAcidentes = (res['data']['accidents']['data'].length === 0);
+      console.log(this.semAcidentes);
 
       this.acidentes = res['data']['accidents']['data'];
 
       this.loaderService.hide();
 
-      // this.model1.tipo = 'null';
-      // this.model1.edificio = 'null';
-      // this.model1.piso = 'null';
-      // this.model1.sala = 'null';
-      // this.model1.data_ini = '';
-      // this.model1.data_fim = '';
       this.active1 = false;
     });
   }

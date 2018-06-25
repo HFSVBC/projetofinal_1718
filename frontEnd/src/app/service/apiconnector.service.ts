@@ -5,7 +5,8 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/take';
 import 'rxjs/add/observable/from';
-import { CookieOptions } from 'ngx-cookie';
+import { CookieService } from 'angular2-cookie/core';
+// import { CookieOptions } from 'ngx-cookie';
 
 @Injectable()
 export class APIConnectorService {
@@ -75,12 +76,12 @@ export class APIConnectorService {
   }
 }
 
-export const options: CookieOptions = {
-  path: '/',
-  // domain: 'cafcul.hugocurado.info',
-  domain: 'localhost',
-  expires: new Date('2018-06-27'),
-  secure: false,
-  httpOnly: true,
-  storeUnencoded: false
-};
+// export const options: CookieOptions = {
+//   path: '/',
+//   // domain: 'cafcul.hugocurado.info',
+//   domain: 'localhost',
+//   expires: new Date('2018-06-27'),
+//   secure: false,
+//   httpOnly: true,
+//   storeUnencoded: false
+// };
