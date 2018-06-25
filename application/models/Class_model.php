@@ -5,7 +5,7 @@
 	*   -getSubjectsByProf -> array()
 	*	-getClassesBySubject -> array()
 	*/
-	class Class_model extends CI_Model{
+class Class_model extends CI_Model{
 		//consult subjects given prof
 		public function getSubjectsByProf($profToken){
 
@@ -40,6 +40,15 @@
 
             $query = $this->db->query($sql);
             return $query->result_array();
-        }
 	}
+	public function getCorsesByStudent($token)
+	{
+		$sql = "SELECT id_disciplina, (SELECT d.designacao FROM disciplina d WHERE d.id = da.id_disciplina) AS 'designacao'
+			FROM disciplina_aluno da
+			WHERE id_aluno=(SELECT user FROM users_loggedIn WHERE token = $token)";
+
+		$query = $this->db->query($sql);
+		return $query->result_array();
+	}
+}
 ?>

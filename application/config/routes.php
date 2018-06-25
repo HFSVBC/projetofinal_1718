@@ -57,7 +57,9 @@ $route['general/availableSpaces'] = 'spaces/getFacultyAvailableRooms';
 // CONSULTA DE HISTORICO DE ACESSOS
 $route['history/user']                  = 'history/getUserAccessHistory';
 $route['history/user/(:any)']           = 'history/getUserAccessHistory/$1';
+// STUDENT
 $route['student/attendance']            = 'attendance/getStudentAttendance_Student';
+$route['student/retrieveCourses']       = 'attendance/getStudentCourses';
 // CONSULTA DE PRESENÇAS NAS AULAS
 $route['teacher/classes']               = 'attendance/getTeacherClasses';
 $route['teacher/class/dates/(:any)']    = 'attendance/getTeacherClassDates/$1';

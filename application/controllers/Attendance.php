@@ -264,7 +264,48 @@ class Attendance extends CI_Controller
             jsonExporter(405, validation_errors());
         }
     }
-
+    public function getStudentCourses()
+    {
+        $config = array(
+            array(
+                'field' => 'userTokenId',
+                'label' => "User's Token",
+                'rules' => 'trim|required'
+            )
+        );
+        $this->form_validation->set_rules($config);
+        $this->form_validation->set_error_delimiters('', '');
+        if($this->form_validation->run() === true){
+            if(isUserLoggedIn($this->input->post('userTokenId'))===true){
+                $token = $this->db->escape($this->input->post('userTokenId'));
+                $sql = "SELECT *
+                        FROM conf_routesAccess
+                        WHERE user_type = (SELECT account_type FROM users WHERE id = (SELECT user FROM users_loggedIn WHERE token = $token)) AND route = 'student/retrieveCourses'";
+                if(routeAccess($sql)===true){
+                    $result = $this->class_model->getCorsesByStudent($token);
+                    $out = array("data"=>array());
+                    foreach ($result as $key => $value) {
+                        $thisOut = array(
+                            "id"=>$value['id'],
+                            "name"=>$value['designacao']
+                        );
+                        array_push($out["data"], $thisOut);
+                    }
+                    $data = array(
+                        "studentCourses"=>$out,
+                        "token"=>regenerateUserToken($this->input->post('userTokenId'))[1]
+                    );
+                    jsonExporter(200, $data);
+                }else{
+                    jsonExporter(403);
+                }
+            }else{
+                jsonExporter(401);
+            }
+        }else{
+            jsonExporter(405, validation_errors());
+        }
+    }
     public function getStudentAttendance_Student()
     {
         $config = array(
