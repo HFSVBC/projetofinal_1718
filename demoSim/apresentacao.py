@@ -68,7 +68,7 @@ with open('apresentacao/apresentacao_entradas.sql', 'w') as infile, open('aprese
         infile.write("INSERT INTO acesso(data_entrada,espaco,user) VALUES(" + "'" + datas[2] + "'" +\
                      "," + str(espaco) + "," + str(user) + ");\n")
         #Criar saidas
-        infile2.write("UPDATE acesso SET data_fim=" + "'" + datas[3] + "'" + "WHERE user=" + str(user) + " AND data_fim=NULL;\n")
+        infile2.write("UPDATE acesso SET data_fim=" + "'" + datas[3] + "'" + "WHERE user=" + str(user) + " AND data_fim='0000-00-00 00:00:00';\n")
 
 with open('apresentacao/apresentacao_presencas.sql', 'w') as infile:
     for aula in range(1000, 1010):
