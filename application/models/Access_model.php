@@ -133,11 +133,19 @@
             $bloco = $this->db->escape($this->input->post("block"));
             $piso = $this->db->escape($this->input->post("floor"));
             $room = $this->db->escape($this->input->post("room"));
+            $date_ini = $this->input->post("data_ini");
+            $hour_ini = $this->input->post("hora_ini");
+            $hour_end = $this->input->post("hora_fim");
+
+            $rangeIni = $this->db->escape($date_ini." ".$hour_ini);
+            $rangeEnd = $this->db->escape($date_ini." ".$hour_end);
 
             $sql = "SELECT e.id, CONCAT_WS('.', e.bloco, e.piso, e.sala) AS espaco, e.lotacao, COUNT(e.id) as 'now'
                     FROM espaco e, acesso a 
-                    WHERE a.espaco = e.id AND ((NOW() + INTERVAL 8 HOUR) >= a.data_entrada AND (NOW() + INTERVAL 8 HOUR) <= a.data_fim) AND e.bloco = $bloco";
+                    WHERE a.espaco = e.id AND $rangeIni <= a.data_entrada AND $rangeEnd >= a.data_fim";
 
+            if($bloco != "'null'")
+                $sql .= " AND e.bloco = $bloco";
             if($piso != "'null'")
                 $sql .= " AND e.piso = $piso";
             if($room != "'null'")

@@ -80,6 +80,21 @@ class Spaces extends CI_Controller
                 'field' => 'room',
                 'label' => "Room number",
                 'rules' => 'trim|required'
+            ),
+            array(
+                'field' => 'data_ini',
+                'label' => "Initial Date",
+                'rules' => 'trim|required'
+            ),
+            array(
+                'field' => 'hora_ini',
+                'label' => "Hour ini",
+                'rules' => 'trim|required'
+            ),
+            array(
+                'field' => 'hora_fim',
+                'label' => "Hora end",
+                'rules' => 'trim|required'
             )
         );
         $this->form_validation->set_rules($config);
@@ -91,7 +106,7 @@ class Spaces extends CI_Controller
                 foreach ($result as $key => $value) {
                     $thisOut = array(
                         "space"=>$value['espaco'],
-                        "peopel"=>$value['now'],
+                        "people"=>$value['now'],
                         "max"=>$value['lotacao']
                     );
                     array_push($out["data"], $thisOut);
