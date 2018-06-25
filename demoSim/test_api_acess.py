@@ -66,43 +66,19 @@ def createAccess(number_acesses, duracao=0, space=0, date=0, user_choice=0, aula
         datas=compute_date(ano,mes,dia,hora,minutos, duracao)
 
         out = {'data_entrada':datas[2],'data_saida':datas[3],'espaco':espaco,'user':str(user), 'aula':aula}
-        ###requests.post('url/testcase/createAcess', data=out)
+        ###requests.post('api.cafcul.hugocurado.info/testcase/createAcess', data=out)
         ###sql="INSERT INTO acesso(data_entrada,data_fim,espaco,user) VALUES(" + "'" + datas[2] + "'" + "," + "'" + datas[3] + "'" + "," + str(espaco) + "," + str(user) + ");\n"
         print out
-
-
-createAccess(10)
-###----Todo---###
-"""
-Reformular bd depois disto
-Caso consiga, tornar os acesso mais realistas.
-
-SEMPRE:
-Verifica se o utilizador ainda não saiu de outro espaço, data_saida a null
-
-1-não enviar aula, o backend tem que perceber onde é a aula
-1.1-O backend recebe o acesso e faz os seguintes passos.
-1.1.1-Verifica se está a haver alguma aula naquele espaço naquela hora +10 minutos.
-1.1.2-Verifica se o aluno está inscrito nessa disciplina
-1.1.3-Se ainda não tiver saido fazer update, caso contrário fazer insert
-1.1.4-Caso esteja inscrito meter nas presenças, caso contrário por só nos acessos.(ver se é para avisar)
-
-2-mandar so a data, o backend faz update em vez de insert
-2.1-O backend recebe o acesso e verifica se o utilizado fez um acesso aquele espaço (data_saida a null)
-2.2-Caso tenha feito faz update à tabela
-
-3-Basta mandar apenas uma data e o backend ve se e data de entrada ou saida
-
-4-Basta enviar assim (data,espaço e user)
-"""
 
 def generateAcess(date, users, room):
     """
     users sao utilizadores separados por virgulas
+    formato da date: 2017-10-14 10:16:00
     """
-    for user in users.split(','):
-        out = {'data':date, 'espaco':room, 'user':user}
-        #requests.post('url/testcase/createAcess', data=out)
+    for user in users:
+        out = {'data':date, 'espaco':room, 'user':str(user)}
+        requests.post('api.cafcul.hugocurado.info/testcase/createAcess', data=out)
+        print out
 
 def generateRandomAcess(number, room_choice=0, date_choice=0, user_choice=0):
     user_choice=user_choice.split(',')
@@ -129,3 +105,18 @@ def generateRandomAcess(number, room_choice=0, date_choice=0, user_choice=0):
             room=room_choice[i%len(room_choice)]
         out = {'data':date, 'espaco':room, 'user':user}
         #requests.post('url/testcase/createAcess', data=out)
+
+#-- TESTES --#
+
+### Sem aulas
+## Uma Pessoa
+#Entrada
+generateAcess("2018-06-22 16:50:00", range(45600,45601), "40")
+#Saida
+generateAcess("2018-06-22 17:20:00", range(45600,45601), "40")
+
+##Várias pessoas
+#Entrada
+generateAcess("2018-06-26 09:25:00", range(45009,45014), "20")
+#Saida
+generateAcess("2018-06-26 10:02:00", range(45009,45014), "20")

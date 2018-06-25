@@ -131,7 +131,7 @@
         {
             $sql = "SELECT *
                     FROM users_loggedIn
-                    WHERE CURRENT_DATE() > timeOut";
+                    WHERE CURRENT_TIMESTAMP() > timeOut";
             $usersExpired = $this->db->query($sql);
             $usersExpired = $usersExpired->result_array();
             $this->db->trans_start();

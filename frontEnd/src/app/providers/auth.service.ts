@@ -6,12 +6,11 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/take';
 import 'rxjs/add/observable/from';
-
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
-import { Session } from 'protractor';
-import { APIConnectorService } from '../service/apiconnector.service';
-import { CookieService } from 'angular2-cookie/core';
+import { APIConnectorService, options } from '../service/apiconnector.service';
+// import { CookieService } from 'angular2-cookie/core';
+import { CookieService } from 'ngx-cookie';
 
 @Injectable()
 export class AuthService {
@@ -61,13 +60,13 @@ export class AuthService {
         console.log(res);
 
         if (code !== 200) {
-          this._cookieService.put('error', 'true');
+          this._cookieService.put('error', 'true', options);
           this.logout();
           alert('Something went wrong! Try again later.');
         } else {
           const tipo = this.getTipo(res['data']['user_type']);
-          this._cookieService.put('tipo', tipo);
-          this._cookieService.put('token', res['data']['token']);
+          this._cookieService.put('tipo', tipo, options);
+          this._cookieService.put('token', res['data']['token'], options);
           this.router.navigateByUrl('/dashboard');
         }
       });

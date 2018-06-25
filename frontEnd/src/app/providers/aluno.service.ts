@@ -6,7 +6,8 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/take';
 import 'rxjs/add/observable/from';
-import { CookieService } from 'angular2-cookie/core';
+// import { CookieService } from 'angular2-cookie/core';
+import { CookieService } from 'ngx-cookie';
 
 @Injectable()
 export class AlunoService implements CanActivate {

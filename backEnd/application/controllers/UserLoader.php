@@ -34,9 +34,7 @@ class UserLoader extends CI_Controller {
 		$this->form_validation->set_error_delimiters('', '');
 		// var_dump($_POST);
 		if($this->form_validation->run() === true){
-			// echo $this->input->post('idToken');
-			$idToken = $this->input->post('idToken');
-			$result = $this->firebase_lib->verifyToken($idToken);
+			$result = $this->firebase_lib->verifyToken($this->input->post('idToken'));
 			if(is_string($result)===FALSE){
 				$provData = $result->providerData[0];
 				if($this->user_model->isRegistered($provData->uid)===true){
