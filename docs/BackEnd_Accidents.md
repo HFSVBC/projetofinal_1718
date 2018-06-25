@@ -1,10 +1,15 @@
-# Attendance
+# Accidents
 ---
-## createSubject
-Accessed by the route ```/teacher/createSubject```. It handles the creation of a course subject. For that it requires the following POST elements:
+## registerAccident
+Accessed by the route ```/accident/new```. It handles the creation of a new accident event. For that it requires the following POST elements:
 ```
 userTokenId => Client's last issued token => String
-course_designation => The name or designator of the subject to be created => String
+type => Accident type => String
+block => Building in which the accident happened => String
+floor => Floor in which the accident happened => String
+room => Room in which the accident happened => String
+date => Date of the accident => String
+description => Description of the accident => String
 ```
 It returns a JSON with the following configuration for a successful response:
 ```JSON
@@ -16,7 +21,8 @@ It returns a JSON with the following configuration for a successful response:
     "state": "ok",
     "code": 200,
     "data": {
-        "token": (String) Client's first token,
+        "accidentCreationResult": (Object) result of the accident creation SQL query,
+        "token": (String) Client's first token
     }
 }
 ```
@@ -38,16 +44,19 @@ It returns a JSON with the following configuration for an unsuccessful response:
 The HTTP error codes might be 401 (Unauthorized => User session expired), 403 (Forbidden => Access not authorised for current user), 405 (Method Not Allowed => POST has not passed the validation check.) and 500 (Server Error => Error getting user profile)
 
 
-## createClasses
-Accessed by the route ```/teacher/createClasses```. It handles the creation of a class for a subject. For that it requires the following POST elements:
+## getAccidents
+Accessed by the route ```/accident/getAll```. It retrieves the information for all the existent accident events. For that it requires the following POST elements:
 ```
 userTokenId => Client's last issued token => String
-semester => Number of the semester for which the class is being created => Numeric
-date => Date of the first class => String
-duration => Duration of the class => Numeric
-type => Type of class => String
-room => Designator of the room in which the class will proceed => Numeric
-subject => Identifier of the subject for which the class was created => Numeric
+data_ini => Beginning of date range for the accident => String
+data_fim => End of date range for the accident => String
+```
+With the following optional fields:
+```
+type => Accident type => String
+block => Building in which the accident happened => String
+floor => Floor in which the accident happened => String
+room => Room in which the accident happened => String
 ```
 It returns a JSON with the following configuration for a successful response:
 ```JSON
@@ -59,7 +68,16 @@ It returns a JSON with the following configuration for a successful response:
     "state": "ok",
     "code": 200,
     "data": {
-        "token": (String) Client's first token,
+        "accidents": {
+            "data": {
+                "id": (String) the identifier of each accident,
+				"name": (String) designator of the accident,
+				"espaco": (String) the faculty space where the accident happened,
+                "date_open": (String) the starting date and time of the class,
+				"description": (String) the description of the accident
+            }
+        },
+        "token": (String) Client's first token
     }
 }
 ```
@@ -81,12 +99,19 @@ It returns a JSON with the following configuration for an unsuccessful response:
 The HTTP error codes might be 401 (Unauthorized => User session expired), 403 (Forbidden => Access not authorised for current user), 405 (Method Not Allowed => POST has not passed the validation check.) and 500 (Server Error => Error getting user profile)
 
 
-## matriculateStudent
-Accessed by the route ```/teacher/matriculateStudent```. It handles the assignment of a student to a subject. For that it requires the following POST elements:
+## getAccidentsOthers
+Accessed by the route ```/accident/getOthers```. It retrieves all the student information for a single class. For that it requires the following POST elements:
 ```
 userTokenId => Client's last issued token => String
-course => Identifier of the course to which the student is being signed up for => String
-student_id => The student's assigned identifier => String
+data_ini => Beginning of date range for the accident => String
+data_fim => End of date range for the accident => String
+```
+With the following optional fields:
+```
+type => Accident type => String
+block => Building in which the accident happened => String
+floor => Floor in which the accident happened => String
+room => Room in which the accident happened => String
 ```
 It returns a JSON with the following configuration for a successful response:
 ```JSON
@@ -98,7 +123,16 @@ It returns a JSON with the following configuration for a successful response:
     "state": "ok",
     "code": 200,
     "data": {
-        "token": (String) Client's first token,
+        "accidents": {
+            "data": {
+                "id": (String) the identifier of each accident,
+				"name": (String) designator of the accident,
+				"espaco": (String) the faculty space where the accident happened,
+                "date_open": (String) the starting date and time of the class,
+				"description": (String) the description of the accident
+            }
+        },
+        "token": (String) Client's first token
     }
 }
 ```

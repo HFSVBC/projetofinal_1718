@@ -20,7 +20,9 @@
     * [Users](BackEnd_Users.md)
     * [History](BackEnd_History.md)
 	* [Spaces](BackEnd_Spaces.md)
+	* [Classes](BackEnd_Classes.md)
 	* [Temporary Accesses](BackEnd_TempAccess.md)
+	* [Attendance](BackEnd_Attendance.md)
 
 * Data Simulator
     * [Resources](dataSim.md)
