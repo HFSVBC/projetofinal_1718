@@ -39,6 +39,8 @@ export class APIConnectorService {
   newAcidente = this.baseURL + 'accident/new';
   getAcidenteAll = this.baseURL + 'accident/getAll';
   getAcidenteOthers = this.baseURL + 'accident/getOthers';
+  getCoursesAluno = this.baseURL + 'student/retrieveCourses';
+  getPresencasAlunoAulas = this.baseURL + 'student/attendance';
 
   historico = this.baseURL + 'history/user';
   presencas = this.baseURL +  'presencas';
@@ -75,13 +77,3 @@ export class APIConnectorService {
     });*/
   }
 }
-
-// export const options: CookieOptions = {
-//   path: '/',
-//   // domain: 'cafcul.hugocurado.info',
-//   domain: 'localhost',
-//   expires: new Date('2018-06-27'),
-//   secure: false,
-//   httpOnly: true,
-//   storeUnencoded: false
-// };
