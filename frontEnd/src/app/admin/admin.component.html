@@ -26,25 +26,25 @@
     </div>
 
     <div class="card mt-3" *ngIf='user'>
-        <div class="row mainInfo">
+        <div class="row mainInfo py-3">
             <div class="col-md-9 ">
                 <div class="card-block ">
                     <h3>{{user_name}}</h3>
                     <div class="row">
                         <div class="col-md-6">
-                            <label for="uid " class="col-sm-3 col-form-label" title="ID interno do utilizador">ID</label>
+                            <label for="uid " class="col col-form-label" title="ID interno do utilizador">ID</label>
                             <input type="text " readonly class="form-control col-sm-11 " id="uid " value="{{user_id}}">
                         </div>
                         <div class="col-md-6">
-                            <label for="email " class="col-sm-3 col-form-label" title="Utilizador activo na aplicação">Active Now</label>
+                            <label for="email " class="col col-form-label" title="Utilizador activo na aplicação">Active Now</label>
                             <input type="text " readonly class="form-control col-sm-11 " id="email " value="{{user_active === '1' ? 'True' : 'False'}}">
                         </div>
                         <div class="col-md-6">
-                            <label for="uid " class="col-sm-3 col-form-label" title="ID da google / faculdade do utilizador">UID</label>
+                            <label for="uid " class="col col-form-label" title="ID da google / faculdade do utilizador">UID</label>
                             <input type="text " readonly class="form-control col-sm-11 " id="uid " value="{{user_uid}}">
                         </div>
                         <div class="col-md-6">
-                            <label for="uid " class="col-sm-3 col-form-label" title="Último login na aplicação">Last Login</label>
+                            <label for="uid " class="col col-form-label" title="Último login na aplicação">Last Login</label>
                             <input type="text " readonly class="form-control col-sm-11" id="uid " value="{{user_lastLogin}}">
                         </div>
                         <div class="col-md-6">
@@ -63,7 +63,7 @@
 
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 py-3">
                 <div class="card-img-middle">
                     <img src={{user_avatar}} class="rounded-circle" id='photoUser'>
                 </div>

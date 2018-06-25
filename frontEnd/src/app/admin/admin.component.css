@@ -35,7 +35,8 @@
 }
 
 #photoUser {
-    padding: 1.5em 2em;
+    padding: 0 0 1.5em;
+    width: 14em;
 }
 
 #user_row {
