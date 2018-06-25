@@ -5,7 +5,8 @@ import { Subject } from 'rxjs/Subject';
 import { DataTableDirective } from 'angular-datatables';
 import { LoaderService } from '../loader/loader.service';
 import { ResponseStatusValidatorService } from '../service/response-status-validator.service';
-import { CookieService } from 'angular2-cookie/core';
+// import { CookieService } from 'angular2-cookie/core';
+import { CookieService } from 'ngx-cookie-service';
 // import { CookieService } from 'ngx-cookie';
 
 class SalasDisp {
@@ -55,7 +56,7 @@ export class SalasComponent implements OnInit, AfterViewInit {
 
       console.log('res', res);
       // this._cookieService.put('token', res['data']['token'], options);
-      this._cookieService.put('token', res['data']['token']);
+      this._cookieService.set('token', res['data']['token']);
       this.edificios = res['data']['blocks']['data'];
       this.model.edificio = '1';
       this.edificioChanged();
@@ -77,7 +78,7 @@ export class SalasComponent implements OnInit, AfterViewInit {
 
       console.log('res', res);
       // this._cookieService.put('token', res['data']['token'], options);
-      this._cookieService.put('token', res['data']['token']);
+      this._cookieService.set('token', res['data']['token']);
       this.pisos = res['data']['floors']['data'];
       this.model.piso = 'null';
       this.loader = false;
@@ -98,7 +99,7 @@ export class SalasComponent implements OnInit, AfterViewInit {
 
       console.log('res', res);
       // this._cookieService.put('token', res['data']['token'], options);
-      this._cookieService.put('token', res['data']['token']);
+      this._cookieService.set('token', res['data']['token']);
       console.log('cenas', res['data']['availableRooms']['data']);
       this.extractData(res['data']['availableRooms']);
       this.loaderService.hide();

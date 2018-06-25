@@ -9,7 +9,8 @@ import { LoaderService } from '../loader/loader.service';
 import { DataTableDirective } from 'angular-datatables';
 import { ResponseStatusValidatorService } from '../service/response-status-validator.service';
 import 'rxjs/add/operator/map';
-import { CookieService } from 'angular2-cookie/core';
+// import { CookieService } from 'angular2-cookie/core';
+import { CookieService } from 'ngx-cookie-service';
 // import { CookieService } from 'ngx-cookie';
 
 class SearchOptions {
@@ -67,7 +68,7 @@ export class HistoricoComponent implements OnInit, AfterViewInit {
 
       console.log('res', res);
       // this._cookieService.put('token', res['data']['token'], options);~
-      this._cookieService.put('token', res['data']['token']);
+      this._cookieService.set('token', res['data']['token']);
       this.edificios = res['data']['blocks']['data'];
       this.model.edificio = 'null';
       this.edificioChanged();
@@ -88,7 +89,7 @@ export class HistoricoComponent implements OnInit, AfterViewInit {
 
         console.log('res', res);
         // this._cookieService.put('token', res['data']['token'], options);
-        this._cookieService.put('token', res['data']['token']);
+        this._cookieService.set('token', res['data']['token']);
         this.pisos = res['data']['floors']['data'];
         this.model.piso = 'null';
         this.pisoChanged();
@@ -111,7 +112,7 @@ export class HistoricoComponent implements OnInit, AfterViewInit {
 
         console.log('res', res);
         // this._cookieService.put('token', res['data']['token'], options);
-        this._cookieService.put('token', res['data']['token']);
+        this._cookieService.set('token', res['data']['token']);
         this.salas = res['data']['rooms']['data'];
         this.model.sala = 'null';
         this.loader = false;
@@ -137,7 +138,7 @@ export class HistoricoComponent implements OnInit, AfterViewInit {
 
         console.log('res', res);
         // this._cookieService.put('token', res['data']['token'], options);
-        this._cookieService.put('token', res['data']['token']);
+        this._cookieService.set('token', res['data']['token']);
         this.extractData(res['data']['accessHist']);
         this.loaderService.hide();
       });

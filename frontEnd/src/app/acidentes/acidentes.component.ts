@@ -6,7 +6,8 @@ import { ResponseStatusValidatorService } from '../service/response-status-valid
 import { LoaderService } from '../loader/loader.service';
 import { AlertService } from '../alerts/alert.service';
 import '@fengyuanchen/datepicker';
-import { CookieService } from 'angular2-cookie/core';
+// import { CookieService } from 'angular2-cookie/core';
+import { CookieService } from 'ngx-cookie-service';
 // import { CookieService } from 'ngx-cookie';
 
 class Acidente {
@@ -109,7 +110,7 @@ export class AcidentesComponent implements OnInit {
       this.respVal.validate(res);
 
       // this._cookieService.put('token', res['data']['token'], options);
-      this._cookieService.put('token', res['data']['token']);
+      this._cookieService.set('token', res['data']['token']);
 
       this.edificios = res['data']['blocks']['data'];
       this.model.edificio = res['data']['blocks']['data'][0]['bloco'];
@@ -128,7 +129,7 @@ export class AcidentesComponent implements OnInit {
       this.respVal.validate(res);
 
       // this._cookieService.put('token', res['data']['token'], options);
-      this._cookieService.put('token', res['data']['token']);
+      this._cookieService.set('token', res['data']['token']);
 
       this.pisos = res['data']['floors']['data'];
       this.model.piso = res['data']['floors']['data'][0]['piso'];
@@ -149,7 +150,7 @@ export class AcidentesComponent implements OnInit {
       this.respVal.validate(res);
 
       // this._cookieService.put('token', res['data']['token'], options);
-      this._cookieService.put('token', res['data']['token']);
+      this._cookieService.set('token', res['data']['token']);
       this.salas = res['data']['rooms']['data'];
       console.log('cenas', res['data']['rooms']['data']);
       this.model.sala = res['data']['rooms']['data'][0]['sala'];
@@ -205,7 +206,7 @@ export class AcidentesComponent implements OnInit {
 
       console.log('res', res);
       // this._cookieService.put('token', res['data']['token'], options);
-      this._cookieService.put('token', res['data']['token']);
+      this._cookieService.set('token', res['data']['token']);
       this.loaderService.hide();
     });
   }
@@ -245,7 +246,7 @@ export class AcidentesComponent implements OnInit {
       console.log('res', res);
 
       // this._cookieService.put('token', res['data']['token'], options);
-      this._cookieService.put('token', res['data']['token']);
+      this._cookieService.set('token', res['data']['token']);
 
       this.semAcidentes = (res['data']['accidents']['data'] === 0);
 

@@ -10,7 +10,8 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 // import { APIConnectorService, options } from '../service/apiconnector.service';
 import { APIConnectorService } from '../service/apiconnector.service';
-import { CookieService } from 'angular2-cookie/core';
+// import { CookieService } from 'angular2-cookie/core';
+import { CookieService } from 'ngx-cookie-service';
 // import { CookieService } from 'ngx-cookie';
 
 @Injectable()
@@ -62,15 +63,15 @@ export class AuthService {
 
         if (code !== 200) {
           // this._cookieService.put('error', 'true', options);
-          this._cookieService.put('error', 'true');
+          this._cookieService.set('error', 'true');
           this.logout();
           alert('Something went wrong! Try again later.');
         } else {
           const tipo = this.getTipo(res['data']['user_type']);
           // this._cookieService.put('tipo', tipo, options);
-          this._cookieService.put('tipo', tipo);
+          this._cookieService.set('tipo', tipo);
           // this._cookieService.put('token', res['data']['token'], options);
-          this._cookieService.put('token', res['data']['token']);
+          this._cookieService.set('token', res['data']['token']);
           this.router.navigateByUrl('/dashboard');
         }
       });
@@ -114,7 +115,8 @@ export class AuthService {
 
     this.current = null;
     this._firebaseAuth.auth.signOut();
-    this._cookieService.removeAll();
+    // this._cookieService.removeAll();
+    this._cookieService.deleteAll();
     this.router.navigateByUrl('/login');
 
   }

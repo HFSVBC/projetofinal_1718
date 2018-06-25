@@ -7,7 +7,8 @@ import { APIConnectorService } from '../service/apiconnector.service';
 import { Subject } from 'rxjs/Subject';
 import { HistoricoComponent } from '../historico/historico.component';
 import { ResponseStatusValidatorService } from '../service/response-status-validator.service';
-import { CookieService } from 'angular2-cookie/core';
+// import { CookieService } from 'angular2-cookie/core';
+import { CookieService } from 'ngx-cookie-service';
 // import { CookieService } from 'ngx-cookie';
 
 class HistAc {
@@ -86,7 +87,7 @@ export class DashboardComponent implements OnInit {
 
         console.log('res', res);
         // this._cookieService.put('token', res['data']['token'], options);
-        this._cookieService.put('token', res['data']['token']);
+        this._cookieService.set('token', res['data']['token']);
         this.extractData(res['data']['accessHist']);
       });
   }
