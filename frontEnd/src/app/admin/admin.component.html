@@ -26,6 +26,20 @@
     </div>
   </div>
 
+  <div *ngIf="userNotFound" class="card">
+    <div class="card-header">
+      <h5 title="Novo acidente" class="" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        Utilizador não encontrado
+      </h5>
+    </div>
+
+    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body">
+        <p>Não existe um utilizador com esse email.</p>
+      </div>
+    </div>
+  </div>
+
   <div class="card mt-3" *ngIf='user'>
     <div class="row mainInfo">
       <div class="col-md-9 ">
