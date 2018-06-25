@@ -77,10 +77,10 @@ export class APIConnectorService {
 
 export const options: CookieOptions = {
   path: '/',
-  // domain: 'cafcul.hugocurado.info',
-  domain: 'localhost',
+  domain: 'cafcul.hugocurado.info',
+  // domain: 'localhost',
   expires: new Date('2018-06-27'),
-  secure: false,
+  secure: true,
   httpOnly: true,
   storeUnencoded: false
 };
