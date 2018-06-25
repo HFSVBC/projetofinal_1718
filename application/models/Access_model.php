@@ -39,7 +39,7 @@
 			$student  = $this->db->escape($this->input->post("student_id"));
             $class    = $this->db->escape($this->input->post("class_id"));
 
-            if($student != "'null'" && $class != "'null'"){
+            if($student == "'null'" && $class == "'null'"){
                 $sql = "SELECT u.id, u.name, COUNT(u.name) AS 'attended_classes', (SELECT d.designacao FROM disciplina d WHERE a.disciplina = d.id) AS disciplina, a.data_inicio, a.data_fim
                         FROM users u, presencas p, aula a
                         WHERE u.id = p.aluno AND p.aula = a.id AND a.disciplina = $course

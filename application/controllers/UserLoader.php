@@ -130,6 +130,7 @@ class UserLoader extends CI_Controller {
 						$data = array(
 							"token" => regenerateUserToken($this->input->post('userTokenId'))[1],
 							"user" => array(
+								"found" => 1,
 								"uid" => $result[1]->googleUID,
                                 "id" => $result[1]->id,
 								"name" => $result[1]->name,
@@ -142,7 +143,12 @@ class UserLoader extends CI_Controller {
 						);
 						jsonExporter(200, $data);
 					}else{
-						jsonExporter(500, 'Error gueting user profile');
+						jsonExporter(200, array(
+							"token" => regenerateUserToken($this->input->post('userTokenId'))[1],
+							"user" => array(
+								"found" => 0,
+							)
+						));
 					}
 				}else{
 					jsonExporter(403);

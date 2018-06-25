@@ -14,7 +14,7 @@ class Room extends CI_Controller
         // header("Access-Control-Allow-Headers: Content-Type");
         parent::__construct();
 
-        $this->load->model('');
+        $this->load->model('class_model');
     }
     // shows all available rooms (where there are no classes) and there available seats
     public function getAvailableRooms()
