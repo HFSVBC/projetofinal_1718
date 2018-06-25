@@ -72,7 +72,7 @@ class Attendance extends CI_Controller
                 $token = $this->db->escape($this->input->post('userTokenId'));
                 $sql = "SELECT *
                         FROM conf_routesAccess
-                        WHERE user_type = (SELECT account_type FROM users WHERE id = (SELECT user FROM users_loggedIn WHERE token = $token)) AND route = 'teacher/retrieveClassDates/(:any)'";
+                        WHERE user_type = (SELECT account_type FROM users WHERE id = (SELECT user FROM users_loggedIn WHERE token = $token)) AND route = 'teacher/class/dates/(:any)'";
                 if(routeAccess($sql)===true){
                     $result = $this->class_model->getClassesBySubject($class_id);
                     $out = array("data"=>array());
