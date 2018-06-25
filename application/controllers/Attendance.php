@@ -293,7 +293,7 @@ class Attendance extends CI_Controller
                         FROM conf_routesAccess
                         WHERE user_type = (SELECT account_type FROM users WHERE id = (SELECT user FROM users_loggedIn WHERE token = $token)) AND route = 'teacher/course/getStudentsAttendance'";
                 if(routeAccess($sql)===true){
-                    $result = $this->access_model->();
+                    // $result = $this->access_model->();
                     $out = array("data"=>array());
                     foreach ($result as $key => $value) {
                         $thisOut = array(
