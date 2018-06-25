@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery';
-import { APIConnectorService, options } from '../service/apiconnector.service';
+// import { APIConnectorService, options } from '../service/apiconnector.service';
+import { APIConnectorService } from '../service/apiconnector.service';
 import { ResponseStatusValidatorService } from '../service/response-status-validator.service';
 import { LoaderService } from '../loader/loader.service';
 import { AlertService } from '../alerts/alert.service';
