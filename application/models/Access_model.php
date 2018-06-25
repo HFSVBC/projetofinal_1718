@@ -57,6 +57,32 @@
 
             $query = $this->db->query($sql);
             return $query->result_array();
+        }
+        
+        public function getStudentAttendance_Mine()
+		{
+            $class = $this->db->escape($this->input->post("class_id"));
+            $course	  = $this->db->escape($this->input->post("course_id"));
+            $token = $this->db->escape($this->input->post("userTokenId"));
+
+            if($student == "'null'" && $class == "'null'"){
+                $sql = "SELECT (SELECT d.designacao FROM disciplina d WHERE a.disciplina = d.id) AS disciplina, COUNT(disciplina) AS 'attendance', a.data_inicio, a.data_fim
+                        FROM users u, users_loggedIn uli,presencas p, aula a
+                        WHERE u.id = p.aluno AND p.aula = a.id AND uli.user = u.id AND uli.token = $token
+                        GROUP BY disciplina";
+            }else{
+                $sql = "SELECT (SELECT d.designacao FROM disciplina d WHERE a.disciplina = d.id) AS disciplina, a.data_inicio, a.data_fim
+                        FROM users u, users_loggedIn uli,presencas p, aula a
+                        WHERE u.id = p.aluno AND p.aula = a.id AND uli.user = u.id AND uli.token = $token";
+
+                if($course != "'null'" || is_null($course))
+                    $sql .= " AND a.disciplina = $course";
+                if($class != "'null'" || is_null($class))
+                    $sql .= " AND p.aula = $class";
+            }
+
+            $query = $this->db->query($sql);
+            return $query->result_array();
 		}
 
 		public function getIndividualStudentAttendance_Teacher()
