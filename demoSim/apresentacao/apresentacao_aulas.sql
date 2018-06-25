@@ -1,0 +1,10 @@
+INSERT INTO aula(id, data_inicio, data_fim, tipo, espaco, disciplina) VALUES(1000,'2018-06-26 09:30:00','2018-06-26 10:30:00','T',40,21);
+INSERT INTO aula(id, data_inicio, data_fim, tipo, espaco, disciplina) VALUES(1001,'2018-06-26 09:30:00','2018-06-26 10:30:00','T',41,25);
+INSERT INTO aula(id, data_inicio, data_fim, tipo, espaco, disciplina) VALUES(1002,'2018-05-30 12:00:00','2018-05-30 13:00:00','T',50,7);
+INSERT INTO aula(id, data_inicio, data_fim, tipo, espaco, disciplina) VALUES(1003,'2018-05-16 15:00:00','2018-05-16 16:30:00','T',52,8);
+INSERT INTO aula(id, data_inicio, data_fim, tipo, espaco, disciplina) VALUES(1004,'2018-05-17 17:30:00','2018-05-17 19:00:00','T',50,9);
+INSERT INTO aula(id, data_inicio, data_fim, tipo, espaco, disciplina) VALUES(1005,'2018-05-07 08:30:00','2018-05-07 10:00:00','T',40,11);
+INSERT INTO aula(id, data_inicio, data_fim, tipo, espaco, disciplina) VALUES(1006,'2018-05-07 15:00:00','2018-05-07 16:30:00','T',50,12);
+INSERT INTO aula(id, data_inicio, data_fim, tipo, espaco, disciplina) VALUES(1007,'2018-05-08 11:00:00','2018-05-08 12:00:00','T',41,5);
+INSERT INTO aula(id, data_inicio, data_fim, tipo, espaco, disciplina) VALUES(1008,'2018-05-09 16:00:00','2018-05-09 17:30:00','T',52,5);
+INSERT INTO aula(id, data_inicio, data_fim, tipo, espaco, disciplina) VALUES(1009,'2018-05-10 14:00:00','2018-05-10 15:00:00','T',40,2);
