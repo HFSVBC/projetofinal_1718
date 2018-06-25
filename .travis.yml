@@ -10,7 +10,7 @@ before_script:
   - npm install -g @angular/cli
 
 script:
-  - ng build
+  - ng build --prod
 
 deploy:
   on:
@@ -24,7 +24,7 @@ deploy:
   local_dir: dist
 
 notifications:
-  slack: 
+  slack:
     rooms:
       - $slack_id
     on_success: always
