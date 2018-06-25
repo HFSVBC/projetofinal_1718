@@ -1,0 +1,31 @@
+language: node_js
+node_js:
+  - "9.2.0"
+
+branches:
+  only:
+    - frontEnd-Deploy
+
+before_script:
+  - npm install -g @angular/cli
+
+script:
+  - ng build
+
+deploy:
+  on:
+    branch: frontEnd-Deploy
+  provider: s3
+  region: "eu-west-1"
+  access_key_id: $AWS_ACCESS_KEY_ID
+  secret_access_key: $AWS_SECRET_ACCESS_KEY
+  bucket: $s3_bucket
+  skip_cleanup: true
+  local_dir: dist
+
+notifications:
+  slack: 
+    rooms:
+      - $slack_id
+    on_success: always
+    on_failure: always
