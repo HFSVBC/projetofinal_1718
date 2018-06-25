@@ -40,7 +40,6 @@
     </div>
   </div>
 
-<<<<<<< HEAD
   <div class="card mt-3" *ngIf='user'>
     <div class="row mainInfo">
       <div class="col-md-9 p-3">
@@ -71,49 +70,6 @@
                 </select>
                 <div class="input-group-append">
                   <button title="Alterar" class="btn btn-warning" (click)="submitChange()">Alterar</button>
-=======
-    <div class="card mt-3" *ngIf='user'>
-        <div class="row mainInfo py-3">
-            <div class="col-md-9 ">
-                <div class="card-block ">
-                    <h3>{{user_name}}</h3>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label for="uid " class="col col-form-label" title="ID interno do utilizador">ID</label>
-                            <input type="text " readonly class="form-control col-sm-11 " id="uid " value="{{user_id}}">
-                        </div>
-                        <div class="col-md-6">
-                            <label for="email " class="col col-form-label" title="Utilizador activo na aplicação">Active Now</label>
-                            <input type="text " readonly class="form-control col-sm-11 " id="email " value="{{user_active === '1' ? 'True' : 'False'}}">
-                        </div>
-                        <div class="col-md-6">
-                            <label for="uid " class="col col-form-label" title="ID da google / faculdade do utilizador">UID</label>
-                            <input type="text " readonly class="form-control col-sm-11 " id="uid " value="{{user_uid}}">
-                        </div>
-                        <div class="col-md-6">
-                            <label for="uid " class="col col-form-label" title="Último login na aplicação">Last Login</label>
-                            <input type="text " readonly class="form-control col-sm-11" id="uid " value="{{user_lastLogin}}">
-                        </div>
-                        <div class="col-md-6">
-                            <label for="user_type " class="col-sm-3 col-form-label" title="Tipo de utilizador">Tipo</label>
-                            <div class="input-group col-sm-11 p-0">
-                                <select id="user_type " class="custom-select" [(ngModel)]="user_type">
-                  <option *ngFor="let user of users " [ngValue]="user.type ">{{user.type}}</option>
-                </select>
-                                <div class="input-group-append">
-                                    <button title="Alterar" class="btn btn-warning" (click)="submitChange()">Alterar</button>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <div class="col-md-3 py-3">
-                <div class="card-img-middle">
-                    <img src={{user_avatar}} class="rounded-circle" id='photoUser'>
->>>>>>> 5abbb0b664c1ae3ca55ab96950d885a73e713117
                 </div>
               </div>
 
