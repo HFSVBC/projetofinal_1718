@@ -8,7 +8,8 @@ import 'rxjs/add/operator/take';
 import 'rxjs/add/observable/from';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
-import { APIConnectorService, options } from '../service/apiconnector.service';
+// import { APIConnectorService, options } from '../service/apiconnector.service';
+import { APIConnectorService } from '../service/apiconnector.service';
 import { CookieService } from 'angular2-cookie/core';
 // import { CookieService } from 'ngx-cookie';
 
@@ -66,7 +67,8 @@ export class AuthService {
           alert('Something went wrong! Try again later.');
         } else {
           const tipo = this.getTipo(res['data']['user_type']);
-          this._cookieService.put('tipo', tipo, options);
+          // this._cookieService.put('tipo', tipo, options);
+          this._cookieService.put('tipo', tipo);
           // this._cookieService.put('token', res['data']['token'], options);
           this._cookieService.put('token', res['data']['token']);
           this.router.navigateByUrl('/dashboard');
