@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Router } from '@angular/router';
 import { AuthService } from '../providers/auth.service';
-// import { CookieService } from 'angular2-cookie/core';
-import { CookieService } from 'ngx-cookie';
+import { CookieService } from 'angular2-cookie/core';
+// import { CookieService } from 'ngx-cookie';
 
 import '@angular/animations';
 

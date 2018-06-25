@@ -1,78 +1,118 @@
 <app-menu class="col-sm-2"></app-menu>
 <div class="router">
 
-    <div class="card mb-3">
-        <h5 title="Consultar espaços" class="card-header">Consultar Espaços</h5>
+  <div class="card mb-3">
+    <h5 title="Consultar espaços" class="card-header">Consultar Espaços</h5>
 
-        <app-loader></app-loader>
+    <app-loader></app-loader>
 
-        <div class="card-body">
+    <div class="card-body">
 
-            <form class="form-inline" (ngSubmit)="onSubmit()" #searchForm="ngForm">
-                <div class="form-row justify-content-center">
-                    <div class="input-group col-sm-3">
-                        <div class="input-group-prepend">
-                            <label for="edifico" class="input-group-text" title="Edifício">
-                            <i class="material-icons">business</i>
-                            </label>
-                        </div>
-                        <select class="custom-select" id="edifico" (change)="edificioChanged()" [(ngModel)]="model.edificio" name="na_edificio" required>
-                            <option value="null">Todas os Edifícios</option>
-                            <option *ngFor="let ed of edificios" [value]="ed['bloco']">C{{ed['bloco']}}</option>
-                        </select>
-                    </div>
+      <form class="form-inline was-validated" (ngSubmit)="onSubmit()" #searchForm="ngForm">
+        <div class="form-row justify-content-center pb-3">
+          <div class="input-group col-sm-3">
+            <div class="input-group-prepend">
+              <label for="edifico" class="input-group-text" title="Edifício">
+                <i class="material-icons">business</i>
+              </label>
+            </div>
+            <select class="custom-select" id="edifico" (change)="edificioChanged()" [(ngModel)]="model.edificio" name="na_edificio" required>
+              <option value="null">Todas os Edifícios</option>
+              <option *ngFor="let ed of edificios" [value]="ed['bloco']">C{{ed['bloco']}}</option>
+            </select>
+          </div>
 
-                    <div class="input-group col-sm-3">
-                        <div class="input-group-prepend">
-                            <label for="piso" class="input-group-text" title="Piso">
-                            <i class="material-icons">trending_up</i>
-                            </label>
-                        </div>
-                        <select class="custom-select" id="piso" (change)="pisoChanged()" [(ngModel)]="model.piso" name="na_piso" required>
-                            <option value="null">Todos os Pisos</option>
-                            <option *ngFor="let p of pisos" [value]="p['piso']">{{p['piso']}}</option>
-                        </select>
-                    </div>
+          <div class="input-group col-sm-3">
+            <div class="input-group-prepend">
+              <label for="piso" class="input-group-text" title="Piso">
+                <i class="material-icons">trending_up</i>
+              </label>
+            </div>
+            <select class="custom-select" id="piso" (change)="pisoChanged()" [(ngModel)]="model.piso" name="na_piso" required>
+              <option value="null">Todos os Pisos</option>
+              <option *ngFor="let p of pisos" [value]="p['piso']">{{p['piso']}}</option>
+            </select>
+          </div>
 
-                    <div class="input-group col-sm-3">
-                        <div class="input-group-prepend">
-                            <label for="sala" class="input-group-text" title="Sala">
-                            <i class="material-icons">room</i>
-                            </label>
-                        </div>
-                        <select class="custom-select" id="sala" (change)="salaChanged()" [(ngModel)]="model.sala" name="na_sala" required>
-                            <option value="null">Todas as Salas</option>
-                            <option *ngFor="let p of salas" [value]="p['sala']">{{p['sala']}}</option>
-                        </select>
-                    </div>
+          <div class="input-group col-sm-3">
+            <div class="input-group-prepend">
+              <label for="sala" class="input-group-text" title="Sala">
+                <i class="material-icons">room</i>
+              </label>
+            </div>
+            <select class="custom-select" id="sala" (change)="salaChanged()" [(ngModel)]="model.sala" name="na_sala" required>
+              <option value="null">Todas as Salas</option>
+              <option *ngFor="let p of salas" [value]="p['sala']">{{p['sala']}}</option>
+            </select>
+          </div>
 
-                    <button type="submit" class="btn btn-success" [disabled]="loader">Procurar</button>
+        </div>
+        <div class="form-row justify-content-center">
+
+            <div class="input-group col-md-2 pb-3 pl-0">
+                <div class="input-label input-group-prepend">
+                  <label class="input-group-text mb-0" for="ca_data_i" title="Data de início do acidente">
+                    <i class="material-icons">date_range</i>
+                  </label>
                 </div>
-            </form>
+                <input type="text" class="form-control" placeholder="Data Início" id="na_data_ini" (click)="dataChanged()" [(ngModel)]="model.data_ini"
+                  name="na_data_ini" data-toggle="datepicker" required>
+                <div title="É necessário uma data de Início" class="invalid-feedback">É necessário uma Data de Início</div>
+              </div>
+
+              <div class="input-group col-md-2 pb-3 pr-0">
+                  <div class="input-label input-group-prepend">
+                    <label class="input-group-text mb-0" for="ca_data_f" title="Data de fim do acidente">
+                      <i class="material-icons">access_time</i>
+                    </label>
+                  </div>
+                  <select class="custom-select" id="hora_ini" (change)="hora_iniChange()" [(ngModel)]="model.hora_ini" name="na_hora_ini" required>
+                    <option [value]=null>Hora Início</option>
+                    <option *ngFor="let h of horas" [value]="h">{{h}}</option>
+                    </select>
+                    <div title="É necessário uma Hora de Início" class="invalid-feedback">É necessário uma Hora de Início</div>
+                </div>
+
+                <div class="input-group col-md-2 pb-3 pr-0">
+                    <div class="input-label input-group-prepend">
+                      <label class="input-group-text mb-0" for="ca_data_f" title="Data de fim do acidente">
+                        <i class="material-icons">access_time</i>
+                      </label>
+                    </div>
+                    <select class="custom-select" id="hora_fim" [(ngModel)]="model.hora_fim" name="na_hora_fim" required>
+                        <option [value]=null>Hora Fim</option>
+                        <option *ngFor="let h of horas_fim" [value]="h">{{h}}</option>
+                      </select>
+                      <div title="É necessário uma Hora de Fim" class="invalid-feedback">É necessário uma Hora de Fim</div>
+                  </div>
+
+          <button type="submit" class="btn btn-success ml-3" [disabled]="loader">Procurar</button>
         </div>
+      </form>
     </div>
+  </div>
 
-    <div class="card">
-        <div class="card-body">
+  <div class="card">
+    <div class="card-body">
 
-            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-striped table-bordered dataTable no-footer">
-                <thead>
-                    <tr>
-                        <th title="Sala">Sala</th>
-                        <th title="Número de Pessoas">Número de Pessoas</th>
-                        <th title="Lotação">Lotação</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let pos of si" role="row" class="odd">
-                        <td>{{ pos.space }}</td>
-                        <td>{{ pos.people }}</td>
-                        <td>{{ pos.max }}</td>
-                    </tr>
-                </tbody>
-            </table>
+      <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-striped table-bordered dataTable no-footer">
+        <thead>
+          <tr>
+            <th title="Sala">Sala</th>
+            <th title="Número de Pessoas">Número de Pessoas</th>
+            <th title="Lotação">Lotação</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let pos of si" role="row" class="odd">
+            <td>{{ pos.space }}</td>
+            <td>{{ pos.people }}</td>
+            <td>{{ pos.max }}</td>
+          </tr>
+        </tbody>
+      </table>
 
-        </div>
     </div>
+  </div>
 
 </div>

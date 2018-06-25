@@ -4,8 +4,8 @@ import { Subject } from 'rxjs/Subject';
 import { DataTableDirective } from 'angular-datatables';
 import { LoaderService } from '../loader/loader.service';
 import { ResponseStatusValidatorService } from '../service/response-status-validator.service';
-// import { CookieService } from 'angular2-cookie/core';
-import { CookieService } from 'ngx-cookie';
+import { CookieService } from 'angular2-cookie/core';
+// import { CookieService } from 'ngx-cookie';
 
 class SearchOptions {
   aula: string;

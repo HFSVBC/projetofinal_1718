@@ -4,8 +4,8 @@ import { Subject } from 'rxjs/Subject';
 import { DataTableDirective } from 'angular-datatables';
 import { LoaderService } from '../loader/loader.service';
 import { ResponseStatusValidatorService } from '../service/response-status-validator.service';
-// import { CookieService } from 'angular2-cookie/core';
-import { CookieService } from 'ngx-cookie';
+import { CookieService } from 'angular2-cookie/core';
+// import { CookieService } from 'ngx-cookie';
 
 class SearchOptions {
   aula: string;
@@ -80,7 +80,8 @@ export class PresencasComponent implements OnInit, AfterViewInit {
 
       console.log('res', res);
       this.model.data = 'null';
-      this._cookieService.put('token', res['data']['token'], options);
+      // this._cookieService.put('token', res['data']['token'], options);
+      this._cookieService.put('token', res['data']['token']);
       this.todasDatas = res['data']['classDates']['data'];
       this.loadStudents();
     });
@@ -95,7 +96,8 @@ export class PresencasComponent implements OnInit, AfterViewInit {
 
       console.log('res', res);
       this.model.aluno = 'null';
-      this._cookieService.put('token', res['data']['token'], options);
+      // this._cookieService.put('token', res['data']['token'], options);
+      this._cookieService.put('token', res['data']['token']);
       this.todosAlunos = res['data']['classStudents']['data'];
       this.loader = false;
       this.loaderService.hide();
@@ -117,7 +119,8 @@ export class PresencasComponent implements OnInit, AfterViewInit {
       this.respVal.validate(res);
 
       console.log('res', res);
-      this._cookieService.put('token', res['data']['token'], options);
+      // this._cookieService.put('token', res['data']['token'], options);
+      this._cookieService.put('token', res['data']['token']);
 
       if (this.model.data === 'null' && this.model.aluno === 'null') {
         this.dtOptions['aoColumnDefs'] = [{'visible': false, 'targets': -2}, {'visible': true, 'targets': -1}];
