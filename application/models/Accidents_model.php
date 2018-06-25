@@ -58,13 +58,13 @@
             if($accident_room != "'null'")
                 $sql .= " AND e.sala = $accident_room";
             if($token != "'null'")
-                $sql .= " AND u.user IN (SELECT u.id
-                                         FROM users u
-                                         WHERE u.account_type = (SELECT u2.account_type
+                $sql .= " AND u.id IN (SELECT ui.id
+                                         FROM users ui
+                                         WHERE ui.account_type = (SELECT u2.account_type
                                                                  FROM users u2
                                                                  WHERE u2.id = (SELECT ul.user
                                                                                 FROM users_loggedIn ul
-                                                                                WHERE ul.token = $token))";
+                                                                                WHERE ul.token = $token)))";
 
             $query = $this->db->query($sql);
             return $query->result_array();
