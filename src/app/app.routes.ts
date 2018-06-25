@@ -77,11 +77,11 @@ export const router: Routes = [
     component: EspacosComponent,
     canActivate: [SecurityService]
   },
-  {
-    path: 'criar-acessos',
-    component: CriarAcessosComponent,
-    canActivate: [SecurityService]
-  },
+  // {
+  //   path: 'criar-acessos',
+  //   component: CriarAcessosComponent,
+  //   canActivate: [SecurityService]
+  // },
   {
     path: 'acidentes',
     component: AcidentesComponent,

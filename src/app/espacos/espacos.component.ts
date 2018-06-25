@@ -176,7 +176,7 @@ export class EspacosComponent implements OnInit, AfterViewInit {
       console.log('res', res);
       // this._cookieService.put('token', res['data']['token'], options);
       this._cookieService.set('token', res['data']['token']);
-      this.extractData(res['data']['accessHist']);
+      this.extractData(res['data']['rooms']);
       this.loaderService.hide();
     });
   }

@@ -1,15 +1,15 @@
 <app-menu class="col-sm-2"></app-menu>
 <div class="router">
-    <div class="row">
-        <div class="col-lg-6 pb-3 pl-0">
+  <div class="row">
+    <div class="col-lg-6 pb-3 pl-0">
 
-            <div id="accordion">
-                <div class="card">
-                    <div class="card-header" id="headingOne">
-                        <h5 title="Novo acidente" class="" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            Novo Acidente
-                        </h5>
-                    </div>
+      <div id="accordion">
+        <div class="card">
+          <div class="card-header" id="headingOne">
+            <h5 title="Novo acidente" class="" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              Novo Acidente
+            </h5>
+          </div>
 
           <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
             <div class="card-body">
@@ -107,11 +107,9 @@
 
     </div>
 
-<<<<<<< HEAD
-    <div class="col-lg-6 pb-3">
-=======
-        <div class="col-lg-6 pb-3 pr-0">
->>>>>>> 5abbb0b664c1ae3ca55ab96950d885a73e713117
+
+
+    <div class="col-lg-6 pb-3 pr-0">
 
       <div id="accordion">
         <div class="card">
@@ -208,7 +206,6 @@
       </div>
     </div>
   </div>
-</div>
 
 <div *ngIf="semAcidentes" class="card">
   <div class="card-header">
@@ -231,19 +228,6 @@
       <h5 class="head-card" data-toggle="collapse" [attr.data-target]="'#collapse' + acid.id" aria-expanded="true" [attr.aria-controls]="'collapse' + acid.id">
         Acidente {{acid.date_open}}
       </h5>
-      <!-- <button type="button" class="btn btn-primary float-right">
-          <h5 class="float-left pr-3" >Estado</h5>
-          <span class="badge badge-success">
-            <i class="material-icons" title="Acidente fechado">
-              check
-            </i>
-          </span>
-          <span class="badge badge-warning" (click)="closeAccident()">
-            <i class="material-icons" title="Fechar Acidente" >
-              close
-            </i>
-          </span>
-        </button> -->
     </div>
 
     <div [attr.id]="'collapse' + acid.id" class="collapse" [ngClass]="{'show': i == 0}" [attr.aria-labelledby]="'heading' + acid.id"

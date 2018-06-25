@@ -231,7 +231,7 @@ export class AcidentesComponent implements OnInit {
     }
 
     const data = new FormData();
-
+    console.log('url', url);
     this.token = data.append('userTokenId', this._cookieService.get('token'));
     data.append('type', this.model1.tipo);
     data.append('block', this.model1.edificio);
@@ -248,18 +248,13 @@ export class AcidentesComponent implements OnInit {
       // this._cookieService.put('token', res['data']['token'], options);
       this._cookieService.set('token', res['data']['token']);
 
-      this.semAcidentes = (res['data']['accidents']['data'] === 0);
+      this.semAcidentes = (res['data']['accidents']['data'].length === 0);
+      console.log(this.semAcidentes);
 
       this.acidentes = res['data']['accidents']['data'];
 
       this.loaderService.hide();
 
-      // this.model1.tipo = 'null';
-      // this.model1.edificio = 'null';
-      // this.model1.piso = 'null';
-      // this.model1.sala = 'null';
-      // this.model1.data_ini = '';
-      // this.model1.data_fim = '';
       this.active1 = false;
     });
   }
