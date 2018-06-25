@@ -6,7 +6,8 @@ import { EmailValidator } from '@angular/forms';
 import { AuthService } from '../providers/auth.service';
 import { AlertService } from '../alerts/alert.service';
 import { ResponseStatusValidatorService } from '../service/response-status-validator.service';
-import { CookieService } from 'angular2-cookie/core';
+// import { CookieService } from 'angular2-cookie/core';
+import { CookieService } from 'ngx-cookie-service';
 // import { CookieService } from 'ngx-cookie';
 
 @Component({
@@ -73,7 +74,7 @@ export class AdminComponent implements OnInit {
       this.respVal.validate(res);
 
       // this._cookieService.put('token', res['data']['token'], options);
-      this._cookieService.put('token', res['data']['token']);
+      this._cookieService.set('token', res['data']['token']);
       console.log('user', res);
 
       this.user = res['data']['user'];
@@ -119,7 +120,7 @@ export class AdminComponent implements OnInit {
 
       console.log('cenas', res);
       // this._cookieService.put('token', res['data']['token'], options);
-      this._cookieService.put('token', res['data']['token']);
+      this._cookieService.set('token', res['data']['token']);
     });
   }
 

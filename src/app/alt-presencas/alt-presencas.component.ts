@@ -6,7 +6,8 @@ import { Subject } from 'rxjs/Subject';
 import { DataTableDirective } from 'angular-datatables';
 import * as $ from 'jquery';
 import { ResponseStatusValidatorService } from '../service/response-status-validator.service';
-import { CookieService } from 'angular2-cookie/core';
+// import { CookieService } from 'angular2-cookie/core';
+import { CookieService } from 'ngx-cookie-service';
 // import { CookieService } from 'ngx-cookie';
 
 class AltPresenca {
@@ -71,7 +72,7 @@ export class AltPresencasComponent implements OnInit, AfterViewInit {
 
       console.log('res', res);
       // this._cookieService.put('token', res['data']['token'], options);
-      this._cookieService.put('token', res['data']['token']);
+      this._cookieService.set('token', res['data']['token']);
       this.todasAulas = res['data']['teacherSubjects']['data'];
       this.model.aula = this.todasAulas[0]['id'];
       this.aulaChange();
@@ -96,7 +97,7 @@ export class AltPresencasComponent implements OnInit, AfterViewInit {
 
       console.log('res', res);
       // this._cookieService.put('token', res['data']['token'], options);
-      this._cookieService.put('token', res['data']['token']);
+      this._cookieService.set('token', res['data']['token']);
       console.log('studant', res['data']['studentAttendance']);
       this.extractData(res['data']['studentAttendance']);
       this.loaderService.hide();
@@ -122,7 +123,7 @@ export class AltPresencasComponent implements OnInit, AfterViewInit {
 
       console.log('res', res);
       // this._cookieService.put('token', res['data']['token'], options);
-      this._cookieService.put('token', res['data']['token']);
+      this._cookieService.set('token', res['data']['token']);
       this.todasDatas = res['data']['classDates']['data'];
       this.model.data = 'null';
     });
@@ -143,7 +144,7 @@ export class AltPresencasComponent implements OnInit, AfterViewInit {
 
       console.log('res', res);
       // this._cookieService.put('token', res['data']['token'], options);
-      this._cookieService.put('token', res['data']['token']);
+      this._cookieService.set('token', res['data']['token']);
       this.ErroAlterar = (res['data']['changeStudentAttendance']);
       this.onSubmit();
       this.alterarLoader = false;
