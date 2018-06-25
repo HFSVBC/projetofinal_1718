@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { APIConnectorService, options } from '../service/apiconnector.service';
+// import { APIConnectorService, options } from '../service/apiconnector.service';
+import { APIConnectorService } from '../service/apiconnector.service';
 import { LoaderService } from '../loader/loader.service';
 import { EmailValidator } from '@angular/forms';
 import { AuthService } from '../providers/auth.service';

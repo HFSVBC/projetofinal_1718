@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { APIConnectorService, options } from '../service/apiconnector.service';
+// import { APIConnectorService, options } from '../service/apiconnector.service';
+import { APIConnectorService } from '../service/apiconnector.service';
 import { LoaderService } from '../loader/loader.service';
 import { Subject } from 'rxjs/Subject';
 import { DataTableDirective } from 'angular-datatables';
