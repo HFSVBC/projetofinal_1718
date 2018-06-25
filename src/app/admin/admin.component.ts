@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { APIConnectorService, options } from '../service/apiconnector.service';
+import { CookieService } from 'angular2-cookie/core';
+import { APIConnectorService } from '../service/apiconnector.service';
 import { LoaderService } from '../loader/loader.service';
 import { EmailValidator } from '@angular/forms';
 import { AuthService } from '../providers/auth.service';
 import { AlertService } from '../alerts/alert.service';
 import { ResponseStatusValidatorService } from '../service/response-status-validator.service';
-// import { CookieService } from 'angular2-cookie/core';
-import { CookieService } from 'ngx-cookie';
 
 @Component({
   selector: 'app-admin',
@@ -14,14 +13,18 @@ import { CookieService } from 'ngx-cookie';
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent implements OnInit {
-  email; user;
-  u_number; user_name;
-  user_email; user_active;
+  email;
+  user;
+  u_number;
+  user_name;
+  user_email;
+  user_active;
   user_lastLogin;
-  user_uid; user_id;
-  user_type; user_avatar;
+  user_uid;
+  user_id;
+  user_type;
+  user_avatar;
   loader = true;
-  userNotFound = false;
 
   types = {
     'student' : 0,
@@ -71,23 +74,17 @@ export class AdminComponent implements OnInit {
 
       this.respVal.validate(res);
 
-      this._cookieService.put('token', res['data']['token'], options);
+      this._cookieService.put('token', res['data']['token']);
       console.log('user', res);
-
       this.user = res['data']['user'];
-
-      if (this.user.found === 1) {
-        this.user_name = this.user.name;
-        this.user_email = this.user.email;
-        this.user_uid = this.user.uid;
-        this.user_id = this.user.id;
-        this.user_type = this.user.user_type;
-        this.user_avatar = this.user.avatar;
-        this.user_active = this.user.active;
-        this.user_lastLogin = this.user.last_login;
-      } else {
-        this.userNotFound = true;
-      }
+      this.user_name = this.user.name;
+      this.user_email = this.user.email;
+      this.user_uid = this.user.uid;
+      this.user_id = this.user.id;
+      this.user_type = this.user.user_type;
+      this.user_avatar = this.user.avatar;
+      this.user_active = this.user.active;
+      this.user_lastLogin = this.user.last_login;
 
       this.loaderService.hide();
 
@@ -95,7 +92,7 @@ export class AdminComponent implements OnInit {
   }
 
   emailChanged() {
-    if (this.email.length > 0 && this.email.search('@') > 0) {
+    if (this.email.length > 0) {
       this.loader = false;
     } else {
       this.loader = true;
@@ -116,7 +113,7 @@ export class AdminComponent implements OnInit {
       this.alertService.show('Tipo de utilizador trocado', 'success');
 
       console.log('cenas', res);
-      this._cookieService.put('token', res['data']['token'], options);
+      this._cookieService.put('token', res['data']['token']);
     });
   }
 

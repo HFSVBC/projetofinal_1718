@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import * as $ from 'jquery';
-import { APIConnectorService, options } from '../service/apiconnector.service';
+import { APIConnectorService } from '../service/apiconnector.service';
 import { ResponseStatusValidatorService } from '../service/response-status-validator.service';
+import { CookieService } from 'angular2-cookie/core';
 import { LoaderService } from '../loader/loader.service';
 import { AlertService } from '../alerts/alert.service';
 import '@fengyuanchen/datepicker';
-// import { CookieService } from 'angular2-cookie/core';
-import { CookieService } from 'ngx-cookie';
 
 class Acidente {
   tipo: string;
@@ -39,12 +39,9 @@ export class AcidentesComponent implements OnInit {
   acidenteForm; token;
   edificios = []; pisos = []; salas = [];
   loader = false; active = false;
-  showAcidentes = false; active1 = false;
-  semAcidentes = false;
+  showAcidentes = false;
 
-  acidentes = [];
-
-  acidentes1 = [{
+  acidentes = [{
     id: '1',
     tipo: 'Incendio',
     edificio: '6',
@@ -69,36 +66,15 @@ export class AcidentesComponent implements OnInit {
       private _cookieService: CookieService, private loaderService: LoaderService, private alertService: AlertService) { }
 
   ngOnInit() {
-
     $(document).ready(function() {
-      (<any>$()).on('hide.datepicker', function (e) {
-        console.log('eventdate', e.date);
-        this.model.data = e.date;
-      });
       (<any>$('#na_data')).datepicker({
         endDate: new Date(),
-        format: 'yyyy-mm-dd',
-      });
-      (<any>$('#na_data_ini')).datepicker({
-        endDate: new Date(),
-        format: 'yyyy-mm-dd',
-      });
-      (<any>$('#na_data_fim')).datepicker({
-        endDate: new Date(),
-        format: 'yyyy-mm-dd',
+        format: 'dd-mm-yyyy',
       });
     });
     this.model.tipo = '';
     this.model.descricao = '';
     this.model.data = '';
-    this.model.tipo = 'Perda';
-
-    this.model1.tipo = 'null';
-    this.model1.edificio = 'null';
-    this.model1.piso = 'null';
-    this.model1.sala = 'null';
-    this.model1.data_ini = '';
-    this.model1.data_fim = '';
 
     const url = this.apiconnector.getEdificios;
     const data = new FormData();
@@ -107,7 +83,7 @@ export class AcidentesComponent implements OnInit {
     this.apiconnector.postData(url, data).subscribe(res => {
       this.respVal.validate(res);
 
-      this._cookieService.put('token', res['data']['token'], options);
+      this._cookieService.put('token', res['data']['token']);
 
       this.edificios = res['data']['blocks']['data'];
       this.model.edificio = res['data']['blocks']['data'][0]['bloco'];
@@ -125,7 +101,7 @@ export class AcidentesComponent implements OnInit {
     this.apiconnector.postData(url, data).subscribe(res => {
       this.respVal.validate(res);
 
-      this._cookieService.put('token', res['data']['token'], options);
+      this._cookieService.put('token', res['data']['token']);
 
       this.pisos = res['data']['floors']['data'];
       this.model.piso = res['data']['floors']['data'][0]['piso'];
@@ -145,7 +121,7 @@ export class AcidentesComponent implements OnInit {
     this.apiconnector.postData(url, data).subscribe(res => {
       this.respVal.validate(res);
 
-      this._cookieService.put('token', res['data']['token'], options);
+      this._cookieService.put('token', res['data']['token']);
       this.salas = res['data']['rooms']['data'];
       console.log('cenas', res['data']['rooms']['data']);
       this.model.sala = res['data']['rooms']['data'][0]['sala'];
@@ -156,16 +132,6 @@ export class AcidentesComponent implements OnInit {
     this.model.data = (<any>$('#na_data')).datepicker('getDate', true);
   }
 
-  dataIniChanged() {
-    this.model1.data_ini = (<any>$('#na_data_ini')).datepicker('getDate', true);
-    this.active1 = this.model1.data_ini.length > 5 && this.model1.data_fim.length > 5;
-  }
-
-  dataFimChanged() {
-    this.model1.data_fim = (<any>$('#na_data_fim')).datepicker('getDate', true);
-    this.active1 = this.model1.data_ini.length > 5 && this.model1.data_fim.length > 5;
-  }
-
   newModel() {
     this.model.tipo = '';
     this.model.data = '';
@@ -174,16 +140,11 @@ export class AcidentesComponent implements OnInit {
     console.log('Modelo', this.model);
   }
 
-  closeAccident() {
-    console.log('cliclou');
-  }
-
   onSubmit() {
     console.log('Modelo', this.model);
     this.loaderService.show();
-    this.model.data = (<any>$('#na_data')).datepicker('getDate', true);
 
-    const url = this.apiconnector.newAcidente;
+    const url = this.apiconnector.getAulasDeUmAluno;
 
     const data = new FormData();
     this.token = data.append('userTokenId', this._cookieService.get('token'));
@@ -200,7 +161,7 @@ export class AcidentesComponent implements OnInit {
       this.alertService.show('Acidente criado com sucesso!', 'success');
 
       console.log('res', res);
-      this._cookieService.put('token', res['data']['token'], options);
+      this._cookieService.put('token', res['data']['token']);
       this.loaderService.hide();
     });
   }
@@ -210,51 +171,29 @@ export class AcidentesComponent implements OnInit {
     (<any>$('#collapseTwo')).removeClass('show');
     this.showAcidentes = true;
     (<any>$('#collapse1')).addClass('show');
-    console.log('Modelo1', this.model1);
-    this.loaderService.show();
+    // console.log('Modelo', this.model);
+    // this.loaderService.show();
 
-    this.model1.data_ini = (<any>$('#na_data_ini')).datepicker('getDate', true);
-    this.model1.data_fim = (<any>$('#na_data_fim')).datepicker('getDate', true);
+    // const url = this.apiconnector.getAulasDeUmAluno;
+    // const data = new FormData();
 
-    let url;
+    // this.token = data.append('userTokenId', this._cookieService.get('token'));
+    // data.append('type', this.model1.tipo);
+    // data.append('block', this.model1.edificio);
+    // data.append('floor', this.model1.piso);
+    // data.append('room', this.model1.sala);
+    // data.append('date_ini', this.model1.data_ini);
+    // data.append('date_end', this.model1.data_fim);
 
-    if (this._cookieService.get('tipo') === '10' || this._cookieService.get('tipo') === '3') {
-      url = this.apiconnector.getAcidenteAll;
-    } else {
-      url = this.apiconnector.getAcidenteOthers;
-    }
+    // this.apiconnector.postData(url, data).subscribe(res => {
+    //   this.respVal.validate(res);
 
-    const data = new FormData();
+    //   this.alertService.show('Acidente criado com sucesso!', 'success');
 
-    this.token = data.append('userTokenId', this._cookieService.get('token'));
-    data.append('type', this.model1.tipo);
-    data.append('block', this.model1.edificio);
-    data.append('floor', this.model1.piso);
-    data.append('room', this.model1.sala);
-    data.append('data_ini', this.model1.data_ini);
-    data.append('data_fim', this.model1.data_fim);
-
-    this.apiconnector.postData(url, data).subscribe(res => {
-      this.respVal.validate(res);
-
-      console.log('res', res);
-
-      this._cookieService.put('token', res['data']['token'], options);
-
-      this.semAcidentes = (res['data']['accidents']['data'] === 0);
-
-      this.acidentes = res['data']['accidents']['data'];
-
-      this.loaderService.hide();
-
-      // this.model1.tipo = 'null';
-      // this.model1.edificio = 'null';
-      // this.model1.piso = 'null';
-      // this.model1.sala = 'null';
-      // this.model1.data_ini = '';
-      // this.model1.data_fim = '';
-      this.active1 = false;
-    });
+    //   console.log('res', res);
+    //   this._cookieService.put('token', res['data']['token']);
+    //   this.loaderService.hide();
+    // });
   }
 
   verify(field) {

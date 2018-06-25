@@ -19,7 +19,6 @@ import { AuthService } from './providers/auth.service';
 // Services
 import { APIConnectorService } from './service/apiconnector.service';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
-import { CookieModule } from 'ngx-cookie';
 
 // Routes
 import { routes } from './app.routes';
@@ -82,7 +81,6 @@ import { PresencasAlunoComponent } from './presencas-aluno/presencas-aluno.compo
     AngularFireAuthModule,
     DataTablesModule,
     FormsModule,
-    CookieModule.forRoot()
   ],
   providers: [
     AuthService,

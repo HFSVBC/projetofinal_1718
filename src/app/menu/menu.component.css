@@ -12,10 +12,6 @@
     display: block!important;
 }
 
-.toggleDropdownStyle {
-    display: block!important;
-}
-
 .router {
     position: absolute !important;
     right: 0 !important;

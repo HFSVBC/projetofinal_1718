@@ -6,8 +6,7 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/take';
 import 'rxjs/add/observable/from';
-// import { CookieService } from 'angular2-cookie/core';
-import { CookieService } from 'ngx-cookie';
+import { CookieService } from 'angular2-cookie/core';
 
 @Injectable()
 export class SecurityService implements CanActivate {

@@ -2,7 +2,7 @@
 <div class="router">
 
   <div class="card mb-1">
-    <h5 title="Consultar Presenças nas Aulas" class="card-header">Consultar Presenças nas Aulas</h5>
+    <h5 class="card-header">Consultar Presenças nas Aulas</h5>
 
     <app-loader></app-loader>
 
@@ -11,7 +11,7 @@
         <div class="form-row">
           <div class="input-group col-lg-4 pb-3">
             <div class="input-group-prepend">
-              <label class="input-group-text mb-0" for="na_aula" title="Aula a pesquisar">
+              <label class="input-group-text mb-0" for="na_aula">
                 <i class="material-icons">class</i>
               </label>
             </div>
@@ -22,7 +22,7 @@
 
           <div class="input-group col-lg-4 pb-3">
             <div class="input-group-prepend">
-              <label class="input-group-text mb-0" for="na_data" title="Data da aula">
+              <label class="input-group-text mb-0" for="na_data">
                 <i class="material-icons">date_range</i>
               </label>
             </div>
@@ -34,7 +34,7 @@
 
           <div class="input-group col-lg-3 pb-3">
             <div class="input-group-prepend">
-              <label class="input-group-text mb-0" for="na_aluno" title="Aluno a pesquisar">
+              <label class="input-group-text mb-0" for="na_aluno">
                 <i class="material-icons">person</i>
               </label>
             </div>
@@ -45,7 +45,7 @@
           </div>
 
           <div class="input-group col-lg-1 pb-3">
-            <button title="Procurar" type="submit" class="btn btn-success" [disabled]="loader">Procurar</button>
+            <button type="submit" class="btn btn-success" [disabled]="loader">Procurar</button>
           </div>
         </div>
       </form>
@@ -59,9 +59,8 @@
         <thead>
           <tr>
             <th>#</th>
-            <th title="Aluno">Aluno</th>
-            <th title="Data">Data</th>
-            <th title="Presenças">Presenças</th>
+            <th>Aluno</th>
+            <th>Data</th>
           </tr>
         </thead>
         <tbody>
@@ -69,7 +68,6 @@
             <td>{{ pos.student_id }}</td>
             <td>{{ pos.student_name }}</td>
             <td>{{ pos.date_ini }}</td>
-            <td>{{ pos.attended_classes }}</td>
           </tr>
         </tbody>
       </table>

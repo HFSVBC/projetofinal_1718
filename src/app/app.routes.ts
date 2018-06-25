@@ -35,8 +35,8 @@ export const router: Routes = [
     path: '',
     redirectTo: 'dashboard',
     pathMatch: 'full',
-    canActivate: [AuthService]
-    // canActivate: [AdminService]
+    // canActivate: [AuthService]
+    canActivate: [AdminService]
   },
   {
     path: 'login',
@@ -85,7 +85,7 @@ export const router: Routes = [
   {
     path: 'acidentes',
     component: AcidentesComponent,
-    canActivate: [AllService]
+    canActivate: [SecurityService]
   },
   {
     path: 'admin',

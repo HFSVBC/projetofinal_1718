@@ -1,23 +1,26 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/take';
 import 'rxjs/add/observable/from';
-import { CookieOptions } from 'ngx-cookie';
 
 @Injectable()
 export class APIConnectorService {
 
   constructor(private http: HttpClient) { }
 
-  private baseURL = 'https://api.cafcul.hugocurado.info/';
+  // private baseURL = 'http://localhost:8888/';
+  private baseURL = 'https://bcapi.hugocurado.info/';
+  // private baseURL = 'https://cafcul.hugocurado.info/';
+  // private baseURL = 'https://0a024cd4.ngrok.io/';
 
   // USER Routes
   loginPOST = this.baseURL + 'user/login';
   logoutPOST = this.baseURL + 'user/logout';
   isloggedinPOST = this.baseURL + 'user/isloggedin';
+  // registerPOST = this.baseURL + 'user/register';
   existsPOST = this.baseURL + 'user/exists';
   retriveprofilePOST = this.baseURL + 'user/retriveprofile';
 
@@ -34,10 +37,7 @@ export class APIConnectorService {
   getAlunosNomesAulas = this.baseURL + 'teacher/class/students/';
   getAlunosAulas = this.baseURL + 'teacher/course/getStudentsAttendance';
   getAulasDeUmAluno = this.baseURL + 'teacher/individual/getStudentsAttendance';
-  changeAulasDeUmAluno = this.baseURL + 'teacher/individual/changeStudentsAttendance';
-  newAcidente = this.baseURL + 'accident/new';
-  getAcidenteAll = this.baseURL + 'accident/getAll';
-  getAcidenteOthers = this.baseURL + 'accident/getOthers';
+  changetAulasDeUmAluno = this.baseURL + 'teacher/individual/changeStudentsAttendance';
 
   historico = this.baseURL + 'history/user';
   presencas = this.baseURL +  'presencas';
@@ -74,13 +74,3 @@ export class APIConnectorService {
     });*/
   }
 }
-
-export const options: CookieOptions = {
-  path: '/',
-  // domain: 'cafcul.hugocurado.info',
-  domain: 'localhost',
-  expires: new Date('2018-06-27'),
-  secure: false,
-  httpOnly: true,
-  storeUnencoded: false
-};
