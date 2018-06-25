@@ -19,6 +19,7 @@ export class MenuComponent implements OnInit {
   private user;
   tipo;
   toggleMenu = false;
+  toggleDropdown = false;
 
   constructor(public authService: AuthService, public angularAuth: AngularFireAuth, private router: Router,
   private _cookieService: CookieService) {
@@ -40,6 +41,14 @@ export class MenuComponent implements OnInit {
       this.toggleMenu = false;
     } else {
       this.toggleMenu = true;
+    }
+  }
+
+  onToggleDropdown() {
+    if (this.toggleDropdown === true) {
+      this.toggleDropdown = false;
+    } else {
+      this.toggleDropdown = true;
     }
   }
 }

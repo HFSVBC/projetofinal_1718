@@ -1,97 +1,96 @@
 <app-menu class="col-sm-2"></app-menu>
 <div class="router">
 
-  <div class="card">
-    <h5 class="card-header">Alterar Tipo de Utilizador</h5>
+    <div class="card">
+        <h5 class="card-header">Alterar Tipo de Utilizador</h5>
 
-    <app-loader></app-loader>
+        <app-loader></app-loader>
 
-    <div class="card-body">
+        <div class="card-body">
 
-      <form (ngSubmit)="onSubmit()">
-        <div class="form-row" id='user_row'>
-          <div class="input-group col-sm-5">
-            <div class="input-group-prepend">
-              <label class="input-group-text mb-0" for="na_email" title="Email da pessoa para pesquisar">
+            <form (ngSubmit)="onSubmit()">
+                <div class="form-row" id='user_row'>
+                    <div class="input-group col-sm-5">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text mb-0" for="na_email" title="Email da pessoa para pesquisar">
                 <i class="material-icons">person</i>
               </label>
-            </div>
-            <input type="email" class="form-control" (keyup)="emailChanged()" placeholder="Email do utilizador" id="email" [(ngModel)]="email"
-              name="email" required>
-            <div title="É necessário um email válido" class="invalid-feedback">É necessário um Email válido</div>
-          </div>
-          <button type="submit" class="btn btn-success" [disabled]="loader" title="Pesquisar email">Pesquisar</button>
+                        </div>
+                        <input type="email" class="form-control" (keyup)="emailChanged()" placeholder="Email do utilizador" id="email" [(ngModel)]="email" name="email" required>
+                        <div title="É necessário um email válido" class="invalid-feedback">É necessário um Email válido</div>
+                    </div>
+                    <button type="submit" class="btn btn-success" [disabled]="loader" title="Pesquisar email">Pesquisar</button>
+                </div>
+            </form>
         </div>
-      </form>
-    </div>
-  </div>
-
-  <div *ngIf="userNotFound" class="card">
-    <div class="card-header">
-      <h5 title="Novo acidente" class="" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-        Utilizador não encontrado
-      </h5>
     </div>
 
-    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-      <div class="card-body">
-        <p>Não existe um utilizador com esse email.</p>
+    <div *ngIf="userNotFound" class="card">
+      <div class="card-header">
+        <h5 title="Novo acidente" class="" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Utilizador não encontrado
+        </h5>
+      </div>
+
+      <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+        <div class="card-body">
+          <p>Não existe um utilizador com esse email.</p>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="card mt-3" *ngIf='user'>
-    <div class="row mainInfo">
-      <div class="col-md-9 ">
-        <div class="card-block ">
-          <h3>{{user_name}}</h3>
-          <div class="row">
-            <div class="col-md-6">
-              <label for="uid " class="col-sm-3 col-form-label" title="ID interno do utilizador">ID</label>
-              <input type="text " readonly class="form-control col-sm-11 " id="uid " value="{{user_id}}">
-            </div>
-            <div class="col-md-6">
-              <label for="email " class="col-sm-3 col-form-label" title="Utilizador activo na aplicação">Active Now</label>
-              <input type="text " readonly class="form-control col-sm-11 " id="email " value="{{user_active === '1' ? 'True' : 'False'}}">
-            </div>
-            <div class="col-md-6">
-              <label for="uid " class="col-sm-3 col-form-label" title="ID da google / faculdade do utilizador">UID</label>
-              <input type="text " readonly class="form-control col-sm-11 " id="uid " value="{{user_uid}}">
-            </div>
-            <div class="col-md-6">
-              <label for="uid " class="col-sm-3 col-form-label" title="Último login na aplicação">Last Login</label>
-              <input type="text " readonly class="form-control col-sm-11" id="uid " value="{{user_lastLogin}}">
-            </div>
-            <div class="col-md-6">
-              <label for="user_type " class="col-sm-3 col-form-label" title="Tipo de utilizador">Tipo</label>
-              <div class="input-group col-sm-11 p-0">
-                <select id="user_type " class="custom-select" [(ngModel)]="user_type">
+    <div class="card mt-3" *ngIf='user'>
+        <div class="row mainInfo">
+            <div class="col-md-9 ">
+                <div class="card-block ">
+                    <h3>{{user_name}}</h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="uid " class="col-sm-3 col-form-label" title="ID interno do utilizador">ID</label>
+                            <input type="text " readonly class="form-control col-sm-11 " id="uid " value="{{user_id}}">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="email " class="col-sm-3 col-form-label" title="Utilizador activo na aplicação">Active Now</label>
+                            <input type="text " readonly class="form-control col-sm-11 " id="email " value="{{user_active === '1' ? 'True' : 'False'}}">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="uid " class="col-sm-3 col-form-label" title="ID da google / faculdade do utilizador">UID</label>
+                            <input type="text " readonly class="form-control col-sm-11 " id="uid " value="{{user_uid}}">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="uid " class="col-sm-3 col-form-label" title="Último login na aplicação">Last Login</label>
+                            <input type="text " readonly class="form-control col-sm-11" id="uid " value="{{user_lastLogin}}">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="user_type " class="col-sm-3 col-form-label" title="Tipo de utilizador">Tipo</label>
+                            <div class="input-group col-sm-11 p-0">
+                                <select id="user_type " class="custom-select" [(ngModel)]="user_type">
                   <option *ngFor="let user of users " [ngValue]="user.type ">{{user.type}}</option>
                 </select>
-                <div class="input-group-append">
-                  <button title="Alterar" class="btn btn-warning" (click)="submitChange()">Alterar</button>
+                                <div class="input-group-append">
+                                    <button title="Alterar" class="btn btn-warning" (click)="submitChange()">Alterar</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
                 </div>
-              </div>
-
             </div>
-          </div>
-
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="card-img-middle">
-          <img src={{user_avatar}} class="rounded-circle" id='photoUser'>
-        </div>
-        <a href="mailto:{{user_email}}">
-          <div class="input-group justify-content-center">
-            <div class="input-group-prepend">
-              <div class="input-group-text btn btn-cafcul" id="btnGroupAddon">@</div>
+            <div class="col-md-3">
+                <div class="card-img-middle">
+                    <img src={{user_avatar}} class="rounded-circle" id='photoUser'>
+                </div>
+                <a href="mailto:{{user_email}}">
+                    <div class="input-group justify-content-center">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text btn btn-cafcul" id="btnGroupAddon">@</div>
+                        </div>
+                        <input type="button" class="form-control btn btn-cafcul" id="btnCont" value="Contactar">
+                    </div>
+                </a>
             </div>
-            <input type="button" class="form-control btn btn-cafcul" id="btnCont" value="Contactar">
-          </div>
-        </a>
-      </div>
+        </div>
     </div>
-  </div>
 
 </div>
