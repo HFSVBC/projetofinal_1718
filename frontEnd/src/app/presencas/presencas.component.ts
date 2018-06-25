@@ -120,7 +120,13 @@ export class PresencasComponent implements OnInit, AfterViewInit {
       this._cookieService.put('token', res['data']['token'], options);
 
       if (this.model.data === 'null' && this.model.aluno === 'null') {
-        this.countPresencas = true;
+        this.dtOptions['aoColumnDefs'] = [{'visible': false, 'targets': -2}, {'visible': true, 'targets': -1}];
+        this.dtOptions['columnDefs'] = [{'visible': false, 'targets': -2}, {'visible': true, 'targets': -1}];
+        console.log('dtOpt', this.dtOptions);
+      } else {
+        this.dtOptions['aoColumnDefs'] = [{'visible': true, 'targets': -2}, {'visible': false, 'targets': -1}];
+        this.dtOptions['columnDefs'] = [{'visible': true, 'targets': -2}, {'visible': false, 'targets': -1}];
+        console.log('dtOpt', this.dtOptions);
       }
 
       this.extractData(res['data']['studentAttendance']);
