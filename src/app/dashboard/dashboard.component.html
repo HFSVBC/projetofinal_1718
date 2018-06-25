@@ -5,14 +5,14 @@
         <h5 class="card-header">Perfil</h5>
         <div class="row">
             <div class="col-md-3 card-img-middle">
-                <img src={{user_avatar}} id='photoUser' class="rounded-circle">
+                <img src={{user_avatar}} id='photoUser' class="rounded-circle" alt="Foto do utilizador">
             </div>
 
             <div class="col-md-9" id="pad">
-                <h5 class="card-title">{{user_name}}</h5>
-                <p class="card-text">Email: {{user_email}}</p>
-                <p class="card-text">UID: {{user_uid}}</p>
-                <p class="card-text">Tipo: {{user_type}}</p>
+                <h5 title="Nome do utilizador" class="card-title">{{user_name}}</h5>
+                <p title="Email do utilizador" class="card-text">Email: {{user_email}}</p>
+                <p title="ID do utilizador" class="card-text">UID: {{user_uid}}</p>
+                <p title="Tipo de utilizador" class="card-text">Tipo: {{user_type}}</p>
             </div>
         </div>
     </div>
@@ -20,14 +20,14 @@
     <div class="row">
         <div class=" col-md-6" id="padTop">
             <div class="card">
-                <h5 class="card-header">Histórico de Acessos</h5>
+                <h5 title="Histórico de acessos" class="card-header">Histórico de Acessos</h5>
                 <div class="p-3">
                     <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-striped dataTable no-footer p-0">
                         <thead>
                             <tr>
-                                <th>Sala</th>
-                                <th>Hora de Entrada</th>
-                                <th>Hora de Saida</th>
+                                <th title="Sala">Sala</th>
+                                <th title="Hora de Entrada">Hora de Entrada</th>
+                                <th title="Hora de Saida">Hora de Saida</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -38,21 +38,21 @@
                             </tr>
                         </tbody>
                     </table>
-                    <a href="/historico" class="btn mt-3 float-right">Mais informação</a>
+                    <a title="Mais informação" routerLink="/historico" class="btn mt-3 float-right">Mais informação</a>
                 </div>
             </div>
         </div>
 
         <div class=" col-md-6" id="padBottom">
             <div class="card">
-                <h5 class="card-header">Presenças</h5>
+                <h5 title="Presenças" class="card-header">Presenças</h5>
                 <div class="p-3">
                     <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-striped dataTable no-footer">
                         <thead>
                             <tr>
-                                <th>Sala</th>
-                                <th>Hora de Entrada</th>
-                                <th>Hora de Saida</th>
+                                <th title="Sala">Sala</th>
+                                <th title="Hora de Entrada">Hora de Entrada</th>
+                                <th title="Hora de Saida">Hora de Saida</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -63,7 +63,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    <a href="/presencas" class="btn mt-3 float-right">Mais informação</a>
+                    <a title="Mais informação" routerLink="/presencas" class="btn mt-3 float-right">Mais informação</a>
                 </div>
             </div>
         </div>
