@@ -9,6 +9,7 @@ import { DataTableDirective } from 'angular-datatables';
 import { ResponseStatusValidatorService } from '../service/response-status-validator.service';
 // import { CookieService } from 'angular2-cookie/core';
 import { CookieService } from 'ngx-cookie';
+import '@fengyuanchen/datepicker';
 
 class SpaceInfo {
   space: string;
@@ -20,6 +21,9 @@ class SearchOptions {
   edificio: string;
   piso: string;
   sala: string;
+  data_ini: string;
+  hora_ini: string;
+  hora_fim: string;
 }
 
 @Component({
@@ -38,6 +42,12 @@ export class EspacosComponent implements OnInit, AfterViewInit {
   pisos = [];  salas = [];
   edificios; loader = true;
   model = new SearchOptions();
+  horas = ['0:00', '0:30', '1:00', '1:30', '2:00', '2:30', '3:00', '3:30', '4:00', '4:30',
+  '5:00', '5:30', '6:00', '6:30', '7:00', '7:30', '8:00', '8:30', '9:00', '9:30', '10:00',
+   '10:30', '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00',
+    '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30', '19:00', '19:30', '20:00',
+     '20:30', '21:00', '21:30', '22:00', '22:30', '23:00', '23:30'];
+  horas_fim = [];
 
   constructor(public authService: AuthService, private router: Router, private _cookieService: CookieService,
     private apiconnector: APIConnectorService, private loaderService: LoaderService,
@@ -54,6 +64,20 @@ export class EspacosComponent implements OnInit, AfterViewInit {
       ]
     };
     this.dtTrigger.next();
+
+    this.model.hora_ini = this.horas[0];
+    this.hora_iniChange();
+
+    $(document).ready(function() {
+      (<any>$()).on('hide.datepicker', function (e) {
+        console.log('eventdate', e.date);
+        this.model.data_ini = e.date;
+      });
+      (<any>$('#na_data_ini')).datepicker({
+        endDate: new Date(),
+        format: 'yyyy-mm-dd',
+      });
+    });
 
     const url = this.apiconnector.getEdificios;
     const data = new FormData();
@@ -77,7 +101,6 @@ export class EspacosComponent implements OnInit, AfterViewInit {
 
   edificioChanged() {
     this.loaderService.show();
-    this.loader = true;
     const url = this.apiconnector.getPisosEdificio;
     const data = new FormData();
 
@@ -98,7 +121,6 @@ export class EspacosComponent implements OnInit, AfterViewInit {
 
   pisoChanged() {
     this.loaderService.show();
-    this.loader = true;
     const url = this.apiconnector.getSalasPisos;
     const data = new FormData();
 
@@ -113,7 +135,6 @@ export class EspacosComponent implements OnInit, AfterViewInit {
       this._cookieService.put('token', res['data']['token'], options);
       this.salas = res['data']['rooms']['data'];
       this.model.sala = 'null';
-      this.loader = false;
       this.loaderService.hide();
     });
   }
@@ -138,6 +159,11 @@ export class EspacosComponent implements OnInit, AfterViewInit {
     data.append('block', this.model.edificio);
     data.append('floor', this.model.piso);
     data.append('room', this.model.sala);
+    data.append('data_ini', this.model.data_ini);
+    data.append('hora_ini', this.model.hora_ini);
+    data.append('hora_fim', this.model.hora_fim);
+
+    console.log('Modelo', this.model);
 
     this.apiconnector.postData(url, data).subscribe(res => {
       this.respVal.validate(res);
@@ -147,6 +173,16 @@ export class EspacosComponent implements OnInit, AfterViewInit {
       this.extractData(res['data']['accessHist']);
       this.loaderService.hide();
     });
+  }
+
+  dataChanged() {
+    this.model.data_ini = (<any>$('#na_data_ini')).datepicker('getDate', true);
+    this.loader = false;
+  }
+
+  hora_iniChange() {
+    this.horas_fim = this.horas.slice(this.horas.indexOf(this.model.hora_ini) + 1);
+    this.model.hora_fim = this.horas_fim[0];
   }
 
 }
