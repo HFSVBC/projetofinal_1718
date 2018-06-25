@@ -17,6 +17,38 @@ This solution will assure the availability, confidentiality, and accuracy of the
 * Creation of temporary visitor access
 * Creation and control of events for catastrophe management
 
+## User types
+The application is directed towards the several kinds of users present at any time in the faculty, each with different needs within the service. Each role has access clearance to several different functionalities according to their specific needs. Should there be a user who has information from a previous type, it is still accessible to the user through the dashboard.
+
+### User type: Student
+Students have access to the following functionalities:
+* view their access records
+* check their own class attendance
+
+### User type: Professor/Staff
+Professors have access to the following functionalities:
+* view their access records
+* check class attendance of their classes
+* change class attendance for students of their classes
+* create the entry information for their subjects and add classes
+
+### User type: Security
+Security personnel can access the following information:
+* view access records
+* check user access
+* check how many people are in a room
+* create access for temporary users
+* create and verify accident logs
+
+### User type: Administrator
+The administrator can access the following information:
+* view access records
+* check user access
+* check how many people are in a room
+* check class attendance
+* change user type
+* create and verify accident logs
+
 ## Authors {docsify-ignore}
 * Ana Catarina Sousa (1)
 * André Nunes (1)

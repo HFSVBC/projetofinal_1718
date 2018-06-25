@@ -19,6 +19,7 @@ class Presencas {
   student_name: string;
   date_ini: string;
   date_end: string;
+  attended_classes: string;
 }
 
 @Component({
@@ -35,6 +36,7 @@ export class PresencasComponent implements OnInit, AfterViewInit {
   dtOptions: any = {};
   presencas: Presencas[] = [];
   loader = true;
+  countPresencas = false;
 
   constructor(private _cookieService: CookieService, private apiconnector: APIConnectorService, private loaderService: LoaderService,
     private respVal: ResponseStatusValidatorService) {
@@ -116,6 +118,17 @@ export class PresencasComponent implements OnInit, AfterViewInit {
 
       console.log('res', res);
       this._cookieService.put('token', res['data']['token'], options);
+
+      if (this.model.data === 'null' && this.model.aluno === 'null') {
+        this.dtOptions['aoColumnDefs'] = [{'visible': false, 'targets': -2}, {'visible': true, 'targets': -1}];
+        this.dtOptions['columnDefs'] = [{'visible': false, 'targets': -2}, {'visible': true, 'targets': -1}];
+        console.log('dtOpt', this.dtOptions);
+      } else {
+        this.dtOptions['aoColumnDefs'] = [{'visible': true, 'targets': -2}, {'visible': false, 'targets': -1}];
+        this.dtOptions['columnDefs'] = [{'visible': true, 'targets': -2}, {'visible': false, 'targets': -1}];
+        console.log('dtOpt', this.dtOptions);
+      }
+
       this.extractData(res['data']['studentAttendance']);
       this.loaderService.hide();
     });
