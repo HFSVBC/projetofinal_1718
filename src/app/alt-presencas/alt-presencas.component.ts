@@ -1,11 +1,12 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { CookieService } from 'angular2-cookie/core';
-import { APIConnectorService } from '../service/apiconnector.service';
+import { APIConnectorService, options } from '../service/apiconnector.service';
 import { LoaderService } from '../loader/loader.service';
 import { Subject } from 'rxjs/Subject';
 import { DataTableDirective } from 'angular-datatables';
 import * as $ from 'jquery';
 import { ResponseStatusValidatorService } from '../service/response-status-validator.service';
+// import { CookieService } from 'angular2-cookie/core';
+import { CookieService } from 'ngx-cookie';
 
 class AltPresenca {
   aluno: string;
@@ -68,7 +69,7 @@ export class AltPresencasComponent implements OnInit, AfterViewInit {
       this.respVal.validate(res);
 
       console.log('res', res);
-      this._cookieService.put('token', res['data']['token']);
+      this._cookieService.put('token', res['data']['token'], options);
       this.todasAulas = res['data']['teacherSubjects']['data'];
       this.model.aula = this.todasAulas[0]['id'];
       this.aulaChange();
@@ -92,7 +93,7 @@ export class AltPresencasComponent implements OnInit, AfterViewInit {
       this.respVal.validate(res);
 
       console.log('res', res);
-      this._cookieService.put('token', res['data']['token']);
+      this._cookieService.put('token', res['data']['token'], options);
       console.log('studant', res['data']['studentAttendance']);
       this.extractData(res['data']['studentAttendance']);
       this.loaderService.hide();
@@ -117,14 +118,14 @@ export class AltPresencasComponent implements OnInit, AfterViewInit {
       this.respVal.validate(res);
 
       console.log('res', res);
-      this._cookieService.put('token', res['data']['token']);
+      this._cookieService.put('token', res['data']['token'], options);
       this.todasDatas = res['data']['classDates']['data'];
       this.model.data = 'null';
     });
   }
 
   alterarPresenca() {
-    const url = this.apiconnector.changetAulasDeUmAluno;
+    const url = this.apiconnector.changeAulasDeUmAluno;
     const data = new FormData();
     this.token = data.append('userTokenId', this._cookieService.get('token'));
     data.append('student_id', this.student_id);
@@ -137,7 +138,7 @@ export class AltPresencasComponent implements OnInit, AfterViewInit {
       this.respVal.validate(res);
 
       console.log('res', res);
-      this._cookieService.put('token', res['data']['token']);
+      this._cookieService.put('token', res['data']['token'], options);
       this.ErroAlterar = (res['data']['changeStudentAttendance']);
       this.onSubmit();
       this.alterarLoader = false;

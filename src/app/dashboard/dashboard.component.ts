@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../providers/auth.service';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { APIConnectorService } from '../service/apiconnector.service';
-import { CookieService } from 'angular2-cookie/core';
+import { APIConnectorService, options } from '../service/apiconnector.service';
 import { Subject } from 'rxjs/Subject';
 import { HistoricoComponent } from '../historico/historico.component';
 import { ResponseStatusValidatorService } from '../service/response-status-validator.service';
+// import { CookieService } from 'angular2-cookie/core';
+import { CookieService } from 'ngx-cookie';
 
 class HistAc {
   sala: string;
@@ -83,7 +84,7 @@ export class DashboardComponent implements OnInit {
         this.respVal.validate(res);
 
         console.log('res', res);
-        this._cookieService.put('token', res['data']['token']);
+        this._cookieService.put('token', res['data']['token'], options);
         this.extractData(res['data']['accessHist']);
       });
   }
