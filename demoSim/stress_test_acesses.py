@@ -38,7 +38,7 @@ def check_ten(args):
     else:
         return str(args)
 
-with open('populate_acesses_stress.sql', 'w') as infile:
+with open('apresentacao/populate_acesses_stress.sql', 'w') as infile:
     for i in range(0,10001):
         espaco=r.randint(101,200)
         if i<200:

@@ -1,5 +1,5 @@
 import random as r
-with open('populate_presences_stress_test.sql', 'w') as infile, open('presences_classes_helper.txt', 'r') as helper, open('presences_students_helper.txt', 'r') as helper2:
+with open('apresentacao/populate_presences_stress_test.sql', 'w') as infile, open('helpers/presences_classes_helper.txt', 'r') as helper, open('helpers/presences_students_helper.txt', 'r') as helper2:
     buffer_classes = helper.readlines()
     buffer_students = helper2.readlines()
 
@@ -13,3 +13,4 @@ with open('populate_presences_stress_test.sql', 'w') as infile, open('presences_
             alunos_presencas = r.sample(alunos,num_presencas)
             for aluno_ir in alunos_presencas:
                 infile.write("INSERT INTO presencas(aula,aluno) VALUES (" + str(aula) + "," + (aluno_ir) + ");\n")
+                infile.write("INSERT INTO acesso(data_entrada,data_fim,espaco,user) SELECT a.data_inicio, a.data_fim, a.espaco, " + aluno_ir + " FROM aula a WHERE a.id=" + str(aula) + ";\n")
