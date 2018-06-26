@@ -52,7 +52,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let pos of presencas" role="row" class="odd">
-            <td>{{ pos.course }}</td>
+            <td>{{ pos.date_ini }}</td>
             <td>
               <button type="button" class="btn" [ngClass]="{'active btn-success' : pos.attended === '1', 'btn-warning': pos.attended === '0'}"
                 data-toggle="modal" data-target="#exampleModal" title="{{pos.attended === '1' ? 'Presente' : 'Ausente'}}">
