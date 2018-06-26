@@ -65,10 +65,10 @@
             $course	  = $this->db->escape($this->input->post("course_id"));
             $token = $this->db->escape($this->input->post("userTokenId"));
 
-            if($student == "'null'" && $class == "'null'"){
+            if($class == "'null'"){
                 $sql = "SELECT (SELECT d.designacao FROM disciplina d WHERE a.disciplina = d.id) AS disciplina, COUNT(disciplina) AS 'attendance', a.data_inicio, a.data_fim
                         FROM users u, users_loggedIn uli,presencas p, aula a
-                        WHERE u.id = p.aluno AND p.aula = a.id AND uli.user = u.id AND uli.token = $token
+                        WHERE u.id = p.aluno AND p.aula = a.id AND uli.user = u.id AND uli.token = $token AND a.disciplina = $course
                         GROUP BY disciplina";
             }else{
                 $sql = "SELECT (SELECT d.designacao FROM disciplina d WHERE a.disciplina = d.id) AS disciplina, a.data_inicio, a.data_fim
