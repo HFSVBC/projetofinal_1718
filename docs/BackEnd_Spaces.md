@@ -7,6 +7,9 @@ userTokenId => Client's last issued token => String
 block => The number of the block for the space in question => String
 floor => The floor number for the space in question => String
 room => The room number for the space in question => String
+data_ini => Date for which the access is listed => String
+hora_ini => Beginning time for the access => String
+hora_fim => End time for the access => String
 ```
 It returns a JSON with the following configuration for a successful response:
 ```JSON
@@ -21,7 +24,7 @@ It returns a JSON with the following configuration for a successful response:
         "rooms": {
             "data": {
                 "space": (String) the identifier of the room in question,
-                "peopel": (String) the number of people present in the selected room,
+                "people": (String) the number of people present in the selected room,
                 "max": (String) the maximum possible amount of people for the selected room
             }
         },

@@ -1,9 +1,12 @@
 # History
 ---
-## User
+## getUserAccessHistory
 Accessed by the route ```/history/user``` or the route ```/history/user/<email>```, where ```<email>``` is the email of the user of whom the access history was requested (email must be URL encoded). It handles user access history to the faculty campus. For that it requires the following POST elements:
 ```
 userTokenId => Client's last issued token => String
+block => Building in which to conduct the search => String
+floor => Floor in which to conduct the search => String
+room => Room in which to conduct the search => String
 ```
 It returns a JSON with the following configuration for a successful response:
 ```JSON

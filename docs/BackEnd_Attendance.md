@@ -235,7 +235,7 @@ The HTTP error codes might be 401 (Unauthorized => User session expired), 403 (F
 
 
 ## getStudentAttendance_Student
-Accessed by the route ```/student/class/getStudentAttendance```. It retrieves the class attendance information of a single specific student for the student in question. For that it requires the following POST elements:
+Accessed by the route ```/student/attendance```. It retrieves the class attendance information of a single specific student for the student in question. For that it requires the following POST elements:
 ```
 userTokenId => Client's last issued token => String
 course_id => Subject identifier => Numeric
@@ -306,6 +306,49 @@ It returns a JSON with the following configuration for a successful response:
     "code": 200,
     "data": {
         "changeStudentAttendance": (Object) result of the SQL query,
+        "token": (String) Client's first token
+    }
+}
+```
+It returns a JSON with the following configuration for an unsuccessful response:
+```JSON
+{
+    "user_agent": (String) Client user agent,
+    "client_ip": (String) Client external ip,
+    "url": (String) Client accessed route,
+    "request_date": (String) Client request time stamp,
+    "state": (String) Error message,
+    "code": (int) HTTP error code,
+    "data": {
+        "message": (String) Error description,
+        "errors (Optional)": (String) Describing missing fields
+    }
+}
+```
+The HTTP error codes might be 401 (Unauthorized => User session expired), 403 (Forbidden => Access not authorised for current user), 405 (Method Not Allowed => POST has not passed the validation check.) and 500 (Server Error => Error getting user profile)
+
+
+## getStudentCourses
+Accessed by the route ```/student/retrieveCourses```. It handles information retrieval for a student's subject information. For that it requires the following POST elements:
+```
+userTokenId => Client's last issued token => String
+```
+It returns a JSON with the following configuration for a successful response:
+```JSON
+{
+    "user_agent": (String) Client user agent,
+    "client_ip": (String) Client external ip,
+    "url": (String) Client accessed route,
+    "request_date": (String) Client request time stamp,
+    "state": "ok",
+    "code": 200,
+    "data": {
+        "studentCourses": {
+            "data": {
+                "id": (String) subject's identifier,
+                "name": (String) subject's designator
+            }
+        },
         "token": (String) Client's first token
     }
 }
