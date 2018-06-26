@@ -10,14 +10,12 @@ There are five types of users:
 - Security
 - Admin
 
+
 ---
 ## LogIn
 Accessed by the route ```/user/login```. It handles user registration and login in the back end. For that it requires the following POST elements:
 ```
-uid => Google's UID => String
-name => User's name => String
-email => User's email => String
-avatar => User's avatar provided by Google => String
+idToken => User's issued token => String
 ```
 It returns a JSON with the following configuration for a successful response:
 ```JSON
@@ -50,6 +48,7 @@ It returns a JSON with the following configuration for an unsuccessful response:
 }
 ```
 The HTTP error codes might be 405 (Method Not Allowed => POST has not passed the validation check.) and 500 (Server Error => Error completing signup process / Error completing login process)
+
 
 ## LogOut
 Accessed by the route ```/user/logout```. It handles user logout in the back end. For that it requires the following POST elements:
@@ -85,6 +84,7 @@ It returns a JSON with the following configuration for an unsuccessful response:
 ```
 The HTTP error codes might be 405 (Method Not Allowed => POST has not passed the validation check.) and 500 (Server Error => Error completing logout process)
 
+
 ## getUserProfile
 Accessed by the route ```/user/retriveprofile```. It retrieves user profile information in the back end. For that it requires the following POST elements:
 ```
@@ -93,7 +93,7 @@ userEmail => The user's email to whom the profile to retrieve belongs to => Stri
 ```
 The API ensures that the user is still valid and has access to the route.
 
-It returns a JSON with the following configuration for a successful response:
+It returns a JSON with the following configuration for a successful response with an existing client:
 ```JSON
 {
     "user_agent": (String) Client user agent,
@@ -105,11 +105,32 @@ It returns a JSON with the following configuration for a successful response:
     "data": {
         "token": (String) Client's updated token,
         "user": {
-            "avatar": (String) Client's avatar link,
-            "email": (String) Client's email address,
-            "name": (String) Client's full name,
+			"found": (Int) whether client exists or not, at value 1,
             "uid": (String) Client's Google UID,
-            "user_type": (String) Client's account type
+			"id": (String) Client's user id,
+            "name": (String) Client's full name,
+            "email": (String) Client's email address,
+            "avatar": (String) Client's avatar URL link,
+            "user_type": (String) Client's account type,
+			"active": (String) whether the client is current active,
+			"last_login": (String) Client's last login date and time
+        }
+    }
+}
+```
+It returns a JSON with the following configuration for a successful response with an non-existent client:
+```JSON
+{
+    "user_agent": (String) Client user agent,
+    "client_ip": (String) Client external ip,
+    "url": (String) Client accessed route,
+    "request_date": (String) Client request time stamp,
+    "state": "ok",
+    "code": 200,
+    "data": {
+        "token": (String) Client's updated token,
+        "user": {
+			"found": (Int) whether client exists or not, at value 0
         }
     }
 }
@@ -130,6 +151,7 @@ It returns a JSON with the following configuration for an unsuccessful response:
 }
 ```
 The HTTP error codes might be 401 (Unauthorized => User session expired), 403 (Forbidden => Access not authorised for current user), 405 (Method Not Allowed => POST has not passed the validation check.) and 500 (Server Error => Error getting user profile)
+
 
 ## updateUserType
 Accessed by the route ```/user/changeType```. It handles the user type change in the back end. For that it requires the following POST elements:

@@ -100,7 +100,7 @@ The HTTP error codes might be 401 (Unauthorized => User session expired), 403 (F
 
 
 ## getAccidentsOthers
-Accessed by the route ```/accident/getOthers```. It retrieves all the student information for a single class. For that it requires the following POST elements:
+Accessed by the route ```/accident/getOthers```. It handles the retrieval of the information for accident events created by student users, solely for the use of student users. For that it requires the following POST elements:
 ```
 userTokenId => Client's last issued token => String
 data_ini => Beginning of date range for the accident => String

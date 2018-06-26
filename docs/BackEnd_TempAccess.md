@@ -3,7 +3,7 @@
 ## CreateAccess
 Accessed by the route ```/testcase/createAcess```. It handles the creation of temporary user access for the faculty campus. For that it requires the following POST elements:
 ```
-userTokenId => Client's last issued token => String
+
 data => The date for which the temporary access is created => String
 espaco => The space for which the temporary user has access to => String
 user => The user being granted temporary access => String
