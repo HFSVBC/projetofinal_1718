@@ -332,7 +332,7 @@ class Attendance extends CI_Controller
                 $token = $this->db->escape($this->input->post('userTokenId'));
                 $sql = "SELECT *
                         FROM conf_routesAccess
-                        WHERE user_type = (SELECT account_type FROM users WHERE id = (SELECT user FROM users_loggedIn WHERE token = $token)) AND route = 'teacher/course/getStudentsAttendance'";
+                        WHERE user_type = (SELECT account_type FROM users WHERE id = (SELECT user FROM users_loggedIn WHERE token = $token)) AND route = 'student/attendance'";
                 if(routeAccess($sql)===true){
                     $result = $this->access_model->getStudentAttendance_Mine();
                     $out = array("data"=>array());
