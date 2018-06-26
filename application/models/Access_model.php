@@ -140,7 +140,7 @@
             $rangeIni = $this->db->escape($date_ini." ".$hour_ini);
             $rangeEnd = $this->db->escape($date_ini." ".$hour_end);
 
-            $sql = "SELECT e.id, CONCAT_WS('.', e.bloco, e.piso, e.sala) AS espaco, e.lotacao, COUNT(e.id) as 'now'
+            $sql = "SELECT e.id, (SELECT u.name FROM users u WHERE u.id = a.user)
                     FROM espaco e, acesso a 
                     WHERE a.espaco = e.id AND $rangeIni <= a.data_entrada AND $rangeEnd >= a.data_fim";
 
@@ -150,8 +150,6 @@
                 $sql .= " AND e.piso = $piso";
             if($room != "'null'")
                 $sql .= " AND e.sala = $room";
-
-            $sql .= " GROUP BY e.id";
 
             $query = $this->db->query($sql);
             return $query->result_array();
