@@ -15,8 +15,8 @@ import '@fengyuanchen/datepicker';
 
 class SpaceInfo {
   space: string;
-  people: string;
-  max: string;
+  person: string;
+  personID: string;
 }
 
 class SearchOptions {

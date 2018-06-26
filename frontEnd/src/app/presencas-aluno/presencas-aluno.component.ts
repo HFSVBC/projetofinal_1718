@@ -15,7 +15,7 @@ class SearchOptions {
 }
 
 class Presencas {
-  course: string;
+  date_ini: string;
   attended: string;
 }
 @Component({

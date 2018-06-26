@@ -8,8 +8,8 @@
 
         <div class="card-body">
 
-            <form class="form-inline" (ngSubmit)="onSubmit()" #searchForm="ngForm">
-                <div class="form-row justify-content-center">
+            <form class="form-inline was-validated" (ngSubmit)="onSubmit()" #searchForm="ngForm">
+                <div class="form-row justify-content-center pb-3">
                     <div class="input-group col-sm-3">
                         <div class="input-group-prepend">
                             <label for="edifico" class="input-group-text" title="Edifício">
@@ -45,9 +45,48 @@
                             <option *ngFor="let p of salas" [value]="p['sala']">{{p['sala']}}</option>
                         </select>
                     </div>
+                    </div>
+                    <div class="form-row justify-content-center">
 
-                    <button type="submit" class="btn btn-success" [disabled]="loader">Procurar</button>
-                </div>
+                      <div class="input-group col-md-2 pb-3 pl-0">
+                          <div class="input-label input-group-prepend">
+                            <label class="input-group-text mb-0" for="ca_data_i" title="Data de início do acidente">
+                              <i class="material-icons">date_range</i>
+                            </label>
+                          </div>
+                          <input type="text" class="form-control" placeholder="Data Início" id="na_data_ini" (click)="dataChanged()" [(ngModel)]="model.data_ini"
+                            name="na_data_ini" data-toggle="datepicker" required>
+                          <div title="É necessário uma data de Início" class="invalid-feedback">É necessário uma Data de Início</div>
+                        </div>
+
+                        <div class="input-group col-md-2 pb-3 pr-0">
+                            <div class="input-label input-group-prepend">
+                              <label class="input-group-text mb-0" for="ca_data_f" title="Data de fim do acidente">
+                                <i class="material-icons">access_time</i>
+                              </label>
+                            </div>
+                            <select class="custom-select" id="hora_ini" (change)="hora_iniChange()" [(ngModel)]="model.hora_ini" name="na_hora_ini" required>
+                              <option [value]=null>Hora Início</option>
+                              <option *ngFor="let h of horas" [value]="h">{{h}}</option>
+                              </select>
+                              <div title="É necessário uma Hora de Início" class="invalid-feedback">É necessário uma Hora de Início</div>
+                          </div>
+
+                          <div class="input-group col-md-2 pb-3 pr-0">
+                              <div class="input-label input-group-prepend">
+                                <label class="input-group-text mb-0" for="ca_data_f" title="Data de fim do acidente">
+                                  <i class="material-icons">access_time</i>
+                                </label>
+                              </div>
+                              <select class="custom-select" id="hora_fim" [(ngModel)]="model.hora_fim" name="na_hora_fim" required>
+                                  <option [value]=null>Hora Fim</option>
+                                  <option *ngFor="let h of horas_fim" [value]="h">{{h}}</option>
+                                </select>
+                                <div title="É necessário uma Hora de Fim" class="invalid-feedback">É necessário uma Hora de Fim</div>
+                            </div>
+
+                    <button type="submit" class="btn btn-success ml-3" [disabled]="loader">Procurar</button>
+                  </div>
             </form>
         </div>
     </div>
@@ -59,15 +98,15 @@
                 <thead>
                     <tr>
                         <th title="Sala">Sala</th>
-                        <th title="Número de Pessoas">Número de Pessoas</th>
-                        <th title="Lotação">Lotação</th>
+                        <th title="Número de Pessoas">#</th>
+                        <th title="Lotação">Pessoa</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let pos of si" role="row" class="odd">
                         <td>{{ pos.space }}</td>
-                        <td>{{ pos.people }}</td>
-                        <td>{{ pos.max }}</td>
+                        <td>{{ pos.personID }}</td>
+                        <td>{{ pos.person }}</td>
                     </tr>
                 </tbody>
             </table>
