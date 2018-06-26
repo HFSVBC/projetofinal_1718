@@ -70,7 +70,7 @@
                         FROM aula a
                         WHERE (SELECT u.name FROM users u WHERE u.id = (SELECT uli.user FROM users_loggedIn uli WHERE uli.token = $token)) IS NOT NULL AND a.disciplina = $course";
 
-            if($class == "'null'")
+            if($class != "'null'")
                 $sql .= " AND a.id = $class";
 
             $query = $this->db->query($sql);
