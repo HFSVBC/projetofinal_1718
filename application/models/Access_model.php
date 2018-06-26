@@ -65,21 +65,13 @@
             $course	  = $this->db->escape($this->input->post("course_id"));
             $token = $this->db->escape($this->input->post("userTokenId"));
 
-            if($class == "'null'"){
-                $sql = "SELECT (SELECT d.designacao FROM disciplina d WHERE a.disciplina = d.id) AS disciplina, COUNT(disciplina) AS 'attendance', a.data_inicio, a.data_fim
-                        FROM users u, users_loggedIn uli,presencas p, aula a
-                        WHERE u.id = p.aluno AND p.aula = a.id AND uli.user = u.id AND uli.token = $token AND a.disciplina = $course
-                        GROUP BY disciplina";
-            }else{
-                $sql = "SELECT (SELECT d.designacao FROM disciplina d WHERE a.disciplina = d.id) AS disciplina, a.data_inicio, a.data_fim
-                        FROM users u, users_loggedIn uli,presencas p, aula a
-                        WHERE u.id = p.aluno AND p.aula = a.id AND uli.user = u.id AND uli.token = $token";
+            
+                $sql = "SELECT data_inicio, IF(ISNULL((SELECT p.aluno FROM presencas p WHERE p.aula = a.id AND p.aluno = (SELECT uli.user FROM users_loggedIn uli WHERE uli.token = $token))), 0, 1) AS 'attended'
+                        FROM aula a
+                        WHERE (SELECT u.name FROM users u WHERE u.id = (SELECT uli.user FROM users_loggedIn uli WHERE uli.token = $token)) IS NOT NULL AND a.disciplina = $course";
 
-                if($course != "'null'" || is_null($course))
-                    $sql .= " AND a.disciplina = $course";
-                if($class != "'null'" || is_null($class))
-                    $sql .= " AND p.aula = $class";
-            }
+            if($class == "'null'")
+                $sql .= " AND a.id = $class";
 
             $query = $this->db->query($sql);
             return $query->result_array();
@@ -140,7 +132,7 @@
             $rangeIni = $this->db->escape($date_ini." ".$hour_ini);
             $rangeEnd = $this->db->escape($date_ini." ".$hour_end);
 
-            $sql = "SELECT e.id, (SELECT u.name FROM users u WHERE u.id = a.user)
+            $sql = "SELECT e.id, CONCAT_WS('.', e.bloco, e.piso, e.sala) AS 'espaco', (SELECT u.name FROM users u WHERE u.id = a.user) AS 'name', a.user AS 'uid'
                     FROM espaco e, acesso a 
                     WHERE a.espaco = e.id AND $rangeIni <= a.data_entrada AND $rangeEnd >= a.data_fim";
 

@@ -338,12 +338,9 @@ class Attendance extends CI_Controller
                     $out = array("data"=>array());
                     foreach ($result as $key => $value) {
                         $thisOut = array(
-                            "course"=>$value['disciplina'],
+                            "attended"=>$value['attended'],
                             "date_ini"=>$value['data_inicio'],
-                            "date_end"=>$value['data_fim'],
                         );
-                        if(isset($value['attended_classes']))
-                            $thisOut['attended_classes'] = $value['attended_classes'];
                         array_push($out["data"], $thisOut);
                     }
                     $data = array(

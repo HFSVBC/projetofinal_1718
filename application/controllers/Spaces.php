@@ -106,8 +106,8 @@ class Spaces extends CI_Controller
                 foreach ($result as $key => $value) {
                     $thisOut = array(
                         "space"=>$value['espaco'],
-                        "people"=>$value['now'],
-                        "max"=>$value['lotacao']
+                        "person"=>$value['name'],
+                        "personID"=>$value['uid']
                     );
                     array_push($out["data"], $thisOut);
                 }
