@@ -11,8 +11,6 @@ import { CookieService } from 'ngx-cookie-service';
 
 class SearchOptions {
   aula: string;
-  sala: string;
-  aluno: string;
   data: string;
 }
 
@@ -41,7 +39,7 @@ export class PresencasAlunoComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.loaderService.show();
-    const url = this.apiconnector.getAulas;
+    const url = this.apiconnector.getCoursesAluno;
     const data = new FormData();
     this.dtOptions = {
       pagingType: 'full_numbers',
@@ -50,16 +48,16 @@ export class PresencasAlunoComponent implements OnInit, AfterViewInit {
     this.token = data.append('userTokenId', this._cookieService.get('token'));
     this.dtTrigger.next();
 
-    // this.apiconnector.postData(url, data).subscribe(res => {
-    //   this.respVal.validate(res);
+    this.apiconnector.postData(url, data).subscribe(res => {
+      this.respVal.validate(res);
 
-    //   console.log('res', res);
-    //   this._cookieService.put('token', res['data']['token']);
-    //   this.todasAulas = res['data']['teacherSubjects']['data'];
-    //   this.model.aula = this.todasAulas[0]['id'];
-    //   this.aulaChange();
-    //   console.log('data no pedido', this.model.aula, this.model.aluno, this.model.data);
-    // });
+      console.log('res', res);
+      // this._cookieService.put('token', res['data']['token']);
+      this._cookieService.set('token', res['data']['token']);
+      this.todasAulas = res['data']['teacherSubjects']['data'];
+      this.model.aula = this.todasAulas[0]['id'];
+      this.aulaChange();
+    });
   }
 
   ngAfterViewInit() {
@@ -72,52 +70,36 @@ export class PresencasAlunoComponent implements OnInit, AfterViewInit {
     const data = new FormData();
     this.token = data.append('userTokenId', this._cookieService.get('token'));
 
-    // this.apiconnector.postData(url, data).subscribe(res => {
-    //   this.respVal.validate(res);
+    this.apiconnector.postData(url, data).subscribe(res => {
+      this.respVal.validate(res);
 
-    //   console.log('res', res);
-    //   this.model.data = 'null';
-    //   this._cookieService.put('token', res['data']['token']);
-    //   this.todasDatas = res['data']['classDates']['data'];
-    //   this.loadStudents();
-    // });
-  }
-
-  loadStudents() {
-    const url = this.apiconnector.getAlunosNomesAulas + this.model.aula;
-    const data = new FormData();
-    this.token = data.append('userTokenId', this._cookieService.get('token'));
-    // this.apiconnector.postData(url, data).subscribe(res => {
-    //   this.respVal.validate(res);
-
-    //   console.log('res', res);
-    //   this.model.aluno = 'null';
-    //   this._cookieService.put('token', res['data']['token']);
-    //   this.todosAlunos = res['data']['classStudents']['data'];
-    //   this.loader = false;
-    //   this.loaderService.hide();
-    // });
+      console.log('res', res);
+      this.model.data = 'null';
+      // this._cookieService.put('token', res['data']['token']);
+      this._cookieService.set('token', res['data']['token']);
+      this.todasDatas = res['data']['classDates']['data'];
+    });
   }
 
   onSubmit() {
     this.loaderService.show();
-    const url = this.apiconnector.getAlunosAulas;
+    const url = this.apiconnector.getPresencasAlunoAulas;
     const data = new FormData();
     this.token = data.append('userTokenId', this._cookieService.get('token'));
     data.append('course_id', this.model.aula);
-    data.append('student_id', this.model.aluno);
     data.append('class_id', this.model.data);
 
-    console.log('data', this.model.aula, this.model.aluno, this.model.data);
+    console.log('data', this.model.aula, this.model.data);
 
-    // this.apiconnector.postData(url, data).subscribe(res => {
-    //   this.respVal.validate(res);
+    this.apiconnector.postData(url, data).subscribe(res => {
+      this.respVal.validate(res);
 
-    //   console.log('res', res);
-    //   this._cookieService.put('token', res['data']['token']);
-    //   this.extractData(res['data']['studentAttendance']);
-    //   this.loaderService.hide();
-    // });
+      console.log('res', res);
+      // this._cookieService.put('token', res['data']['token']);
+      this._cookieService.set('token', res['data']['token']);
+      this.extractData(res['data']['studentAttendance']);
+      this.loaderService.hide();
+    });
   }
 
   private extractData(myDataArray) {
