@@ -286,7 +286,7 @@ class Attendance extends CI_Controller
                     $out = array("data"=>array());
                     foreach ($result as $key => $value) {
                         $thisOut = array(
-                            "id"=>$value['id'],
+                            "id"=>$value['id_disciplina'],
                             "name"=>$value['designacao']
                         );
                         array_push($out["data"], $thisOut);
