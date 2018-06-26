@@ -33,7 +33,7 @@
           </div>
 
           <div class="input-group col-lg-1 pb-3">
-            <button title="Procurar" type="submit" class="btn btn-success" [disabled]="loader">Procurar</button>
+            <button title="Procurar" type="submit" class="btn btn-success">Procurar</button>
           </div>
         </div>
       </form>
@@ -52,7 +52,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let pos of presencas" role="row" class="odd">
-            <td>{{ pos.date }}</td>
+            <td>{{ pos.course }}</td>
             <td>
               <button type="button" class="btn" [ngClass]="{'active btn-success' : pos.attended === '1', 'btn-warning': pos.attended === '0'}"
                 data-toggle="modal" data-target="#exampleModal" title="{{pos.attended === '1' ? 'Presente' : 'Ausente'}}">

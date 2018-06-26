@@ -15,7 +15,7 @@ class SearchOptions {
 }
 
 class Presencas {
-  date: string;
+  course: string;
   attended: string;
 }
 @Component({
@@ -54,7 +54,7 @@ export class PresencasAlunoComponent implements OnInit, AfterViewInit {
       console.log('res', res);
       // this._cookieService.put('token', res['data']['token']);
       this._cookieService.set('token', res['data']['token']);
-      this.todasAulas = res['data']['teacherSubjects']['data'];
+      this.todasAulas = res['data']['studentCourses']['data'];
       this.model.aula = this.todasAulas[0]['id'];
       this.aulaChange();
     });
